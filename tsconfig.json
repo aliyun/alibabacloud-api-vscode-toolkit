@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "strict": false,
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "removeComments": true,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "strictBindCallApply": false,
+    "preserveConstEnums": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
+    "target": "es6",
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "declarationMap": false,
+    "declaration": false,
+    "lib": ["es6", "es7"],
+    "sourceMap": true,
+    "rootDir": "./src"
+  },
+  "exclude": ["node_modules", ".vscode-test", "out", "media", "dist"]
+}

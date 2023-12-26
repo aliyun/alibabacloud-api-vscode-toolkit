@@ -1,0 +1,33 @@
+.semix-form-field {
+  // margin-bottom: 8px;
+
+  .semix-form-error {
+    color: red;
+  }
+
+  .semix-form-widget-wrapper {
+    flex: 1 1;
+    text-align: left;
+  }
+}
+
+.semix-form-object,
+.semix-form-list {
+  position: relative;
+
+  .child-list {
+    padding-left: 12px;
+  }
+
+  // &::before {
+  //   content: "";
+  //   display: block;
+  //   width: 3px;
+  //   height: 100%;
+  //   background-color: #ddd;
+  //   position: absolute;
+  //   top: 0;
+  //   bottom: 0;
+  //   left: 0;
+  // }
+}

@@ -1,0 +1,12 @@
+.api-error-codes {
+  .mod-title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .error-code-table {
+    td {
+      word-break: break-word;
+    }
+  }
+}

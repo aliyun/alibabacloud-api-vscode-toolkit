@@ -1,0 +1,25 @@
+// 规范变量定义
+
+/*----- 字体 -----*/
+
+//中文字体
+$fontFamily-zh: PingFangSC, Microsoft YaHei;
+$fontFamily-en: HelveticaNeue, Arial;
+//代码字体
+$fontFamily-code: Menlo, Consolas;
+
+//主文字大小行高
+$primary-font: 400 12px;
+$medium-font-weight: 600;
+
+//字体颜色
+//用于标题、正文的主文字色
+$primary-font-color: #333333;
+//主文字色2
+$primary-2-font-color: #696969;
+//辅助说明文字色
+$minor-font-color: #808080;
+//disable、提示等文字色
+$disable-font-color: #aaaaaa;
+//链接颜色
+$primary-anchor-color: #0064c8;

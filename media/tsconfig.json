@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "removeComments": true,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "strictBindCallApply": false,
+    "preserveConstEnums": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "allowJs": false,
+    "strict": false,
+    "esModuleInterop": true,
+    "declaration": false,
+    "declarationMap": false,
+    "outDir": "lib",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "es2020",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "rootDir": "./src",
+    "noEmit": true,
+    "incremental": true
+  },
+  "include": [
+    "./src/vite-env.d.ts",
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
