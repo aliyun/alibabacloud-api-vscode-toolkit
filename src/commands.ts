@@ -136,39 +136,39 @@ export class AlicloudApiCommands {
       });
     });
 
-    vscode.commands.registerCommand("alicloud.api.regenerateAPIMocks", async (event) => {
-      const filePaths: string[] = (event.path || "")?.split("/");
-      const lastMocksIndex = filePaths.lastIndexOf("mocks");
-      const names = filePaths.slice(lastMocksIndex + 1);
-      names.push(names.pop().replace(".ts", ""));
+    // vscode.commands.registerCommand("alicloud.api.regenerateAPIMocks", async (event) => {
+    //   const filePaths: string[] = (event.path || "")?.split("/");
+    //   const lastMocksIndex = filePaths.lastIndexOf("mocks");
+    //   const names = filePaths.slice(lastMocksIndex + 1);
+    //   names.push(names.pop().replace(".ts", ""));
 
-      if (service.pontManager.localPontSpecs?.[0]?.name) {
-        showProgress("重新生成 API Mocks", service.pontManager, async (log) => {
-          log("代码生成中...");
-          await wait(100);
+    //   if (service.pontManager.localPontSpecs?.[0]?.name) {
+    //     showProgress("重新生成 API Mocks", service.pontManager, async (log) => {
+    //       log("代码生成中...");
+    //       await wait(100);
 
-          let specName, modName, apiName;
-          if (names.length === 3) {
-            [specName, modName, apiName] = names;
-          } else {
-            [specName, apiName] = names;
-          }
-          const mocksPlugin = await service.pontManager.innerManagerConfig.plugins.mocks?.instance;
-          const mocksOptions = await service.pontManager.innerManagerConfig.plugins.mocks?.options;
-          const mocksCode = await mocksPlugin.getAPIMockCode(
-            service.pontManager,
-            mocksOptions,
-            apiName,
-            modName,
-            specName,
-          );
-          fs.writeFileSync(event.path, mocksCode, "utf-8");
+    //       let specName, modName, apiName;
+    //       if (names.length === 3) {
+    //         [specName, modName, apiName] = names;
+    //       } else {
+    //         [specName, apiName] = names;
+    //       }
+    //       const mocksPlugin = await service.pontManager.innerManagerConfig.plugins.mocks?.instance;
+    //       const mocksOptions = await service.pontManager.innerManagerConfig.plugins.mocks?.options;
+    //       const mocksCode = await mocksPlugin.getAPIMockCode(
+    //         service.pontManager,
+    //         mocksOptions,
+    //         apiName,
+    //         modName,
+    //         specName,
+    //       );
+    //       fs.writeFileSync(event.path, mocksCode, "utf-8");
 
-          log("API Mocks 生成成功！");
-          vscode.window.showInformationMessage("API Mocks生成成功！");
-        });
-      }
-    });
+    //       log("API Mocks 生成成功！");
+    //       vscode.window.showInformationMessage("API Mocks生成成功！");
+    //     });
+    //   }
+    // });
 
     vscode.commands.registerCommand("alicloud.api.fetchRemote", (config) => {
       const pontManager = service.pontManager;
@@ -245,20 +245,20 @@ export class AlicloudApiCommands {
         spec: spec?.apis?.[`${result.apiKey}`],
       });
     });
-    vscode.commands.registerTextEditorCommand("alicloud.api.viewMocks", async (editor, edit) => {
-      const isSingleSpec = PontManager.checkIsSingleSpec(service.pontManager);
-      const result = (await findInterface(editor, !isSingleSpec, service.pontManager)) || ({} as any);
-      const spec = PontManager.getSpec(service.pontManager, result.specName);
+    // vscode.commands.registerTextEditorCommand("alicloud.api.viewMocks", async (editor, edit) => {
+    //   const isSingleSpec = PontManager.checkIsSingleSpec(service.pontManager);
+    //   const result = (await findInterface(editor, !isSingleSpec, service.pontManager)) || ({} as any);
+    //   const spec = PontManager.getSpec(service.pontManager, result.specName);
 
-      if (!result.apiName) {
-        vscode.window.showErrorMessage("未找到该 OpenAPI");
-        return;
-      }
+    //   if (!result.apiName) {
+    //     vscode.window.showErrorMessage("未找到该 OpenAPI");
+    //     return;
+    //   }
 
-      const namespace = [result.specName, result.modName, result.apiName].filter((id) => id).join("/");
-      const mocksFilePath = path.join(service.pontManager.innerManagerConfig.outDir, "mocks", namespace + ".ts");
-      vscode.commands.executeCommand("vscode.open", vscode.Uri.file(mocksFilePath));
-    });
+    //   const namespace = [result.specName, result.modName, result.apiName].filter((id) => id).join("/");
+    //   const mocksFilePath = path.join(service.pontManager.innerManagerConfig.outDir, "mocks", namespace + ".ts");
+    //   vscode.commands.executeCommand("vscode.open", vscode.Uri.file(mocksFilePath));
+    // });
 
     // vscode.commands.registerCommand('alicloud.api.refreshPontExplorer', () => {
     //   service.treeDataProvider.refresh();
