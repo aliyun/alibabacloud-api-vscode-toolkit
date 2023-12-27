@@ -245,7 +245,7 @@
     "urllib": "^2.36.1",
     "xml2js": "^0.4.23"
   },
-  "icon": "resources/alibabacloud.png",
+  "icon": "resources/aliyun_logo_128x128.png",
   "repository": {
     "url": "git@github.com:aliyun/alibabacloud-api-vscode-toolkit.git",
     "type": "git"
