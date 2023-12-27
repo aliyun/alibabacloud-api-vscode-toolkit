@@ -1,11 +1,12 @@
 {
   "name": "vscode-alicloud-api",
   "displayName": "Alibaba Cloud API Toolkit",
-  "description": "",
+  "description": "The Alibaba Cloud API Toolkit for VSCode makes it easier to access Alibaba Cloud services.",
+  "author": "Alibaba Cloud SDK Team",
   "version": "0.0.1",
   "private": true,
-  "publisher": "AlibabaCloud",
-  "license": "MIT",
+  "publisher": "alibabacloud-openapi",
+  "license": "Apache-2.0",
   "engines": {
     "vscode": "^1.47.0"
   },
@@ -35,16 +36,6 @@
         "icon": "$(debug-start)"
       },
       {
-        "command": "alicloud.api.generateMocks",
-        "title": "生成Mocks代码",
-        "icon": "$(issues)"
-      },
-      {
-        "command": "alicloud.api.regenerateAPIMocks",
-        "title": "重新生成 API Mocks代码",
-        "icon": "$(issues)"
-      },
-      {
         "command": "alicloud.api.restart",
         "title": "重启 Alibaba Cloud API Toolkit",
         "icon": "$(debug-restart)"
@@ -72,11 +63,6 @@
         "command": "alicloud.api.removeSubscriptions",
         "icon": "$(notebook-delete-cell)",
         "title": "取消订阅"
-      },
-      {
-        "command": "alicloud.api.viewMocks",
-        "icon": "$(go-to-file)",
-        "title": "查看Mocks数据"
       }
     ],
     "keybindings": [
@@ -151,19 +137,9 @@
         {
           "command": "alicloud.api.openDocument",
           "group": "navigation"
-        },
-        {
-          "command": "alicloud.api.viewMocks",
-          "group": "navigation"
         }
       ],
-      "editor/title": [
-        {
-          "command": "alicloud.api.regenerateAPIMocks",
-          "when": "resourcePath =~ /mocks/ && resourceFilename =~ /.ts$/ && resourceFilename != 'index.ts'",
-          "group": "navigation"
-        }
-      ],
+      "editor/title": [],
       "view/title": [
         {
           "command": "alicloud.api.restart",
@@ -209,7 +185,7 @@
     "build:media": "cd media && npm run build:ncc",
     "reinstall": "rimraf node_modules && npm i",
     "afterinstall": "cd ../../ && lerna bootstrap",
-    "build:ncc": "rimraf dist && ncc build ./src/extension.ts -o dist -m --license licenses.txt && mv dist/index.js dist/extension.js && mv dist/license.txt ./LICENSE.txt",
+    "build:ncc": "rimraf dist && ncc build ./src/extension.ts -o dist -m --license licenses.txt && mv dist/index.js dist/extension.js",
     "vscode:prepublish": "npm run build:ncc",
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --minify",
     "esbuild": "npm run esbuild-base -- --sourcemap",

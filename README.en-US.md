@@ -1,5 +1,9 @@
 # Alibaba Cloud API Toolkit
 
+[![Version](https://img.shields.io/visual-studio-marketplace/v/alibabacloud-openapi.vscode-alicloud-api)](https://marketplace.visualstudio.com/items?itemName=alibabacloud-openapi.vscode-alicloud-api)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/alibabacloud-openapi.vscode-alicloud-api)](https://marketplace.visualstudio.com/items?itemName=alibabacloud-openapi.vscode-alicloud-api)
+[![Ratings](https://img.shields.io/visual-studio-marketplace/r/alibabacloud-openapi.vscode-alicloud-api)](https://marketplace.visualstudio.com/items?itemName=alibabacloud-openapi.vscode-alicloud-api)
+
 The Alibaba Cloud API Toolkit for VSCode makes it easier to access Alibaba Cloud services.
 
 ## Features
@@ -16,7 +20,7 @@ Click to debug, you can link to Aliyun OpenAPI portal for online API trial.
 
 ## Extension UI Guide
 
-![VSCode Extension Guide](https://img.alicdn.com/imgextra/i2/O1CN01VJNeqk1NKrbDtTotP_!!6000000001552-0-tps-2310-1524.jpg)
+![VSCode Extension Guide](https://img.alicdn.com/imgextra/i1/O1CN01iYMtwm27arlqDq7V3_!!6000000007814-0-tps-2328-1540.jpg)
 
  * Product Searching `ctrl+cmd+k`
   
