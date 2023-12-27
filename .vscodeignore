@@ -1,0 +1,15 @@
+.vscode/
+.vscode-test/
+out/
+src/
+.gitignore
+media
+!media/lib
+!media/dist
+node_modules
+!node_modules/@vscode/codicons/dist/
+**/*.map
+tsconfig.json
+*.d.ts
+*.md
+!README.md

@@ -1,0 +1,287 @@
+@import "./variable.scss";
+@import "../components/APIPage/APIDocument/ApiErrorCode.scss";
+// mde style
+.vscode-page,
+.pontx-ui-schema-editor {
+  .bg-white {
+    blockquote {
+      background-color: var(--vscode-textBlockQuote-background);
+    }
+  }
+  .wmde-markdown {
+    // 字体行高 规范
+    font: $primary-font;
+    color: $primary-font-color;
+
+    font-size: 12px;
+
+    a {
+      color: $primary-anchor-color;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: $primary-font-color;
+      font-weight: $medium-font-weight;
+    }
+    h1 {
+      font-size: 16px;
+      line-height: 28px;
+    }
+    h2 {
+      font-size: 14px;
+      line-height: 24px;
+    }
+    h3,
+    p,
+    li,
+    strong {
+      font-size: 12px;
+      line-height: 22px;
+      margin-bottom: 8px;
+    }
+    pre {
+      code {
+        font-family: $fontFamily-code;
+      }
+    }
+    ul {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    // 提示规范
+    // .note {
+    //   padding: 8px 16px;
+    //   margin: 16px 0;
+    //   .note-icon-wrapper {
+    //     margin: 2px 8px 0 0;
+    //     .icon-note {
+    //       background-size: 16px 16px;
+    //     }
+    //   }
+
+    //   //说明
+    //   &.note-note {
+    //     background-color: #eff3f8;
+    //     .note-icon-wrapper .icon-note.fastpath,
+    //     .note-icon-wrapper .icon-note.note,
+    //     .note-icon-wrapper .icon-note.remember,
+    //     .note-icon-wrapper .icon-note.tip {
+    //       background-image: url(https://img.alicdn.com/imgextra/i3/O1CN01MshIwo1dyHU7WqqFH_!!6000000003804-2-tps-32-32.png);
+    //     }
+    //   }
+
+    //   //注意
+    //   &.note-notice {
+    //     background-color: #fff4dd;
+    //     .note-icon-wrapper .icon-note.attention,
+    //     .note-icon-wrapper .icon-note.important,
+    //     .note-icon-wrapper .icon-note.notice,
+    //     .note-icon-wrapper .icon-note.restriction {
+    //       background-image: url(https://img.alicdn.com/imgextra/i1/O1CN01HjqA8e1CofXl1bgDV_!!6000000000128-2-tps-32-32.png);
+    //     }
+    //   }
+
+    //   //警告
+    //   &.note-warning {
+    //     background-color: #ffe8e8;
+    //     .note-icon-wrapper .icon-note.caution,
+    //     .note-icon-wrapper .icon-note.trouble,
+    //     .note-icon-wrapper .icon-note.warning {
+    //       background-image: url(https://img.alicdn.com/imgextra/i4/O1CN01pV2huf1qJbJFOAJzv_!!6000000005475-2-tps-32-32.png);
+    //     }
+    //   }
+
+    //   //危险
+    //   &.note-danger {
+    //     background-color: #fff5f5;
+    //     .note-icon-wrapper .icon-note.danger {
+    //       background-image: url(https://img.alicdn.com/imgextra/i2/O1CN01ofHLye1dqx9CLRdEM_!!6000000003788-2-tps-32-34.png);
+    //     }
+    //   }
+    // }
+
+    blockquote {
+      background-color: #f8f8f8;
+      border-left: 0.15em solid #1366ec !important;
+      color: #6a737d;
+      padding: 0 1em;
+    }
+
+    // collapse 区块样式
+    .collapse {
+      display: block;
+      margin-top: 10px;
+      border: 1px solid #dedede;
+    }
+
+    .collapse > .expandable-title {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-align-items: center;
+      align-items: center;
+      padding: 6px 10px;
+      font-size: 12px;
+      line-height: 28px;
+      background: #fafafa;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+    }
+
+    .collapse > .expandable-title h2,
+    .collapse > .expandable-title h3,
+    .collapse > .expandable-title h4 {
+      margin: 0;
+      padding: 0;
+    }
+
+    .collapse > .expandable-title .title {
+      margin-left: 2px;
+    }
+
+    .collapse > .expandable-title .icon {
+      font-weight: 600;
+      font-size: 13px;
+      -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+
+    .collapse > .expandable-content {
+      height: 0;
+      overflow: hidden;
+    }
+
+    .collapse:hover {
+      -webkit-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+    }
+
+    .collapse.expanded > .expandable-title {
+      padding: 6px 10px;
+      border-bottom: 1px solid #dedede;
+    }
+
+    .collapse.expanded > .expandable-title .icon {
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+
+    .collapse.expanded > .expandable-content {
+      height: auto;
+      padding: 10px;
+    }
+
+    .expandable-title::before {
+      display: block;
+      content: "";
+      border-width: 6px 8px 6px 8px;
+      border-style: solid;
+      border-color: transparent transparent transparent #333;
+      margin-right: 3px;
+    }
+
+    .expandable-title.expanded::before {
+      display: block;
+      content: "";
+      border-width: 8px 6px 8px 6px;
+      border-style: solid;
+      border-color: #333 transparent transparent transparent;
+      margin-right: 7px;
+      margin-top: 9px;
+    }
+  }
+
+  .wmde-markdown {
+    pre {
+      position: relative;
+      background-color: #f6f8fa;
+      border-radius: 6px;
+      font-size: 85%;
+      line-height: 1.45;
+
+      &:hover {
+        .copied {
+          visibility: visible;
+        }
+      }
+    }
+
+    pre > code {
+      display: block;
+      overflow: auto;
+      padding: 16px;
+      background: transparent;
+      border: 0;
+      margin: 0;
+      white-space: pre;
+      word-break: normal;
+    }
+
+    pre .copied {
+      background: #d0d7de;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      font-size: 12px;
+      padding: 6px;
+      position: absolute;
+      right: 6px;
+      top: 6px;
+      transition: all 0.3s;
+      visibility: hidden;
+
+      &:hover {
+        background: #116329;
+        color: #fff;
+      }
+
+      .octicon-check {
+        display: none;
+      }
+    }
+    pre .active {
+      .octicon-copy {
+        display: none;
+      }
+      .octicon-check {
+        display: block;
+      }
+    }
+
+    //表格样式
+    table {
+      width: 100%;
+      thead {
+        background-color: #f1f1f2;
+        height: 42px;
+        th {
+          text-align: left;
+          padding-left: 16px;
+        }
+        th:not(:last-child) {
+          border-right: 1px solid #eee;
+        }
+      }
+      tr {
+        border-bottom: 1px solid #eee;
+        &:hover {
+          background-color: #fafafa;
+        }
+        td {
+          padding: 16px;
+          border-right: 1px solid #eee;
+        }
+        td:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+}

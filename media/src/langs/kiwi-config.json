@@ -1,0 +1,17 @@
+{
+  "kiwiDir": "langs",
+  "configFile": "../langs/kiwi-config.json",
+  "srcLang": "zh_CN",
+  "mds": {
+    "tagName": "api-workbench-core-all",
+    "appName": "api-workbench-core-all"
+  },
+  "distLangs": ["en_US"],
+  "translateOptions": {
+    "concurrentLimit": 10,
+    "requestOptions": {}
+  },
+  "importI18N": "import I18N from 'src/utils/I18N';",
+  "ignoreDir": "",
+  "ignoreFile": ""
+}
