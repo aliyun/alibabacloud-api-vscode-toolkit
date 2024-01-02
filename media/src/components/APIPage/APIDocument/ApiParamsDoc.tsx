@@ -24,6 +24,9 @@ export const ApiParamsDoc: React.FC<PontxParamsDocProps> = (props) => {
     } as SemixJsonSchema;
     if (props.parameters) {
       props.parameters.forEach((param) => {
+        if(param.schema?.enumValueTitles && param.schema?.enum){
+          delete param.schema.enumValueTitles;
+        }
         if (schema.properties) {
           schema.properties[param.name] = {
             ...(param.schema || {}),
