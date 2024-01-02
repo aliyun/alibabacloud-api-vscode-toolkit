@@ -40,7 +40,7 @@ const TAB_PANES = [
 export const TryAPI: React.FC<TryAPIProps> = (props) => {
   const { openAPIResponses, isApiResultLoading,version,apiMeta, product } = APIPageContext.useContainer();
   const doc = `${product}::${version}::${apiMeta.name}`
-  const apiResult = openAPIResponses?.[doc];
+  const apiResult = openAPIResponses?.[doc] || apiResponse;
 
   const noShowMonacoEditor = ["byte"];
 

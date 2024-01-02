@@ -160,18 +160,20 @@ export const API: React.FC<APIProps> = (props) => {
             </Tab.Item>
             <Tab.Item key="debug" title="调试">
               {selectedApi?.externalDocs ? (
+               <div className="web-debug">
                 <Button
-                  type="primary"
-                  component="a"
-                  style={{ marginLeft: 12 }}
-                  href={selectedApi?.externalDocs?.url}
-                  target="_blank"
-                  // onClick={() => {
-                  //   window.open(selectedApi?.externalDocs?.url, "_blank");
-                  // }}
-                >
-                  {selectedApi?.externalDocs?.description}
-                </Button>
+               type="normal"
+               component="a"
+               href={selectedApi?.externalDocs?.url}
+               target="_blank"
+               
+               // onClick={() => {
+               //   window.open(selectedApi?.externalDocs?.url, "_blank");
+               // }}
+             >
+               去门户网页版页调试
+             </Button>
+               </div>
               ) : null}
               {/* <div className="content"><TryAPI></TryAPI></div> */}
             </Tab.Item>

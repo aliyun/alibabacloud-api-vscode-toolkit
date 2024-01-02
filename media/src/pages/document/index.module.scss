@@ -1,7 +1,9 @@
+@import "semix-schema-table/module/Markdown.scss";
 @import "semix-schema-table/module/SchemaTable.scss";
 @import "../../components/SemixFormRender/SemixForm.scss";
 @import "../../styles/variable.scss";
 @import "../../styles/Markdown.scss";
+@import "../../components/APIPage/API.module.css";
 
 $primary-color: #448ef7;
 $nav-height: 36px;
@@ -100,19 +102,7 @@ $create-color: #007100;
     min-width: 100px;
   }
 
-  .api-page-content {
-    padding: 12px 20px 12px;
-    display: flex;
-    .api-debug {
-      width: 356px;
-    }
-    .right-panel {
-      width: 100%;
-    }
-  }
-
   .desc-mod {
-    background-color: #d6e0e5;
     border: 1px solid #89a6b5;
     border-radius: 2px;
     padding: 8px 18px;
