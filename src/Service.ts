@@ -140,6 +140,16 @@ export class AlicloudAPIService {
     return {};
   }
 
+  async requestEndpoints(product: string) {
+    const resStr = await fetch(
+      `https://pre-api.aliyun.com/meta/v1/products/${product}/endpoints.json?language=zh-CN`,
+      {},
+    ).then((res) => res.text());
+    const res = JSON.parse(resStr);
+    return res?.data?.endpoints || [];
+  }
+
+
   async loadProfiles() {
     const configFilePath = path.join(os.homedir(), ".aliyun/config.json");
     const { R_OK, W_OK } = fs.constants;
@@ -154,29 +164,35 @@ export class AlicloudAPIService {
   }
 
   async openAPIRequest(requestData) {
-    const { apiMeta, paramsValue, product, version } = requestData;
+    const { apiMeta, paramsValue, product, version, endpoint } = requestData;
     const newParamsValue = getFormatValues(paramsValue, apiMeta?.parameters);
-    // 定义了一个post变量，用于暂存请求体的信息
-    let post = "";
     let response = "";
     let data;
     const profilesInfo = await this.loadProfiles();
     const profiles = profilesInfo?.profiles;
     // TODO：用户可以选择使用哪个profile
+    const security = apiMeta?.ext?.security;
+    const defaultCredentialType =
+      security?.length > 0
+        ? security.indexOf("AK") < 0
+          ? security.indexOf("BearerToken") < 0
+            ? "anonymous"
+            : "bearer"
+          : "ak"
+        : "ak";
     if (profiles?.length) {
       try {
         data = await request({
           accessKeyId: profiles[0]?.access_key_id,
           accessKeySecret: profiles[0]?.access_key_secret,
-          // TODO：可选服务地址
-          endpoint: "ecs-cn-hangzhou.aliyuncs.com",
+          endpoint: endpoint,
           action: apiMeta?.name,
           apiVersion: version,
           params: newParamsValue || {},
           productName: product,
           meta: this.pontManager.localPontSpecs[0],
           bodyStyle: undefined,
-          credential: "AK",
+          credential: {tyep: defaultCredentialType},
         });
         response = data;
         // 设置状态码

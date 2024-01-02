@@ -1,21 +1,40 @@
 /**
- * @author nianyi
- * @description API调试器
+ * @author yini-chen
+ * @description API debugger
  */
 import React from "react";
 import { APIPageContext } from "../context";
 import { Input, Button } from "@alicloud/console-components";
 import { SemixForm } from "../../SemixFormRender";
+import I18N from "../../../utils/I18N";
+import { PontUIService } from "../../../service/UIService";
+import { endpointsMocks } from "../../../mocks/endpoints";
+import RegionSelector from "./RegionSelector";
 
 export class APIDebuggerProps {}
 
 export const APIDebugger: React.FC<APIDebuggerProps> = (props) => {
   const { apiMeta, schemaForm, product, version, onDebug } = APIPageContext.useContainer();
+  const [regionId, setRegionId] = React.useState<string>("");
+  const [endpoints, setEndpoints] = React.useState([]);
+
+  React.useEffect(() => {
+    if (endpoints.length === 0) {
+      // get endpoints list
+      PontUIService.requestEndpoints(product).then((res) => {
+        console.log(res);
+        setEndpoints(res?.length ? res : endpointsMocks);
+      });
+    }
+  }, [product]);
 
   return React.useMemo(() => {
     return (
       <div className="api-debug">
-        {apiMeta.title}
+        <div className="head-content">
+        <RegionSelector endpoints={endpoints} regionId={regionId} setRegionId={setRegionId} product={product}></RegionSelector>
+        </div>
+        <div className="middle-content">
         <SemixForm
           // widgets={serviceFormWidgets}
           // renderTitle={Guide}
@@ -26,21 +45,30 @@ export const APIDebugger: React.FC<APIDebuggerProps> = (props) => {
           //       });
           //   }}
         ></SemixForm>
-        <Button
+        </div>
+        <div className="footer-content">
+          <Button onClick={()=>{
+            schemaForm.setFormData({})
+          }}>
+            {I18N.main.explorer.empty}
+          </Button>
+          <Button
           onClick={() => {
             onDebug({
               paramsValue: schemaForm.formData,
               apiMeta: apiMeta,
               product,
               version,
+              endpoint: endpoints?.find((item) => item.regionId === regionId)?.public
             })
           }}
         >
-          调试
-        </Button>
+          {I18N.main.explorer.debug}
+        </Button></div>
+        
       </div>
     );
-  }, [schemaForm.formData]);
+  }, [schemaForm.formData, regionId, endpoints]);
 };
 APIDebugger.defaultProps = new APIDebuggerProps();
 export default APIDebugger;

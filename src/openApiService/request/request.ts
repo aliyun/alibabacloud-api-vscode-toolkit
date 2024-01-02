@@ -232,9 +232,7 @@ export const request = async function (options: OpenAPIOptions) {
     action,
     reqBodyType: requestType,
     bodyType: responseType,
-    // TODO：根据元数据判断鉴权方式
     authType:'AK',
-    // authType: credential && credential.type === 'anonymous' ? 'Anonymous' : 'AK'
   };
   return await client.doRequest(data, request, {});
 };

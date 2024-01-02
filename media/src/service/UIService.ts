@@ -50,6 +50,11 @@ export const PontUIService = {
       spec: any;
     }): Promise<void> => {},
 
-    /** 发起调用 */
+    /** request openapi */
     openAPIRequest: async (params = {}): Promise<ExtensionResponse> => new ExtensionResponse,
+
+    /** get endpoints list */
+    requestEndpoints: async (product: string) => {
+      return [] as any;
+    },
   };

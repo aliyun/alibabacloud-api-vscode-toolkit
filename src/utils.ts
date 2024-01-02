@@ -175,6 +175,7 @@ export class VSCodeLogger extends PontLogger {
 
 export const htmlTemplate = (context: { cspSource: string; getUri: (uri: string) => any }, pageConfig: any) => {
   // const initContent = createServerContent(pageConfig);
+  console.log("pageconfig",pageConfig)
 
   return `<!DOCTYPE html>
 <html lang="en">
