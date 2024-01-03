@@ -14,7 +14,7 @@ import RegionSelector from "./RegionSelector";
 export class APIDebuggerProps {}
 
 export const APIDebugger: React.FC<APIDebuggerProps> = (props) => {
-  const { apiMeta, schemaForm, product, version, onDebug } = APIPageContext.useContainer();
+  const { apiMeta, schemaForm, product, version, onDebug, changeMode } = APIPageContext.useContainer();
   const [regionId, setRegionId] = React.useState<string>("");
   const [endpoints, setEndpoints] = React.useState([]);
 
@@ -54,6 +54,7 @@ export const APIDebugger: React.FC<APIDebuggerProps> = (props) => {
           </Button>
           <Button
           onClick={() => {
+            changeMode("debug");
             onDebug({
               paramsValue: schemaForm.formData,
               apiMeta: apiMeta,

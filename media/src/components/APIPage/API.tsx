@@ -175,7 +175,7 @@ export const API: React.FC<APIProps> = (props) => {
              </Button>
                </div>
               ) : null}
-              {/* <div className="content"><TryAPI></TryAPI></div> */}
+              <div className="content"><TryAPI></TryAPI></div>
             </Tab.Item>
           </Tab>
         </div>
@@ -197,7 +197,7 @@ export const API: React.FC<APIProps> = (props) => {
     <div className="pontx-ui-api">
       {/*  */}
       <APIPageContext.Provider
-        initialState={{ apiMeta: selectedApi, schemaForm: form, product: props.product, version: props.version }}
+        initialState={{ apiMeta: selectedApi, schemaForm: form, product: props.product, version: props.version, changeMode: changeMode }}
       >
         <RootContext.Provider initialState={initValue}>
           {selectedApi ? (

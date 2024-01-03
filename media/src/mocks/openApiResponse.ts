@@ -1,5 +1,6 @@
 export const apiResponse = {
     "format": "json",
+    "cost": 300,
     "result": {
         "RequestId": "9BE1875B-EE52-501D-AD6E-BF0EEC4E1660",
         "Regions": {

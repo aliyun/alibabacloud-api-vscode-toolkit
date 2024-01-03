@@ -14,7 +14,6 @@ import I18N from "../../../utils/I18N";
 import { APIResponse } from "../../../types/WorkbenchAPI";
 import { EditorLanguages } from "../../../types/EditorLanguages";
 import { OpenAPIRequestResult } from "../../../types/openAPI";
-import { WorkbenchIcon } from "../../../Icon/Icon";
 import { APIPageContext } from "../context";
 import { apiResponse } from "../../../mocks/openApiResponse";
 
@@ -156,18 +155,18 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
             {/* {apiResult?.result || props.isApiResultLoading ? ( */}
             <div className="res-info">
               <div className="item">
-                <span className="label">
-                  <WorkbenchIcon type={String(statusCode).startsWith("2") ? "success" : "error"}></WorkbenchIcon>
-                </span>
-                <span className="value">
+              <div className="debug-res">
+              <div className={`codicon codicon-${String(statusCode).startsWith("2") ? "pass-filled success" : "error error-red"}`}></div>
+                <div className="value">
                   {String(statusCode).startsWith("2") ? I18N.main.explorer.success : I18N.main.explorer.error}
-                </span>
+                </div>
+              </div>
               </div>
               {apiResult && statusCode ? (
                 <div className="item">
                   {/* {httpStatusMessageMap[statusCode] || statusCode} */}
                   <span className="label">{I18N.main.explorer.statusCode}</span>
-                  <span className={`value result-status  ${String(statusCode).startsWith("2") ? "success" : "error"}`}>
+                  <span className={`value result-status  ${String(statusCode).startsWith("2") ? "success" : "error error-red"}`}>
                     {statusCode}
                   </span>
                 </div>
@@ -175,7 +174,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
               {apiResult ? (
                 <div className="item">
                   <span className="label">{I18N.main.explorer.time}</span>
-                  {/* <span className="value">{apiResult.cost}ms</span> */}
+                  <span className="value">{apiResult.cost}ms</span>
                 </div>
               ) : null}
             </div>

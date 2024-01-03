@@ -30,6 +30,7 @@ export class APIPageState  {
    * 发起调用loading
    */
   isApiResultLoading? = false
+  changeMode: (mode: 'debug' | 'doc' | 'sdk') => void;
 }
 
 export const useAPIPageContext = (initialState = {} as APIPageState): APIPageState => {

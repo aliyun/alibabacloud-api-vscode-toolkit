@@ -166,7 +166,7 @@ export class AlicloudAPIService {
   async openAPIRequest(requestData) {
     const { apiMeta, paramsValue, product, version, endpoint } = requestData;
     const newParamsValue = getFormatValues(paramsValue, apiMeta?.parameters);
-    let response = "";
+    let response = {} as any;
     let data;
     const profilesInfo = await this.loadProfiles();
     const profiles = profilesInfo?.profiles;
@@ -181,6 +181,7 @@ export class AlicloudAPIService {
           : "ak"
         : "ak";
     if (profiles?.length) {
+      const start = Date.now();
       try {
         data = await request({
           accessKeyId: profiles[0]?.access_key_id,
@@ -197,6 +198,7 @@ export class AlicloudAPIService {
         response = data;
         // 设置状态码
         // res.writeHead(200);
+        response.cost = Date.now() - start;
       } catch (error) {
         console.log("response error：", error);
         if (error && error.name === "RequesctTimeoutError") {
@@ -217,12 +219,14 @@ export class AlicloudAPIService {
               message: error.message,
               notice: "The request has executed failed.",
             },
+            cost: 300,
             entry: error.entry || {
               url: "",
             },
           };
         }
         response = data;
+        response.cost = Date.now() - start;
         // 设置状态码
         // res.writeHead(500);
       }
@@ -231,7 +235,7 @@ export class AlicloudAPIService {
         requestId: requestData.requestId,
         doc: `${product}::${version}::${apiMeta.name}`,
         type: "openAPIResponse",
-        response,
+        response
       };
     }else{
       let result = await vscode.window.showErrorMessage("请先安装阿里云 CLI 插件，并完成AK/SK配置后，再发起调用", "install","cancel");
