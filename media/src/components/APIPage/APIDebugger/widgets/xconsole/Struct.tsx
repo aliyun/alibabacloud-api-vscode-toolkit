@@ -7,7 +7,7 @@
 // import { LinkButton } from '@alicloud/console-components-actions';
 import React from 'react';
 import { CommonWidgetProps } from '../types';
-import { addParamStruct } from './utils';
+// import { addParamStruct } from './utils';
 // import { addParamStruct } from '../utils';
 
 export class StructProps extends CommonWidgetProps {
@@ -24,7 +24,7 @@ export const Struct: React.FC<StructProps> = (props) => {
       } catch {}
       props.onChange(value);
     }
-    addParamStruct(props.schemaPath, props.schema);
+    // addParamStruct(props.schemaPath, props.schema);
   }
   return (
     <div style={{ marginBottom: '16px' }}>
@@ -33,7 +33,7 @@ export const Struct: React.FC<StructProps> = (props) => {
         style={{ textDecoration: 'none' }}
         className="op"
         onClick={() => {
-          addParamStruct(props.schemaPath, props.schema);
+          // addParamStruct(props.schemaPath, props.schema);
         }}
       >
         <div className='codicon codicon-add' style={{ marginRight: '5px', marginTop: '1px' }}></div>

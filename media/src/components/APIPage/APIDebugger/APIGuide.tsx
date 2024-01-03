@@ -29,6 +29,8 @@ export class APIGuideProps {
 export const APIGuide = React.memo((props: APIGuideProps) => {
   const isNewHeader = props.schema?.temperary;
 
+  console.log(props)
+
   const description = props.schema?.description || props.schema?.title;
 
   const getShortName = (des: string) => {
@@ -53,7 +55,7 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
     }
     return shortName;
   };
-  const shortDesc = getShortName(description || '');
+  const shortDesc = /[0-9]+$/.test(props.fieldName) ? "" : getShortName(description || '');
 
   let hasCollapsedIcon = ['object', 'array'].includes(props.schema.type as any);
   if (props.schema?.type === 'array' && ['string', 'number', 'integer'].includes(props.schema?.items?.type as any)) {
@@ -70,9 +72,9 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
     props.schema?.format
   );
 
-  const paramTitle = !props.schema?.isItems
-    ? props.fieldName
-    : props.fieldName.substring(props.fieldName.lastIndexOf('.') + 1, props.fieldName.length);
+  const paramTitle = /[0-9]+$/.test(props.fieldName)
+    ? props.fieldName.substring(props.fieldName.lastIndexOf('.') + 1, props.fieldName.length)
+    : props.fieldName
 
   if (!paramTitle?.length) {
     return null;
@@ -99,7 +101,7 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
               {props.isRequired ? <span className="must"></span> : null}
               <span className="name">{paramTitle}</span>
               <span className="guide-info" style={{ whiteSpace: 'pre' }}>
-                {hasHelpTip ? (
+                {hasHelpTip && shortDesc?.length ? (
                   <span className="desc-box">
                     <span className="desc">{shortDesc}</span>
                     <Balloon

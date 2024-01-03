@@ -5,6 +5,11 @@
 @import "../../styles/Markdown.scss";
 @import "../../components/APIPage/API.module.css";
 @import "../../components/APIPage/TryAPI/TryAPI.module.css";
+@import "../../components/APIPage/APIDebugger//widgets/xconsole/enum.module.scss";
+@import "../../components/APIPage/APIDebugger//widgets/xconsole/index.module.scss";
+@import "../../components/APIPage/APIDebugger//widgets/xconsole/list.module.scss";
+@import "../../components/APIPage/APIDebugger/APIGuide.module.scss";
+@import "../../components/APIPage/APIDebugger/APIDebugger.module.scss";
 
 $primary-color: #448ef7;
 $nav-height: 36px;

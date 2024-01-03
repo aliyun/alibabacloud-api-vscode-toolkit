@@ -37,7 +37,6 @@ export const simpleType: any[] = ["string", "boolean", "number", "array", "objec
 // import { emitter } from '@/utils/emitter';
 // import { ErrorField } from '@ali/api-component';
 import _ from 'lodash';
-import { emitter } from "../emitter";
 import { ErrorField } from "../../../../SemixFormRender/context";
 
 export const schemaTraversal = (schema, parentPath?: string) => {
@@ -112,9 +111,9 @@ export const getFormatParams = (meta, form) => {
   return newMeta;
 };
 
-export const addParamStruct = (schemaPath, schema) => {
-  emitter.emit('addStruct', { schemaPath, schema });
-};
+// export const addParamStruct = (schemaPath, schema) => {
+//   emitter.emit('addStruct', { schemaPath, schema });
+// };
 
 export const addNewStruct = (parameters, schemaPath, struct) => {
   // const _struct = {...struct}
