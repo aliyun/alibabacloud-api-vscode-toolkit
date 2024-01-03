@@ -10,6 +10,11 @@ import I18N from "../../../utils/I18N";
 import { PontUIService } from "../../../service/UIService";
 import { endpointsMocks } from "../../../mocks/endpoints";
 import RegionSelector from "./RegionSelector";
+import { xconsoleWidgets } from "./widgets/xconsole";
+import { APIGuide } from "./APIGuide";
+// import { APIGuide } from "./Guide";
+// import { APIGuide } from "./APIGuide";
+// import APIGuide from "./Guide";
 
 export class APIDebuggerProps {}
 
@@ -36,8 +41,10 @@ export const APIDebugger: React.FC<APIDebuggerProps> = (props) => {
         </div>
         <div className="middle-content">
         <SemixForm
-          // widgets={serviceFormWidgets}
-          // renderTitle={Guide}
+          widgets={xconsoleWidgets}
+          renderTitle={(props)=>{
+            return <APIGuide product={product} version={version} {...props} ></APIGuide>
+          }}
           form={schemaForm as any}
           //   onChange={(value): void => {
           //     callVscode({ data: value, type: "openAPIDebug", requestId: 100 }, (res) => {

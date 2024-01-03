@@ -1,0 +1,44 @@
+.api-debugger-guide-wrapper {
+  .guide {
+    display: flex;
+    .must {
+      line-height: 22px;
+      vertical-align: middle;
+
+      &:before {
+        display: inline-block;
+        margin-right: 8px;
+        color: red;
+        line-height: 22px;
+        content: '*';
+      }
+    }
+    .name {
+      margin-right: 4px;
+      // margin-right: 8px;
+      color: #333333;
+      font-weight: 500;
+      font-size: 12px;
+      font-family: Alibaba-PuHuiTi;
+      line-height: 22px;
+      vertical-align: 0;
+    }
+    .desc {
+      display: inline-block;
+      max-width: 290px;
+      margin-right: 4px;
+      overflow: hidden;
+      color: #787878;
+      font-size: 12px;
+      line-height: 24px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      vertical-align: middle;
+      vertical-align: -0.6em;
+      cursor: pointer;
+    }
+    .api-debugger-param-desc {
+      color: #787878;
+    }
+  }
+}
