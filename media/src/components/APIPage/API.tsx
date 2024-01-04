@@ -16,6 +16,7 @@ import { APIPageContext } from "./context";
 import APIDebugger from "./APIDebugger/APIDebugger";
 import { SemixForm } from "../SemixFormRender";
 import { TryAPI } from "./TryAPI/TryAPI";
+import TrySDK from "./TrySDK/TrySDK";
 
 export class APIProps {
   selectedApi?: PontSpec.PontAPI;
@@ -156,7 +157,7 @@ export const API: React.FC<APIProps> = (props) => {
               {documentComp}
             </Tab.Item>
             <Tab.Item key="sdk" title="示例代码">
-              <div className="content">敬请期待...</div>
+              <div className="content"><TrySDK></TrySDK></div>
             </Tab.Item>
             <Tab.Item key="debug" title="调试">
               {selectedApi?.externalDocs ? (
@@ -166,7 +167,6 @@ export const API: React.FC<APIProps> = (props) => {
                component="a"
                href={selectedApi?.externalDocs?.url}
                target="_blank"
-               
                // onClick={() => {
                //   window.open(selectedApi?.externalDocs?.url, "_blank");
                // }}

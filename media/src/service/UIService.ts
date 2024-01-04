@@ -1,5 +1,5 @@
 import { PontSpec } from "pontx-spec";
-import { ExtensionResponse } from "../types/openAPI";
+import { MakeCodeResponse, OpenAPIResponse } from "../types/openAPI";
 
 /** 不同使用场景，各自注册服务来源 */
 const defaultSpecs: any[] = [];
@@ -51,10 +51,12 @@ export const PontUIService = {
     }): Promise<void> => {},
 
     /** request openapi */
-    openAPIRequest: async (params = {}): Promise<ExtensionResponse> => new ExtensionResponse,
+    openAPIRequest: async (params = {}): Promise<OpenAPIResponse> => new OpenAPIResponse,
 
     /** get endpoints list */
     requestEndpoints: async (product: string) => {
       return [] as any;
     },
+    /** get sdk demo */
+    makeCodeRequest: async (params = {}): Promise<MakeCodeResponse> => new MakeCodeResponse,
   };

@@ -46,7 +46,7 @@ html body {
       padding-left:16px;
       .content{
         padding: 0px 20px 20px 0;
-        height: calc(100vh - 200px);
+        height: calc(100vh - 270px);
         overflow: auto;
       }
     }

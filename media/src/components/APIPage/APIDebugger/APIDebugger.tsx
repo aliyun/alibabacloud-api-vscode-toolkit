@@ -19,19 +19,7 @@ import { APIGuide } from "./APIGuide";
 export class APIDebuggerProps {}
 
 export const APIDebugger: React.FC<APIDebuggerProps> = (props) => {
-  const { apiMeta, schemaForm, product, version, onDebug, changeMode } = APIPageContext.useContainer();
-  const [regionId, setRegionId] = React.useState<string>("");
-  const [endpoints, setEndpoints] = React.useState([]);
-
-  React.useEffect(() => {
-    if (endpoints.length === 0) {
-      // get endpoints list
-      PontUIService.requestEndpoints(product).then((res) => {
-        console.log(res);
-        setEndpoints(res?.length ? res : endpointsMocks);
-      });
-    }
-  }, [product]);
+  const { apiMeta, schemaForm, product, version, onDebug, changeMode, endpoints, regionId, setRegionId } = APIPageContext.useContainer();
 
   return React.useMemo(() => {
     return (

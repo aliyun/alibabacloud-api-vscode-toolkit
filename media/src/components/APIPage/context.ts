@@ -5,7 +5,8 @@ import { createContainer } from 'unstated-next';
 import { SemixFormProps } from '../SemixFormRender';
 import React from 'react';
 import { PontUIService } from '../../service/UIService';
-import { ExtensionResponse, OpenAPIRequestResult } from '../../types/openAPI';
+import { OpenAPIResponse, OpenAPIRequestResult } from '../../types/openAPI';
+import { endpointsMocks } from '../../mocks/endpoints';
 
 export class APIPageState  {
   /**
@@ -31,11 +32,33 @@ export class APIPageState  {
    */
   isApiResultLoading? = false
   changeMode: (mode: 'debug' | 'doc' | 'sdk') => void;
+  /**
+   * 服务地址
+   */
+  endpoints?: any[];
+  /**
+   * regionId
+   */
+  regionId?: string;
+  setRegionId?: (regionId: string) => void;
 }
 
 export const useAPIPageContext = (initialState = {} as APIPageState): APIPageState => {
   const [openAPIResponses, setOpenAPIResponse] = React.useState(null);
   const [isApiResultLoading, setIsApiResultLoading] = React.useState(false);
+  const [endpoints, setEndpoints] = React.useState([]);
+  const [regionId, setRegionId] = React.useState<string>("");
+
+  React.useEffect(() => {
+    if (endpoints.length === 0) {
+      // get endpoints list
+      PontUIService.requestEndpoints(initialState.product).then((res) => {
+        console.log(res);
+        setEndpoints(res?.length ? res : endpointsMocks);
+      });
+    }
+  }, [initialState.product]);
+
   const onDebug = (value) =>{
     setIsApiResultLoading(true);
     PontUIService.openAPIRequest(value).then(res=>{
@@ -47,7 +70,7 @@ export const useAPIPageContext = (initialState = {} as APIPageState): APIPageSta
       setOpenAPIResponse(responses);
     });
   }
-  return { ...initialState, openAPIResponses, onDebug, isApiResultLoading };
+  return { ...initialState, openAPIResponses, onDebug, isApiResultLoading, endpoints, regionId, setRegionId };
 };
 
 export const APIPageContext = createContainer(useAPIPageContext);
