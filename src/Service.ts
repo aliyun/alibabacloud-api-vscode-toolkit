@@ -163,6 +163,45 @@ export class AlicloudAPIService {
     }
   }
 
+
+
+  async makeCodeRequest(requestData) {
+    const { apiMeta, paramsValue, product, version, endpoint, regionId } = requestData;
+    const newParamsValue = getFormatValues(paramsValue, apiMeta?.parameters);
+    const security = apiMeta?.ext?.security;
+    const defaultCredentialType =
+      security?.length > 0
+        ? security.indexOf("AK") < 0
+          ? security.indexOf("BearerToken") < 0
+            ? "anonymous"
+            : "bearer"
+          : "ak"
+        : "ak";
+    const body = {
+      "apiName": apiMeta?.name,
+      "apiStyle": "RPC",
+      "apiVersion": version,
+      "method": "POST,GET",
+      "product": product,
+      "bodyStyle": null,
+      "sdkType": "dara",
+      "params": newParamsValue || {},
+      "regionId": regionId,
+      "endpoint": endpoint,
+      "credential": {tyep: defaultCredentialType},
+      "runtimeOptions": {},
+      "useCommon": false
+    }
+    const resStr = await fetch(
+      `https://api.aliyun.com/api/product/makeCode`,
+      {method: 'post',
+      body: JSON.stringify(body),
+      headers: {'Content-Type': 'application/json'}},
+    ).then((res) => res.text());
+    const res = JSON.parse(resStr);
+    return res;
+  }
+
   async openAPIRequest(requestData) {
     const { apiMeta, paramsValue, product, version, endpoint } = requestData;
     const newParamsValue = getFormatValues(paramsValue, apiMeta?.parameters);
