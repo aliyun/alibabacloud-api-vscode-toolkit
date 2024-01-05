@@ -1,5 +1,15 @@
 .sdk-demo-content{
-    .head-info{
-        margin:16px 0 0 36px
+     .operations{
+        display: flex;
+        margin:16px 16px;
+        width: 300px;
+        justify-content: space-around;
+        .head-info{
+            margin: auto 0;
+        }
      }
+     .tab-content{
+        position: relative;
+     }
+     
 }

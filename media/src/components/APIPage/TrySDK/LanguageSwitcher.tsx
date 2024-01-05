@@ -2,7 +2,7 @@
  * @author yini-chen
  * @description 语言切换
  */
-import { Card, Empty, Tabs } from 'antd';
+import { Card, Empty, Select, Tabs } from 'antd';
 import * as React from 'react';
 // import { WorkbenchIcon } from './Icon/Icon';
 // import { EditorLanguages } from './MonacoEditor/define';
@@ -54,12 +54,9 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = (props) => {
 
   return (
     <div className="language-switcher-comp">
-      <Tabs
+      {/* <Tabs
         activeKey={props.language}
         onChange={(tab) => props.onLanguageChange(tab as EditorLanguages)}
-        // tabBarExtraContent={
-        //   { left: <div className="label">{I18N.main.explorer.allLanguages}</div> }
-        // }
         type={'card'}
         tabBarGutter={0}
       >
@@ -69,7 +66,6 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = (props) => {
               disabled={!Object.keys(props.sdkDemos || {})?.includes(language.value?.toLocaleLowerCase())}
               tab={
                 <span>
-                  {/* <WorkbenchIcon type={language.icon} useSVG /> */}
                   {language.text}
                 </span>
               }
@@ -79,12 +75,22 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = (props) => {
             </Tabs.TabPane>
           );
         })}
-      </Tabs>
-      {/* {props.languages && props.languages?.length ? null : (
-        <Card className="empty-card">
-          <Empty description={I18N.components.index.noData} />
-        </Card>
-      )} */}
+      </Tabs> */}
+      <Select style={{width:130}} value={props.language}  onChange={(tab) => props.onLanguageChange(tab as EditorLanguages)} children={
+        props.languages.map((language) => {
+          return (
+            <Select.Option
+              disabled={!Object.keys(props.sdkDemos || {})?.includes(language.value?.toLocaleLowerCase())}
+              label={language.text}
+              key={language.value}
+              value={language.value}
+            >
+              {props.tabContent}
+            </Select.Option>
+          );
+        })
+      }></Select>
+
     </div>
   );
 };

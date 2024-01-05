@@ -59,4 +59,8 @@ export const PontUIService = {
     },
     /** get sdk demo */
     makeCodeRequest: async (params = {}): Promise<MakeCodeResponse> => new MakeCodeResponse,
+    /** get local language */
+    getLocalLanguage : async () => "",
+    /** update local language */
+    updateLocalLanguage : async (language:string) => "",
   };

@@ -5,7 +5,7 @@ import { getVSCode } from "../utils/utils";
 import { parseAPIMetaDescription } from "../utils/parseAPIMetaDescription";
 import { ApiErrorCode } from "./APIPage/APIDocument/ApiErrorCode";
 import { PontUIService } from "../service/UIService";
-import "../pages/document/index.scss";
+import "../pages/document/index.module.scss";
 import { routerMeta } from "../mocks/routerMeta";
 
 if (typeof window !== "undefined") {

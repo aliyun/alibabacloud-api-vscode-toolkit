@@ -163,7 +163,13 @@ export class AlicloudAPIService {
     }
   }
 
+  async updateLocalLanguage(lang) {
+    this.context.globalState.update('defaultLanguage', lang);
+  }
 
+  async getLocalLanguage() {
+    return this.context.globalState.get('defaultLanguage')
+  }
 
   async makeCodeRequest(requestData) {
     const { apiMeta, paramsValue, product, version, endpoint, regionId } = requestData;
@@ -179,11 +185,8 @@ export class AlicloudAPIService {
         : "ak";
     const body = {
       "apiName": apiMeta?.name,
-      "apiStyle": "RPC",
       "apiVersion": version,
-      "method": "POST,GET",
       "product": product,
-      "bodyStyle": null,
       "sdkType": "dara",
       "params": newParamsValue || {},
       "regionId": regionId,
