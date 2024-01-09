@@ -63,4 +63,8 @@ export const PontUIService = {
     getLocalLanguage : async () => "",
     /** update local language */
     updateLocalLanguage : async (language:string) => "",
+    /** open in ide */
+    openInCode: async (codeInfo:{code:string,language:string}): Promise<void> => {},
+    /** save to file */
+    saveToFile: async (code:string): Promise<void> => {},
   };

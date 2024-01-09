@@ -34,7 +34,7 @@ export const DARA_SDK_LANGUAGES = [
   { value: EditorLanguages.CSharp, text: 'C#', icon: 'csharp' },
   { value: EditorLanguages.CPP, text: 'C++', icon: 'cpp' },
   { value: EditorLanguages.Swift, text: 'Swift', icon: 'swift' },
-];
+] as Array<{value:string; text:string; icon:string; disabled:boolean}>;
 
 export class LanguageSwitcherProps {
   languages? = DARA_SDK_LANGUAGES;
@@ -47,7 +47,6 @@ export class LanguageSwitcherProps {
 
   extra = null;
   languageStatus? = {};
-  sdkDemos? = {};
 }
 
 export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = (props) => {
@@ -80,7 +79,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = (props) => {
         props.languages.map((language) => {
           return (
             <Select.Option
-              disabled={!Object.keys(props.sdkDemos || {})?.includes(language.value?.toLocaleLowerCase())}
+              disabled={language.disabled}
               label={language.text}
               key={language.value}
               value={language.value}

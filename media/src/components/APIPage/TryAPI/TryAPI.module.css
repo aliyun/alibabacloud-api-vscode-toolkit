@@ -2,6 +2,17 @@
     position: relative;
     padding: 0 16px 16px;
     height: 100%;
+    .ant-btn {
+      margin-left: 8px;
+      padding: 8px;
+      background-color: #f8f9fa;
+      border: 1px #f8f9fa solid;
+    }
+    .ant-btn:hover{
+      background-color: #fff;
+      border: 1px #2f84ae solid;
+      color: #2f84ae;
+    }
   
     .ant-alert {
       margin-bottom: 16px;

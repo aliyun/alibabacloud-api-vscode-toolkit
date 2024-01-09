@@ -98,11 +98,11 @@ export const request = async function (options: OpenAPIOptions) {
     bodyStyle,
     credential
   } = options;
-  let method = meta?.apis[action]?.method?.toUpperCase();
+  let method = meta?.method?.toUpperCase();
   let protocol = 'https';
   endpoint = endpoint ? endpoint.replace('http://', '').replace('https://', '') : `${productName.toLowerCase()}.cn-hangzhou.aliyuncs.com`;
   let pathname = '/';
-  const schema = meta.apis[action].responses['200'] && meta.apis[action].responses['200'].schema;
+  const schema = meta?.responses['200'] && meta?.responses['200'].schema;
   const requestType = bodyStyle === 'json' ? 'json' : 'formData';
   let responseType;
   if (!schema) {
@@ -128,7 +128,7 @@ export const request = async function (options: OpenAPIOptions) {
   // });
   // paramObject.params = newParams;
   const parameters = {};
-  meta.apis[action]?.parameters?.map(param=>{
+  meta?.parameters?.map(param=>{
     parameters[param.name] = param;
   })
   // paramObject.params = params;

@@ -2,6 +2,8 @@ import _ from "lodash";
 import { APIResponse } from "../types/WorkbenchAPI";
 import { Parser } from 'xml2js';
 import { EditorLanguages } from "./define";
+import { PontUIService } from "../service/UIService";
+import { getVSCode } from "../utils/utils";
 
 export const getRefSchema = (schemas: any) => ($ref: string) => {
   const schemaName = $ref.split("/").pop();
@@ -124,5 +126,56 @@ export const getLangByLanguageEditor = (language: EditorLanguages) => {
     default: {
       return language;
     }
+  }
+};
+
+export const getEditorMenuItems = (code, language):Array<{ key: string; label: string; codicon?: string; onClick: () => void }> => {
+  return [
+    {
+      key: "openInCode",
+      label: "在 IDE 中打开",
+      codicon: "file-code",
+      onClick: () => {
+        PontUIService.openInCode({
+          code: code,
+          language: language,
+        });
+      },
+    },
+    {
+      key: "saveToFile",
+      label: "另存为...",
+      codicon: "save-as",
+      onClick: () => {
+        PontUIService.saveToFile(code || "");
+      },
+    },
+  ];
+}
+
+export const getEditorLanguage = (lang) => {
+  switch (lang) {
+    case "java-async":
+      return "java";
+    case "Java":
+      return "java";
+    case "TypeScript":
+      return "typescript";
+    case "Go":
+      return "go";
+    case "PHP":
+      return "php";
+    case "Python":
+      return "python";
+    case "Python2":
+      return "python";
+    case "CSharp":
+      return "csharp";
+    case "cpp":
+      return "cpp";
+    case "swift":
+      return "swift";
+    default:
+      return "javascript";
   }
 };

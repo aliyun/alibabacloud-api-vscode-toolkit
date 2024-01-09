@@ -149,6 +149,29 @@ export class AlicloudAPIService {
     return res?.data?.endpoints || [];
   }
 
+  async openInCode(codeInfo:{code:string,language:string}){
+    const {language, code} = codeInfo
+    // 创建新的文件
+    vscode.workspace.openTextDocument({
+      content: code,
+      language: language?.toLocaleLowerCase(),
+  }).then(newDocument => {
+      vscode.window.showTextDocument(newDocument,{
+        viewColumn: vscode.ViewColumn.Beside,
+      });
+  });
+    return {}
+  }
+
+  async saveToFile(code:string){
+    const uri = await vscode.window.showSaveDialog();
+    if (uri) {
+        const buf = Buffer.from(code, 'utf8');
+        await vscode.workspace.fs.writeFile(uri, buf);
+    }
+    return {}
+  }
+
 
   async loadProfiles() {
     const configFilePath = path.join(os.homedir(), ".aliyun/config.json");
@@ -233,7 +256,7 @@ export class AlicloudAPIService {
           apiVersion: version,
           params: newParamsValue || {},
           productName: product,
-          meta: this.pontManager.localPontSpecs[0],
+          meta: apiMeta,
           bodyStyle: undefined,
           credential: {tyep: defaultCredentialType},
         });

@@ -2,15 +2,9 @@
  * @author 念依
  * @description 参数Title
  */
-
-// import { AmpIcon } from '@ali/amp-base';
-import { Balloon, Icon, Tag } from '@alicloud/console-components';
-// import { LinkButton } from '@alicloud/console-components-actions';
-import { RightOutlined } from '@ant-design/icons';
-import React from 'react';
-import { stringToType } from './widgets/xconsole/utils';
-import { SemixMarkdown } from 'semix-schema-table';
-// import { stringToType } from './utils';
+import { Balloon, Icon, Tag } from "@alicloud/console-components";
+import React from "react";
+import { SemixMarkdown } from "semix-schema-table";
 
 export class APIGuideProps {
   schema?: any;
@@ -22,20 +16,17 @@ export class APIGuideProps {
   deleteHeader?: Function;
   changeValue?: (dataPath: string, value: string | number | boolean) => void;
   // titleOperator?: any;
-  product:string;
-  version:string;
+  product: string;
+  version: string;
 }
 
 export const APIGuide = React.memo((props: APIGuideProps) => {
-  const isNewHeader = props.schema?.temperary;
-
-  console.log(props)
 
   const description = props.schema?.description || props.schema?.title;
 
   const getShortName = (des: string) => {
     const endIndex = Math.min(
-      ...['，', '\n', '。'].map((ch) => des.indexOf(ch)).map((num) => (num === -1 ? Number.MAX_VALUE : num)),
+      ...["，", "\n", "。"].map((ch) => des.indexOf(ch)).map((num) => (num === -1 ? Number.MAX_VALUE : num)),
     );
     let shortName = des;
 
@@ -43,10 +34,10 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
       shortName = des.slice(0, endIndex);
     }
 
-    if (shortName.startsWith('<props')) {
+    if (shortName.startsWith("<props")) {
       const repalceStrs = shortName.match(/\<(.+?)\>/g) || [];
       repalceStrs?.map((str) => {
-        shortName = shortName.replace(str, '');
+        shortName = shortName.replace(str, "");
       });
     }
 
@@ -55,10 +46,10 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
     }
     return shortName;
   };
-  const shortDesc = /[0-9]+$/.test(props.fieldName) ? "" : getShortName(description || '');
+  const shortDesc = /[0-9]+$/.test(props.fieldName) ? "" : getShortName(description || "");
 
-  let hasCollapsedIcon = ['object', 'array'].includes(props.schema.type as any);
-  if (props.schema?.type === 'array' && ['string', 'number', 'integer'].includes(props.schema?.items?.type as any)) {
+  let hasCollapsedIcon = ["object", "array"].includes(props.schema.type as any);
+  if (props.schema?.type === "array" && ["string", "number", "integer"].includes(props.schema?.items?.type as any)) {
     hasCollapsedIcon = false;
   }
 
@@ -73,8 +64,8 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
   );
 
   const paramTitle = /[0-9]+$/.test(props.fieldName)
-    ? props.fieldName.substring(props.fieldName.lastIndexOf('.') + 1, props.fieldName.length)
-    : props.fieldName
+    ? props.fieldName.substring(props.fieldName.lastIndexOf(".") + 1, props.fieldName.length)
+    : props.fieldName;
 
   if (!paramTitle?.length) {
     return null;
@@ -83,24 +74,27 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
   return (
     <div className="api-debugger-guide-wrapper">
       {!props.schema?.isRoot ? (
-        <div className="guide" style={{ display: 'flex' }}>
+        <div className="guide" style={{ display: "flex" }}>
           {hasCollapsedIcon ? (
-            <div className="right-outlined">
-              <RightOutlined
-                onClick={() => {
-                  props.setCollapsed(!props.collapsed);
-                }}
-                style={{ marginRight: 8, paddingTop: 5 }}
-                rotate={props.collapsed ? 0 : 90}
-                translate={undefined}
-              />
+            <div
+              className="right-outlined"
+              onClick={() => {
+                props.setCollapsed(!props.collapsed);
+              }}
+              style={{ marginRight: 8, paddingTop: 2 }}
+            >
+              {props.collapsed ? (
+                <div className="codicon codicon-chevron-right"></div>
+              ) : (
+                <div className="codicon codicon-chevron-down"></div>
+              )}
             </div>
           ) : null}
-          <div className="api-title" style={{ marginBottom: '8px' }}>
+          <div className="api-title" style={{ marginBottom: "8px" }}>
             <div className="api-title-left">
               {props.isRequired ? <span className="must"></span> : null}
               <span className="name">{paramTitle}</span>
-              <span className="guide-info" style={{ whiteSpace: 'pre' }}>
+              <span className="guide-info" style={{ whiteSpace: "pre" }}>
                 {hasHelpTip && shortDesc?.length ? (
                   <span className="desc-box">
                     <span className="desc">{shortDesc}</span>
@@ -110,14 +104,16 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
                       style={{ width: 500 }}
                       closable={false}
                       trigger={
-                        <span style={{ lineHeight: '24px' }}>
-                          <div className='codicon codicon-question'></div>
+                        <span style={{ lineHeight: "24px" }}>
+                          <div className="codicon codicon-question"></div>
                         </span>
                       }
                     >
                       <div className="api-debugger-param-desc">
                         <span className="config-title-desc">描述</span>
-                        <div><SemixMarkdown source={description}></SemixMarkdown></div>
+                        <div>
+                          <SemixMarkdown source={description}></SemixMarkdown>
+                        </div>
                         {props.schema?.example ? (
                           <>
                             <div className="config-title">
@@ -149,7 +145,7 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
                           <>
                             <div className="config-title">枚举值</div>
                             {props.schema?.enum?.map((item) => (
-                              <Tag size="small" type="normal" style={{ marginRight: '4px', borderRadius: '2px' }}>
+                              <Tag size="small" type="normal" style={{ marginRight: "4px", borderRadius: "2px" }}>
                                 {item.value || item}
                               </Tag>
                             ))}

@@ -7,6 +7,7 @@ import React from 'react';
 import { PontUIService } from '../../service/UIService';
 import { OpenAPIResponse, OpenAPIRequestResult } from '../../types/openAPI';
 import { endpointsMocks } from '../../mocks/endpoints';
+import { getVSCode } from '../../utils/utils';
 
 export class APIPageState  {
   /**
@@ -31,6 +32,10 @@ export class APIPageState  {
    * 发起调用loading
    */
   isApiResultLoading? = false
+  /**
+   * 模式选择
+   */
+  mode: 'debug' | 'doc' |'sdk' = 'debug';
   changeMode: (mode: 'debug' | 'doc' | 'sdk') => void;
   /**
    * 服务地址

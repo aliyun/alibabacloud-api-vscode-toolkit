@@ -17,6 +17,9 @@ import APIDebugger from "./APIDebugger/APIDebugger";
 import { SemixForm } from "../SemixFormRender";
 import { TryAPI } from "./TryAPI/TryAPI";
 import TrySDK from "./TrySDK/TrySDK";
+import { Dropdown, MenuProps } from "antd";
+import { PontUIService } from "../../service/UIService";
+import { getVSCode } from "../../utils/utils";
 
 export class APIProps {
   selectedApi?: PontSpec.PontAPI;
@@ -157,25 +160,14 @@ export const API: React.FC<APIProps> = (props) => {
               {documentComp}
             </Tab.Item>
             <Tab.Item key="sdk" title="示例代码">
-              <div className="content"><TrySDK></TrySDK></div>
+              <div className="content">
+                <TrySDK></TrySDK>
+              </div>
             </Tab.Item>
             <Tab.Item key="debug" title="调试">
-              {selectedApi?.externalDocs ? (
-               <div className="web-debug">
-                <Button
-               type="normal"
-               component="a"
-               href={selectedApi?.externalDocs?.url}
-               target="_blank"
-               // onClick={() => {
-               //   window.open(selectedApi?.externalDocs?.url, "_blank");
-               // }}
-             >
-               去门户网页版页调试
-             </Button>
-               </div>
-              ) : null}
-              <div className="content"><TryAPI></TryAPI></div>
+              <div className="content">
+                <TryAPI></TryAPI>
+              </div>
             </Tab.Item>
           </Tab>
         </div>
@@ -197,7 +189,14 @@ export const API: React.FC<APIProps> = (props) => {
     <div className="pontx-ui-api">
       {/*  */}
       <APIPageContext.Provider
-        initialState={{ apiMeta: selectedApi, schemaForm: form, product: props.product, version: props.version, changeMode: changeMode }}
+        initialState={{
+          apiMeta: selectedApi,
+          schemaForm: form,
+          product: props.product,
+          version: props.version,
+          mode: mode,
+          changeMode: changeMode,
+        }}
       >
         <RootContext.Provider initialState={initValue}>
           {selectedApi ? (

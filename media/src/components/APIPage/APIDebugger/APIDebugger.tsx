@@ -21,50 +21,50 @@ export class APIDebuggerProps {}
 export const APIDebugger: React.FC<APIDebuggerProps> = (props) => {
   const { apiMeta, schemaForm, product, version, onDebug, changeMode, endpoints, regionId, setRegionId } = APIPageContext.useContainer();
 
-  return React.useMemo(() => {
-    return (
-      <div className="api-debug">
-        <div className="head-content">
-        <RegionSelector endpoints={endpoints} regionId={regionId} setRegionId={setRegionId} product={product}></RegionSelector>
-        </div>
-        <div className="middle-content">
-        <SemixForm
-          widgets={xconsoleWidgets}
-          renderTitle={(props)=>{
-            return <APIGuide product={product} version={version} {...props} ></APIGuide>
-          }}
-          form={schemaForm as any}
-          //   onChange={(value): void => {
-          //     callVscode({ data: value, type: "openAPIDebug", requestId: 100 }, (res) => {
-          //         console.log("callVscode callback", res);
-          //       });
-          //   }}
-        ></SemixForm>
-        </div>
-        <div className="footer-content">
-          <Button onClick={()=>{
-            schemaForm.setFormData({})
-          }}>
-            {I18N.main.explorer.empty}
-          </Button>
-          <Button
-          onClick={() => {
-            changeMode("debug");
-            onDebug({
-              paramsValue: schemaForm.formData,
-              apiMeta: apiMeta,
-              product,
-              version,
-              endpoint: endpoints?.find((item) => item.regionId === regionId)?.public
-            })
-          }}
-        >
-          {I18N.main.explorer.debug}
-        </Button></div>
-        
+  const endpoint = regionId ? endpoints?.find((item) => item.regionId === regionId)?.public : endpoints?.find((item) => item.regionId === 'cn-hangzhou')?.public;
+
+  return (
+    <div className="api-debug">
+      <div className="head-content">
+      <RegionSelector endpoints={endpoints} regionId={regionId} setRegionId={setRegionId} product={product}></RegionSelector>
       </div>
-    );
-  }, [schemaForm.formData, regionId, endpoints]);
+      <div className="middle-content">
+      <SemixForm
+        widgets={xconsoleWidgets}
+        renderTitle={(props)=>{
+          return <APIGuide product={product} version={version} {...props} ></APIGuide>
+        }}
+        form={schemaForm as any}
+        //   onChange={(value): void => {
+        //     callVscode({ data: value, type: "openAPIDebug", requestId: 100 }, (res) => {
+        //         console.log("callVscode callback", res);
+        //       });
+        //   }}
+      ></SemixForm>
+      </div>
+      <div className="footer-content">
+        <Button onClick={()=>{
+          schemaForm.setFormData({})
+        }}>
+          {I18N.main.explorer.empty}
+        </Button>
+        <Button
+        onClick={() => {
+          changeMode("debug");
+          onDebug({
+            paramsValue: schemaForm.formData,
+            apiMeta: apiMeta,
+            product,
+            version,
+            endpoint: endpoint
+          })
+        }}
+      >
+        {I18N.main.explorer.debug}
+      </Button></div>
+      
+    </div>
+  );
 };
 APIDebugger.defaultProps = new APIDebuggerProps();
 export default APIDebugger;
