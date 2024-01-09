@@ -63,6 +63,7 @@ export class AlicloudAPIWebview {
       {
         // Enable javascript in the webview
         enableScripts: true,
+        retainContextWhenHidden: true
       },
     );
     webview = AlicloudAPIWebview.webviewPanels[panelKey];
@@ -112,6 +113,7 @@ export class AlicloudAPIWebview {
       {
         // Enable javascript in the webview
         enableScripts: true,
+        retainContextWhenHidden: true
       },
     );
     const filewatcher = vscode.workspace.createFileSystemWatcher(filePath, true, false, true);
