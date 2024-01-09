@@ -58,7 +58,6 @@ export const useAPIPageContext = (initialState = {} as APIPageState): APIPageSta
     if (endpoints.length === 0) {
       // get endpoints list
       PontUIService.requestEndpoints(initialState.product).then((res) => {
-        console.log(res);
         setEndpoints(res?.length ? res : endpointsMocks);
       });
     }
@@ -67,7 +66,6 @@ export const useAPIPageContext = (initialState = {} as APIPageState): APIPageSta
   const onDebug = (value) =>{
     setIsApiResultLoading(true);
     PontUIService.openAPIRequest(value).then(res=>{
-      console.log("webview 收到的信息", res)
       setIsApiResultLoading(false);
       const responses = {};
       // 根据文档名存储响应，切换API文档时展示对应的响应

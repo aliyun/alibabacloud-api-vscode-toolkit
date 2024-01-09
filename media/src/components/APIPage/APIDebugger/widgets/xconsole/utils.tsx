@@ -195,7 +195,6 @@ export const getFormatValues = (paramValues: any, apiParams, purpose?: string) =
         )
       ) {
         try {
-          console.log(newAPIParamValues[key], JSON.parse(newAPIParamValues[key]));
           newAPIParamValues[key] = JSON.parse(newAPIParamValues[key]);
         } catch (e) {
           newAPIParamValues[key] = {};

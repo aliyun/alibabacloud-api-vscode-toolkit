@@ -16,7 +16,6 @@ export class UploadFileProps extends CommonWidgetProps {
 }
 
 export const UploadFile: React.FC<UploadFileProps> = (props) => {
-    console.log(props)
   const [isUpload, changeIsUpload] = React.useState(false);
   const { apiMeta } = APIPageContext.useContainer();
 //   const location = useLocation();
@@ -35,8 +34,6 @@ export const UploadFile: React.FC<UploadFileProps> = (props) => {
     }
     return path;
   };
-
-  console.log(apiMeta)
 
   return (
     <div>暂不支持文件传输调试，您可以到<a href={apiMeta?.externalDocs?.url} target='_blank'>开发者门户网页版</a>进行调试</div>
