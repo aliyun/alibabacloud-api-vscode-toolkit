@@ -9,7 +9,7 @@ import { String } from "./string";
 import { BooleanSwitch } from "./swtich";
 import { NumberInput } from "./number";
 import { SimpleList } from "./list";
-// import { UploadFile } from "./UploadFile";
+import { UploadFile } from "./UploadFile";
 import { EnumSelect } from "./enum";
 import { SimpleMap } from "./map";
 import { TypeSelector } from "./any";
@@ -34,7 +34,7 @@ export const xconsoleWidgets = {
   typeSelect: TypeSelector, // any类型支持选择各种类型
   simpleList: SimpleList,
   // list: SimpleList,
-  // file: UploadFile,
+  file: UploadFile,
   // json: JsonEdit,
   // fileTypeSelect: FileUploadType, // 文件上传切换，amp暂时不支持
   struct: Struct, // 数据结构

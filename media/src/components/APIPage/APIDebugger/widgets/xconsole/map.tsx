@@ -94,14 +94,14 @@ export const SimpleMap: React.FC<SimpleMapProps> = (props) => {
         {children}
         <div className="operators map">
           <a
-            style={{ textDecoration: 'none' }}
+            style={{ textDecoration: 'none', cursor: "pointer" }}
             className="op"
             onClick={() => {
               props.addItem();
             }}
           >
             <div className='codicon codicon-add' style={{ marginRight: '5px', marginTop: '1px' }}></div>
-            添加
+            add
           </a>
         </div>
       </div>

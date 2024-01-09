@@ -6,7 +6,8 @@ import { parseAPIMetaDescription } from "../utils/parseAPIMetaDescription";
 import { ApiErrorCode } from "./APIPage/APIDocument/ApiErrorCode";
 import { PontUIService } from "../service/UIService";
 import "../pages/document/index.scss";
-import { routerMeta } from "../mocks/routerMeta";
+// import { routerMeta } from "../mocks/routerMeta";
+// import { definitions } from "../mocks/definitions";
 
 if (typeof window !== "undefined") {
   (window as any).routerMeta = {};
