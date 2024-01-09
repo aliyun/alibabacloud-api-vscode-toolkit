@@ -6,7 +6,7 @@ import { PontUIService } from "../service/UIService";
 import { getVSCode } from "../utils/utils";
 
 export const getRefSchema = (schemas: any) => ($ref: string) => {
-  const schemaName = $ref.split("/").pop();
+  const schemaName = $ref?.split("/").pop();
   const schema = schemaName ? schemas?.[schemaName] : {};
   if (schema) {
     return schema;

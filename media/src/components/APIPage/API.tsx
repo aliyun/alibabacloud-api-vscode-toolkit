@@ -20,6 +20,7 @@ import TrySDK from "./TrySDK/TrySDK";
 import { Dropdown, MenuProps } from "antd";
 import { PontUIService } from "../../service/UIService";
 import { getVSCode } from "../../utils/utils";
+import { SemixJsonSchema } from "semix-core";
 import _ from "lodash";
 
 export class APIProps {
@@ -86,6 +87,12 @@ export const API: React.FC<APIProps> = (props) => {
     (result, param) => {
       if(param.schema?.$ref){
         param.schema = getSchema(param.schema?.$ref)
+        param.schema = SemixJsonSchema.mapSchema(param.schema as any, (schema)=>{
+          if(schema?.$ref){
+            schema = getSchema(schema?.$ref)
+          }
+          return schema
+        })
       }
       return {
         ...result,
