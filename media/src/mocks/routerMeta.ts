@@ -1,21 +1,19 @@
 export const routerMeta = {
     "specName": "Oss::2019-05-17",
-    "modName": "",
+    "name": "PutObject",
     "spec": {
         "consumes": [
-            "application/xml"
+            "application/octet-stream"
         ],
         "deprecated": false,
-        "description": "- GetBucket (ListObjects)接口已修订为GetBucketV2 (ListObjectsV2)。建议您在开发应用程序时使用较新的版本GetBucketV2 (ListObjectsV2)。为保证向后兼容性，OSS继续支持GetBucket (ListObjects)。有关GetBucketV2 (ListObjectsV2)的更多信息，请参见[GetBucketV2 (ListObjectsV2)](https://help.aliyun.com/document_detail/187544.html)。\n\n- 执行GetBucket (ListObjects)请求时不会返回Object中自定义的元信息。",
+        "description": "**注意事项**\n\n- 添加的Object大小不能超过5 GB。\n\n- 默认情况下，如果已存在同名Object且对该Object有访问权限，则新添加的Object将覆盖原有的Object，并返回200 OK。\n\n- OSS没有文件夹的概念，所有资源都是以文件来存储，但您可以通过创建一个以正斜线（/）结尾，大小为0的Object来创建模拟文件夹。\n\n**版本控制**\n\n- 在已开启版本控制的Bucket中，OSS会为新添加的Object自动生成唯一的版本ID，并在响应Header中通过x-oss-version-id形式返回。\n- 在暂停了版本控制的Bucket中，新添加的Object的版本ID为null。OSS会保证同一个Object仅有一个null的版本ID。",
         "ext": {
             "methods": [
-                "get"
+                "put"
             ],
-            "operationType": "read",
-            "produces": [
-                "application/xml"
-            ],
-            "responseDemo": "[{\"errorExample\":\"\",\"example\":\"{\\n  \\\"Name\\\": \\\"examplebucket\\\",\\n  \\\"Prefix\\\": \\\"fun/\\\",\\n  \\\"Marker\\\": \\\"test1.txt\\\",\\n  \\\"MaxKeys\\\": 100,\\n  \\\"Delimiter\\\": \\\"/\\\",\\n  \\\"IsTruncated\\\": false,\\n  \\\"Contents\\\": [\\n    {\\n      \\\"Key\\\": \\\"fun/test.jpg\\\",\\n      \\\"LastModified\\\": \\\"2012-02-24T08:42:32.000Z\\\",\\n      \\\"ETag\\\": \\\"5B3C1A2E053D763E1B002CC607C5A0FE1****\\\",\\n      \\\"Type\\\": \\\"Normal\\\",\\n      \\\"Size\\\": 344606,\\n      \\\"Owner\\\": {\\n        \\\"ID\\\": \\\"\\\",\\n        \\\"DisplayName\\\": \\\"\\\"\\n      },\\n      \\\"ResoreInfo\\\": \\\"ongoing-request=\\\\\\\"true”\\\"\\n    }\\n  ],\\n  \\\"CommonPrefixes\\\": [\\n    {\\n      \\\"Prefix\\\": \\\"\\\"\\n    }\\n  ]\\n}\",\"type\":\"json\"}]",
+            "operationType": "write",
+            "produces": [],
+            "responseDemo": "[{\"errorExample\":\"\",\"example\":\"{}\",\"type\":\"json\"}]",
             "schemes": [
                 "http",
                 "https"
@@ -25,18 +23,18 @@ export const routerMeta = {
                     "AK": []
                 }
             ],
-            "summary": "列举存储空间（Bucket）中所有文件（Object）的信息。",
+            "summary": "上传文件（Object）。",
             "systemTags": {
-                "operationType": "get"
+                "operationType": "create"
             },
-            "title": "列举存储空间中文件的信息"
+            "title": "上传文件"
         },
         "externalDocs": {
             "description": "去调试",
-            "url": "https://api.aliyun.com/api/Oss/2019-05-17/GetBucket"
+            "url": "https://api.aliyun.com/api/Oss/2019-05-17/PutObject"
         },
-        "method": "get",
-        "name": "GetBucket",
+        "method": "put",
+        "name": "PutObject",
         "parameters": [
             {
                 "in": "host",
@@ -50,139 +48,148 @@ export const routerMeta = {
                 }
             },
             {
-                "in": "query",
-                "name": "delimiter",
+                "in": "path",
+                "name": "key",
+                "required": true,
+                "schema": {
+                    "description": "Object的完整路径。",
+                    "example": "exampledir/exampleobject/txt",
+                    "required": true,
+                    "type": "string"
+                }
+            },
+            {
+                "in": "header",
+                "name": "x-oss-forbid-overwrite",
                 "required": false,
                 "schema": {
-                    "description": "对Object名字进行分组的字符。所有Object名字包含指定的前缀，第一次出现delimiter字符之间的Object作为一组元素（即CommonPrefixes）。<br>默认值：无",
-                    "example": "/",
+                    "description": "指定PutObject操作时是否覆盖同名Object。 当目标Bucket处于已开启或已暂停的版本控制状态时，**x-oss-forbid-overwrite**请求Header设置无效，即允许覆盖同名Object。\n  - 不指定**x-oss-forbid-overwrite**或者指定**x-oss-forbid-overwrite**为**false**时，表示允许覆盖同名Object。\n  - 指定**x-oss-forbid-overwrite**为**true**时，表示禁止覆盖同名Object。\n\n设置**x-oss-forbid-overwrite**请求Header会导致QPS处理性能下降，如果您有大量的操作需要使用**x-oss-forbid-overwrite**请求Header（QPS>1000），请联系技术支持，避免影响您的业务。\n默认值：**false**",
+                    "example": "false",
+                    "required": false,
+                    "type": "boolean"
+                }
+            },
+            {
+                "in": "header",
+                "name": "x-oss-server-side-encryption",
+                "required": false,
+                "schema": {
+                    "description": "创建Object时，指定服务器端加密方式。\n\n取值：**AES256**、**KMS****或**SM4****\n\n指定此选项后，在响应头中会返回此选项，OSS会对上传的Object进行加密编码存储。当下载该Object时，响应头中会包含**x-oss-server-side-encryption**，且该值会被设置成此Object的加密算法。",
+                    "example": "AES256",
                     "required": false,
                     "type": "string"
                 }
             },
             {
-                "in": "query",
-                "name": "marker",
+                "in": "header",
+                "name": "x-oss-server-side-data-encryption",
                 "required": false,
                 "schema": {
-                    "description": "设定从marker之后按字母排序开始返回Object。<br>\nmarker用来实现分页显示效果，参数的长度必须小于1024字节。<br>\n做条件查询时，即使marker在列表中不存在，也会从符合marker字母排序的下一个开始打印。<br>\n默认值：无",
-                    "example": "test1.txt",
+                    "description": "创建Object时，指定服务器端加密方式。\n\n取值：**AES256**、**KMS**或**SM4**\n\n指定此选项后，在响应头中会返回此选项，OSS会对上传的Object进行加密编码存储。当下载该Object时，响应头中会包含**x-oss-server-side-encryption**，且该值会被设置成此Object的加密算法。",
+                    "example": "AES256",
                     "required": false,
                     "type": "string"
                 }
             },
             {
-                "in": "query",
-                "name": "max-keys",
+                "in": "header",
+                "name": "x-oss-server-side-encryption-key-id",
                 "required": false,
                 "schema": {
-                    "description": "指定返回Object的最大数。 如果因为max-keys的设定无法一次完成列举，返回结果会附加NextMarker元素作为下一次列举的marker。<br>\n取值：大于0小于1000<br>\n默认值：100",
-                    "example": "200",
-                    "format": "int64",
-                    "required": false,
-                    "type": "integer"
-                }
-            },
-            {
-                "in": "query",
-                "name": "prefix",
-                "required": false,
-                "schema": {
-                    "description": "限定返回文件的Key必须以prefix作为前缀。\n\n- prefix参数的长度必须小于1024字节。\n\n- 使用prefix查询时，返回的Key中仍会包含prefix。<br>\n\n如果把prefix设为某个文件夹名，则列举以此Prefix开头的文件，即该文件夹下递归的所有文件和子文件夹。<br>\n在设置prefix的基础上，将delimiter设置为正斜线（/）时，返回值中只列举该文件夹下的文件，文件夹下的子文件夹名返回在CommonPrefixes中，子文件夹下递归的所有文件和文件夹不显示。<br>\n例如，一个Bucket中有三个Object ，分别为fun/test.jpg、 fun/movie/001.avi和fun/movie/007.avi。如果设定prefix为fun/，则返回三个Object；如果在prefix设置为fun/的基础上，将delimiter设置为正斜线（/），则返回fun/test.jpg和fun/movie/。<br>\n默认值：无",
-                    "example": "fun",
+                    "description": "KMS托管的用户主密钥。\n此选项仅在**x-oss-server-side-encryption**为KMS时有效。",
+                    "example": "9468da86-3509-4f8d-a61e-6eab1eac****",
                     "required": false,
                     "type": "string"
                 }
             },
             {
-                "in": "query",
-                "name": "encoding-type",
+                "in": "header",
+                "name": "x-oss-object-acl",
                 "required": false,
                 "schema": {
-                    "$ref": "#/definitions/EncodeType",
-                    "description": "对返回的内容进行编码并指定编码的类型。<br>\n默认值：无<br>\n可选值：URL<br> \n></notice>delimiter、marker、prefix、NextMarker以及Key使用UTF-8字符。如果delimiter、marker、prefix、NextMarker以及Key中包含XML 1.0标准不支持的控制字符，您可以通过指定encoding-type对返回结果中的Delimiter、Marker、Prefix、NextMarker以及Key进行编码。",
+                    "$ref": "#/definitions/ObjectACL",
+                    "description": "指定OSS创建Object时的访问权限。\n\n取值：\n\n- default（默认）：Object遵循所在存储空间的访问权限。\n- private：Object是私有资源。只有Object的拥有者和授权用户有该Object的读写权限，其他用户没有权限操作该Object。\n- public-read：Object是公共读资源。只有Object的拥有者和授权用户有该Object的读写权限，其他用户只有该Object的读权限。请谨慎使用该权限。\n- public-read-write：Object是公共读写资源。所有用户都有该Object的读写权限。请谨慎使用该权限。\n\n关于访问权限的更多信息，请参见**[读写权限ACL](https://help.aliyun.com/document_detail/100676.html)**。",
                     "isDefsType": true,
                     "required": false,
-                    "typeName": "EncodeType"
+                    "typeName": "ObjectACL"
                 }
-            }
-        ],
-        "path": "/",
-        "responses": {
-            "200": {
+            },
+            {
+                "in": "header",
+                "name": "x-oss-storage-class",
+                "required": false,
                 "schema": {
-                    "description": "保存每个返回Object元信息的容器。",
-                    "properties": {
-                        "CommonPrefixes": {
-                            "description": "如果请求中指定了Delimiter参数，则会在返回的响应中包含CommonPrefixes元素。该元素表明以Delimiter结尾，并有共同前缀的Object名称的集合。",
-                            "items": {
-                                "$ref": "#/definitions/CommonPrefix",
-                                "description": "如果请求中指定了delimiter参数，则OSS返回的响应中包含CommonPrefixes元素。该元素标明以delimiter结尾，并有共同前缀的Object名称的集合。",
-                                "isDefsType": true,
-                                "typeName": "CommonPrefix"
-                            },
-                            "title": "Objects whose names contain the same string that ranges from the prefix to the next occurrence of the delimiter are grouped as a single result element",
-                            "type": "array"
-                        },
-                        "Contents": {
-                            "description": "保存每个返回Object元信息的容器。",
-                            "items": {
-                                "$ref": "#/definitions/ObjectSummary",
-                                "description": "返回的文件元信息。\n\n",
-                                "isDefsType": true,
-                                "typeName": "ObjectSummary"
-                            },
-                            "title": "The container that stores the returned object metadata",
-                            "type": "array"
-                        },
-                        "Delimiter": {
-                            "description": "对Object名字进行分组的字符。所有名字包含指定的前缀且第一次出现Delimiter字符之间的Object作为一组元素CommonPrefixes。",
-                            "example": "/",
-                            "title": "The character used to group objects by name",
-                            "type": "string"
-                        },
-                        "IsTruncated": {
-                            "description": "请求中返回的结果是否被截断。",
-                            "example": "false",
-                            "title": "Indicates whether the returned results are truncated",
-                            "type": "boolean"
-                        },
-                        "Marker": {
-                            "description": "标识此次GetBucket（ListObjects）的起点。",
-                            "example": "test1.txt",
-                            "title": "The name of the object from which the list operation begins",
-                            "type": "string"
-                        },
-                        "MaxKeys": {
-                            "description": "响应请求内返回结果的最大数目。",
-                            "example": "\t100",
-                            "format": "int32",
-                            "title": "The maximum number of returned objects in the response",
-                            "type": "integer"
-                        },
-                        "Name": {
-                            "description": "Bucket名称。",
-                            "example": "examplebucket",
-                            "title": "The bucket name",
-                            "type": "string"
-                        },
-                        "Prefix": {
-                            "description": "本次查询结果的前缀。",
-                            "example": "fun/",
-                            "title": "The prefix that the names of returned objects contain",
-                            "type": "string"
-                        }
+                    "$ref": "#/definitions/StorageClass",
+                    "description": "指定Object的存储类型。                               对于任意存储类型的Bucket，如果上传Object时指定此参数，则此次上传的Object将存储为指定的类型。例如在IA类型的Bucket中上传Object时，如果指定x-oss-storage-class为Standard，则该Object直接存储为Standard。                              取值：                                 Standard：标准存储                                    IA：低频访问                                    Archive：归档存储                                    ColdArchive：冷归档存储                                    关于存储类型的更多信息，请参见存储类型介绍。",
+                    "isDefsType": true,
+                    "required": false,
+                    "typeName": "StorageClass"
+                }
+            },
+            {
+                "in": "header",
+                "name": "x-oss-tagging",
+                "required": false,
+                "schema": {
+                    "description": "指定Object的标签，可同时设置多个标签，例如TagA=A&TagB=B。\n> Key和Value需要先进行URL编码，如果某项没有”=“，则看作Value为空字符串。",
+                    "example": "a:1",
+                    "required": false,
+                    "type": "string"
+                }
+            },
+            {
+                "in": "header",
+                "name": "x-oss-meta-*",
+                "required": false,
+                "schema": {
+                    "additionalProperties": {
+                        "description": "使用PutObject接口时，如果配置以**x-oss-meta-***为前缀的参数，则该参数视为元数据，例如`x-oss-meta-location`。一个Object可以有多个类似的参数，但所有的元数据总大小不能超过8 KB。\n\n元数据支持短划线（-）、数字、英文字母（a~z）。英文字符的大写字母会被转成小写字母，不支持下划线（_）在内的其他字符。",
+                        "example": "x-oss-meta-location",
+                        "type": "string"
                     },
+                    "description": "使用PutObject接口时，如果配置以**x-oss-meta-***为前缀的参数，则该参数视为元数据，例如`x-oss-meta-location`。一个Object可以有多个类似的参数，但所有的元数据总大小不能超过8 KB。\n\n元数据支持短划线（-）、数字、英文字母（a~z）。英文字符的大写字母会被转成小写字母，不支持下划线（_）在内的其他字符。",
+                    "example": "x-oss-meta-location",
+                    "required": false,
                     "type": "object"
                 }
             },
-            "4xx": {},
-            "5xx": {}
+            {
+                "in": "body",
+                "name": "body",
+                "required": false,
+                "schema": {
+                    "description": "请求体。",
+                    "example": "二进制内容",
+                    "format": "binary",
+                    "required": false,
+                    "type": "string"
+                }
+            }
+        ],
+        "path": "/{key}",
+        "responses": {
+            "200": {
+                "headers": {
+                    "x-oss-hash-crc64ecma": {
+                        "schema": {
+                            "format": "int64",
+                            "sdkPropertyName": "crc64",
+                            "type": "integer"
+                        }
+                    },
+                    "x-oss-version-id": {
+                        "schema": {
+                            "sdkPropertyName": "contentMD5",
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "5XX": {}
         },
-        "summary": "列举存储空间（Bucket）中所有文件（Object）的信息。",
-        "title": "列举存储空间中文件的信息"
+        "summary": "上传文件（Object）。",
+        "title": "上传文件"
     },
-    "name": "GetBucket",
     "pageType": "document",
     "schemaType": "api"
 }
