@@ -88,11 +88,11 @@ export function useForm(initProps = new FormProps()) {
       if (hasDynamicSchemaResult) {
         return schema;
       }
-      if (schema.visible && typeof schema.visible === "string") {
+      if (schema?.visible && typeof schema?.visible === "string") {
         hasDynamicSchemaResult = true;
         return schema;
       }
-      if (schema.dynamic) {
+      if (schema?.dynamic) {
         hasDynamicSchemaResult = true;
         return schema;
       }

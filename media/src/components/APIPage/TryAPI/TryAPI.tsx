@@ -38,7 +38,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
   const { openAPIResponses, isApiResultLoading, version, apiMeta, product, mode } = APIPageContext.useContainer();
   const doc = `${product}::${version}::${apiMeta.name}`;
   const [tab, setTab] = React.useState(TAB_PANES[0].value);
-  const apiResult = openAPIResponses?.[doc] || apiResponse;
+  const apiResult = openAPIResponses?.[doc];
 
   const noShowMonacoEditor = ["byte"];
 

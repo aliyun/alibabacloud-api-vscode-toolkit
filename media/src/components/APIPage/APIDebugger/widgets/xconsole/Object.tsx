@@ -19,7 +19,6 @@ export class RenderObjectProps {
 }
 
 export const RenderObject: React.FC<RenderObjectProps> = (props) => {
-  console.log(props.dataPath)
   if (props.value && typeof props.value === 'string') {
     let value = {};
     try {

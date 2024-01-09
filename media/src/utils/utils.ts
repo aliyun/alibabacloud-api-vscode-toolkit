@@ -11,7 +11,7 @@ export const getVSCode = () => {
   }
   // return null
 
-  const vscode: WebviewApi<any> = acquireVsCodeApi ? acquireVsCodeApi?.() : null;
+  const vscode: WebviewApi<any> = acquireVsCodeApi?.();
   (window as any).vscode = vscode;
 
   return vscode;

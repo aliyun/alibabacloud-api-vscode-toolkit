@@ -1,6 +1,5 @@
 export const getCustomWidget = (schema): string => {
   if (schema?.type === 'array') {
-    console.log("array")
     // if (schema.items?.type === 'string' && schema?.widget === 'stringList') {
     //   return 'stringList';
     // }

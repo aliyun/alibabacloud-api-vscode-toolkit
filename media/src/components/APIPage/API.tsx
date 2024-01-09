@@ -82,6 +82,9 @@ export const API: React.FC<APIProps> = (props) => {
   const apiNameEle = selectedApi?.name ? <div className="title">{selectedApi?.name}</div> : null;
   const paramsSchema = selectedApi?.parameters?.reduce(
     (result, param) => {
+      if(param.schema?.$ref){
+        param.schema = getSchema(param.schema?.$ref)
+      }
       return {
         ...result,
         properties: {

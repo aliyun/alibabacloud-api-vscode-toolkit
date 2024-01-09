@@ -74,7 +74,7 @@ export const EnumSelect: React.FC<EnumSelectProps> = (props) => {
         changeValue={changeCurValue}
         param={props.schema as any}> */}
       <Select
-        // style={{ width: 350 }}
+        style={{ width: "100%" }}
         className="jsonschema-form-widget"
         placeholder={schema?.placeholder || '请输入字符串'}
         hasClear
