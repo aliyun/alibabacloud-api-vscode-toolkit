@@ -20,6 +20,7 @@ import TrySDK from "./TrySDK/TrySDK";
 import { Dropdown, MenuProps } from "antd";
 import { PontUIService } from "../../service/UIService";
 import { getVSCode } from "../../utils/utils";
+import _ from "lodash";
 
 export class APIProps {
   selectedApi?: PontSpec.PontAPI;
@@ -80,7 +81,8 @@ export const API: React.FC<APIProps> = (props) => {
 
   const pathEle = selectedApi?.path ? <div className="path">{selectedApi.path}</div> : null;
   const apiNameEle = selectedApi?.name ? <div className="title">{selectedApi?.name}</div> : null;
-  const paramsSchema = selectedApi?.parameters?.reduce(
+  let paramsSchema = _.cloneDeep(selectedApi?.parameters);
+  const newParamsSchema = paramsSchema?.reduce(
     (result, param) => {
       if(param.schema?.$ref){
         param.schema = getSchema(param.schema?.$ref)
@@ -99,7 +101,7 @@ export const API: React.FC<APIProps> = (props) => {
   const form = SemixForm.useForm({
     formData: {},
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    schema: paramsSchema as any,
+    schema: newParamsSchema as any,
     context: {},
     getCustomWidget: getCustomWidget,
   });
