@@ -1,5 +1,5 @@
 /**
- * @author 念依
+ * @author yini-chen
  * @description 数据结构
  */
 // import { AmpIcon } from '@ali/amp-base';

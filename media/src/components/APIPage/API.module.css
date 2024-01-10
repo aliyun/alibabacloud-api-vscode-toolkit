@@ -1,7 +1,77 @@
 .pontx-ui-api {
+   min-width: 540px;
+    overflow: auto;
    .web-debug{
       margin: 12px 40px 12px;
       float:right
    }
+   .debug-comp-content{
+      display: flex;
+      flex-direction: row;
+   }
+   .debug-comp-content-column {
+      flex-direction: column;
+   }
+   .left-panel {
+      .head-content{
+        padding: 20px;
+        border-bottom: 1px #ccc solid;
+      }
+      .middle-content{
+        /* border: 1px #ccc solid;
+        border-top: 0px; */
+        padding: 20px;
+        height: calc(100vh - 330px);
+        overflow: auto;
+      }
+      .footer-content{
+        padding: 20px;
+        border-top: 1px #ccc solid;
+        display: flex;
+        justify-content: space-between;
+      }
+      
+    }
+    .left-panel-column {
+      overflow: auto;
+      border: #ccc 1px solid;
+      .middle-content{
+         /* border: 1px #ccc solid;
+         border-top: 0px; */
+         padding: 20px;
+         height: 200px;
+         overflow: auto;
+       }
+    }
+    .right-panel {
+      min-width: 540px;
+      border-left: 1px #ccc solid;
+      padding-left:16px;
+      .right-ops{
+        padding: 0 16px;
+        font-weight: 500;
+      }
+      .content{
+        padding: 16px 20px 20px 0;
+        height: calc(100vh - 270px);
+        overflow: auto;
+        .api-params-doc{
+         overflow: auto;
+        }
+        .semix-schema-table{
+         table-layout: fixed;
+         .param-name {
+            width: 280px;
+         }
+         .param-name div > div{
+            display: flex;
+            flex-wrap: wrap;
+         }
+        }
+        /* .param-name.semix-table-td{
+         max-width: 280px;
+        } */
+      }
+    }
 }
 

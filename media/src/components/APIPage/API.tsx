@@ -22,6 +22,7 @@ import { PontUIService } from "../../service/UIService";
 import { getVSCode } from "../../utils/utils";
 import { SemixJsonSchema } from "semix-core";
 import _ from "lodash";
+import { useResizeObserver } from 'react-use-observer';
 
 export class APIProps {
   selectedApi?: PontSpec.PontAPI;
@@ -80,6 +81,21 @@ export const API: React.FC<APIProps> = (props) => {
     };
   }, [definitions, getSchema]);
 
+  const mapSchema = (schema) => {
+    return SemixJsonSchema.mapSchema(schema as any, (schema)=>{
+      if(schema?.$ref){
+        schema = getSchema(schema?.$ref)
+        if(schema?.properties){
+          Object.keys(schema.properties)?.map((item=>{
+            schema.properties[item] = mapSchema(schema.properties[item])
+          }))
+        }
+        return schema;
+      }
+      return schema
+    })
+  };
+
   const pathEle = selectedApi?.path ? <div className="path">{selectedApi.path}</div> : null;
   const apiNameEle = selectedApi?.name ? <div className="title">{selectedApi?.name}</div> : null;
   let paramsSchema = _.cloneDeep(selectedApi?.parameters);
@@ -87,12 +103,7 @@ export const API: React.FC<APIProps> = (props) => {
     (result, param) => {
       if(param.schema?.$ref){
         param.schema = getSchema(param.schema?.$ref)
-        param.schema = SemixJsonSchema.mapSchema(param.schema as any, (schema)=>{
-          if(schema?.$ref){
-            schema = getSchema(schema?.$ref)
-          }
-          return schema
-        })
+        param.schema = mapSchema(param.schema)
       }
       return {
         ...result,
@@ -115,9 +126,19 @@ export const API: React.FC<APIProps> = (props) => {
 
   const tabs = [
     { tab: "文档", key: "doc" },
-    { tab: "调试", key: "debug" },
+    { tab: "调试结果", key: "debug" },
     { tab: "代码示例", key: "sdk" },
   ];
+
+  const [pageEl, resizeObserverEntry] = useResizeObserver();
+
+  const [boxWidth, setBoxWidth] = React.useState(0);
+  React.useEffect(() => {
+    const { width = 0, height = 0 } = resizeObserverEntry?.contentRect || {};
+    if (width !== boxWidth) {
+      setBoxWidth(width);
+    }
+  }, [boxWidth, resizeObserverEntry]);
 
   const renderContent = React.useMemo(() => {
     const documentComp = (
@@ -157,11 +178,11 @@ export const API: React.FC<APIProps> = (props) => {
       </div>
     );
     const debugComp = (
-      <>
-        <div className="left-panel">
+      <div className={ `debug-comp-content ${boxWidth<850 ? "debug-comp-content-column":""}`}>
+        <div className={`left-panel ${boxWidth<850 ? "left-panel-column":""}`} style={{width: boxWidth < 850 ? boxWidth : 368}}>
           <APIDebugger></APIDebugger>
         </div>
-        <div className="right-panel">
+        <div className="right-panel" style={{width: boxWidth < 850 ? boxWidth : boxWidth - 400}}>
           <Tab
             activeKey={mode}
             onChange={(key) => {
@@ -183,7 +204,7 @@ export const API: React.FC<APIProps> = (props) => {
             </Tab.Item>
           </Tab>
         </div>
-      </>
+      </div>
     );
     switch (mode) {
       case "doc":
@@ -195,10 +216,10 @@ export const API: React.FC<APIProps> = (props) => {
       default:
         return debugComp;
     }
-  }, [mode]);
+  }, [mode, boxWidth]);
 
   return (
-    <div className="pontx-ui-api">
+    <div className="pontx-ui-api" ref={pageEl}>
       {/*  */}
       <APIPageContext.Provider
         initialState={{
@@ -217,7 +238,6 @@ export const API: React.FC<APIProps> = (props) => {
                 <div className="heading">
                   <div className="left">
                     {selectedApi.method ? <div className="method">{selectedApi.method?.toUpperCase()}</div> : null}
-
                     {selectedApi.deprecated ? (
                       <Tag className="deprecated" style={{ marginRight: 12, color: "#888" }}>
                         deprecated

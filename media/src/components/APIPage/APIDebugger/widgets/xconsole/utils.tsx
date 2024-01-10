@@ -31,7 +31,7 @@ export const simpleType: any[] = ["string", "boolean", "number", "array", "objec
   };
 
   /**
- * @author 念依
+ * @author yini-chen
  * @description ampDebugger 工具函数
  */
 // import { emitter } from '@/utils/emitter';

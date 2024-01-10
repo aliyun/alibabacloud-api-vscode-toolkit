@@ -19,6 +19,7 @@ import { Struct } from "./Struct";
 import { RenderObject } from "./Object";
 import { RenderMap } from "./RenderMap";
 import RenderList from "./base/List";
+import { JsonEdit } from "./JsonEdit";
 
 export const xconsoleWidgets = {
   object: RenderObject,
@@ -28,14 +29,14 @@ export const xconsoleWidgets = {
   number: NumberInput,
   integer: NumberInput,
   list: RenderList,
-  // binary: UploadFile, // 文件上传，amp暂时不支持
+  // binary: UploadFile, // 文件上传，暂时不支持
   enum: EnumSelect,
   simpleMap: SimpleMap,
   typeSelect: TypeSelector, // any类型支持选择各种类型
   simpleList: SimpleList,
   // list: SimpleList,
-  file: UploadFile,
-  // json: JsonEdit,
+  file: UploadFile, // 文件上传，暂时不支持
+  json: JsonEdit,
   // fileTypeSelect: FileUploadType, // 文件上传切换，amp暂时不支持
   struct: Struct, // 数据结构
 };

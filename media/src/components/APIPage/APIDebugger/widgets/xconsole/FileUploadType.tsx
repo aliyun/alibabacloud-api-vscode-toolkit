@@ -1,5 +1,5 @@
 // /**
-//  * @author 念依
+//  * @author yini-chen
 //  * @description 文件上传方式选择组件
 //  */
 

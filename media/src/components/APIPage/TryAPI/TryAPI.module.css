@@ -1,6 +1,6 @@
 .comp-try-api {
     position: relative;
-    padding: 0 16px 16px;
+    padding: 16px;
     height: 100%;
     .ant-btn {
       margin-left: 8px;

@@ -1,5 +1,5 @@
 /**
- * @author 念依
+ * @author yini-chen
  * @description Switch
  */
 import * as React from 'react';

@@ -8,7 +8,7 @@ import { SemixJsonSchema } from 'semix-core';
 import { ErrorField } from '../../types';
 import { FormStoreContext } from '../../../../../SemixFormRender/context';
 import { ListProps } from '../../../../../SemixFormRender';
-// import { ErrorField, FormStoreContext, ListProps } from 'semix-form-render';
+// import { FormStoreContext, ListProps } from 'semix-form-render';
 
 export class RenderListProps {
   dataPath = '';

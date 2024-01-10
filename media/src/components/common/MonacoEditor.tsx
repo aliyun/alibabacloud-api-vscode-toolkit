@@ -1,5 +1,5 @@
 /**
- * @author 念依
+ * @author yini-chen
  * @description 编辑器
  */
 import { Editor } from "@monaco-editor/react";
@@ -50,6 +50,9 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
           options={{
             readOnly: readOnly,
             tabCompletion: true,
+            minimap: {
+              enabled: false,
+            },
           }}
           // theme='vs-dark'
           language={getEditorLanguage(languageTab)}
