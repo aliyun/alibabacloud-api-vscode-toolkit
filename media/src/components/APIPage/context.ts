@@ -44,7 +44,7 @@ export class APIPageState  {
   /**
    * regionId
    */
-  regionId?: string;
+  regionId? = 'cn-hangzhou';
   setRegionId?: (regionId: string) => void;
 }
 
@@ -52,7 +52,7 @@ export const useAPIPageContext = (initialState = {} as APIPageState): APIPageSta
   const [openAPIResponses, setOpenAPIResponse] = React.useState(null);
   const [isApiResultLoading, setIsApiResultLoading] = React.useState(false);
   const [endpoints, setEndpoints] = React.useState([]);
-  const [regionId, setRegionId] = React.useState<string>("");
+  const [regionId, setRegionId] = React.useState<string>("cn-hangzhou");
 
   React.useEffect(() => {
     if (endpoints.length === 0) {

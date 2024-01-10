@@ -43,7 +43,7 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
     }).then((res) => {
       setSdkDemos(res?.data?.demoSdk || codes.demoSdk);
     });
-  }, [schemaForm.formData, regionId, apiMeta?.name, product, version]);
+  }, [schemaForm.formData, regionId, apiMeta?.name, product, version, endpoints]);
 
   const getEditorLanguage = (lang) => {
     switch (lang) {

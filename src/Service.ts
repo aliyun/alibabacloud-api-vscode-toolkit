@@ -246,11 +246,12 @@ export class AlicloudAPIService {
           : "ak"
         : "ak";
     if (profiles?.length) {
+      const profile = profiles?.find(item=>item.name === profilesInfo.current)
       const start = Date.now();
       try {
         data = await request({
-          accessKeyId: profiles[0]?.access_key_id,
-          accessKeySecret: profiles[0]?.access_key_secret,
+          accessKeyId: profile?.access_key_id,
+          accessKeySecret: profile?.access_key_secret,
           endpoint: endpoint,
           action: apiMeta?.name,
           apiVersion: version,
