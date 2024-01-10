@@ -3,7 +3,7 @@
  * @description 编辑器
  */
 import { Editor } from "@monaco-editor/react";
-import React from "react";
+import React, { ReactNode } from "react";
 import { DARA_SDK_LANGUAGES, LanguageSwitcher } from "../APIPage/TrySDK/LanguageSwitcher";
 import { Button, Dropdown, MenuProps, Tooltip, message } from "antd";
 import { PontUIService } from "../../service/UIService";
@@ -20,7 +20,7 @@ export class MonacoEditorProps {
   readOnly? = true;
   height? = 800;
   languages? = DARA_SDK_LANGUAGES;
-  menuItems?: Array<{ key: string; label: string; codicon?: string; onClick: () => void }> = [];
+  menuItems?: Array<{ key: string; label: ReactNode | string; codicon?: string; onClick: () => void, externalLink?:string }> = [];
 }
 
 export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
@@ -37,7 +37,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
     menuItems,
   } = props;
 
-  const items: Array<{ key: string; label: string; codicon?: string; onClick: () => void }> = [
+  const items: Array<{ key: string; label: ReactNode | string; codicon?: string; onClick: () => void,externalLink?:string }> = [
     ...getEditorMenuItems(value, getEditorLanguage(languageTab)),
     ...menuItems,
   ];
@@ -117,7 +117,8 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
                     trigger={
                       <Button
                         // className="copy-button"
-
+                        href={item.externalLink ? item.externalLink: ""}
+                        target="_blank"
                         onClick={item.onClick}
                       >
                         <div className={`codicon codicon-${item.codicon}`} />

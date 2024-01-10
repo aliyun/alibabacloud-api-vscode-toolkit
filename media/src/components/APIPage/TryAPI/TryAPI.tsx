@@ -135,10 +135,10 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
     ...getEditorMenuItems(getTabValue(tab), "json"),
     {
       key: "gotoweb",
-      label: "去门户网页版调试",
+      label: <a style={{textDecoration:"none"}} href={apiMeta?.externalDocs?.url}>去门户网页版调试</a>,
       codicon: "link-external",
       onClick: () => {
-        window.open(apiMeta?.externalDocs?.url, "_blank");
+        // window.open(apiMeta?.externalDocs?.url, "_blank");
       },
     },
   ];

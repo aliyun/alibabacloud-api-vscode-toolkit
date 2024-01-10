@@ -115,8 +115,9 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
             key: "gotoweb",
             label: "去门户网页版调试",
             codicon:"link-external",
+            externalLink: apiMeta?.externalDocs?.url,
             onClick: () => {
-              window.open(apiMeta?.externalDocs?.url, "_blank");
+              // window.open(apiMeta?.externalDocs?.url, "_blank");
             },
           }]}
           value={sdkDemos[languageTab?.toLocaleLowerCase()]}
