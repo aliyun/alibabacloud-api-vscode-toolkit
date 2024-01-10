@@ -100,6 +100,13 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
     ) : null;
   }, [languageTab, sdkDemos]);
 
+  const getCode = React.useCallback(()=>{
+    if(!sdkDemos[languageTab?.toLocaleLowerCase()]){
+      return "// API 暂未支持该语言的 SDK"
+    }
+    return sdkDemos[languageTab?.toLocaleLowerCase()]
+  },[sdkDemos, languageTab])
+
   return React.useMemo(() => {
     return (
       <div className="sdk-demo-content">
@@ -120,7 +127,7 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
               // window.open(apiMeta?.externalDocs?.url, "_blank");
             },
           }]}
-          value={sdkDemos[languageTab?.toLocaleLowerCase()]}
+          value={getCode()}
           languages={DARA_SDK_LANGUAGES?.map((lang) => {
             if (Object.keys(sdkDemos || {})?.includes(lang?.value?.toLocaleLowerCase())) {
               return lang;
