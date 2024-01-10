@@ -126,7 +126,7 @@ export const API: React.FC<APIProps> = (props) => {
 
   const tabs = [
     { tab: "文档", key: "doc" },
-    { tab: "调试结果", key: "debug" },
+    { tab: "调试", key: "debug" },
     { tab: "代码示例", key: "sdk" },
   ];
 
@@ -197,7 +197,7 @@ export const API: React.FC<APIProps> = (props) => {
                 <TrySDK></TrySDK>
               </div>
             </Tab.Item>
-            <Tab.Item key="debug" title="调试">
+            <Tab.Item key="debug" title="调试结果">
               <div className="content">
                 <TryAPI></TryAPI>
               </div>
