@@ -224,7 +224,6 @@ export const request = async function (options: OpenAPIOptions) {
     readTimeout: 50000,
     connectTimeout: 50000
   });
-  request.query = {};
   const data = {
     version: apiVersion,
     method,
