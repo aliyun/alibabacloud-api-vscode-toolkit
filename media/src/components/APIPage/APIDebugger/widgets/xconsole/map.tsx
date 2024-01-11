@@ -46,7 +46,7 @@ export const SimpleMap: React.FC<SimpleMapProps> = (props) => {
                   props.copyItem(index);
                 }}
               >
-                <div className='codicon codicon-copy'></div>
+                copy
               </a>
             )}
             <a
