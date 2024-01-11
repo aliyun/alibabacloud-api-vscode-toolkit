@@ -240,7 +240,7 @@ export const request = async function (options: OpenAPIOptions) {
     action,
     reqBodyType: requestType,
     bodyType: responseType,
-    authType: credential && credential.type === 'anonymous' ? 'Anonymous' : 'AK',
+    authType: 'AK',
   };
   return await client.doRequest(data, request, {});
 };
