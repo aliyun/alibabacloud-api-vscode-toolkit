@@ -17,7 +17,7 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 
 * **API 文档预览:** 点击 API 可以打开一个新的标签页，并显示对应的 API 文档，包括描述、请求参数、响应参数和错误码。在文档中点击调试按钮，可以链接到阿里云 OpenAPI 门户进行在线 API 试用。
 
-* **API 调试:** 你可以在插件中使用图形表单的方式调试阿里云 API，并查看结果。
+* **API 调试:** 你可以在插件中使用表单的方式调试阿里云 API，并查看结果。
   
 * **SDK 代码示例:** 你可以在插件中获得 SDK 代码示例，并在编辑器中快速打开对应的 SDK 代码。
 
@@ -36,7 +36,7 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 ![API Serching](https://img.alicdn.com/imgextra/i1/O1CN01KaWkBF1UfCUkY0N3v_!!6000000002544-0-tps-1286-518.jpg)
 
 * API 调试 
-调试功能需要配置你的 AK/SK信息，请先安装 [Alibaba Cloud CLI Tools](vscode:extension/alibabacloud-openapi.aliyuncli) 插件，然后在插件中配置你的 AK/SK 信息。更多信息请参考 [Alibaba Cloud CLI Documentation](https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure)。
+调试功能需要配置你的 AK/SK 信息，请先安装 [Alibaba Cloud CLI Tools](vscode:extension/alibabacloud-openapi.aliyuncli) 插件，然后在插件中配置你的 AK/SK 信息。更多信息请参考 [Alibaba Cloud CLI Documentation](https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure)。
 
 ![API debug](https://img.alicdn.com/imgextra/i4/O1CN01F1qI7S1BunIFJPiAt_!!6000000000006-0-tps-2618-2050.jpg)
 
