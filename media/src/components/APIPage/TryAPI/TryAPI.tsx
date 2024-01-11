@@ -135,7 +135,11 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
     ...getEditorMenuItems(getTabValue(tab), "json"),
     {
       key: "gotoweb",
-      label: <a style={{textDecoration:"none"}} href={apiMeta?.externalDocs?.url}>去门户网页版调试</a>,
+      label: (
+        <a style={{ textDecoration: "none" }} href={apiMeta?.externalDocs?.url}>
+          去门户网页版调试
+        </a>
+      ),
       codicon: "link-external",
       onClick: () => {
         // window.open(apiMeta?.externalDocs?.url, "_blank");
@@ -145,6 +149,18 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
 
   return (
     <div className="comp-try-api">
+      <Alert
+        message={
+          <div>
+            请利用 aliyun-cli 配置您的 AK/SK 信息：1. 安装 aliyun-cli: <code>brew install aliyun-cli</code>; 2. 命令行输入 <code>aliyun
+            configure</code>。
+            <a href="https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure">点击查看更多信息</a>。
+          </div>
+        }
+        type="warning"
+        showIcon
+        closable
+      />
       <Alert message={I18N.main.explorer.AKTip} type="warning" showIcon closable />
       {apiResult?.result || isApiResultLoading ? (
         <div className="api-result">

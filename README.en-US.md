@@ -35,7 +35,13 @@ Click to debug, you can link to Aliyun OpenAPI portal for online API trial.
 ![API Serching](https://img.alicdn.com/imgextra/i1/O1CN01KaWkBF1UfCUkY0N3v_!!6000000002544-0-tps-1286-518.jpg)
 
 * Call the API
-To call the API, you need to configure your AK/SK information. Please install the [Alibaba Cloud CLI Tools](vscode:extension/alibabacloud-openapi.aliyuncli)  first, and then configure your AK/SK information. For more information, please refer to [Alibaba Cloud CLI Documentation](https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure).
+
+The feature requires you to configure your AK/SK information as follows: 
+1. Install [Alibaba Cloud CLI Tools](https://marketplace.visualstudio.com/items?itemName=alibabacloud-openapi.aliyuncli) extentions. 
+2. Open the command line to install aliyun-cli `brew install aliyun-cli`, 
+3. Enter `aliyun configure` and follow the prompts to configure it, 
+4. Click the Alibaba Cloud icon in VS Code status bar to manage your profiles, 
+5. More information please refer to the [Alibaba Cloud CLI Documentation] (https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure).
 
 ![API debug](https://img.alicdn.com/imgextra/i4/O1CN01F1qI7S1BunIFJPiAt_!!6000000000006-0-tps-2618-2050.jpg)
 

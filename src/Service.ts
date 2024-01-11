@@ -304,11 +304,10 @@ export class AlicloudAPIService {
         response
       };
     }else{
-      let result = await vscode.window.showErrorMessage("请先安装阿里云 CLI 插件，并完成AK/SK配置后，再发起调用", "install","cancel");
-        if (result === "install") {
-          vscode.env.openExternal(vscode.Uri.parse('vscode:extension/alibabacloud-openapi.aliyuncli'));
+      let result = await vscode.window.showErrorMessage("请完成AK/SK配置后，再发起调用", "查看配置方法","取消");
+        if (result === "查看配置方法") {
+          vscode.env.openExternal(vscode.Uri.parse('https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure'));
         }
-      
     }
   }
 

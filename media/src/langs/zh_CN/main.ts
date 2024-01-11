@@ -120,7 +120,7 @@ export default {
     contributionDemo: '贡献示例',
     seeResults: '查看结果',
     AKTip:
-      '已通过您的配置信息获取 Access Keys、发起调用可能对当前账号发起线上资源操作，请小心操作',
+      '将通过您的配置信息获取 Access Keys、发起调用可能对当前账号发起线上资源操作，请小心操作',
     APICallResult: 'API 调用结果',
     overview: '概览',
     success: '调用成功',
