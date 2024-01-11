@@ -205,7 +205,6 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                   </a>
                 </span>
               }
-              style={{ marginTop: "16px", marginBottom: "-8px" }}
             ></Alert>
           ) : null}
           <div className="api-message">

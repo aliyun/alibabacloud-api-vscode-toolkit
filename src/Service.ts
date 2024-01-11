@@ -214,7 +214,7 @@ export class AlicloudAPIService {
       "params": newParamsValue || {},
       "regionId": regionId,
       "endpoint": endpoint,
-      "credential": {tyep: defaultCredentialType},
+      "credential": {type: defaultCredentialType},
       "runtimeOptions": {},
       "useCommon": false
     }
@@ -230,7 +230,7 @@ export class AlicloudAPIService {
 
   async openAPIRequest(requestData) {
     const { apiMeta, paramsValue, product, version, endpoint } = requestData;
-    const newParamsValue = getFormatValues(paramsValue, apiMeta?.parameters);
+    // const newParamsValue = getFormatValues(paramsValue, apiMeta?.parameters);
     let response = {} as any;
     let data;
     const profilesInfo = await this.loadProfiles();
@@ -255,11 +255,11 @@ export class AlicloudAPIService {
           endpoint: endpoint,
           action: apiMeta?.name,
           apiVersion: version,
-          params: newParamsValue || {},
+          params: paramsValue || {},
           productName: product,
           meta: apiMeta,
           bodyStyle: undefined,
-          credential: {tyep: defaultCredentialType},
+          credential: {type: defaultCredentialType},
         });
         response = data;
         // 设置状态码

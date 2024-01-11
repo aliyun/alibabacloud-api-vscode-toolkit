@@ -82,14 +82,16 @@ export const API: React.FC<APIProps> = (props) => {
   }, [definitions, getSchema]);
 
   const mapSchema = (schema) => {
+    
     return SemixJsonSchema.mapSchema(schema as any, (schema)=>{
+      if(schema?.properties){
+        Object.keys(schema.properties)?.map((item=>{
+          schema.properties[item] = mapSchema(schema.properties[item])
+        }))
+      }
       if(schema?.$ref){
         schema = getSchema(schema?.$ref)
-        if(schema?.properties){
-          Object.keys(schema.properties)?.map((item=>{
-            schema.properties[item] = mapSchema(schema.properties[item])
-          }))
-        }
+        schema = mapSchema(schema)
         return schema;
       }
       return schema
@@ -98,13 +100,10 @@ export const API: React.FC<APIProps> = (props) => {
 
   const pathEle = selectedApi?.path ? <div className="path">{selectedApi.path}</div> : null;
   const apiNameEle = selectedApi?.name ? <div className="title">{selectedApi?.name}</div> : null;
-  let paramsSchema = _.cloneDeep(selectedApi?.parameters);
+  let paramsSchema = _.cloneDeep(selectedApi?.parameters)
   const newParamsSchema = paramsSchema?.reduce(
     (result, param) => {
-      if(param.schema?.$ref){
-        param.schema = getSchema(param.schema?.$ref)
-        param.schema = mapSchema(param.schema)
-      }
+      param.schema = mapSchema(param.schema);
       return {
         ...result,
         properties: {
