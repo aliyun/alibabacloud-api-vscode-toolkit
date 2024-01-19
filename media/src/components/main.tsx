@@ -5,8 +5,10 @@ import { getVSCode } from "../utils/utils";
 import { parseAPIMetaDescription } from "../utils/parseAPIMetaDescription";
 import { ApiErrorCode } from "./APIPage/APIDocument/ApiErrorCode";
 import { PontUIService } from "../service/UIService";
-import "../pages/document/index.module.scss";
-import { routerMeta } from "../mocks/routerMeta";
+import "../pages/document/index.scss";
+// import { definitions } from "../mocks/definitions";
+// import { routerMeta } from "../mocks/routerMeta";
+// import { definitions } from "../mocks/definitions";
 
 if (typeof window !== "undefined") {
   (window as any).routerMeta = {};
@@ -23,7 +25,7 @@ const getRouterMeta = (): any => {
     value = JSON.parse(decodeURI(routerMetaStr));
   } catch (e) {}
 
-  getVSCode().setState(value);
+  getVSCode()?.setState(value);
   return value;
 };
 

@@ -1,5 +1,5 @@
 /**
- * @author nianyi
+ * @author yini-chen
  * @description string类型
  */
 

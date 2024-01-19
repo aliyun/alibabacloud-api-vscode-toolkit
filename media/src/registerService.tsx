@@ -5,7 +5,7 @@ import { PontUIService } from "./service/UIService";
 if (import.meta.env.PROD) {
   const requestPostMessage = <T,>(message: { type: string; value?: any; requestId:string }): Promise<T> => {
     // const requestId = _.uniqueId();
-    getVSCode().postMessage({ ...message });
+    getVSCode()?.postMessage({ ...message });
 
     return new Promise((resove, reject) => {
       window.addEventListener("message", (event) => {

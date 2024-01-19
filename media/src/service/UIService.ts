@@ -1,5 +1,5 @@
 import { PontSpec } from "pontx-spec";
-import { ExtensionResponse } from "../types/openAPI";
+import { MakeCodeResponse, OpenAPIResponse } from "../types/openAPI";
 
 /** 不同使用场景，各自注册服务来源 */
 const defaultSpecs: any[] = [];
@@ -50,6 +50,21 @@ export const PontUIService = {
       spec: any;
     }): Promise<void> => {},
 
-    /** 发起调用 */
-    openAPIRequest: async (params = {}): Promise<ExtensionResponse> => new ExtensionResponse,
+    /** request openapi */
+    openAPIRequest: async (params = {}): Promise<OpenAPIResponse> => new OpenAPIResponse,
+
+    /** get endpoints list */
+    requestEndpoints: async (product: string) => {
+      return [] as any;
+    },
+    /** get sdk demo */
+    makeCodeRequest: async (params = {}): Promise<MakeCodeResponse> => new MakeCodeResponse,
+    /** get local language */
+    getLocalLanguage : async () => "",
+    /** update local language */
+    updateLocalLanguage : async (language:string) => "",
+    /** open in ide */
+    openInCode: async (codeInfo:{code:string,language:string}): Promise<void> => {},
+    /** save to file */
+    saveToFile: async (code:string): Promise<void> => {},
   };

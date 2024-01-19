@@ -1,26 +1,23 @@
 /**
- * @author nianyi
+ * @author yini-chen
  * @description API 试用
  */
 
 import _ from "lodash";
-import { getIsUploadApi, parseXml } from "../../utils";
+import { getEditorMenuItems, getIsUploadApi, parseXml } from "../../utils";
 import React from "react";
-import { Alert, Empty, Spin, message } from "antd";
+import { Alert, Button, Dropdown, Empty, Spin, message } from "antd";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { Button, Tab } from "@alicloud/console-components";
+import { Balloon, Tab } from "@alicloud/console-components";
 import Editor from "@monaco-editor/react";
 import I18N from "../../../utils/I18N";
 import { APIResponse } from "../../../types/WorkbenchAPI";
 import { EditorLanguages } from "../../../types/EditorLanguages";
 import { OpenAPIRequestResult } from "../../../types/openAPI";
-import { WorkbenchIcon } from "../../../Icon/Icon";
 import { APIPageContext } from "../context";
 import { apiResponse } from "../../../mocks/openApiResponse";
 
-export class TryAPIProps {
-
-}
+export class TryAPIProps {}
 
 const TAB_PANES = [
   {
@@ -38,8 +35,9 @@ const TAB_PANES = [
 ];
 
 export const TryAPI: React.FC<TryAPIProps> = (props) => {
-  const { openAPIResponses, isApiResultLoading,version,apiMeta, product } = APIPageContext.useContainer();
-  const doc = `${product}::${version}::${apiMeta.name}`
+  const { openAPIResponses, isApiResultLoading, version, apiMeta, product, mode } = APIPageContext.useContainer();
+  const doc = `${product}::${version}::${apiMeta.name}`;
+  const [tab, setTab] = React.useState(TAB_PANES[0].value);
   const apiResult = openAPIResponses?.[doc];
 
   const noShowMonacoEditor = ["byte"];
@@ -113,15 +111,6 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
     return res;
   };
 
-  const copyBtn = (tab) => (
-    <CopyToClipboard
-      style={{ marginLeft: "8px" }}
-      text={getTabValue(tab.value)}
-      onCopy={() => message.success(I18N.main.explorer.copySuccess)}
-    >
-      <Button>{I18N.main.explorer.copy}</Button>
-    </CopyToClipboard>
-  );
 
   const getResponseSchema = (statusCode, responseSchema) => {
     if (!statusCode || _.isEmpty(responseSchema)) {
@@ -133,16 +122,37 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
     return responseSchema[statusCode]?.schema || {};
   };
 
+  const items = [
+    ...getEditorMenuItems(getTabValue(tab), "json"),
+    {
+      key: "gotoweb",
+      label: (
+        <a style={{ textDecoration: "none" }} href={apiMeta?.externalDocs?.url}>
+          去门户网页版调试
+        </a>
+      ),
+      codicon: "link-external",
+      onClick: () => {
+        // window.open(apiMeta?.externalDocs?.url, "_blank");
+      },
+    },
+  ];
+
   return (
     <div className="comp-try-api">
       <Alert
         message={
-          I18N.main.explorer.AKTip
+          <div>
+            请利用 aliyun-cli 配置您的 AK/SK 信息：1. 安装 aliyun-cli: <code>brew install aliyun-cli</code>; 2. 命令行输入 <code>aliyun
+            configure</code>。
+            <a href="https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure">点击查看更多信息</a>。
+          </div>
         }
         type="warning"
         showIcon
         closable
       />
+      <Alert message={I18N.main.explorer.AKTip} type="warning" showIcon closable />
       {apiResult?.result || isApiResultLoading ? (
         <div className="api-result">
           {isApiResultLoading ? (
@@ -156,18 +166,26 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
             {/* {apiResult?.result || props.isApiResultLoading ? ( */}
             <div className="res-info">
               <div className="item">
-                <span className="label">
-                  <WorkbenchIcon type={String(statusCode).startsWith("2") ? "success" : "error"}></WorkbenchIcon>
-                </span>
-                <span className="value">
-                  {String(statusCode).startsWith("2") ? I18N.main.explorer.success : I18N.main.explorer.error}
-                </span>
+                <div className="debug-res">
+                  <div
+                    className={`codicon codicon-${
+                      String(statusCode).startsWith("2") ? "pass-filled success" : "error error-red"
+                    }`}
+                  ></div>
+                  <div className="value">
+                    {String(statusCode).startsWith("2") ? I18N.main.explorer.success : I18N.main.explorer.error}
+                  </div>
+                </div>
               </div>
               {apiResult && statusCode ? (
                 <div className="item">
                   {/* {httpStatusMessageMap[statusCode] || statusCode} */}
                   <span className="label">{I18N.main.explorer.statusCode}</span>
-                  <span className={`value result-status  ${String(statusCode).startsWith("2") ? "success" : "error"}`}>
+                  <span
+                    className={`value result-status  ${
+                      String(statusCode).startsWith("2") ? "success" : "error error-red"
+                    }`}
+                  >
                     {statusCode}
                   </span>
                 </div>
@@ -175,7 +193,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
               {apiResult ? (
                 <div className="item">
                   <span className="label">{I18N.main.explorer.time}</span>
-                  {/* <span className="value">{apiResult.cost}ms</span> */}
+                  <span className="value">{apiResult.cost}ms</span>
                 </div>
               ) : null}
             </div>
@@ -194,7 +212,6 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                   </a>
                 </span>
               }
-              style={{ marginTop: "16px", marginBottom: "-8px" }}
             ></Alert>
           ) : null}
           <div className="api-message">
@@ -216,7 +233,37 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
             )}
           </div>
           <div className="content">
-            <Tab>
+            <Tab
+              extra={
+                <>
+                  <Balloon
+                    closable={false}
+                    align="t"
+                    trigger={
+                      <Button
+                        className="copy-button"
+                        onClick={() => {
+                          if (navigator.clipboard) {
+                            navigator.clipboard.writeText(getTabValue(tab));
+                            message.success("复制成功");
+                          }
+                        }}
+                      >
+                        <div className="codicon codicon-copy" />
+                      </Button>
+                    }
+                  >
+                    复制
+                  </Balloon>
+                  <Dropdown menu={{ items }}>
+                    <Button onClick={(e) => e.preventDefault()}>
+                      <div className="codicon codicon-list-selection" />
+                    </Button>
+                  </Dropdown>
+                </>
+              }
+              onChange={(t: any) => setTab(t)}
+            >
               {TAB_PANES.map((tab) => {
                 return (
                   <Tab.Item key={tab.value} title={tab.text}>
@@ -243,40 +290,9 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                             }
                             value={getTabValue(tab.value)}
                             // schema={getResponseSchema(statusCode, props.responseSchema) || {}}
-                            // operators={
-                            //   props?.apiResult?.format === 'xml' && tab.value === 'preview' ? (
-                            //     <>
-                            //       {currentFormat === 'xml' ? (
-                            //         <Button type="default" onClick={() => setFormat('json')}>
-                            //           {I18N.explorer.apiExplorer.formatJson}
-                            //         </Button>
-                            //       ) : (
-                            //         <Button type="default" onClick={() => setFormat('xml')}>
-                            //           {I18N.explorer.apiExplorer.formatXml}
-                            //         </Button>
-                            //       )}
-                            //       {copyBtn(tab)}
-                            //     </>
-                            //   ) : (
-                            //     <CopyToClipboard
-                            //       text={getTabValue(tab.value)}
-                            //       onCopy={() => {
-                            //         message.success(I18N.main.explorer.copySucc);
-                            //       }}
-                            //     >
-                            //       <Button className="try-api-copy-button">
-                            //         <WorkbenchIcon type="copy-line"></WorkbenchIcon>
-                            //       </Button>
-                            //     </CopyToClipboard>
-                            //   )
-                            // }
                           />
                         ) : (
                           <div>{I18N.main.explorer.specialresponsetip}</div>
-                          //   <OnlineTrialResult
-                          //     value={getTabValue(tab.value) as any as string[]}
-                          //     format={props?.apiResult?.format}
-                          //   />
                         )}
                       </div>
                     </div>

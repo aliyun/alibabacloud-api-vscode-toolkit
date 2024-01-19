@@ -1,5 +1,5 @@
 /**
- * @author nianyi
+ * @author yini-chen
  * @description amp定制object，object回填value可能为string
  */
 import * as React from "react";

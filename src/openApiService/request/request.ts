@@ -98,20 +98,28 @@ export const request = async function (options: OpenAPIOptions) {
     bodyStyle,
     credential
   } = options;
-  let method = meta?.apis[action]?.method?.toUpperCase();
+  let method = meta?.method?.toUpperCase();
   let protocol = 'https';
   endpoint = endpoint ? endpoint.replace('http://', '').replace('https://', '') : `${productName.toLowerCase()}.cn-hangzhou.aliyuncs.com`;
   let pathname = '/';
-  const schema = meta.apis[action].responses['200'] && meta.apis[action].responses['200'].schema;
-  const requestType = bodyStyle === 'json' ? 'json' : 'formData';
+  const schema = meta?.responses['200'] && meta?.responses['200'].schema;
+  let requestType;
+  if(meta?.consumes){
+    requestType = _bodyType(meta?.consumes)
+  }else{
+    requestType = bodyStyle === 'json' ? 'json' : 'formData';
+  }
   let responseType;
+  
   if (!schema) {
     responseType = _bodyType(meta.apis[action] && meta.apis[action].produces);
   } else if (schema.xml) {
     responseType = 'xml';
   } else if (schema.type && schema.type !== 'object') {
     responseType = schema.format || schema.type;
-  } else {
+  } else if (meta?.ext?.produces){
+    responseType = _bodyType(meta.ext.produces);
+  }else {
     responseType = 'json';
   }
 
@@ -128,7 +136,7 @@ export const request = async function (options: OpenAPIOptions) {
   // });
   // paramObject.params = newParams;
   const parameters = {};
-  meta.apis[action]?.parameters?.map(param=>{
+  meta?.parameters?.map(param=>{
     parameters[param.name] = param;
   })
   // paramObject.params = params;
@@ -177,7 +185,8 @@ export const request = async function (options: OpenAPIOptions) {
           }
           request.query[name] = value;
           break;
-        case 'Body':
+        case 'body':
+        case 'formData':
           if (!request.body) {
             request.body = {};
           }
@@ -193,7 +202,7 @@ export const request = async function (options: OpenAPIOptions) {
             // request.stream = await ossUtil.getStream(`tmpFile/${params[name]}`);
           }
           break;
-        case 'Header':
+        case 'header':
           request.headers[name] = value;
           break;
       }
@@ -224,7 +233,6 @@ export const request = async function (options: OpenAPIOptions) {
     readTimeout: 50000,
     connectTimeout: 50000
   });
-  request.query = {};
   const data = {
     version: apiVersion,
     method,
@@ -232,9 +240,7 @@ export const request = async function (options: OpenAPIOptions) {
     action,
     reqBodyType: requestType,
     bodyType: responseType,
-    // TODO：根据元数据判断鉴权方式
-    authType:'AK',
-    // authType: credential && credential.type === 'anonymous' ? 'Anonymous' : 'AK'
+    authType: 'AK',
   };
   return await client.doRequest(data, request, {});
 };

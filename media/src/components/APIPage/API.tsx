@@ -16,6 +16,13 @@ import { APIPageContext } from "./context";
 import APIDebugger from "./APIDebugger/APIDebugger";
 import { SemixForm } from "../SemixFormRender";
 import { TryAPI } from "./TryAPI/TryAPI";
+import TrySDK from "./TrySDK/TrySDK";
+import { Dropdown, MenuProps } from "antd";
+import { PontUIService } from "../../service/UIService";
+import { getVSCode } from "../../utils/utils";
+import { SemixJsonSchema } from "semix-core";
+import _ from "lodash";
+import { useResizeObserver } from 'react-use-observer';
 
 export class APIProps {
   selectedApi?: PontSpec.PontAPI;
@@ -30,6 +37,7 @@ export class APIProps {
 
 export const API: React.FC<APIProps> = (props) => {
   const { selectedApi, definitions } = props;
+  const [mode, changeMode] = React.useState("doc" as any);
 
   const getSchema = React.useCallback(
     ($ref: any) => {
@@ -73,10 +81,29 @@ export const API: React.FC<APIProps> = (props) => {
     };
   }, [definitions, getSchema]);
 
+  const mapSchema = (schema) => {
+    
+    return SemixJsonSchema.mapSchema(schema as any, (schema)=>{
+      if(schema?.properties){
+        Object.keys(schema.properties)?.map((item=>{
+          schema.properties[item] = mapSchema(schema.properties[item])
+        }))
+      }
+      if(schema?.$ref){
+        schema = getSchema(schema?.$ref)
+        schema = mapSchema(schema)
+        return schema;
+      }
+      return schema
+    })
+  };
+
   const pathEle = selectedApi?.path ? <div className="path">{selectedApi.path}</div> : null;
   const apiNameEle = selectedApi?.name ? <div className="title">{selectedApi?.name}</div> : null;
-  const paramsSchema = selectedApi?.parameters?.reduce(
+  let paramsSchema = _.cloneDeep(selectedApi?.parameters)
+  const newParamsSchema = paramsSchema?.reduce(
     (result, param) => {
+      param.schema = mapSchema(param.schema);
       return {
         ...result,
         properties: {
@@ -91,16 +118,117 @@ export const API: React.FC<APIProps> = (props) => {
   const form = SemixForm.useForm({
     formData: {},
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    schema: paramsSchema as any,
+    schema: newParamsSchema as any,
     context: {},
     getCustomWidget: getCustomWidget,
   });
 
+  const tabs = [
+    { tab: "文档", key: "doc" },
+    { tab: "调试", key: "debug" },
+    { tab: "代码示例", key: "sdk" },
+  ];
+
+  const [pageEl, resizeObserverEntry] = useResizeObserver();
+
+  const [boxWidth, setBoxWidth] = React.useState(0);
+  React.useEffect(() => {
+    const { width = 0, height = 0 } = resizeObserverEntry?.contentRect || {};
+    if (width !== boxWidth) {
+      setBoxWidth(width);
+    }
+  }, [boxWidth, resizeObserverEntry]);
+
+  const renderContent = React.useMemo(() => {
+    const documentComp = (
+      <div className="content">
+        {selectedApi?.description ? (
+          <div className="mod desc-mod">
+            <SemixMarkdown source={selectedApi?.description} />
+          </div>
+        ) : null}
+        <div className="mod">
+          <div className="mod-title">入参</div>
+          <ApiParamsDoc parameters={selectedApi?.parameters} apiName={selectedApi?.name} schemas={definitions as any} />
+        </div>
+        <div className="mod">
+          <div className="mod-title">出参</div>
+          <InnerSchemaTable
+            name=""
+            schema={selectedApi?.responses["200"]?.schema as any}
+            renderEmpty={() => {
+              return (
+                <tr>
+                  <td
+                    colSpan={2}
+                    style={{
+                      padding: "15px 0",
+                      textAlign: "center",
+                    }}
+                  >
+                    无出参定义
+                  </td>
+                </tr>
+              );
+            }}
+          />
+        </div>
+        {props.renderMore?.()}
+      </div>
+    );
+    const debugComp = (
+      <div className={ `debug-comp-content ${boxWidth<850 ? "debug-comp-content-column":""}`}>
+        <div className={`left-panel ${boxWidth<850 ? "left-panel-column":""}`} style={{width: boxWidth < 850 ? boxWidth : 368}}>
+          <APIDebugger></APIDebugger>
+        </div>
+        <div className="right-panel" style={{width: boxWidth < 850 ? boxWidth : boxWidth - 400}}>
+          <Tab
+            activeKey={mode}
+            onChange={(key) => {
+              changeMode(key);
+            }}
+          >
+            <Tab.Item key="debug-doc" title="API 文档">
+              {documentComp}
+            </Tab.Item>
+            <Tab.Item key="sdk" title="示例代码">
+              <div className="content">
+                <TrySDK></TrySDK>
+              </div>
+            </Tab.Item>
+            <Tab.Item key="debug" title="调试结果">
+              <div className="content">
+                <TryAPI></TryAPI>
+              </div>
+            </Tab.Item>
+          </Tab>
+        </div>
+      </div>
+    );
+    switch (mode) {
+      case "doc":
+        return documentComp;
+      case "debug":
+        return debugComp;
+      case "sdk":
+        return debugComp;
+      default:
+        return debugComp;
+    }
+  }, [mode, boxWidth]);
+
   return (
-    <div className="pontx-ui-api">
+    <div className="pontx-ui-api" ref={pageEl}>
       {/*  */}
       <APIPageContext.Provider
-        initialState={{ apiMeta: selectedApi, schemaForm: form, product: props.product, version: props.version }}
+        initialState={{
+          apiMeta: selectedApi,
+          schemaForm: form,
+          product: props.product,
+          version: props.version,
+          mode: mode,
+          changeMode: changeMode,
+        }}
       >
         <RootContext.Provider initialState={initValue}>
           {selectedApi ? (
@@ -109,7 +237,6 @@ export const API: React.FC<APIProps> = (props) => {
                 <div className="heading">
                   <div className="left">
                     {selectedApi.method ? <div className="method">{selectedApi.method?.toUpperCase()}</div> : null}
-
                     {selectedApi.deprecated ? (
                       <Tag className="deprecated" style={{ marginRight: 12, color: "#888" }}>
                         deprecated
@@ -120,20 +247,11 @@ export const API: React.FC<APIProps> = (props) => {
                   </div>
                   <div className="right">
                     {pathEle ? apiNameEle : null}
-                    {selectedApi?.externalDocs ? (
-                      <Button
-                        type="primary"
-                        component="a"
-                        style={{ marginLeft: 12 }}
-                        href={selectedApi?.externalDocs?.url}
-                        target="_blank"
-                        // onClick={() => {
-                        //   window.open(selectedApi?.externalDocs?.url, "_blank");
-                        // }}
-                      >
-                        {selectedApi?.externalDocs?.description}
-                      </Button>
-                    ) : null}
+                    <Tab shape="capsule" activeKey={mode} onChange={(val) => changeMode(val)}>
+                      {tabs.map((tab) => (
+                        <Tab.Item title={tab.tab} key={tab.key}></Tab.Item>
+                      ))}
+                    </Tab>
                   </div>
                 </div>
                 {selectedApi?.summary ? (
@@ -144,62 +262,7 @@ export const API: React.FC<APIProps> = (props) => {
                   </div>
                 ) : null}
               </div>
-              <div className="api-page-content">
-                {/* <div className="left-panel">
-                  <APIDebugger></APIDebugger>
-                </div> */}
-                <div className="right-panel">
-                  <Tab defaultActiveKey="doc">
-                    <Tab.Item key="doc" title="API 文档">
-                      <div className="content">
-                        {selectedApi?.description ? (
-                          <div className="mod desc-mod">
-                            <SemixMarkdown source={selectedApi?.description} />
-                          </div>
-                        ) : null}
-                        <div className="mod">
-                          <div className="mod-title">入参</div>
-                          <ApiParamsDoc
-                            parameters={selectedApi?.parameters}
-                            apiName={selectedApi?.name}
-                            schemas={definitions as any}
-                          />
-                        </div>
-                        <div className="mod">
-                          <div className="mod-title">出参</div>
-                          <InnerSchemaTable
-                            name=""
-                            schema={selectedApi?.responses["200"]?.schema as any}
-                            renderEmpty={() => {
-                              return (
-                                <tr>
-                                  <td
-                                    colSpan={2}
-                                    style={{
-                                      padding: "15px 0",
-                                      textAlign: "center",
-                                    }}
-                                  >
-                                    无出参定义
-                                  </td>
-                                </tr>
-                              );
-                            }}
-                          />
-                        </div>
-                        {props.renderMore?.()}
-                      </div>
-                    </Tab.Item>
-                    <Tab.Item key="code_sample" title="示例代码">
-                      <div className="content">敬请期待...</div>
-                    </Tab.Item>
-                    <Tab.Item key="debug" title="调试">
-                    <div className="content">敬请期待...</div>
-                      {/* <div className="content"><TryAPI></TryAPI></div> */}
-                    </Tab.Item>
-                  </Tab>
-                </div>
-              </div>
+              <div className="api-page-content">{renderContent}</div>
             </>
           ) : null}
         </RootContext.Provider>

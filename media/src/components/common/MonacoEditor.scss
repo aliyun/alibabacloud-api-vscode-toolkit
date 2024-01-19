@@ -1,0 +1,42 @@
+.editor-content {
+  .operations {
+    display: flex;
+    margin: 16px 0 16px 0px;
+    padding: 8px 16px;
+    justify-content: space-between;
+    .right-area {
+      display: flex;
+      .ant-btn {
+        margin-left: 8px;
+        padding: 0px;
+        background-color: #f8f9fa;
+        border: 1px #f8f9fa solid;
+      }
+      .ant-btn:hover{
+        background-color: #fff;
+        border: 1px #2f84ae solid;
+        color: #2f84ae;
+      }
+
+    }
+    .left-area {
+      display: flex;
+      margin: auto 0;
+      width: 200px;
+      .head-info {
+        margin: auto 8px;
+      }
+    }
+    .codicon {
+      padding: 8px;
+      cursor: pointer;
+      color:#6e6e6e;
+    }
+    .codicon:hover{
+      color: #2f84ae;
+    }
+  }
+  .tab-content {
+    position: relative;
+  }
+}

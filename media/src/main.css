@@ -6,7 +6,16 @@ html body {
   border-left: 1px solid #d7d7d7;
 }
 .vscode-page {
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   width: 100%;
-  max-width: 100%;
+  .api-page-content {
+    position: relative;
+    margin-top: 16px;
+    display: flex;
+    width: 100%;
+    .content{
+      width: 100%;
+      padding:0 0 16px 20px
+    }
+  }
 }

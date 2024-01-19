@@ -219,7 +219,7 @@ export const semixifySchema = (resultSchema: SemixJsonSchema, getCustomWidget?) 
 
     if (schema?.type === "object" && schema?.properties) {
       let newRequired = Object.keys(schema.properties).filter((key) => {
-        return schema.properties[key].required || schema.properties[key].isRequired;
+        return schema.properties[key]?.required || schema.properties[key]?.isRequired;
       });
       let newProperties = schema?.properties;
       if (schema?.required?.length) {
