@@ -111,15 +111,6 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
     return res;
   };
 
-  const copyBtn = (tab) => (
-    <CopyToClipboard
-      style={{ marginLeft: "8px" }}
-      text={getTabValue(tab.value)}
-      onCopy={() => message.success(I18N.main.explorer.copySuccess)}
-    >
-      <Button>{I18N.main.explorer.copy}</Button>
-    </CopyToClipboard>
-  );
 
   const getResponseSchema = (statusCode, responseSchema) => {
     if (!statusCode || _.isEmpty(responseSchema)) {
@@ -264,25 +255,6 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                   >
                     复制
                   </Balloon>
-                  {/* {items?.map((item) => {
-                      return (
-                        <Balloon
-                          closable={false}
-                          align="t"
-                          trigger={
-                            <Button
-                              // className="copy-button"
-
-                              onClick={item.onClick}
-                            >
-                              <div className={`codicon codicon-${item.icon}`} />
-                            </Button>
-                          }
-                        >
-                          {item.label}
-                        </Balloon>
-                      );
-                    })} */}
                   <Dropdown menu={{ items }}>
                     <Button onClick={(e) => e.preventDefault()}>
                       <div className="codicon codicon-list-selection" />
@@ -318,40 +290,9 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                             }
                             value={getTabValue(tab.value)}
                             // schema={getResponseSchema(statusCode, props.responseSchema) || {}}
-                            // operators={
-                            //   props?.apiResult?.format === 'xml' && tab.value === 'preview' ? (
-                            //     <>
-                            //       {currentFormat === 'xml' ? (
-                            //         <Button type="default" onClick={() => setFormat('json')}>
-                            //           {I18N.explorer.apiExplorer.formatJson}
-                            //         </Button>
-                            //       ) : (
-                            //         <Button type="default" onClick={() => setFormat('xml')}>
-                            //           {I18N.explorer.apiExplorer.formatXml}
-                            //         </Button>
-                            //       )}
-                            //       {copyBtn(tab)}
-                            //     </>
-                            //   ) : (
-                            //     <CopyToClipboard
-                            //       text={getTabValue(tab.value)}
-                            //       onCopy={() => {
-                            //         message.success(I18N.main.explorer.copySucc);
-                            //       }}
-                            //     >
-                            //       <Button className="try-api-copy-button">
-                            //         <WorkbenchIcon type="copy-line"></WorkbenchIcon>
-                            //       </Button>
-                            //     </CopyToClipboard>
-                            //   )
-                            // }
                           />
                         ) : (
                           <div>{I18N.main.explorer.specialresponsetip}</div>
-                          //   <OnlineTrialResult
-                          //     value={getTabValue(tab.value) as any as string[]}
-                          //     format={props?.apiResult?.format}
-                          //   />
                         )}
                       </div>
                     </div>

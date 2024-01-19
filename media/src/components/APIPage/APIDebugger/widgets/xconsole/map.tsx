@@ -26,7 +26,7 @@ export const SimpleMap: React.FC<SimpleMapProps> = (props) => {
       const keyItem = (
         <>
           <Input
-            style={{ width: 200 }}
+            style={{ width: 160 }}
             hasClear
             value={listKeys[index]}
             placeholder="字符串"
@@ -100,8 +100,7 @@ export const SimpleMap: React.FC<SimpleMapProps> = (props) => {
               props.addItem();
             }}
           >
-            <div className='codicon codicon-add' style={{ marginRight: '5px', marginTop: '1px' }}></div>
-            add
+          add
           </a>
         </div>
       </div>

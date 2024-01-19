@@ -103,9 +103,9 @@ export const String: React.FC<StringProps> = (props) => {
   switch (inputType) {
     case 'textarea':
       formItem = (
-        <div className="generate-form-text-area">
+        <div className="generate-form-text-area" style={{position:"relative"}}>
           <Input.TextArea
-            style={{ resize: 'none' }}
+            style={{ resize: 'none', width: schema?.inputWidth || '100%' }}
             ref={textareaRef}
             rows={3}
             value={curvalue}
@@ -117,13 +117,14 @@ export const String: React.FC<StringProps> = (props) => {
           <Tooltip title="转换为 Input，转换后将丢失换行符">
             <span
               className="generate-form-text-area-icon"
+              style={{ position:"absolute", right:6, bottom:6}}
               onClick={() => {
                 setCurvalue((curvalue || '').replace(/\n/gi, ''));
                 setIsToTextArea(false);
               }}
             >
+              <div className='codicon codicon-fold'></div>
               {/* <SwapOutlined translate={undefined} /> */}
-              transfer
             </span>
           </Tooltip>
         </div>
@@ -166,20 +167,20 @@ export const String: React.FC<StringProps> = (props) => {
                 });
               }
             }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                setIsToTextArea(true);
-                e.preventDefault();
-                const { value: newValue, position } = getNewTextareaValueAndPosition('\n');
-                setCurvalue(newValue);
-                Promise.resolve().then(() => {
-                  // @ts-ignore
-                  textareaRef?.current?.resizableTextArea?.textArea?.focus();
-                  // @ts-ignore
-                  textareaRef?.current?.resizableTextArea?.textArea?.setSelectionRange(position, position);
-                });
-              }
-            }}
+            // onKeyDown={(e) => {
+            //   if (e.key === 'Enter') {
+            //     setIsToTextArea(true);
+            //     e.preventDefault();
+            //     const { value: newValue, position } = getNewTextareaValueAndPosition('\n');
+            //     setCurvalue(newValue);
+            //     Promise.resolve().then(() => {
+            //       // @ts-ignore
+            //       textareaRef?.current?.resizableTextArea?.textArea?.focus();
+            //       // @ts-ignore
+            //       textareaRef?.current?.resizableTextArea?.textArea?.setSelectionRange(position, position);
+            //     });
+            //   }
+            // }}
           ></Input>
         </div>
       );

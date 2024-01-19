@@ -46,13 +46,12 @@
     .right-panel {
       min-width: 540px;
       border-left: 1px #ccc solid;
-      padding-left:16px;
       .right-ops{
         padding: 0 16px;
         font-weight: 500;
       }
       .content{
-        padding: 16px 20px 20px 0;
+        padding: 0 0 16px 20px;
         height: calc(100vh - 270px);
         overflow: auto;
         .api-params-doc{

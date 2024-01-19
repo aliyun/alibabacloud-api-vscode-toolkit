@@ -1,10 +1,8 @@
 .editor-content {
   .operations {
     display: flex;
-    margin: 0 0 16px 0px;
-    // box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    margin: 16px 0 16px 0px;
     padding: 8px 16px;
-    //    width: 300px;
     justify-content: space-between;
     .right-area {
       display: flex;
@@ -32,6 +30,10 @@
     .codicon {
       padding: 8px;
       cursor: pointer;
+      color:#6e6e6e;
+    }
+    .codicon:hover{
+      color: #2f84ae;
     }
   }
   .tab-content {

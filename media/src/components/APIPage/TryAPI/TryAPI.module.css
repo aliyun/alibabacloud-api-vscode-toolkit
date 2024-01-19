@@ -121,6 +121,7 @@
   
       .content {
         padding-top: 1px;
+        height: 425px;
         .title {
             margin-bottom: 8px;
             font-family:  PingFangSC;
@@ -176,7 +177,7 @@
     }
   
     .ant-empty {
-      height: calc(100% - 37px);
+      height: 400px;
       display: flex;
       flex-direction: column;
       align-items: center;

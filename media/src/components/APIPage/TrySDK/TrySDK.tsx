@@ -112,6 +112,7 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
       <div className="sdk-demo-content">
         <MonacoEditor
           languageTab={languageTab}
+          height={580}
           setLanguageTab={setLanguageTab}
           header={
             <div className="head-info">
