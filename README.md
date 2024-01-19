@@ -17,11 +17,15 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 
 * **API 文档预览:** 点击 API 可以打开一个新的标签页，并显示对应的 API 文档，包括描述、请求参数、响应参数和错误码。在文档中点击调试按钮，可以链接到阿里云 OpenAPI 门户进行在线 API 试用。
 
+* **API 调试:** 你可以在插件中使用表单的方式调试阿里云 API，并查看结果。
+  
+* **SDK 代码示例:** 你可以在插件中获得 SDK 代码示例，并在编辑器中快速打开对应的 SDK 代码。
+
 * 更多功能正在开发中，敬请期待...
 
 ## 插件 UI 导览
 
-![VSCode Extension Guide](https://img.alicdn.com/imgextra/i2/O1CN01VJNeqk1NKrbDtTotP_!!6000000001552-0-tps-2310-1524.jpg)
+![VSCode Extension Guide](https://img.alicdn.com/imgextra/i1/O1CN01o9s4TT1GTq3oggW7K_!!6000000000624-0-tps-2456-1446.jpg)
 
  * 产品搜索 `ctrl+cmd+k`
 
@@ -31,3 +35,36 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 
 ![API Serching](https://img.alicdn.com/imgextra/i1/O1CN01KaWkBF1UfCUkY0N3v_!!6000000002544-0-tps-1286-518.jpg)
 
+* API 调试 
+
+调试功能需要配置你的 AK/SK 信息，配置方法如下：
+1. 安装 [Alibaba Cloud CLI Tools](https://marketplace.visualstudio.com/items?itemName=alibabacloud-openapi.aliyuncli) 插件，
+2. 打开命令行安装 aliyun-cli `brew install aliyun-cli`，
+3. 输入 `aliyun configure` 命令，按照提示进行配置，
+4. 点击 VS Code 状态栏中的阿里云图标，管理你的 profiles，
+5. 更多信息请参考 [Alibaba Cloud CLI Documentation](https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure)。
+
+![API debug](https://img.alicdn.com/imgextra/i4/O1CN01F1qI7S1BunIFJPiAt_!!6000000000006-0-tps-2618-2050.jpg)
+
+* SDK 示例
+  
+![sdk demo](https://img.alicdn.com/imgextra/i1/O1CN01GVhWTl1waRdYmCn7E_!!6000000006324-0-tps-2630-2038.jpg)
+
+## Requirements
+- Need VS Code 1.75.0 or above.
+
+## Release Notes
+
+### 0.0.1 
+Initial release
+- Support product searching and subscription.
+- Support API searching.
+- Support API Document View.
+
+### 0.0.3
+- Support API calling.
+- Support SDK code sample.
+
+## License
+
+See the [Apache License 2.0](./LICENSE).

@@ -9,7 +9,7 @@ import { getSchemaByRef, semixifySchema, usePrevious } from "./utils";
 import { SemixUISchema } from "./type";
 import { FormInstance, FormStoreContext, FormStoreIntialState, useForm } from "./context";
 import { Field } from "./common/Field";
-import { useDeepCompareMemo } from "use-deep-compare";
+// import { useDeepCompareMemo } from "use-deep-compare";
 import { FormItem } from "./common/FormItem";
 import { getFieldClassName } from "./utils";
 import classNames from "classnames";

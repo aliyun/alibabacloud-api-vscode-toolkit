@@ -51,9 +51,30 @@ export class PontAPI {
     };
   }
 
-export class ExtensionResponse {
+export class OpenAPIResponse {
   requestId : string;
   doc: string;
   response: OpenAPIRequestResult;
   type: string;
 }
+
+export class MakeCodeResponse {
+  code: number;
+  data: MakeCodeData;
+}
+
+export class MakeCodeData {
+  demoSdk: any;
+  apiInfo: APIInfo;
+  cost:    number;
+}
+
+export class APIInfo {
+  apiStyle:   string;
+  product:    string;
+  method:     string;
+  apiVersion: Date;
+  apiName:    string;
+  regionId:   string;
+}
+

@@ -3,6 +3,16 @@
 @import "../../components/SemixFormRender/SemixForm.scss";
 @import "../../styles/variable.scss";
 @import "../../styles/Markdown.scss";
+@import "../../components/APIPage/API.module.css";
+@import "../../components/APIPage/TryAPI/TryAPI.module.css";
+@import "../../components/APIPage/APIDebugger//widgets/xconsole/enum.module.scss";
+@import "../../components/APIPage/APIDebugger//widgets/xconsole/index.module.scss";
+@import "../../components/APIPage/APIDebugger//widgets/xconsole/list.module.scss";
+@import "../../components/APIPage/APIDebugger/APIGuide.module.scss";
+@import "../../components/APIPage/APIDebugger/APIDebugger.module.scss";
+@import "../../components/APIPage/TrySDK/LanguageSwitcher.module.scss";
+@import "../../components/APIPage/TrySDK/TrySDK.module.scss";
+@import "../../components/common/MonacoEditor.scss";
 
 $primary-color: #448ef7;
 $nav-height: 36px;
@@ -99,17 +109,6 @@ $create-color: #007100;
 
   .semix-table-header-th.param-name {
     min-width: 100px;
-  }
-
-  .api-page-content {
-    padding: 12px 20px 12px;
-    display: flex;
-    .api-debug {
-      width: 356px;
-    }
-    .right-panel {
-      width: 100%;
-    }
   }
 
   .desc-mod {

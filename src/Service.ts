@@ -140,6 +140,39 @@ export class AlicloudAPIService {
     return {};
   }
 
+  async requestEndpoints(product: string) {
+    const resStr = await fetch(
+      `https://pre-api.aliyun.com/meta/v1/products/${product}/endpoints.json?language=zh-CN`,
+      {},
+    ).then((res) => res.text());
+    const res = JSON.parse(resStr);
+    return res?.data?.endpoints || [];
+  }
+
+  async openInCode(codeInfo:{code:string,language:string}){
+    const {language, code} = codeInfo
+    // 创建新的文件
+    vscode.workspace.openTextDocument({
+      content: code,
+      language: language?.toLocaleLowerCase(),
+  }).then(newDocument => {
+      vscode.window.showTextDocument(newDocument,{
+        viewColumn: vscode.ViewColumn.Beside,
+      });
+  });
+    return {}
+  }
+
+  async saveToFile(code:string){
+    const uri = await vscode.window.showSaveDialog();
+    if (uri) {
+        const buf = Buffer.from(code, 'utf8');
+        await vscode.workspace.fs.writeFile(uri, buf);
+    }
+    return {}
+  }
+
+
   async loadProfiles() {
     const configFilePath = path.join(os.homedir(), ".aliyun/config.json");
     const { R_OK, W_OK } = fs.constants;
@@ -153,34 +186,85 @@ export class AlicloudAPIService {
     }
   }
 
-  async openAPIRequest(requestData) {
-    const { apiMeta, paramsValue, product, version } = requestData;
+  async updateLocalLanguage(lang) {
+    this.context.globalState.update('defaultLanguage', lang);
+  }
+
+  async getLocalLanguage() {
+    return this.context.globalState.get('defaultLanguage')
+  }
+
+  async makeCodeRequest(requestData) {
+    const { apiMeta, paramsValue, product, version, endpoint, regionId } = requestData;
     const newParamsValue = getFormatValues(paramsValue, apiMeta?.parameters);
-    // 定义了一个post变量，用于暂存请求体的信息
-    let post = "";
-    let response = "";
+    const security = apiMeta?.ext?.security;
+    const defaultCredentialType =
+      security?.length > 0
+        ? security.indexOf("AK") < 0
+          ? security.indexOf("BearerToken") < 0
+            ? "anonymous"
+            : "bearer"
+          : "ak"
+        : "ak";
+    const body = {
+      "apiName": apiMeta?.name,
+      "apiVersion": version,
+      "product": product,
+      "sdkType": "dara",
+      "params": newParamsValue || {},
+      "regionId": regionId,
+      "endpoint": endpoint,
+      "credential": {type: defaultCredentialType},
+      "runtimeOptions": {},
+      "useCommon": false
+    }
+    const resStr = await fetch(
+      `https://api.aliyun.com/api/product/makeCode`,
+      {method: 'post',
+      body: JSON.stringify(body),
+      headers: {'Content-Type': 'application/json'}},
+    ).then((res) => res.text());
+    const res = JSON.parse(resStr);
+    return res;
+  }
+
+  async openAPIRequest(requestData) {
+    const { apiMeta, paramsValue, product, version, endpoint } = requestData;
+    // const newParamsValue = getFormatValues(paramsValue, apiMeta?.parameters);
+    let response = {} as any;
     let data;
     const profilesInfo = await this.loadProfiles();
     const profiles = profilesInfo?.profiles;
     // TODO：用户可以选择使用哪个profile
+    const security = apiMeta?.ext?.security;
+    const defaultCredentialType =
+      security?.length > 0
+        ? security.indexOf("AK") < 0
+          ? security.indexOf("BearerToken") < 0
+            ? "anonymous"
+            : "bearer"
+          : "ak"
+        : "ak";
     if (profiles?.length) {
+      const profile = profiles?.find(item=>item.name === profilesInfo.current)
+      const start = Date.now();
       try {
         data = await request({
-          accessKeyId: profiles[0]?.access_key_id,
-          accessKeySecret: profiles[0]?.access_key_secret,
-          // TODO：可选服务地址
-          endpoint: "ecs-cn-hangzhou.aliyuncs.com",
+          accessKeyId: profile?.access_key_id,
+          accessKeySecret: profile?.access_key_secret,
+          endpoint: endpoint,
           action: apiMeta?.name,
           apiVersion: version,
-          params: newParamsValue || {},
+          params: paramsValue || {},
           productName: product,
-          meta: this.pontManager.localPontSpecs[0],
+          meta: apiMeta,
           bodyStyle: undefined,
-          credential: "AK",
+          credential: {type: defaultCredentialType},
         });
         response = data;
         // 设置状态码
         // res.writeHead(200);
+        response.cost = Date.now() - start;
       } catch (error) {
         console.log("response error：", error);
         if (error && error.name === "RequesctTimeoutError") {
@@ -201,12 +285,14 @@ export class AlicloudAPIService {
               message: error.message,
               notice: "The request has executed failed.",
             },
+            cost: 300,
             entry: error.entry || {
               url: "",
             },
           };
         }
         response = data;
+        response.cost = Date.now() - start;
         // 设置状态码
         // res.writeHead(500);
       }
@@ -215,14 +301,13 @@ export class AlicloudAPIService {
         requestId: requestData.requestId,
         doc: `${product}::${version}::${apiMeta.name}`,
         type: "openAPIResponse",
-        response,
+        response
       };
     }else{
-      let result = await vscode.window.showErrorMessage("请先安装阿里云 CLI 插件，并完成AK/SK配置后，再发起调用", "install","cancel");
-        if (result === "install") {
-          vscode.env.openExternal(vscode.Uri.parse('vscode:extension/alibabacloud-openapi.aliyuncli'));
+      let result = await vscode.window.showErrorMessage("请完成AK/SK配置后，再发起调用", "查看配置方法","取消");
+        if (result === "查看配置方法") {
+          vscode.env.openExternal(vscode.Uri.parse('https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure'));
         }
-      
     }
   }
 

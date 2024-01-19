@@ -1,5 +1,5 @@
 /**
- * @author nianyi
+ * @author yini-chen
  * @description semix-map
  */
 import * as React from "react";
