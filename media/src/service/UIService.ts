@@ -67,4 +67,6 @@ export const PontUIService = {
     openInCode: async (codeInfo:{code:string,language:string}): Promise<void> => {},
     /** save to file */
     saveToFile: async (code:string): Promise<void> => {},
+    /** get vscode os platform */
+    getVscodeOsPlatform: async () => ""
   };

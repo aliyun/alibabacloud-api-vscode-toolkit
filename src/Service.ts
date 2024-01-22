@@ -194,6 +194,10 @@ export class AlicloudAPIService {
     return this.context.globalState.get('defaultLanguage')
   }
 
+  async getVscodeOsPlatform(){
+    return os.type()
+  }
+
   async makeCodeRequest(requestData) {
     const { apiMeta, paramsValue, product, version, endpoint, regionId } = requestData;
     const newParamsValue = getFormatValues(paramsValue, apiMeta?.parameters);

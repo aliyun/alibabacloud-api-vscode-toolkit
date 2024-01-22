@@ -16,6 +16,7 @@ import { EditorLanguages } from "../../../types/EditorLanguages";
 import { OpenAPIRequestResult } from "../../../types/openAPI";
 import { APIPageContext } from "../context";
 import { apiResponse } from "../../../mocks/openApiResponse";
+import { PontUIService } from "../../../service/UIService";
 
 export class TryAPIProps {}
 
@@ -111,7 +112,6 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
     return res;
   };
 
-
   const getResponseSchema = (statusCode, responseSchema) => {
     if (!statusCode || _.isEmpty(responseSchema)) {
       return {};
@@ -138,13 +138,47 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
     },
   ];
 
+  const [osType, setOsType] = React.useState("Darwin");
+
+  React.useEffect(() => {
+    PontUIService.getVscodeOsPlatform().then((res) => {
+      setOsType(res);
+    });
+  }, []);
+
+  const installDoc = React.useMemo(() => {
+    if (osType === "Windows_NT") {
+      return (
+        <a href="https://aliyuncli.alicdn.com/aliyun-cli-windows-latest-amd64.zip" target="_blank">
+          Windows (64 bit)
+        </a>
+      );
+    } else if (osType === "Darwin") {
+      return <span><code>brew install aliyun-cli</code></span>;
+    } else if (osType === "Linux") {
+      return (
+        <span>
+          <a href="https://aliyuncli.alicdn.com/aliyun-cli-linux-latest-arm64.tgz" target="_blank">
+            Linux (ARM64)
+          </a>
+          ,{" "}
+          <a href="https://aliyuncli.alicdn.com/aliyun-cli-linux-latest-amd64.tgz" target="_blank">
+            Linux (AMD64)
+          </a>
+        </span>
+      );
+    } else {
+      return <code>brew install aliyun-cli</code>;
+    }
+  }, [osType]);
+
   return (
     <div className="comp-try-api">
       <Alert
         message={
           <div>
-            请利用 aliyun-cli 配置您的 AK/SK 信息：1. 安装 aliyun-cli: <code>brew install aliyun-cli</code>; 2. 命令行输入 <code>aliyun
-            configure</code>。
+            请利用 aliyun-cli 配置您的 AK/SK 信息：1. 安装 aliyun-cli: {installDoc}; 2.
+            命令行输入 <code>aliyun configure</code>。
             <a href="https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure">点击查看更多信息</a>。
           </div>
         }
