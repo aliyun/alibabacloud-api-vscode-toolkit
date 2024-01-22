@@ -13,6 +13,7 @@ import { AlicloudAPIPontParserPlugin } from "./plugins/parser";
 
 import { AlicloudApiMetaGeneratePlugin } from "./plugins/generate";
 import { getProductRequestInstance } from "./productExplorer";
+import autoCompletion from './autoCompletion'
 
 export async function activate(context: vscode.ExtensionContext) {
   // if (!vscode.workspace.rootPath) {
@@ -25,7 +26,7 @@ export async function activate(context: vscode.ExtensionContext) {
     return;
   }
 
-  // 需要先拿一次产品列表
+  // 获取产品列表
   await getProductRequestInstance();
 
   alicloudAPIMessageService.context = context;
@@ -61,6 +62,7 @@ export async function activate(context: vscode.ExtensionContext) {
       );
       // 将命令注册到执行上下文中
       context.subscriptions.push(new PontFileDecoration());
+      autoCompletion(context);
     }
   } catch (e) {
     vscode.window.showErrorMessage(e.message);
