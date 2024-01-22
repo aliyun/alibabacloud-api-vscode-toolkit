@@ -3,7 +3,7 @@
   "displayName": "Alibaba Cloud API Toolkit",
   "description": "The Alibaba Cloud API Toolkit for VSCode makes it easier to access Alibaba Cloud services.",
   "author": "Alibaba Cloud SDK Team",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "publisher": "alibabacloud-openapi",
   "license": "Apache-2.0",
