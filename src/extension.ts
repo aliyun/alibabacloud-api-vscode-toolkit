@@ -5,10 +5,9 @@ import * as vscode from "vscode";
 import { PontManager } from "pontx-manager";
 import PontMetaFetchPlugin from "pontx-meta-fetch-plugin";
 import { alicloudAPIMessageService } from "./Service";
-import { findAlicloudAPIConfig, pontConsole, registerConfigSchema, VSCodeLogger } from "./utils";
+import { findAlicloudAPIConfig, pontConsole, VSCodeLogger } from "./utils";
 import { AlicloudAPISerializer, AlicloudAPIWebview } from "./webview";
 import { PontFileDecoration } from "./explorer";
-import * as path from "path";
 import { AlicloudAPIPontParserPlugin } from "./plugins/parser";
 
 import { AlicloudApiMetaGeneratePlugin } from "./plugins/generate";

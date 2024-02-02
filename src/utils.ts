@@ -7,6 +7,9 @@ import PontMetaFetchPlugin from "pontx-meta-fetch-plugin";
 import { AlicloudAPIPontParserPlugin } from "./plugins/parser";
 import { AlicloudApiMetaGeneratePlugin } from "./plugins/generate";
 import _ from "lodash";
+import { alicloudAPIMessageService } from "./Service";
+import { AlicloudApiCommands } from "./commands";
+import { AlicloudApiExplorer } from "./explorer";
 const configSchema = require("pontx-spec/configSchema.json");
 
 const { createServerContent } = require("../media/lib/index");
@@ -430,3 +433,31 @@ export const getFormatValues = (paramValues: any, apiParams, purpose?: string) =
   travelObj(newAPIParamValues);
   return newAPIParamValues;
 };
+
+export const getDefaultValue = (schema) => {
+  switch(schema?.type){
+    case 'string' : return "";
+    case 'number' : return 0;
+    case 'boolean': return false;
+    case 'array': return [];
+    case 'object': return {};
+    default: return "";
+  }
+}
+
+export const getRequiredParamsValue = (product:string,version:string, api:string) => {
+  const service = alicloudAPIMessageService;
+    let apis = [];
+    const selectSpec = service.pontManager.localPontSpecs?.find((spec) => spec.name === `${product}::${version}`);
+    const selectAPI = _.find(selectSpec?.apis || {}, item=>item.name === api);
+    
+    const paramsValue = {}
+    const requiredParams = selectAPI?.parameters?.map(param=>{
+      if(param?.schema?.required){
+        paramsValue[param.name] = param.schema?.example || getDefaultValue(param.schema)
+        return param
+      }
+    }) 
+
+  return paramsValue
+}
