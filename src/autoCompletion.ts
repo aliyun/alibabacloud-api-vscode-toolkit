@@ -60,7 +60,6 @@ class CompletionItemProvider {
         });
         completionItems = [...completionItems, ...javaAsyncCompletionItems];
       }
-      console.log(completionItems)
       return completionItems;
     }
   }
