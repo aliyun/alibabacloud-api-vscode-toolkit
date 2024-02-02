@@ -53,7 +53,7 @@ export class AlicloudApiCommands {
       description: `${product.description || ""}`,
       versions: product.versions?.map((version) => {
         return {
-          label: version,
+          label: `选择 API 版本: ${version}`,
           key: version,
           description: version === product.defaultVersion ? "推荐版本" : "",
         } as vscode.QuickPickItem;

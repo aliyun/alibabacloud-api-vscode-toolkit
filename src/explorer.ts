@@ -8,6 +8,7 @@ import { findAlicloudAPIConfig, plugins, VSCodeLogger } from "./utils";
 import { AlicloudApiCommands } from "./commands";
 import { getProductRequestInstance } from "./productExplorer";
 import { Product } from "./types";
+import _ from "lodash";
 
 type DiffResult<T> = T;
 
@@ -20,6 +21,30 @@ export class PontAPITreeItem extends vscode.TreeItem {
 }
 
 export class PontAPIExplorer {
+  static getProductItems(products:Array<Product>, element:PontAPITreeItem = null){
+    return products?.map(product=>{
+      return {
+        specName: product.code,
+        modName: "",
+        contextValue: "PRODUCT",
+        label: `${product.name}`,
+        iconPath: vscode.Uri.joinPath(alicloudAPIMessageService.context.extensionUri, `resources/product.svg`),
+        description: product.code,
+        collapsibleState: vscode.TreeItemCollapsibleState.None,
+        command: {
+          command: "alicloud.api.addSubscription",
+          title: "subscribe",
+          arguments: [
+            {
+              specName: product.code,
+              modName: "clickItem",
+              label: product.name
+            },
+          ],
+        },
+      };
+    })
+  }
   static getDirItems(spec: PontSpec, element = null) {
     const dirs = element?.children || spec?.ext?.directories || [];
 
@@ -211,6 +236,19 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
   }
 
   getAPIManagerChildren(element?: PontAPITreeItem): vscode.ProviderResult<PontAPITreeItem[]> {
+    if(element.contextValue === "alicloudProducts"){
+      const productExplorer = getProductRequestInstance();
+      const productGroups = _.groupBy(productExplorer?.products, (product) => product.group)
+      return (Object.keys(productGroups || {}))?.map((group) => {
+        return {
+          specName: group,
+          contextValue: 'productGroup',
+          label: `${group}`,
+          modName: group,
+          collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
+        };
+      });
+    }
     if (element.contextValue === "alicloudAPISubscriptions") {
       const hasSingleSpec = this.pontManager.localPontSpecs?.length <= 1 && !this.pontManager.localPontSpecs[0]?.name;
       if (hasSingleSpec) {
@@ -227,7 +265,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
           contextValue: "Spec",
           resourceUri: vscode.Uri.parse(`pontx-manager://spec/${spec.name}`),
           label: `${this.getCNNameOfProduct(productExplorer.products, specName)} v${version}`,
-          collapsibleState: vscode.TreeItemCollapsibleState.Expanded,
+          collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
         };
       });
     }
@@ -268,7 +306,12 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
       });
     } else if (element.contextValue === "Dir" && spec) {
       return PontAPIExplorer.getDirItems(spec, element);
-    } else {
+    } else if (element.contextValue === "productGroup"){
+      const productExplorer = getProductRequestInstance();
+      const productGroups = _.groupBy(productExplorer?.products, (product) => product.group)
+      return PontAPIExplorer.getProductItems(productGroups[element?.modName?.toString()],element)
+    }
+    else {
       return PontAPIExplorer.getDirItems(spec);
     }
   }
@@ -366,7 +409,63 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
       this.updateDiffs();
     }
     const service = alicloudAPIMessageService;
+    vscode.commands.registerCommand("alicloud.api.addSubscription", async (element)=>{
+      if (element.modName === 'clickItem') {
+        // 取消订阅
+        let result = await vscode.window.showInformationMessage(`是否订阅${element.label}?`, "Yes", "No");
+        if (result === "No") {
+          return
+        }
+      }
+      const productExplorer = getProductRequestInstance()
+      const selectedProduct = productExplorer?.products?.find((item) => item?.code === element?.specName);
+      const pickItem = AlicloudApiCommands.getPickProductItems(selectedProduct)
+      if (pickItem.versions?.length > 1) {
+        vscode.window
+          .showQuickPick(pickItem.versions, {
+            matchOnDescription: true,
+            matchOnDetail: true,
+          })
+          .then(async (version: any) => {
+            this.subscribeProduct(pickItem.code, version.key);
+          });
+      } else {
+        this.subscribeProduct(pickItem.code, (pickItem.versions[0] as any).key);
+      }
+    })
     vscode.commands.registerCommand("alicloud.api.addSubscriptions", async () => {
+      // 搜索+订阅功能
+      const productExplorer = getProductRequestInstance()
+      const items = productExplorer?.products?.map((item) => {
+          return AlicloudApiCommands.getPickProductItems(item);
+        })
+        .reduce((pre, next) => pre.concat(next), []);
+
+      return vscode.window
+        .showQuickPick(items, {
+          matchOnDescription: true,
+          matchOnDetail: true,
+        })
+        .then(async (item: any) => {
+          if (!item) {
+            return;
+          }
+          if (item.versions?.length > 1) {
+            vscode.window
+              .showQuickPick(item.versions, {
+                matchOnDescription: true,
+                matchOnDetail: true,
+              })
+              .then(async (version: any) => {
+                this.subscribeProduct(item.code, version.key);
+              });
+          } else {
+            this.subscribeProduct(item.code, item.versions[0].key);
+          }
+        });
+    });
+
+    vscode.commands.registerCommand("alicloud.api.searchProducts", async () => {
       // 搜索+订阅功能
       const productExplorer = getProductRequestInstance()
       const items = productExplorer?.products?.map((item) => {
@@ -565,6 +664,12 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
   getChildren(element?: PontAPITreeItem): vscode.ProviderResult<PontAPITreeItem[]> {
     if (!element) {
       return [
+        {
+          label: "阿里云产品",
+          contextValue: "alicloudProducts",
+          resourceUri: vscode.Uri.parse(`pontx-manager://manager`),
+          collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
+        },
         {
           label: "我的订阅",
           contextValue: "alicloudAPISubscriptions",

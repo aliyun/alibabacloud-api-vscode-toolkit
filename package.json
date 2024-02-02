@@ -60,6 +60,16 @@
         "title": "订阅更多产品"
       },
       {
+        "command": "alicloud.api.searchProducts",
+        "icon": "$(search)",
+        "title": "搜索产品并订阅"
+      },
+      {
+        "command": "alicloud.api.addSubscription",
+        "icon": "$(add)",
+        "title": "订阅产品"
+      },
+      {
         "command": "alicloud.api.removeSubscriptions",
         "icon": "$(notebook-delete-cell)",
         "title": "取消订阅"
@@ -163,6 +173,16 @@
         }
       ],
       "view/item/context": [
+        {
+          "command": "alicloud.api.addSubscription",
+          "when": "view == alicloudApiExplorer && viewItem == PRODUCT",
+          "group": "inline"
+        },
+        {
+          "command": "alicloud.api.searchProducts",
+          "when": "view == alicloudApiExplorer && viewItem == alicloudProducts",
+          "group": "inline"
+        },
         {
           "command": "alicloud.api.addSubscriptions",
           "when": "view == alicloudApiExplorer && viewItem == alicloudAPISubscriptions",
