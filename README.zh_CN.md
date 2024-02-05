@@ -7,7 +7,7 @@
 
 Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 VS Code 中快速查阅阿里云产品的 API.
 
-简体中文 | [English](./README.en-US.md)
+简体中文 | [English](./README.md)
 
 ## 功能
 
