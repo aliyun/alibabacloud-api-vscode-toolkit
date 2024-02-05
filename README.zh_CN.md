@@ -86,6 +86,9 @@ Default Language [zh]: zh
 ### 0.0.6
 - Surpport code snippets.
 
+### 0.0.5
+- Added aliyun-cli installation instructions.
+
 ### 0.0.3
 - Support API calling.
 - Support SDK code sample.
