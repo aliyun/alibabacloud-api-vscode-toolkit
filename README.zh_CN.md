@@ -83,7 +83,7 @@ Default Language [zh]: zh
 
 ## Release Notes
 
-### 0.0.5
+### 0.0.6
 - Surpport code snippets.
 
 ### 0.0.3

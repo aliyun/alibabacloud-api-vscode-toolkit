@@ -80,7 +80,7 @@ Submit bug reports and feature requests on [our Github repository](https://githu
 
 ## Release Notes
 
-### 0.0.5
+### 0.0.6
 - Surpport code snippets.
 
 ### 0.0.3
