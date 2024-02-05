@@ -13,7 +13,6 @@ The Alibaba Cloud API Toolkit for VSCode makes it easier to access Alibaba Cloud
 
 * **API Document View:** Clicking on an API can navigate you to a new tab which displays the corresponding API document, 
 including descriptions, request parameters, response parameters and error codes.
-Click to debug, you can link to Aliyun OpenAPI portal for online API trial.
 
 * **Call the API:** You can use the form to call the Alibaba Cloud API and see the response.
   
