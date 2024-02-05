@@ -8,15 +8,16 @@ import { PontSpec } from "pontx-spec";
 import * as fs from "fs-extra";
 import { Product } from "./types";
 import { codeSampleProvider } from "./plugins/generate";
+import { generateImport } from "./common/generateImport";
 
 const path = require("path");
 
-export const insertCode = (code: string) => {
+export const insertCode = (code: string, insertPosition?) => {
   const editor = vscode.window.activeTextEditor;
   if (editor) {
     editor.edit((builder) => {
       if (editor.selection.isEmpty) {
-        const position = editor.selection.active;
+        const position = insertPosition ? insertPosition : editor.selection.active;
 
         builder.insert(position, code);
       } else {
@@ -210,6 +211,15 @@ export class AlicloudApiCommands {
     //     });
     //   }
     // });
+    vscode.commands.registerCommand("alicloud.api.autoImport", (...argus) => {
+      const diagnostic = argus[0];
+      const missingDep = argus[1];
+      const range = argus[2];
+      if (diagnostic.message === "importLists") {
+        const importStr = generateImport(missingDep, range);
+        insertCode(importStr, new vscode.Position(0, 0));
+      }
+    });
 
     vscode.commands.registerCommand("alicloud.api.fetchRemote", (config) => {
       const pontManager = service.pontManager;

@@ -1,9 +1,9 @@
 import * as vscode from "vscode";
-import { alicloudAPIMessageService } from "./Service";
-import { AlicloudApiCommands, insertCode } from "./commands";
+import { alicloudAPIMessageService } from "../Service";
+import { AlicloudApiCommands } from "../commands";
 import _ from "lodash";
-import { getRequiredParamsValue } from "./utils";
-import { AlicloudApiMetaGeneratePlugin, codeSampleProvider } from "./plugins/generate";
+import { fileSel } from "../utils";
+import { codeSampleProvider } from "../plugins/generate";
 
 class CompletionItemProvider {
   async provideCompletionItems(
@@ -99,16 +99,7 @@ class CompletionItemProvider {
 }
 
 export default function autoCompletion(context: vscode.ExtensionContext) {
-  let sel: vscode.DocumentSelector = [
-    { scheme: "file", language: "typescript" },
-    { scheme: "file", language: "go" },
-    { scheme: "file", language: "java" },
-    { scheme: "file", language: "csharp" },
-    { scheme: "file", language: "python" },
-    { scheme: "file", language: "php" },
-  ];
-
   context.subscriptions.push(
-    vscode.languages.registerCompletionItemProvider(sel, new CompletionItemProvider(), "", "."),
+    vscode.languages.registerCompletionItemProvider(fileSel, new CompletionItemProvider(), "", "."),
   );
 }

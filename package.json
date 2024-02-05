@@ -21,6 +21,10 @@
   "contributes": {
     "commands": [
       {
+        "command": "alicloud.api.autoImport",
+        "title": "导入依赖"
+      },
+      {
         "command": "alicloud.api.githubIssue",
         "title": "feedback",
         "icon": "$(feedback)"

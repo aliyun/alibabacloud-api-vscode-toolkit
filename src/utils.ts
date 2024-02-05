@@ -461,3 +461,25 @@ export const getRequiredParamsValue = (product:string,version:string, api:string
 
   return paramsValue
 }
+
+export const fileSel: vscode.DocumentSelector = [
+  { scheme: "file", language: "typescript" },
+  { scheme: "file", language: "go" },
+  { scheme: "file", language: "java" },
+  { scheme: "file", language: "csharp" },
+  { scheme: "file", language: "python" },
+  { scheme: "file", language: "php" },
+];
+
+ export const containsAnySubstring = (targetStr, substrings) => {
+  const language = vscode.window.activeTextEditor?.document.languageId;
+  if(language !== "typescript"){
+    return false
+  }
+  for (let i = 0; i < substrings.length; i++) {
+    if (targetStr.includes(substrings[i])) {
+      return true;
+    }
+  }
+  return false;
+}
