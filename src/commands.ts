@@ -7,15 +7,17 @@ import { alicloudAPIMessageService } from "./Service";
 import { PontSpec } from "pontx-spec";
 import * as fs from "fs-extra";
 import { Product } from "./types";
+import { codeSampleProvider } from "./plugins/generate";
+import { generateImport } from "./common/generateImport";
 
 const path = require("path");
 
-export const insertCode = (code: string) => {
+export const insertCode = (code: string, insertPosition?) => {
   const editor = vscode.window.activeTextEditor;
   if (editor) {
     editor.edit((builder) => {
       if (editor.selection.isEmpty) {
-        const position = editor.selection.active;
+        const position = insertPosition ? insertPosition : editor.selection.active;
 
         builder.insert(position, code);
       } else {
@@ -52,7 +54,7 @@ export class AlicloudApiCommands {
       description: `${product.description || ""}`,
       versions: product.versions?.map((version) => {
         return {
-          label: version,
+          label: `选择 API 版本: ${version}`,
           key: version,
           description: version === product.defaultVersion ? "推荐版本" : "",
         } as vscode.QuickPickItem;
@@ -64,7 +66,7 @@ export class AlicloudApiCommands {
     const service = alicloudAPIMessageService;
 
     vscode.commands.registerCommand("alicloud.api.githubIssue", async () => {
-      vscode.env.openExternal(vscode.Uri.parse('https://github.com/aliyun/alibabacloud-api-vscode-toolkit/issues'));
+      vscode.env.openExternal(vscode.Uri.parse("https://github.com/aliyun/alibabacloud-api-vscode-toolkit/issues"));
     });
 
     vscode.commands.registerCommand("alicloud.api.findInterface", () => {
@@ -98,16 +100,56 @@ export class AlicloudApiCommands {
 
           const apiMeta = pontSpec?.apis[apiName];
 
-          Promise.resolve(service.pontManager.innerManagerConfig.plugins.generate?.instance).then((generatePlugin) => {
-            vscode.commands.executeCommand("alicloud.api.openDocument", {
-              specName,
-              modName,
-              name: apiName,
-              spec: apiMeta,
-              pageType: "document",
-              schemaType: "api",
-            });
-          });
+          Promise.resolve(service.pontManager.innerManagerConfig.plugins.generate?.instance).then(
+            async (generatePlugin) => {
+              const snippets = await codeSampleProvider({
+                language: vscode.window.activeTextEditor?.document.languageId || "typescript",
+                product: specName?.split("::")[0],
+                version: specName?.split("::")[1],
+                apiName: apiName,
+                simplify: true,
+              });
+                const VIEW_API_DOC_ID = "VSCODE_PONTX_SHOW_PICK_ITEM_VIEW_API_DOC";
+                let pickItems = [
+                  {
+                    label: "查看文档",
+                    id: VIEW_API_DOC_ID,
+                  },
+                ];
+                if (snippets?.length && vscode.window.activeTextEditor) {
+                  pickItems = [
+                    ...pickItems,
+                    ...snippets.map((snippet) => {
+                      return {
+                        label: "插入代码段: " + snippet.name,
+                        id: snippet.name,
+                        description: snippet.description,
+                      };
+                    }),
+                  ];
+                }
+                return vscode.window
+                  .showQuickPick(pickItems, {
+                    matchOnDescription: true,
+                    matchOnDetail: true,
+                  })
+                  .then((snippet) => {
+                    const foundSnippet = snippets.find((inst) => inst.name === snippet?.id);
+                    if (foundSnippet) {
+                      insertCode(foundSnippet.code);
+                    } else if (snippet.id === VIEW_API_DOC_ID) {
+                      vscode.commands.executeCommand("alicloud.api.openDocument", {
+                        specName,
+                        modName,
+                        name: apiName,
+                        spec: apiMeta,
+                        pageType: "document",
+                        schemaType: "api",
+                      });
+                    }
+                  });
+            },
+          );
         });
     });
 
@@ -169,6 +211,15 @@ export class AlicloudApiCommands {
     //     });
     //   }
     // });
+    vscode.commands.registerCommand("alicloud.api.autoImport", (...argus) => {
+      const diagnostic = argus[0];
+      const missingDep = argus[1];
+      const range = argus[2];
+      if (diagnostic.message === "importLists") {
+        const importStr = generateImport(missingDep, range);
+        insertCode(importStr, new vscode.Position(0, 0));
+      }
+    });
 
     vscode.commands.registerCommand("alicloud.api.fetchRemote", (config) => {
       const pontManager = service.pontManager;

@@ -5,14 +5,15 @@ import * as vscode from "vscode";
 import { PontManager } from "pontx-manager";
 import PontMetaFetchPlugin from "pontx-meta-fetch-plugin";
 import { alicloudAPIMessageService } from "./Service";
-import { findAlicloudAPIConfig, pontConsole, registerConfigSchema, VSCodeLogger } from "./utils";
+import { findAlicloudAPIConfig, pontConsole, VSCodeLogger } from "./utils";
 import { AlicloudAPISerializer, AlicloudAPIWebview } from "./webview";
 import { PontFileDecoration } from "./explorer";
-import * as path from "path";
 import { AlicloudAPIPontParserPlugin } from "./plugins/parser";
 
 import { AlicloudApiMetaGeneratePlugin } from "./plugins/generate";
 import { getProductRequestInstance } from "./productExplorer";
+import autoCompletion from './provider/autoCompletion'
+import autofix from "./provider/autofix";
 
 export async function activate(context: vscode.ExtensionContext) {
   // if (!vscode.workspace.rootPath) {
@@ -25,7 +26,7 @@ export async function activate(context: vscode.ExtensionContext) {
     return;
   }
 
-  // 需要先拿一次产品列表
+  // 获取产品列表
   await getProductRequestInstance();
 
   alicloudAPIMessageService.context = context;
@@ -61,6 +62,10 @@ export async function activate(context: vscode.ExtensionContext) {
       );
       // 将命令注册到执行上下文中
       context.subscriptions.push(new PontFileDecoration());
+      // 自动补全
+      autoCompletion(context);
+      // 自动修复
+	    autofix(context);
     }
   } catch (e) {
     vscode.window.showErrorMessage(e.message);

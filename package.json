@@ -3,7 +3,7 @@
   "displayName": "Alibaba Cloud API Toolkit",
   "description": "The Alibaba Cloud API Toolkit for VSCode makes it easier to access Alibaba Cloud services.",
   "author": "Alibaba Cloud SDK Team",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "publisher": "alibabacloud-openapi",
   "license": "Apache-2.0",
@@ -20,6 +20,10 @@
   "main": "./dist/extension",
   "contributes": {
     "commands": [
+      {
+        "command": "alicloud.api.autoImport",
+        "title": "导入依赖"
+      },
       {
         "command": "alicloud.api.githubIssue",
         "title": "feedback",
@@ -58,6 +62,16 @@
         "command": "alicloud.api.addSubscriptions",
         "icon": "$(add)",
         "title": "订阅更多产品"
+      },
+      {
+        "command": "alicloud.api.searchProducts",
+        "icon": "$(search)",
+        "title": "搜索产品并订阅"
+      },
+      {
+        "command": "alicloud.api.addSubscription",
+        "icon": "$(add)",
+        "title": "订阅产品"
       },
       {
         "command": "alicloud.api.removeSubscriptions",
@@ -163,6 +177,16 @@
         }
       ],
       "view/item/context": [
+        {
+          "command": "alicloud.api.addSubscription",
+          "when": "view == alicloudApiExplorer && viewItem == PRODUCT",
+          "group": "inline"
+        },
+        {
+          "command": "alicloud.api.searchProducts",
+          "when": "view == alicloudApiExplorer && viewItem == alicloudProducts",
+          "group": "inline"
+        },
         {
           "command": "alicloud.api.addSubscriptions",
           "when": "view == alicloudApiExplorer && viewItem == alicloudAPISubscriptions",
