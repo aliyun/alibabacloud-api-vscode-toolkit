@@ -109,24 +109,25 @@ export class AlicloudApiCommands {
                 apiName: apiName,
                 simplify: true,
               });
-              if (snippets?.length) {
-                if (snippets.length === 1) {
-                  insertCode[snippets[0].code];
-                }
                 const VIEW_API_DOC_ID = "VSCODE_PONTX_SHOW_PICK_ITEM_VIEW_API_DOC";
-                const pickItems = [
+                let pickItems = [
                   {
                     label: "查看文档",
                     id: VIEW_API_DOC_ID,
                   },
-                  ...snippets.map((snippet) => {
-                    return {
-                      label: "插入代码段: " + snippet.name,
-                      id: snippet.name,
-                      description: snippet.description,
-                    };
-                  }),
                 ];
+                if (snippets?.length && vscode.window.activeTextEditor) {
+                  pickItems = [
+                    ...pickItems,
+                    ...snippets.map((snippet) => {
+                      return {
+                        label: "插入代码段: " + snippet.name,
+                        id: snippet.name,
+                        description: snippet.description,
+                      };
+                    }),
+                  ];
+                }
                 return vscode.window
                   .showQuickPick(pickItems, {
                     matchOnDescription: true,
@@ -147,7 +148,6 @@ export class AlicloudApiCommands {
                       });
                     }
                   });
-              }
             },
           );
         });

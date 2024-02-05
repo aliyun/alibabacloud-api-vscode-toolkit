@@ -46,7 +46,15 @@ export class AlicloudAPIWebview {
 
   openTab(extensionUri: vscode.Uri, panelConfig: PanelConfig) {
     const panelKey = getPanelKey(panelConfig);
-    const column = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.viewColumn : undefined;
+    const activeEditor = vscode.window.activeTextEditor;
+    const getViewColumn = () =>{
+      if (activeEditor && vscode.window.visibleTextEditors.length > 1) {
+        return activeEditor.viewColumn;
+      } else {
+        return vscode.ViewColumn.Two;
+      }
+    }
+    const column = getViewColumn();
 
     let webview = AlicloudAPIWebview.webviewPanels[panelKey];
     // If we already have a panel, show it.
