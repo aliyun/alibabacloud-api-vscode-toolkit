@@ -37,6 +37,7 @@ export class AlicloudApiCommands {
             label: `${inter.method ? `[${inter.method}] ` : ""}${inter.path ? inter.path : inter.name}`,
             detail: `${pontSpec.name ? pontSpec.name + "/" : ""}${inter.name}`,
             description: `${inter.description || inter.summary || ""}`,
+            summary: `${inter.summary || ""}`,
           };
         });
       })

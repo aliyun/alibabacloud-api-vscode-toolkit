@@ -33,7 +33,7 @@ class CompletionItemProvider {
       completionItems = searchAPIs?.map((api) => {
         let completionItem = new vscode.CompletionItem(api.label, vscode.CompletionItemKind["Interface"]);
         completionItem.detail = api.detail;
-        completionItem.documentation = api.description;
+        completionItem.documentation = api.summary || api.description;
 
         // 代码替换位置，查找位置会同步应用
         completionItem.range = new vscode.Range(
@@ -49,7 +49,7 @@ class CompletionItemProvider {
             vscode.CompletionItemKind["Interface"],
           );
           javaAsyncCompletionItem.detail = api.detail;
-          javaAsyncCompletionItem.documentation = api.description;
+          javaAsyncCompletionItem.documentation = api.summary || api.description;
 
           // 代码替换位置，查找位置会同步应用
           javaAsyncCompletionItem.range = new vscode.Range(
