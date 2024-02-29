@@ -19,7 +19,7 @@ lib/services/
 .mocks/
 .idea/
 test/services/
-lib/
+media/lib/
 scripts/dev/
 yarn-error.log
 out/
