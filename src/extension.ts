@@ -12,7 +12,7 @@ import { AlicloudAPIPontParserPlugin } from "./plugins/parser";
 
 import { AlicloudApiMetaGeneratePlugin } from "./plugins/generate";
 import { getProductRequestInstance } from "./productExplorer";
-import autoCompletion from './provider/autoCompletion'
+import autoCompletion from "./provider/autoCompletion";
 import autofix from "./provider/autofix";
 
 export async function activate(context: vscode.ExtensionContext) {
@@ -46,6 +46,21 @@ export async function activate(context: vscode.ExtensionContext) {
     },
   };
 
+  const globalState = context.globalState;
+  const lastPromptKey = "lastPromptTime";
+  const currentVersion = vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version
+  const storedVersion = globalState.get("extensionVersion");
+  const experienceQuestionnaireKey = "questionnaireExpiration";
+  // 检查是否是第一次启动新版本，新版本更新后，需要重新开启问卷调查
+  if (storedVersion !== currentVersion) {
+    // 刷新问卷调查弹窗过期设置
+    globalState.update(lastPromptKey, undefined);
+    // 问卷调查弹窗弹出频率初始化为 1 天
+    globalState.update(experienceQuestionnaireKey, 1);
+    // 更新 globalState 中的版本号
+    globalState.update("extensionVersion", currentVersion);
+  }
+
   try {
     const pontManager = await PontManager.constructorFromPontConfigAndPlugins(
       pontxConfig,
@@ -65,7 +80,7 @@ export async function activate(context: vscode.ExtensionContext) {
       // 自动补全
       autoCompletion(context);
       // 自动修复
-	    autofix(context);
+      autofix(context);
     }
   } catch (e) {
     vscode.window.showErrorMessage(e.message);

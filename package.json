@@ -77,6 +77,10 @@
         "command": "alicloud.api.removeSubscriptions",
         "icon": "$(notebook-delete-cell)",
         "title": "取消订阅"
+      },
+      {
+        "command": "alicloud.api.updateCloseQuestionnaire",
+        "title": "刷新体验问卷弹出设置"
       }
     ],
     "keybindings": [

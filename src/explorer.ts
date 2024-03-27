@@ -21,8 +21,8 @@ export class PontAPITreeItem extends vscode.TreeItem {
 }
 
 export class PontAPIExplorer {
-  static getProductItems(products:Array<Product>, element:PontAPITreeItem = null){
-    return products?.map(product=>{
+  static getProductItems(products: Array<Product>, element: PontAPITreeItem = null) {
+    return products?.map((product) => {
       return {
         specName: product.code,
         modName: "",
@@ -38,12 +38,12 @@ export class PontAPIExplorer {
             {
               specName: product.code,
               modName: "clickItem",
-              label: product.name
+              label: product.name,
             },
           ],
         },
       };
-    })
+    });
   }
   static getDirItems(spec: PontSpec, element = null) {
     const dirs = element?.children || spec?.ext?.directories || [];
@@ -230,19 +230,19 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
   stagedDiffs: any[] = [];
   allDiffs: any[] = [];
 
-  getCNNameOfProduct(products: Array<Product>, code:string){
+  getCNNameOfProduct(products: Array<Product>, code: string) {
     const findProduct = products?.find((product) => product.code === code);
     return `${findProduct?.name ? findProduct?.name : findProduct?.code}`;
   }
 
   getAPIManagerChildren(element?: PontAPITreeItem): vscode.ProviderResult<PontAPITreeItem[]> {
-    if(element.contextValue === "alicloudProducts"){
+    if (element.contextValue === "alicloudProducts") {
       const productExplorer = getProductRequestInstance();
-      const productGroups = _.groupBy(productExplorer?.products, (product) => product.group)
-      return (Object.keys(productGroups || {}))?.map((group) => {
+      const productGroups = _.groupBy(productExplorer?.products, (product) => product.group);
+      return Object.keys(productGroups || {})?.map((group) => {
         return {
           specName: group,
-          contextValue: 'productGroup',
+          contextValue: "productGroup",
           label: `${group}`,
           modName: group,
           collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
@@ -258,8 +258,8 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
       const productExplorer = getProductRequestInstance();
 
       return this.pontManager.localPontSpecs.map((spec) => {
-        const [specName, version] = spec.name.split("::")
-        
+        const [specName, version] = spec.name.split("::");
+
         return {
           specName: spec.name,
           contextValue: "Spec",
@@ -306,12 +306,11 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
       });
     } else if (element.contextValue === "Dir" && spec) {
       return PontAPIExplorer.getDirItems(spec, element);
-    } else if (element.contextValue === "productGroup"){
+    } else if (element.contextValue === "productGroup") {
       const productExplorer = getProductRequestInstance();
-      const productGroups = _.groupBy(productExplorer?.products, (product) => product.group)
-      return PontAPIExplorer.getProductItems(productGroups[element?.modName?.toString()],element)
-    }
-    else {
+      const productGroups = _.groupBy(productExplorer?.products, (product) => product.group);
+      return PontAPIExplorer.getProductItems(productGroups[element?.modName?.toString()], element);
+    } else {
       return PontAPIExplorer.getDirItems(spec);
     }
   }
@@ -364,7 +363,39 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
         this.updatePontManager(newManager);
         this.updateDiffs();
         vscode.window.showInformationMessage("订阅成功");
+        this.launchExperienceQuestionnaire();
       }
+    }
+  }
+
+  async launchExperienceQuestionnaire() {
+    const globalState = this.context.globalState;
+    const lastPromptKey = "lastPromptTime";
+    const experienceQuestionnaireKey = "questionnaireExpiration";
+    const questionnaireExpiration = globalState.get(experienceQuestionnaireKey) as any;
+    // 检查上次提示的时间
+    const lastPromptTime = globalState.get(lastPromptKey) as any;
+    // 选择关闭 1天 后执行订阅相关操作会再次触发，选择去反馈或30天内不再弹出则 30 天后才会再次触发
+    if (!lastPromptTime || Date.now() - lastPromptTime > (questionnaireExpiration || 0) * 24 * 60 * 60 * 1000) {
+      // 显示信息弹窗
+      let result = await vscode.window.showInformationMessage(
+        "您在使用插件期间是否遇到问题？欢迎吐槽或点赞，您的反馈对我们十分重要！",
+        "去反馈",
+        "关闭",
+        "30天内不再弹出",
+      );
+      if (result === "去反馈") {
+        vscode.env.openExternal(
+          vscode.Uri.parse("https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486"),
+        );
+        globalState.update(experienceQuestionnaireKey, 30);
+      }
+      else if (result === "30天内不再弹出") {
+        globalState.update(experienceQuestionnaireKey, 30);
+      }else {
+        globalState.update(experienceQuestionnaireKey, 1);
+      }
+      globalState.update(lastPromptKey, Date.now());
     }
   }
 
@@ -388,6 +419,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
 
       await this.updatePontManager(newManager);
       vscode.window.showInformationMessage("取消订阅成功");
+      this.launchExperienceQuestionnaire();
     }
   }
 
@@ -409,17 +441,17 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
       this.updateDiffs();
     }
     const service = alicloudAPIMessageService;
-    vscode.commands.registerCommand("alicloud.api.addSubscription", async (element)=>{
-      if (element.modName === 'clickItem') {
+    vscode.commands.registerCommand("alicloud.api.addSubscription", async (element) => {
+      if (element.modName === "clickItem") {
         // 取消订阅
         let result = await vscode.window.showInformationMessage(`是否订阅${element.label}?`, "Yes", "No");
         if (result === "No") {
-          return
+          return;
         }
       }
-      const productExplorer = getProductRequestInstance()
+      const productExplorer = getProductRequestInstance();
       const selectedProduct = productExplorer?.products?.find((item) => item?.code === element?.specName);
-      const pickItem = AlicloudApiCommands.getPickProductItems(selectedProduct)
+      const pickItem = AlicloudApiCommands.getPickProductItems(selectedProduct);
       if (pickItem.versions?.length > 1) {
         vscode.window
           .showQuickPick(pickItem.versions, {
@@ -432,11 +464,12 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
       } else {
         this.subscribeProduct(pickItem.code, (pickItem.versions[0] as any).key);
       }
-    })
+    });
     vscode.commands.registerCommand("alicloud.api.addSubscriptions", async () => {
       // 搜索+订阅功能
-      const productExplorer = getProductRequestInstance()
-      const items = productExplorer?.products?.map((item) => {
+      const productExplorer = getProductRequestInstance();
+      const items = productExplorer?.products
+        ?.map((item) => {
           return AlicloudApiCommands.getPickProductItems(item);
         })
         .reduce((pre, next) => pre.concat(next), []);
@@ -467,8 +500,9 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
 
     vscode.commands.registerCommand("alicloud.api.searchProducts", async () => {
       // 搜索+订阅功能
-      const productExplorer = getProductRequestInstance()
-      const items = productExplorer?.products?.map((item) => {
+      const productExplorer = getProductRequestInstance();
+      const items = productExplorer?.products
+        ?.map((item) => {
           return AlicloudApiCommands.getPickProductItems(item);
         })
         .reduce((pre, next) => pre.concat(next), []);
@@ -496,7 +530,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
           }
         });
     });
-     
+
     vscode.commands.registerCommand("alicloud.api.removeSubscriptions", async (meta) => {
       if (meta.specName) {
         // 取消订阅

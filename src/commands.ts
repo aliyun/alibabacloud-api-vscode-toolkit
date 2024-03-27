@@ -245,6 +245,14 @@ export class AlicloudApiCommands {
       new AlicloudAPIWebview().openTab(context.extensionUri, config);
     });
 
+    // 刷新问卷调查弹窗过期设置
+    vscode.commands.registerCommand("alicloud.api.updateCloseQuestionnaire", () => {
+      const lastPromptKey = "lastPromptTime";
+      const globalState = context.globalState;
+      globalState.update(lastPromptKey, undefined);
+      console.log("update last prompt key to",globalState.get(lastPromptKey))
+    });
+
     vscode.commands.registerCommand("alicloud.api.restart", async () => {
       await vscode.window.withProgress(
         {
