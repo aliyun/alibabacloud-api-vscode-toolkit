@@ -6,6 +6,8 @@
 
 The Alibaba Cloud API Toolkit for VSCode makes it easier to access Alibaba Cloud services.
 
+English | [简体中文](./README.zh_CN.md)
+
 ## Features                          
 * **Alicloud Product Subscription:** You can search for Alicloud products and subscribe to its APIs you want to use.
 
@@ -79,6 +81,10 @@ Submit bug reports and feature requests on [our Github repository](https://githu
 - Need VS Code 1.75.0 or above.
 
 ## Release Notes
+
+### 0.0.7
+- Launch experience satisfaction questionnaire survey
+- You are welcome to submit your questions and suggestions on the [experience questionnaire](https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486).
 
 ### 0.0.6
 - Surpport code snippets.

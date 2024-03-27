@@ -83,6 +83,10 @@ Default Language [zh]: zh
 
 ## Release Notes
 
+### 0.0.7
+- Launch experience satisfaction questionnaire survey.
+- You are welcome to submit your questions and suggestions on the [experience questionnaire](https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486).
+
 ### 0.0.6
 - Surpport code snippets.
 
