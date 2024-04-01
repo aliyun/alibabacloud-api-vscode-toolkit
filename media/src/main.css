@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .pontx-page .next-icon {
   font-family: NextIcon !important;
 }
