@@ -201,7 +201,7 @@ export const API: React.FC<APIProps> = (props) => {
             </Tab.Item>
             <Tab.Item key="sdk" title="示例代码">
               <div className="content">
-                <TrySDK></TrySDK>
+                <TrySDK isExpand={isExpand}></TrySDK>
               </div>
             </Tab.Item>
             <Tab.Item key="debug" title="调试结果">
@@ -247,7 +247,7 @@ export const API: React.FC<APIProps> = (props) => {
                   <div>
                     <div className="flex">
                       {selectedApi.method ? (
-                        <div className="h-6 w-16 rounded-sm border-2 border-solid border-emerald-100 bg-emerald-100 text-center text-base leading-5 text-teal-500">
+                        <div className="h-6 w-16 rounded-sm border-2 border-solid border-emerald-100 bg-emerald-100 text-center text-base font-medium leading-5 text-teal-500 ">
                           {selectedApi.method?.toUpperCase()}
                         </div>
                       ) : null}

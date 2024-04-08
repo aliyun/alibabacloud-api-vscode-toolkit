@@ -11,7 +11,9 @@ import MonacoEditor from "../../common/MonacoEditor";
 import { APIPageContext } from "../context";
 import { DARA_SDK_LANGUAGES } from "./LanguageSwitcher";
 
-export class TrySDKProps {}
+export class TrySDKProps {
+  isExpand? = true;
+}
 
 export const TrySDK: React.FC<TrySDKProps> = (props) => {
   // const daraSdkLannguages = SDKPublishInfo.getDaraLanguages(props.sdkInfos || [], product, version);
@@ -121,7 +123,7 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
         ></MonacoEditor>
       </div>
     );
-  }, [languageTab, sdkDemos]);
+  }, [languageTab, sdkDemos, props.isExpand]);
 };
 TrySDK.defaultProps = new TrySDKProps();
 export default TrySDK;

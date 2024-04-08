@@ -4,11 +4,10 @@
  */
 // import { AmpIcon } from '@ali/amp-base';
 // import { LinkButton } from '@alicloud/console-components-actions';
-import * as React from 'react';
-import './list.module.scss';
-import { ListProps } from '../types';
-import { Field } from '../../../../SemixFormRender/common/Field';
-import { Button } from '@alicloud/console-components';
+import * as React from "react";
+import { Field } from "../../../../SemixFormRender/common/Field";
+import { ListProps } from "../types";
+import "./list.module.scss";
 
 export class SimpleListProps extends ListProps {}
 
@@ -17,7 +16,7 @@ export const SimpleList: React.FC<SimpleListProps> = (props) => {
     return (
       <div className="list-item" key={index}>
         <div className="title-operator">
-          {props.schema?.widget === 'typeSelect' ? null : (
+          {props.schema?.widget === "typeSelect" ? null : (
             <a
               href="javascript:;"
               className="op"
@@ -25,7 +24,7 @@ export const SimpleList: React.FC<SimpleListProps> = (props) => {
                 props.copyItem(index);
               }}
             >
-              copy
+              <div className="codicon codicon-copy"></div>
             </a>
           )}
           <a
@@ -35,15 +34,15 @@ export const SimpleList: React.FC<SimpleListProps> = (props) => {
               props.deleteItem(index);
             }}
           >
-            delete
+            <div className="codicon codicon-trash"></div>
           </a>
         </div>
         <Field
-          fieldName={props.fieldName ? props.fieldName + '.' + index : ''}
+          fieldName={props.fieldName ? props.fieldName + "." + index : ""}
           key={index}
           isRequired={false}
-          dataPath={props.dataPath ? props.dataPath + '.' + index : index + ''}
-          schemaPath={props.schemaPath ? props.schemaPath + '.items' : '.items'}
+          dataPath={props.dataPath ? props.dataPath + "." + index : index + ""}
+          schemaPath={props.schemaPath ? props.schemaPath + ".items" : ".items"}
           schema={props.schema as any}
         />
       </div>
@@ -61,7 +60,8 @@ export const SimpleList: React.FC<SimpleListProps> = (props) => {
               props.addItem();
             }}
           >
-            add
+            <div className="codicon codicon-add m-1 !text-xs"></div>
+            添加
           </a>
         </div>
       </div>

@@ -104,18 +104,18 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
                       closable={false}
                       trigger={
                         <span style={{ lineHeight: "24px" }}>
-                          <div className="codicon codicon-question text-gray-500"></div>
+                          <div className="codicon codicon-question !text-sm text-gray-500"></div>
                         </span>
                       }
                     >
                       <div className="api-debugger-param-desc !text-xs">
-                        <span className="config-title-desc">描述</span>
+                        <span className="config-title-desc text-gray-500">描述</span>
                         <div className="!text-xs">
                           <SemixMarkdown source={description}></SemixMarkdown>
                         </div>
                         {props.schema?.example ? (
                           <>
-                            <div className="config-title">
+                            <div className="config-title mt-2  text-gray-500">
                               <span>示例值</span>
                             </div>
 
@@ -124,25 +124,25 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
                         ) : null}
                         {props.schema?.maximum ? (
                           <>
-                            <div className="config-title">最大值</div>
+                            <div className="config-title mt-2  text-gray-500">最大值</div>
                             <div className="config-content">{props.schema?.maximum}</div>
                           </>
                         ) : null}
                         {props.schema?.minimum ? (
                           <>
-                            <div className="config-title">最小值</div>
+                            <div className="config-title mt-2 text-gray-500">最小值</div>
                             <div className="config-content">{props.schema?.minimum}</div>
                           </>
                         ) : null}
                         {props.schema?.format ? (
                           <>
-                            <div className="config-title">格式</div>
+                            <div className="config-title mt-2 text-gray-500">格式</div>
                             <div className="config-content">{props.schema?.format}</div>
                           </>
                         ) : null}
                         {props.schema?.enum?.length ? (
                           <>
-                            <div className="config-title">枚举值</div>
+                            <div className="config-title mt-2 text-gray-500">枚举值</div>
                             {props.schema?.enum?.map((item) => (
                               <Tag size="small" type="normal" style={{ marginRight: "4px", borderRadius: "2px" }}>
                                 {item.value || item}
@@ -152,7 +152,7 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
                         ) : null}
                         {props.schema?.pattern ? (
                           <>
-                            <div className="config-title">正则</div>
+                            <div className="config-title mt-2 text-gray-500">正则</div>
                             <div className="config-content">{props.schema?.pattern}</div>
                           </>
                         ) : null}
@@ -163,18 +163,6 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
               </span>
             </div>
           </div>
-          {/* {isNewHeader && props.deleteHeader ? (
-            <span className="guide-op">
-              <AmpIcon
-                type="delete"
-                color="#014cd8"
-                style={{ cursor: 'pointer' }}
-                onClick={() => {
-                  props.deleteHeader(props.schema);
-                }}
-              />
-            </span>
-          ) : null} */}
         </div>
       ) : null}
     </div>
