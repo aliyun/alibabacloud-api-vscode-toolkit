@@ -1,11 +1,11 @@
 import * as React from "react";
-import { API as APIPage } from "./APIPage/API";
-import { BaseClass as StructDocument } from "./APIPage/APIDocument/BaseClass";
-import { getVSCode } from "../utils/utils";
-import { parseAPIMetaDescription } from "../utils/parseAPIMetaDescription";
-import { ApiErrorCode } from "./APIPage/APIDocument/ApiErrorCode";
-import { PontUIService } from "../service/UIService";
 import "../pages/document/index.scss";
+import { PontUIService } from "../service/UIService";
+import { parseAPIMetaDescription } from "../utils/parseAPIMetaDescription";
+import { getVSCode } from "../utils/utils";
+import { API as APIPage } from "./APIPage/API";
+import { ApiErrorCode } from "./APIPage/APIDocument/ApiErrorCode";
+import { BaseClass as StructDocument } from "./APIPage/APIDocument/BaseClass";
 // import { definitions } from "../mocks/definitions";
 // import { routerMeta } from "../mocks/routerMeta";
 // import { definitions } from "../mocks/definitions";
@@ -60,7 +60,7 @@ export const App: React.FC<AppProps> = (props) => {
         setItemMeta(responseMessage.data);
       }
     });
-    if(specName){
+    if (specName) {
       PontUIService.requestDefinitions(specName).then((defs) => {
         setDefs(defs);
       });
@@ -83,7 +83,7 @@ export const App: React.FC<AppProps> = (props) => {
         ) : null;
 
         return (
-          <div className="vscode-page">
+          <div className="w-full">
             <APIPage
               selectedApi={selectedApi}
               product={popcode}

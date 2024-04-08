@@ -1,187 +1,129 @@
 .comp-try-api {
-    position: relative;
-    padding: 16px;
-    height: 100%;
-    .ant-btn {
-      margin-left: 8px;
-      padding: 8px;
-      background-color: #f8f9fa;
-      border: 1px #f8f9fa solid;
-    }
-    .ant-btn:hover{
-      background-color: #fff;
-      border: 1px #2f84ae solid;
-      color: #2f84ae;
-    }
-  
-    .ant-alert {
-      margin-bottom: 16px;
-      font-size: 12px;
-      background-color: #FFF4DD;
-      border: none !important;
-      .ant-alert-content {
-        .smart-debugger-wrapper {
-          display: inline-block;
-        }
+  position: relative;
+  padding: 16px;
+  height: 100%;
+  .ant-btn {
+    margin-left: 8px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border: 1px #f8f9fa solid;
+  }
+  .ant-btn:hover {
+    background-color: #fff;
+    border: 1px #2f84ae solid;
+    color: #2f84ae;
+  }
+
+  .ant-alert {
+    margin-bottom: 16px;
+    font-size: 12px;
+    background-color: #fff4dd;
+    border: none !important;
+    .ant-alert-content {
+      .smart-debugger-wrapper {
+        display: inline-block;
       }
-    }
-    .ant-alert-error {
-      background-color: #FFF5F5;
-    }
-  
-    .ant-spin-nested-loading {
-      position: absolute;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      background: rgba(247, 246, 246, 0.6);
-    }
-  
-    .api-result {
-      width: 100%;
-      min-height: 300px;
-  
-      .api-res-header {
-  
-        .title {
-          margin-bottom: 16px;
-          color: #303030;
-          font-size: 14px;
-          font-family:  PingFangSC;
-          font-weight: 500;
-          color: #333333;
-          text-align: left;
-        }
-        .res-info{
-            margin: 0 0 16px 0;
-          &>.item {
-            display: inline-block;
-            margin-right: 24px;
-            vertical-align: middle;
-            margin: 0 4px;
-            .debug-res{
-                display: flex;
-            }
-            .label {
-                font-family:  PingFangSC;
-                font-weight: 400;
-                font-size: 12px;
-                color: #808080;
-                margin-right: 4px;
-                .icon-success {
-                  color: #00A700;
-                }
-                .icon-error {
-                  color: #C80000;
-                }
-                .icon-forbidden {
-                  color: #696969;
-                }
-            }
-            .value {
-                font-family:  PingFangSC;
-                font-weight: 500;
-                font-size: 12px;
-                color: #333333;
-            }
-            .result-status {
-              padding: 0 8px;
-              border-radius: 2px;
-            }
-            .success {
-              color: #00A700;
-            }
-            .error-red {
-                color: #C80000;
-            }
-          }
-        }
-  
-        .feed-back {
-          display: flex;
-          align-items: center;
-          float: right;
-          margin-right: 10px;
-          color: #8e8e8e;
-          font-size: 12px;
-  
-          .workbench-feedback-generic {
-            display: inline-block;
-            display: inline-block;
-            margin-top: 0;
-            margin-right: 4px;
-            margin-left: 5px;
-            .value {
-              line-height: 23px;
-            }
-          }
-        }
-      }
-  
-      .content {
-        padding-top: 1px;
-        height: 425px;
-        .title {
-            margin-bottom: 8px;
-            font-family:  PingFangSC;
-            font-weight: 500;
-            font-size: 14px;
-            color: #333333;
-        }
-  
-        .editor-container-box {
-          width: 100%;
-          max-height: 340px;
-          padding-top: 1px;
-          .editor-container {
-            border-color: #C0C6CC;
-            .header {
-              height: 40px;
-              line-height: 40px;
-              background-color: #F1F1F2;
-              border-radius: 4px 4px 0 0;
-              border-color: #C0C6CC;
-              .statics-lines {
-                font-size: 12px;
-                font-weight: 500;
-              }
-              .right-ops {
-                margin-right: 0;
-                .try-api-copy-button{
-                  border-radius: 2px;
-                   width: 24px;
-                   height: 24px;
-                   line-height: 24px;
-                   padding: 0;
-                   .icon-copy-line {
-                    vertical-align: top;
-                     font-size: 12px;
-                     margin-right: 0px;
-                   }
-                }
-              }
-            }
-            .editor-box {
-              height: calc(100% - 32px);
-              .editor {
-                .line-numbers {
-                  color: #333333;
-                  font-weight: 500;
-                }
-              }
-            }  
-          }
-        }
-      }
-    }
-  
-    .ant-empty {
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
     }
   }
-  
+  .ant-alert-error {
+    background-color: #fff5f5;
+  }
+
+  .ant-spin-nested-loading {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: rgba(247, 246, 246, 0.6);
+  }
+
+  .api-result {
+    width: 100%;
+    min-height: 300px;
+
+    .api-res-header {
+      .title {
+        margin-bottom: 16px;
+        color: #303030;
+        font-size: 14px;
+        font-family: PingFangSC;
+        font-weight: 500;
+        color: #333333;
+        text-align: left;
+      }
+      .res-info {
+        margin: 0 0 16px 0;
+        & > .item {
+          display: inline-block;
+          margin-right: 24px;
+          vertical-align: middle;
+          margin: 0 4px;
+          .debug-res {
+            display: flex;
+          }
+          .label {
+            font-family: PingFangSC;
+            font-weight: 400;
+            font-size: 12px;
+            color: #808080;
+            margin-right: 4px;
+            .icon-success {
+              color: #00a700;
+            }
+            .icon-error {
+              color: #c80000;
+            }
+            .icon-forbidden {
+              color: #696969;
+            }
+          }
+          .value {
+            font-family: PingFangSC;
+            font-weight: 500;
+            font-size: 12px;
+            color: #333333;
+          }
+          .result-status {
+            padding: 0 8px;
+            border-radius: 2px;
+          }
+          .success {
+            color: #00a700;
+          }
+          .error-red {
+            color: #c80000;
+          }
+        }
+      }
+
+      .feed-back {
+        display: flex;
+        align-items: center;
+        float: right;
+        margin-right: 10px;
+        color: #8e8e8e;
+        font-size: 12px;
+
+        .workbench-feedback-generic {
+          display: inline-block;
+          display: inline-block;
+          margin-top: 0;
+          margin-right: 4px;
+          margin-left: 5px;
+          .value {
+            line-height: 23px;
+          }
+        }
+      }
+    }
+  }
+
+  .ant-empty {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -51,7 +51,7 @@ export const ApiErrorCode: React.FC<ApiErrorCodeProps> = (props) => {
             | null
             | undefined,
           index: any,
-          record: any
+          record: any,
         ) => {
           return <div>{value}</div>;
         },
@@ -61,10 +61,7 @@ export const ApiErrorCode: React.FC<ApiErrorCodeProps> = (props) => {
         dataIndex: "errorMessage",
         cell: (value: any, index: any, record: any) => {
           return (
-            <span
-              dangerouslySetInnerHTML={{ __html: value }}
-              style={{ maxWidth: 450, display: "inline-block" }}
-            ></span>
+            <span dangerouslySetInnerHTML={{ __html: value }} style={{ maxWidth: 450, display: "inline-block" }}></span>
           );
         },
       },
@@ -75,7 +72,7 @@ export const ApiErrorCode: React.FC<ApiErrorCodeProps> = (props) => {
         cell: (_: any, index: any, record: { errorCode: any }) => {
           return (
             <a
-              target='_blank'
+              target="_blank"
               href={`https://api.aliyun.com/troubleshoot?q=${record.errorCode}&product=${props.popcode}&version=${props.version}`}
             >
               去诊断
@@ -86,29 +83,20 @@ export const ApiErrorCode: React.FC<ApiErrorCodeProps> = (props) => {
     ];
 
     const errorCodeTable = (
-      <Table
-        primaryKey='name'
-        size='small'
-        className='error-code-table'
-        dataSource={dataSource}
-        columns={columns}
-      />
+      <Table primaryKey="name" size="small" className="error-code-table" dataSource={dataSource} columns={columns} />
     );
 
     return (
-      <div className='mod api-error-codes'>
-        <div className='mod-title'>
-          <div className='title-text'>错误码</div>
-          <div className='more'>
-            <a
-              href={`https://api.aliyun.com/document/${props.popcode}/${props.version}/errorCode`}
-              target='_blank'
-            >
+      <div className="mb-4 bg-white">
+        <div className="flex justify-between border-t border-gray-100 ">
+          <div className="px-5 py-4 text-base font-medium">错误码</div>
+          <div className="my-auto mr-4 text-sm">
+            <a href={`https://api.aliyun.com/document/${props.popcode}/${props.version}/errorCode`} target="_blank">
               所有错误码
             </a>
           </div>
         </div>
-        <div className='mod-content'>{errorCodeTable}</div>
+        <div className="px-4 pb-4">{errorCodeTable}</div>
       </div>
     );
   }, [errorCodes, props.popcode, props.version]);

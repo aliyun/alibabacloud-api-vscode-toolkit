@@ -3,12 +3,11 @@
  * @description
  */
 
-import * as React from "react";
-import { SemixJsonSchema } from "semix-core";
-import * as PontSpec from "pontx-spec";
-import { getRefSchema } from "../../utils";
-import { InnerSchemaTable } from "semix-schema-table";
-import { Card } from "@alicloud/console-components";
+import * as PontSpec from 'pontx-spec';
+import * as React from 'react';
+import { SemixJsonSchema } from 'semix-core';
+import { InnerSchemaTable } from 'semix-schema-table';
+import { getRefSchema } from '../../utils';
 
 export class PontxParamsDocProps {
   parameters?: PontSpec.Parameter[];
@@ -19,12 +18,12 @@ export class PontxParamsDocProps {
 export const ApiParamsDoc: React.FC<PontxParamsDocProps> = (props) => {
   const schema = React.useMemo(() => {
     const schema = {
-      type: "object",
+      type: 'object',
       properties: {},
     } as SemixJsonSchema;
     if (props.parameters) {
       props.parameters.forEach((param) => {
-        if(param.schema?.enumValueTitles && param.schema?.enum){
+        if (param.schema?.enumValueTitles && param.schema?.enum) {
           delete param.schema.enumValueTitles;
         }
         if (schema.properties) {
@@ -48,33 +47,33 @@ export const ApiParamsDoc: React.FC<PontxParamsDocProps> = (props) => {
 
   return React.useMemo(() => {
     return (
-      <div className="api-params-doc">
+      <div className="px-4 pb-4">
         {props.parameters?.length ? (
           <InnerSchemaTable
             name=""
             renderExpandIcon={(node, onExpand) => {
               return (
                 <div
-                  className="relative flex items-center justify-center cursor-pointer rounded hover:bg-darken-3"
+                  className="hover:bg-darken-3 relative flex cursor-pointer items-center justify-center rounded"
                   style={{
                     marginLeft: -23.5,
                     width: 20,
                     height: 20,
                     marginRight: 3,
-                    textAlign: "center",
+                    textAlign: 'center',
                   }}
                   onClick={() => {
                     onExpand(node);
                   }}
                 >
-                  <i className={node.isExpanded ? "codicon codicon-chevron-down" : "codicon codicon-chevron-right"}></i>
+                  <i className={node.isExpanded ? 'codicon codicon-chevron-down' : 'codicon codicon-chevron-right'}></i>
                 </div>
               );
             }}
             renderEmpty={() => {
               return (
                 <tr>
-                  <td colSpan={2} style={{ padding: "15px 0", textAlign: "center" }}>
+                  <td colSpan={2} style={{ padding: '15px 0', textAlign: 'center' }}>
                     无参数定义
                   </td>
                 </tr>
@@ -83,7 +82,7 @@ export const ApiParamsDoc: React.FC<PontxParamsDocProps> = (props) => {
             schema={schema}
           />
         ) : (
-          <div style={{padding:20,fontSize:14}}>调用该 OpenAPI 无需参数。</div>
+          <div style={{ padding: 20, fontSize: 14 }}>调用该 OpenAPI 无需参数。</div>
         )}
       </div>
     );

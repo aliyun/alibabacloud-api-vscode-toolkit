@@ -1,28 +1,24 @@
 /**
- * @author jasonHzq
+ * @author yini-chen
  * @description
  */
-import * as React from "react";
+import { Tab, Tag } from "@alicloud/console-components";
+import { Segmented } from "antd";
+import _ from "lodash";
 import * as PontSpec from "pontx-spec";
-import { Tab, Button, Tag } from "@alicloud/console-components";
-import { ApiParamsDoc } from "./APIDocument/ApiParamsDoc";
-import { getRefSchema } from "../utils";
+import * as React from "react";
+import { useResizeObserver } from "react-use-observer";
+import { SemixJsonSchema } from "semix-core";
+import { InnerSchemaTable, RootContext, SemixMarkdown } from "semix-schema-table";
 import "styled-components";
-import { RootContext } from "semix-schema-table";
-import { SemixMarkdown } from "semix-schema-table";
-import { InnerSchemaTable } from "semix-schema-table";
-import { getCustomWidget } from "./APIDebugger/utils";
-import { APIPageContext } from "./context";
-import APIDebugger from "./APIDebugger/APIDebugger";
 import { SemixForm } from "../SemixFormRender";
+import { getRefSchema } from "../utils";
+import APIDebugger from "./APIDebugger/APIDebugger";
+import { getCustomWidget } from "./APIDebugger/utils";
+import { ApiParamsDoc } from "./APIDocument/ApiParamsDoc";
 import { TryAPI } from "./TryAPI/TryAPI";
 import TrySDK from "./TrySDK/TrySDK";
-import { Dropdown, MenuProps } from "antd";
-import { PontUIService } from "../../service/UIService";
-import { getVSCode } from "../../utils/utils";
-import { SemixJsonSchema } from "semix-core";
-import _ from "lodash";
-import { useResizeObserver } from 'react-use-observer';
+import { APIPageContext } from "./context";
 
 export class APIProps {
   selectedApi?: PontSpec.PontAPI;
@@ -82,25 +78,24 @@ export const API: React.FC<APIProps> = (props) => {
   }, [definitions, getSchema]);
 
   const mapSchema = (schema) => {
-    
-    return SemixJsonSchema.mapSchema(schema as any, (schema)=>{
-      if(schema?.properties){
-        Object.keys(schema.properties)?.map((item=>{
-          schema.properties[item] = mapSchema(schema.properties[item])
-        }))
+    return SemixJsonSchema.mapSchema(schema as any, (schema) => {
+      if (schema?.properties) {
+        Object.keys(schema.properties)?.map((item) => {
+          schema.properties[item] = mapSchema(schema.properties[item]);
+        });
       }
-      if(schema?.$ref){
-        schema = getSchema(schema?.$ref)
-        schema = mapSchema(schema)
+      if (schema?.$ref) {
+        schema = getSchema(schema?.$ref);
+        schema = mapSchema(schema);
         return schema;
       }
-      return schema
-    })
+      return schema;
+    });
   };
 
   const pathEle = selectedApi?.path ? <div className="path">{selectedApi.path}</div> : null;
-  const apiNameEle = selectedApi?.name ? <div className="title">{selectedApi?.name}</div> : null;
-  let paramsSchema = _.cloneDeep(selectedApi?.parameters)
+  const apiNameEle = selectedApi?.name ? <span>{selectedApi?.name}</span> : null;
+  let paramsSchema = _.cloneDeep(selectedApi?.parameters);
   const newParamsSchema = paramsSchema?.reduce(
     (result, param) => {
       param.schema = mapSchema(param.schema);
@@ -132,56 +127,67 @@ export const API: React.FC<APIProps> = (props) => {
   const [pageEl, resizeObserverEntry] = useResizeObserver();
 
   const [boxWidth, setBoxWidth] = React.useState(0);
+  const [isExpand, setIsExpand] = React.useState(true);
   React.useEffect(() => {
     const { width = 0, height = 0 } = resizeObserverEntry?.contentRect || {};
     if (width !== boxWidth) {
+      if (width < 650) {
+        setIsExpand(false);
+      }
       setBoxWidth(width);
     }
   }, [boxWidth, resizeObserverEntry]);
 
   const renderContent = React.useMemo(() => {
     const documentComp = (
-      <div className="content">
+      <div>
         {selectedApi?.description ? (
-          <div className="mod desc-mod">
+          <div className="mb-4 bg-white p-4">
             <SemixMarkdown source={selectedApi?.description} />
           </div>
         ) : null}
-        <div className="mod">
-          <div className="mod-title">入参</div>
+        <div className="mb-4 bg-white">
+          <div className="border-t border-gray-100 px-5 py-4 text-base font-medium">请求参数</div>
           <ApiParamsDoc parameters={selectedApi?.parameters} apiName={selectedApi?.name} schemas={definitions as any} />
         </div>
-        <div className="mod">
-          <div className="mod-title">出参</div>
-          <InnerSchemaTable
-            name=""
-            schema={selectedApi?.responses["200"]?.schema as any}
-            renderEmpty={() => {
-              return (
-                <tr>
-                  <td
-                    colSpan={2}
-                    style={{
-                      padding: "15px 0",
-                      textAlign: "center",
-                    }}
-                  >
-                    无出参定义
-                  </td>
-                </tr>
-              );
-            }}
-          />
+        <div className="mb-4 bg-white">
+          <div className="border-t border-gray-100 px-5 py-4 text-base font-medium">出参</div>
+          <div className="px-4 pb-4">
+            <InnerSchemaTable
+              name=""
+              schema={selectedApi?.responses["200"]?.schema as any}
+              renderEmpty={() => {
+                return (
+                  <tr>
+                    <td
+                      colSpan={2}
+                      style={{
+                        padding: "15px 0",
+                        textAlign: "center",
+                      }}
+                    >
+                      无出参定义
+                    </td>
+                  </tr>
+                );
+              }}
+            />
+          </div>
         </div>
         {props.renderMore?.()}
       </div>
     );
     const debugComp = (
-      <div className={ `debug-comp-content ${boxWidth<850 ? "debug-comp-content-column":""}`}>
-        <div className={`left-panel ${boxWidth<850 ? "left-panel-column":""}`} style={{width: boxWidth < 850 ? boxWidth : 368}}>
-          <APIDebugger></APIDebugger>
+      <div className="flex h-[calc(100vh_-_140px)] bg-white">
+        <div className={`expand-arrow ${isExpand ? "" : "!left-1"}`} onClick={() => setIsExpand(!isExpand)}>
+          {isExpand ? (
+            <div className="codicon codicon-chevron-left"></div>
+          ) : (
+            <div className="codicon codicon-chevron-right"></div>
+          )}
         </div>
-        <div className="right-panel" style={{width: boxWidth < 850 ? boxWidth : boxWidth - 400}}>
+        {isExpand && <div className="w-[25rem]">{isExpand && <APIDebugger></APIDebugger>}</div>}
+        <div className="w-full">
           <Tab
             activeKey={mode}
             onChange={(key) => {
@@ -189,7 +195,9 @@ export const API: React.FC<APIProps> = (props) => {
             }}
           >
             <Tab.Item key="debug-doc" title="API 文档">
-              {documentComp}
+              <div className="grid h-[calc(100vh_-_177px)] w-full bg-white">
+                <div className="overflow-scroll">{documentComp}</div>
+              </div>
             </Tab.Item>
             <Tab.Item key="sdk" title="示例代码">
               <div className="content">
@@ -202,6 +210,7 @@ export const API: React.FC<APIProps> = (props) => {
               </div>
             </Tab.Item>
           </Tab>
+          {/* {renderTabContent()} */}
         </div>
       </div>
     );
@@ -215,10 +224,10 @@ export const API: React.FC<APIProps> = (props) => {
       default:
         return debugComp;
     }
-  }, [mode, boxWidth]);
+  }, [mode, boxWidth, isExpand]);
 
   return (
-    <div className="pontx-ui-api" ref={pageEl}>
+    <div className="bg-gray-100 pb-4" ref={pageEl}>
       {/*  */}
       <APIPageContext.Provider
         initialState={{
@@ -233,36 +242,46 @@ export const API: React.FC<APIProps> = (props) => {
         <RootContext.Provider initialState={initValue}>
           {selectedApi ? (
             <>
-              <div className={"header " + (selectedApi?.deprecated ? "deprecated" : "")}>
-                <div className="heading">
-                  <div className="left">
-                    {selectedApi.method ? <div className="method">{selectedApi.method?.toUpperCase()}</div> : null}
-                    {selectedApi.deprecated ? (
-                      <Tag className="deprecated" style={{ marginRight: 12, color: "#888" }}>
-                        deprecated
-                      </Tag>
+              <div className="bg-white p-4">
+                <div className="flex justify-between">
+                  <div>
+                    <div className="flex">
+                      {selectedApi.method ? (
+                        <div className="h-6 w-16 rounded-sm border-2 border-solid border-emerald-100 bg-emerald-100 text-center text-base leading-5 text-teal-500">
+                          {selectedApi.method?.toUpperCase()}
+                        </div>
+                      ) : null}
+                      {selectedApi.deprecated ? (
+                        <Tag className="my-auto ml-2">
+                          <span className="text-gray-500">deprecated</span>
+                        </Tag>
+                      ) : null}
+                      <div className="my-auto ml-2 text-base font-medium">
+                        {apiNameEle}
+                        {selectedApi?.title ? <span> - {selectedApi.title}</span> : null}
+                      </div>
+                    </div>
+                    {selectedApi?.summary ? (
+                      <div className="py-2 text-sm font-normal text-gray-500" style={{ width: "100%" }}>
+                        {selectedApi?.summary}
+                      </div>
                     ) : null}
-                    {pathEle || apiNameEle}
-                    {selectedApi?.title ? <div className="desc"> - {selectedApi.title}</div> : null}
                   </div>
-                  <div className="right">
-                    {pathEle ? apiNameEle : null}
-                    <Tab shape="capsule" activeKey={mode} onChange={(val) => changeMode(val)}>
-                      {tabs.map((tab) => (
-                        <Tab.Item title={tab.tab} key={tab.key}></Tab.Item>
-                      ))}
-                    </Tab>
+                  <div className="my-auto">
+                    <Segmented
+                      value={mode}
+                      onChange={(val) => changeMode(val)}
+                      options={tabs.map((teb) => {
+                        return {
+                          label: teb.tab,
+                          value: teb.key,
+                        };
+                      })}
+                    ></Segmented>
                   </div>
                 </div>
-                {selectedApi?.summary ? (
-                  <div className="footer">
-                    <div className="summary-mod" style={{ width: "100%" }}>
-                      {selectedApi?.summary}
-                    </div>
-                  </div>
-                ) : null}
               </div>
-              <div className="api-page-content">{renderContent}</div>
+              <div className="m-4">{renderContent}</div>
             </>
           ) : null}
         </RootContext.Provider>

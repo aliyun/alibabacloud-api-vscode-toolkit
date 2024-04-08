@@ -1,4 +1,7 @@
 .api-debugger-guide-wrapper {
+  .list-item {
+    display: block;
+  }
   .guide {
     display: flex;
     .must {
@@ -10,7 +13,7 @@
         margin-right: 8px;
         color: red;
         line-height: 22px;
-        content: '*';
+        content: "*";
       }
     }
     .name {

@@ -2,7 +2,7 @@
  * @author yini-chen
  * @description 参数Title
  */
-import { Balloon, Icon, Tag } from "@alicloud/console-components";
+import { Balloon, Tag } from "@alicloud/console-components";
 import React from "react";
 import { SemixMarkdown } from "semix-schema-table";
 
@@ -21,7 +21,6 @@ export class APIGuideProps {
 }
 
 export const APIGuide = React.memo((props: APIGuideProps) => {
-
   const description = props.schema?.description || props.schema?.title;
 
   const getShortName = (des: string) => {
@@ -105,13 +104,13 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
                       closable={false}
                       trigger={
                         <span style={{ lineHeight: "24px" }}>
-                          <div className="codicon codicon-question"></div>
+                          <div className="codicon codicon-question text-gray-500"></div>
                         </span>
                       }
                     >
-                      <div className="api-debugger-param-desc">
+                      <div className="api-debugger-param-desc !text-xs">
                         <span className="config-title-desc">描述</span>
-                        <div>
+                        <div className="!text-xs">
                           <SemixMarkdown source={description}></SemixMarkdown>
                         </div>
                         {props.schema?.example ? (

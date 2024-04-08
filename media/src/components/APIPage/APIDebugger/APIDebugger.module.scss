@@ -1,10 +1,13 @@
-.semix-form-field{
-    margin: 8px 0;
-    .codicon{
-        vertical-align: middle;
-        position: relative;
-        bottom: 2px;
-    }
+.semix-form-field {
+  margin: 8px 0;
+  .list-item {
+    display: block;
+  }
+  .codicon {
+    vertical-align: middle;
+    position: relative;
+    bottom: 2px;
+  }
 }
 .alicloud-schema-form-object,
 .alicloud-schema-form-list {
@@ -26,6 +29,6 @@
     left: 0;
   }
 }
-.endpoint-selector-title{
+.endpoint-selector-title {
   margin: 8px 0;
 }

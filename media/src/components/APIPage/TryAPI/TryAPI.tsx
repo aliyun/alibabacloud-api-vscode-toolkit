@@ -3,19 +3,16 @@
  * @description API 试用
  */
 
-import _ from "lodash";
-import { getEditorMenuItems, getIsUploadApi, parseXml } from "../../utils";
-import React from "react";
-import { Alert, Button, Dropdown, Empty, Spin, message } from "antd";
-import CopyToClipboard from "react-copy-to-clipboard";
 import { Balloon, Tab } from "@alicloud/console-components";
 import Editor from "@monaco-editor/react";
-import I18N from "../../../utils/I18N";
-import { APIResponse } from "../../../types/WorkbenchAPI";
-import { EditorLanguages } from "../../../types/EditorLanguages";
-import { OpenAPIRequestResult } from "../../../types/openAPI";
-import { APIPageContext } from "../context";
+import { Alert, Button, Dropdown, Empty, Spin, message } from "antd";
+import _ from "lodash";
+import React from "react";
 import { apiResponse } from "../../../mocks/openApiResponse";
+import { EditorLanguages } from "../../../types/EditorLanguages";
+import I18N from "../../../utils/I18N";
+import { getEditorMenuItems, parseXml } from "../../utils";
+import { APIPageContext } from "../context";
 
 export class TryAPIProps {}
 
@@ -38,7 +35,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
   const { openAPIResponses, isApiResultLoading, version, apiMeta, product, mode } = APIPageContext.useContainer();
   const doc = `${product}::${version}::${apiMeta.name}`;
   const [tab, setTab] = React.useState(TAB_PANES[0].value);
-  const apiResult = openAPIResponses?.[doc];
+  const apiResult = openAPIResponses?.[doc] || apiResponse;
 
   const noShowMonacoEditor = ["byte"];
 
@@ -111,7 +108,6 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
     return res;
   };
 
-
   const getResponseSchema = (statusCode, responseSchema) => {
     if (!statusCode || _.isEmpty(responseSchema)) {
       return {};
@@ -143,16 +139,24 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
       <Alert
         message={
           <div>
-            请利用 aliyun-cli 配置您的 AK/SK 信息：1. 安装 aliyun-cli: <code>brew install aliyun-cli</code>; 2. 命令行输入 <code>aliyun
-            configure</code>。
-            <a href="https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure">点击查看更多信息</a>。
+            调试需要
+            <a href="https://help.aliyun.com/zh/cli/installation-guide/" target="_blank">
+              安装
+            </a>
+            阿里云 CLI 并
+            <a
+              href="https://help.aliyun.com/zh/cli/interactive-configuration-or-fast-configuration#section-5pj-p7j-06z"
+              target="_blank"
+            >
+              配置
+            </a>
+            您的 AK/SK 信息。{I18N.main.explorer.AKTip}
           </div>
         }
         type="warning"
         showIcon
         closable
       />
-      <Alert message={I18N.main.explorer.AKTip} type="warning" showIcon closable />
       {apiResult?.result || isApiResultLoading ? (
         <div className="api-result">
           {isApiResultLoading ? (
@@ -267,16 +271,11 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
               {TAB_PANES.map((tab) => {
                 return (
                   <Tab.Item key={tab.value} title={tab.text}>
-                    <div key={tab.value} style={{ marginTop: "24px" }}>
-                      <div
-                        className="editor-container-box"
-                        style={{
-                          height: "100%",
-                        }}
-                      >
+                    <div key={tab.value} className="mt-6">
+                      <div className="editor-container-box">
                         {!(tab.value === "preview" && noShowMonacoEditor.includes(apiResult?.format)) ? (
                           <Editor
-                            height={400}
+                            height={"calc(100vh - 450px)"}
                             options={{
                               readOnly: true,
                             }}
