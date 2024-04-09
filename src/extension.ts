@@ -1,14 +1,14 @@
 "use strict";
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import * as vscode from "vscode";
 import { PontManager } from "pontx-manager";
 import PontMetaFetchPlugin from "pontx-meta-fetch-plugin";
+import * as vscode from "vscode";
+import { PontFileDecoration } from "./explorer";
+import { AlicloudAPIPontParserPlugin } from "./plugins/parser";
 import { alicloudAPIMessageService } from "./Service";
 import { findAlicloudAPIConfig, pontConsole, VSCodeLogger } from "./utils";
 import { AlicloudAPISerializer, AlicloudAPIWebview } from "./webview";
-import { PontFileDecoration } from "./explorer";
-import { AlicloudAPIPontParserPlugin } from "./plugins/parser";
 
 import { AlicloudApiMetaGeneratePlugin } from "./plugins/generate";
 import { getProductRequestInstance } from "./productExplorer";
@@ -48,7 +48,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
   const globalState = context.globalState;
   const lastPromptKey = "lastPromptTime";
-  const currentVersion = vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version
+  const currentVersion = vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version;
   const storedVersion = globalState.get("extensionVersion");
   const experienceQuestionnaireKey = "questionnaireExpiration";
   // 检查是否是第一次启动新版本，新版本更新后，需要重新开启问卷调查

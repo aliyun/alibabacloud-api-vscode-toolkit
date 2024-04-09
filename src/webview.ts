@@ -1,9 +1,8 @@
-import * as vscode from "vscode";
-import { htmlTemplate } from "./utils";
-import * as path from "path";
-import { alicloudAPIMessageService } from "./Service";
-import { ObjectMap } from "pontx-spec";
 import * as fs from "fs-extra";
+import { ObjectMap } from "pontx-spec";
+import * as vscode from "vscode";
+import { alicloudAPIMessageService } from "./Service";
+import { htmlTemplate } from "./utils";
 export type PanelConfig = {
   specName: string;
   modName: string;
@@ -47,13 +46,13 @@ export class AlicloudAPIWebview {
   openTab(extensionUri: vscode.Uri, panelConfig: PanelConfig) {
     const panelKey = getPanelKey(panelConfig);
     const activeEditor = vscode.window.activeTextEditor;
-    const getViewColumn = () =>{
+    const getViewColumn = () => {
       if (activeEditor && vscode.window.visibleTextEditors.length > 1) {
         return activeEditor.viewColumn;
       } else {
-        return vscode.ViewColumn.Two;
+        return activeEditor ? vscode.ViewColumn.Two : vscode.ViewColumn.Active;
       }
-    }
+    };
     const column = getViewColumn();
 
     let webview = AlicloudAPIWebview.webviewPanels[panelKey];
@@ -71,7 +70,7 @@ export class AlicloudAPIWebview {
       {
         // Enable javascript in the webview
         enableScripts: true,
-        retainContextWhenHidden: true
+        retainContextWhenHidden: true,
       },
     );
     webview = AlicloudAPIWebview.webviewPanels[panelKey];
@@ -121,7 +120,7 @@ export class AlicloudAPIWebview {
       {
         // Enable javascript in the webview
         enableScripts: true,
-        retainContextWhenHidden: true
+        retainContextWhenHidden: true,
       },
     );
     const filewatcher = vscode.workspace.createFileSystemWatcher(filePath, true, false, true);

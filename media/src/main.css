@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .pontx-page .next-icon {
   font-family: NextIcon !important;
 }
@@ -5,7 +9,7 @@ html body {
   padding: 0;
   border-left: 1px solid #d7d7d7;
 }
-.vscode-page {
+/* .vscode-page {
   padding: 20px 20px 0 20px;
   width: 100%;
   .api-page-content {
@@ -18,4 +22,4 @@ html body {
       padding:0 0 16px 20px
     }
   }
-}
+} */

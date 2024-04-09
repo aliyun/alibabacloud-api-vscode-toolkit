@@ -2,18 +2,18 @@
  * @author yini-chen
  * @description
  */
+import { Tag } from "antd";
 import React from "react";
-import { DARA_SDK_LANGUAGES, LanguageSwitcher } from "./LanguageSwitcher";
-import { Editor } from "@monaco-editor/react";
 import { codes } from "../../../mocks/makeCode";
-import { MenuProps, Tag } from "antd";
 import { PontUIService } from "../../../service/UIService";
-import { APIPageContext } from "../context";
-import { Button } from "@alicloud/console-components";
 import { getVSCode } from "../../../utils/utils";
 import MonacoEditor from "../../common/MonacoEditor";
+import { APIPageContext } from "../context";
+import { DARA_SDK_LANGUAGES } from "./LanguageSwitcher";
 
-export class TrySDKProps {}
+export class TrySDKProps {
+  isExpand? = true;
+}
 
 export const TrySDK: React.FC<TrySDKProps> = (props) => {
   // const daraSdkLannguages = SDKPublishInfo.getDaraLanguages(props.sdkInfos || [], product, version);
@@ -82,52 +82,36 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
     }
   }, [mode, languageTab, sdkDemos[languageTab?.toLocaleLowerCase()]]);
 
-
-  const tabContent = React.useMemo(() => {
-    return sdkDemos ? (
-      <div className="tab-content">
-        <Editor
-          height={800}
-          options={{
-            readOnly: true,
-            tabCompletion: "on",
-          }}
-          // theme='vs-dark'
-          language={getEditorLanguage(languageTab)}
-          value={sdkDemos[languageTab?.toLocaleLowerCase()]}
-        />
-      </div>
-    ) : null;
-  }, [languageTab, sdkDemos]);
-
-  const getCode = React.useCallback(()=>{
-    if(!sdkDemos[languageTab?.toLocaleLowerCase()]){
-      return "// API 暂未支持该语言的 SDK"
+  const getCode = React.useCallback(() => {
+    if (!sdkDemos[languageTab?.toLocaleLowerCase()]) {
+      return "// API 暂未支持该语言的 SDK";
     }
-    return sdkDemos[languageTab?.toLocaleLowerCase()]
-  },[sdkDemos, languageTab])
+    return sdkDemos[languageTab?.toLocaleLowerCase()];
+  }, [sdkDemos, languageTab]);
 
   return React.useMemo(() => {
     return (
-      <div className="sdk-demo-content">
+      <div className="sdk-demo-content h-[calc(100vh_-_194px)]">
         <MonacoEditor
           languageTab={languageTab}
-          height={580}
+          height={"100vh"}
           setLanguageTab={setLanguageTab}
           header={
             <div className="head-info">
               <Tag color="#3b5999">sdk | v2.0</Tag>
             </div>
           }
-          menuItems={[{
-            key: "gotoweb",
-            label: "去门户网页版调试",
-            codicon:"link-external",
-            externalLink: apiMeta?.externalDocs?.url,
-            onClick: () => {
-              // window.open(apiMeta?.externalDocs?.url, "_blank");
+          menuItems={[
+            {
+              key: "gotoweb",
+              label: "去门户网页版调试",
+              codicon: "link-external",
+              externalLink: apiMeta?.externalDocs?.url,
+              onClick: () => {
+                // window.open(apiMeta?.externalDocs?.url, "_blank");
+              },
             },
-          }]}
+          ]}
           value={getCode()}
           languages={DARA_SDK_LANGUAGES?.map((lang) => {
             if (Object.keys(sdkDemos || {})?.includes(lang?.value?.toLocaleLowerCase())) {
@@ -139,7 +123,7 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
         ></MonacoEditor>
       </div>
     );
-  }, [languageTab, sdkDemos, tabContent]);
+  }, [languageTab, sdkDemos, props.isExpand]);
 };
 TrySDK.defaultProps = new TrySDKProps();
 export default TrySDK;

@@ -2,12 +2,12 @@
  * @author yini-chen
  * @description 编辑器
  */
-import { Editor } from "@monaco-editor/react";
-import React, { ReactNode } from "react";
-import { DARA_SDK_LANGUAGES, LanguageSwitcher } from "../APIPage/TrySDK/LanguageSwitcher";
-import { Button, Dropdown, MenuProps, Tooltip, message } from "antd";
-import { PontUIService } from "../../service/UIService";
 import { Balloon } from "@alicloud/console-components";
+import { Editor } from "@monaco-editor/react";
+import { Button, message } from "antd";
+import React, { ReactNode } from "react";
+import { PontUIService } from "../../service/UIService";
+import { DARA_SDK_LANGUAGES, LanguageSwitcher } from "../APIPage/TrySDK/LanguageSwitcher";
 import { getEditorLanguage, getEditorMenuItems } from "../utils";
 
 export class MonacoEditorProps {
@@ -18,9 +18,15 @@ export class MonacoEditorProps {
   header?: React.ReactNode;
   value? = "";
   readOnly? = true;
-  height? = 800;
+  height? = 800 as string | number;
   languages? = DARA_SDK_LANGUAGES;
-  menuItems?: Array<{ key: string; label: ReactNode | string; codicon?: string; onClick: () => void, externalLink?:string }> = [];
+  menuItems?: Array<{
+    key: string;
+    label: ReactNode | string;
+    codicon?: string;
+    onClick: () => void;
+    externalLink?: string;
+  }> = [];
 }
 
 export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
@@ -37,10 +43,13 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
     menuItems,
   } = props;
 
-  const items: Array<{ key: string; label: ReactNode | string; codicon?: string; onClick: () => void,externalLink?:string }> = [
-    ...getEditorMenuItems(value, getEditorLanguage(languageTab)),
-    ...menuItems,
-  ];
+  const items: Array<{
+    key: string;
+    label: ReactNode | string;
+    codicon?: string;
+    onClick: () => void;
+    externalLink?: string;
+  }> = [...getEditorMenuItems(value, getEditorLanguage(languageTab)), ...menuItems];
 
   const tabContent = React.useMemo(() => {
     return value?.length ? (
@@ -117,7 +126,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
                     trigger={
                       <Button
                         // className="copy-button"
-                        href={item.externalLink ? item.externalLink: ""}
+                        href={item.externalLink ? item.externalLink : ""}
                         target="_blank"
                         onClick={item.onClick}
                       >

@@ -3,19 +3,15 @@
  * @description API 试用
  */
 
-import _ from "lodash";
-import { getEditorMenuItems, getIsUploadApi, parseXml } from "../../utils";
-import React from "react";
-import { Alert, Button, Dropdown, Empty, Spin, message } from "antd";
-import CopyToClipboard from "react-copy-to-clipboard";
 import { Balloon, Tab } from "@alicloud/console-components";
 import Editor from "@monaco-editor/react";
-import I18N from "../../../utils/I18N";
-import { APIResponse } from "../../../types/WorkbenchAPI";
+import { Alert, Button, Dropdown, Empty, Spin, message } from "antd";
+import _ from "lodash";
+import React from "react";
 import { EditorLanguages } from "../../../types/EditorLanguages";
-import { OpenAPIRequestResult } from "../../../types/openAPI";
+import I18N from "../../../utils/I18N";
+import { getEditorMenuItems, parseXml } from "../../utils";
 import { APIPageContext } from "../context";
-import { apiResponse } from "../../../mocks/openApiResponse";
 
 export class TryAPIProps {}
 
@@ -111,7 +107,6 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
     return res;
   };
 
-
   const getResponseSchema = (statusCode, responseSchema) => {
     if (!statusCode || _.isEmpty(responseSchema)) {
       return {};
@@ -143,18 +138,26 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
       <Alert
         message={
           <div>
-            请利用 aliyun-cli 配置您的 AK/SK 信息：1. 安装 aliyun-cli: <code>brew install aliyun-cli</code>; 2. 命令行输入 <code>aliyun
-            configure</code>。
-            <a href="https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure">点击查看更多信息</a>。
+            调试需要
+            <a href="https://help.aliyun.com/zh/cli/installation-guide/" target="_blank">
+              安装
+            </a>
+            阿里云 CLI 并
+            <a
+              href="https://help.aliyun.com/zh/cli/interactive-configuration-or-fast-configuration#section-5pj-p7j-06z"
+              target="_blank"
+            >
+              配置
+            </a>
+            您的 AK/SK 信息。{I18N.main.explorer.AKTip}
           </div>
         }
         type="warning"
         showIcon
         closable
       />
-      <Alert message={I18N.main.explorer.AKTip} type="warning" showIcon closable />
       {apiResult?.result || isApiResultLoading ? (
-        <div className="api-result">
+        <div className="api-result w-full">
           {isApiResultLoading ? (
             <Spin>
               <span></span>
@@ -162,14 +165,14 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
           ) : null}
 
           <div className="api-res-header">
-            <div className="title">{I18N.main.explorer.overview}</div>
+            <div className="title mb-4 text-gray-900 text-sm font-medium">{I18N.main.explorer.overview}</div>
             {/* {apiResult?.result || props.isApiResultLoading ? ( */}
-            <div className="res-info">
-              <div className="item">
-                <div className="debug-res">
+            <div className="res-info mb-4 flex">
+              <div className="item mr-6 mx-1 inline-block">
+                <div className="debug-res flex">
                   <div
                     className={`codicon codicon-${
-                      String(statusCode).startsWith("2") ? "pass-filled success" : "error error-red"
+                      String(statusCode).startsWith("2") ? "pass-filled success text-green-600" : "error error-red text-red-700"
                     }`}
                   ></div>
                   <div className="value">
@@ -178,12 +181,12 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                 </div>
               </div>
               {apiResult && statusCode ? (
-                <div className="item">
+                <div className="item mr-6 mx-1">
                   {/* {httpStatusMessageMap[statusCode] || statusCode} */}
-                  <span className="label">{I18N.main.explorer.statusCode}</span>
+                  <span className="label font-medium mr-1 text-gray-500">{I18N.main.explorer.statusCode}</span>
                   <span
-                    className={`value result-status  ${
-                      String(statusCode).startsWith("2") ? "success" : "error error-red"
+                    className={`value result-status font-medium ${
+                      String(statusCode).startsWith("2") ? "text-green-600 success" : "error error-red text-red-700"
                     }`}
                   >
                     {statusCode}
@@ -191,8 +194,8 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                 </div>
               ) : null}
               {apiResult ? (
-                <div className="item">
-                  <span className="label">{I18N.main.explorer.time}</span>
+                <div className="item mr-6 mx-1">
+                  <span className="label font-medium mr-1 text-gray-500">{I18N.main.explorer.time}</span>
                   <span className="value">{apiResult.cost}ms</span>
                 </div>
               ) : null}
@@ -267,16 +270,11 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
               {TAB_PANES.map((tab) => {
                 return (
                   <Tab.Item key={tab.value} title={tab.text}>
-                    <div key={tab.value} style={{ marginTop: "24px" }}>
-                      <div
-                        className="editor-container-box"
-                        style={{
-                          height: "100%",
-                        }}
-                      >
+                    <div key={tab.value} className="mt-6">
+                      <div className="editor-container-box">
                         {!(tab.value === "preview" && noShowMonacoEditor.includes(apiResult?.format)) ? (
                           <Editor
-                            height={400}
+                            height={"calc(100vh - 450px)"}
                             options={{
                               readOnly: true,
                             }}

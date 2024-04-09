@@ -2,11 +2,11 @@
  * @author jasonHzq
  * @description BaseClass
  */
-import * as React from "react";
-import * as PontSpec from "pontx-spec";
 import classNames from "classnames";
-import { getRefSchema } from "../../utils";
+import * as PontSpec from "pontx-spec";
+import * as React from "react";
 import { SemixSchemaTable } from "semix-schema-table";
+import { getRefSchema } from "../../utils";
 
 export class BaseClassProps {
   name?: string;
@@ -21,7 +21,7 @@ export const BaseClass: React.FC<BaseClassProps> = (props) => {
   return (
     <div className={classNames("pontx-ui-baseclass", (schema as any)?.type)}>
       <div className="header">
-        <div className="title">
+        <div className="title text-base">
           数据结构 - {name}
           {schema?.templateArgs?.length
             ? `<${schema?.templateArgs.map((arg, argIndex) => "T" + argIndex).join(", ")}>`

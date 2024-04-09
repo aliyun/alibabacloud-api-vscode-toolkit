@@ -1,6 +1,5 @@
 // import useSWR from "swr";
 
-import React from "react";
 import { App } from "../../components/main";
 import { routerMeta } from "../../mocks/routerMeta";
 

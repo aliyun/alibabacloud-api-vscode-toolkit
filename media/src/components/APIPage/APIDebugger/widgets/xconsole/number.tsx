@@ -2,9 +2,9 @@
  * @author yini-chen
  * @description 输入数值
  */
-import { NumberPicker } from '@alicloud/console-components';
-import * as React from 'react';
-import { CommonWidgetProps } from '../types';
+import { NumberPicker } from "@alicloud/console-components";
+import * as React from "react";
+import { CommonWidgetProps } from "../types";
 // import APIParamGenerate from "viteSrc/pages/designAwesome/APIDesign/QuickTest/APIParams/APIParamGenerate";
 
 export class NumberInputProps extends CommonWidgetProps {}
@@ -14,10 +14,10 @@ export const NumberInput: React.FC<NumberInputProps> = (props) => {
   const [curvalue, setCurvalue] = React.useState(undefined);
 
   const textMap = {
-    double: '浮点数值',
-    float: '浮点数值',
-    int32: '整型数字',
-    int64: '整型数字',
+    double: "浮点数值",
+    float: "浮点数值",
+    int32: "整型数字",
+    int64: "整型数字",
   } as any;
 
   // const numberProps = {} as any;
@@ -50,28 +50,20 @@ export const NumberInput: React.FC<NumberInputProps> = (props) => {
 
   const uischema = {
     ...props.schema,
-    type: props.schema?.format?.includes('int') ? 'integer' : props?.schema?.type,
+    type: props.schema?.format?.includes("int") ? "integer" : props?.schema?.type,
   };
 
   return (
-    // <APIParamGenerate
-    //   onGetRandomValue={async () => {
-    //     onGetRandomValue(props.onChange, uischema);
-    //   }}
-    //   changeValue={props.onChange}
-    //   param={uischema as any}>
     <NumberPicker
       // {...numberProps}
       value={curvalue}
-      style={{width:"100%"}}
+      style={{ width: "100%" }}
       onBlur={emitvalues}
       onChange={changeCurValue}
-      stringMode={['double', 'int64'].includes(schema.format!)}
-      precision={['int64', 'int32'].includes(schema.format!) ? undefined : 4}
+      stringMode={["double", "int64"].includes(schema.format!)}
+      precision={["int64", "int32"].includes(schema.format!) ? undefined : 4}
       className="jsonschema-form-widget"
-      // placeholder={schema?.placeholder || '请输入数字'}
     ></NumberPicker>
-    // </APIParamGenerate>
   );
 };
 
