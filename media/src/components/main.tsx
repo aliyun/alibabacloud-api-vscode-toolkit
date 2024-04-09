@@ -1,7 +1,7 @@
 import * as React from "react";
 import { API as APIPage } from "./APIPage/API";
 import { BaseClass as StructDocument } from "./APIPage/APIDocument/BaseClass";
-import { getVSCode } from "../utils/utils";
+import { getSpecInfoFromName, getVSCode } from "../utils/utils";
 import { parseAPIMetaDescription } from "../utils/parseAPIMetaDescription";
 import { ApiErrorCode } from "./APIPage/APIDocument/ApiErrorCode";
 import { PontUIService } from "../service/UIService";
@@ -37,7 +37,7 @@ export const App: React.FC<AppProps> = (props) => {
   const [appMeta, setAppMeta] = React.useState(props.routerMeta);
   const { pageType, schemaType, specName, modName, name, spec: metaSpec, remoteSpec } = appMeta || {};
 
-  const [popcode, version] = specName?.split("::") || ["", ""];
+  const {product:popcode,version} = getSpecInfoFromName(specName || "");
 
   const [itemMeta, setItemMeta] = React.useState(metaSpec);
   const [defs, setDefs] = React.useState({});

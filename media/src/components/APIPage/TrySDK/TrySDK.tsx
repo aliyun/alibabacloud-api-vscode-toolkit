@@ -90,7 +90,7 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
           height={800}
           options={{
             readOnly: true,
-            tabCompletion: true,
+            tabCompletion: "on",
           }}
           // theme='vs-dark'
           language={getEditorLanguage(languageTab)}

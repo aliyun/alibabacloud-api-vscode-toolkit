@@ -49,7 +49,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
           height={height}
           options={{
             readOnly: readOnly,
-            tabCompletion: true,
+            tabCompletion: "on",
             minimap: {
               enabled: false,
             },

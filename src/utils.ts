@@ -40,7 +40,7 @@ export const findAlicloudAPIConfig = async (context: vscode.ExtensionContext) =>
     // 订阅的数据源
     origins: [
       {
-        name: "Ecs::2014-05-26",
+        name: "Ecs__2014-05-26",
         url: "https://api.aliyun.com/meta/v1/products/Ecs/versions/2014-05-26/api-docs.json",
       },
     ],
@@ -49,7 +49,21 @@ export const findAlicloudAPIConfig = async (context: vscode.ExtensionContext) =>
   try {
     // 读文件
     const uint8Array = await vscode.workspace.fs.readFile(pontxConfigUri);
-    publicConfig = JSON.parse(String.fromCharCode(...uint8Array));
+    // 将原来的双冒号文件名全部改为双下划线
+    const oldConfig = JSON.parse(String.fromCharCode(...uint8Array));
+    publicConfig = {
+      outDir: oldConfig?.outDir || "./alicloud-services",
+      origins: (oldConfig?.origins || []).map((product) => {
+        return {
+          name: formatName(product.name),
+          url: product.url,
+        };
+      }),
+    }
+    if(!_.isEqual(publicConfig, oldConfig)){
+      const publicConfigUint8Array = new Uint8Array(Buffer.from(JSON.stringify(publicConfig), "utf-8"));
+      await vscode.workspace.fs.writeFile(pontxConfigUri, publicConfigUint8Array);
+    }
   } catch (e) {
     // 写文件
     const publicConfigUint8Array = new Uint8Array(Buffer.from(JSON.stringify(publicConfig), "utf-8"));
@@ -188,8 +202,8 @@ export const htmlTemplate = (context: { cspSource: string; getUri: (uri: string)
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'none'; img-src ${context.cspSource} https:;font-src ${context.cspSource}; script-src ${
-    context.cspSource
-  } https://cdn.jsdelivr.net; style-src ${context.cspSource} https://cdn.jsdelivr.net 'self' 'unsafe-inline';"
+        context.cspSource
+      } https://cdn.jsdelivr.net; style-src ${context.cspSource} https://cdn.jsdelivr.net 'self' 'unsafe-inline';"
     />
     <input type="hidden" id="router-meta-data" value="${encodeURI(JSON.stringify(pageConfig))}"></input>
     </script>
@@ -345,9 +359,9 @@ export const getFormatValues = (paramValues: any, apiParams, purpose?: string) =
   const newAPIParamValues = _.cloneDeep(paramValues || {});
 
   // 调试器校验前的valueformat不需要转换object(json)
-  if (purpose !== 'validate') {
+  if (purpose !== "validate") {
     Object.keys(newAPIParamValues || {})?.map((key) => {
-      if (key !== 'endpoint' && !apiParams?.find((item) => item.name === key)) {
+      if (key !== "endpoint" && !apiParams?.find((item) => item.name === key)) {
         delete newAPIParamValues?.[key];
       }
       // 处理object类型,但需要往后端传json string类型的参数值(不能仅仅用 style 为 json 进行判断)
@@ -355,8 +369,8 @@ export const getFormatValues = (paramValues: any, apiParams, purpose?: string) =
         apiParams?.find(
           (item) =>
             item.name === key &&
-            item.style === 'json' &&
-            item.schema?.type === 'object' &&
+            item.style === "json" &&
+            item.schema?.type === "object" &&
             !item.schema?.properties &&
             !item.schema?.additionalProperties,
         )
@@ -364,7 +378,7 @@ export const getFormatValues = (paramValues: any, apiParams, purpose?: string) =
         try {
           newAPIParamValues[key] = JSON.stringify(newAPIParamValues[key]);
         } catch (e) {
-          newAPIParamValues[key] = '';
+          newAPIParamValues[key] = "";
         }
       }
     });
@@ -376,7 +390,7 @@ export const getFormatValues = (paramValues: any, apiParams, purpose?: string) =
       if (values[key] === undefined) {
         delete values?.[key];
       }
-      if (typeof values[key] === 'object' && !Array.isArray(values[key])) {
+      if (typeof values[key] === "object" && !Array.isArray(values[key])) {
         if (isEmptyObj(values[key])) {
           delete values?.[key];
         }
@@ -390,7 +404,7 @@ export const getFormatValues = (paramValues: any, apiParams, purpose?: string) =
             if (item === undefined) {
               values[key].splice(index, 1);
             }
-            if (typeof item === 'object') {
+            if (typeof item === "object") {
               if (isEmptyObj(item)) {
                 values[key].splice(index, 1);
               }
@@ -406,20 +420,20 @@ export const getFormatValues = (paramValues: any, apiParams, purpose?: string) =
     let isEmpty = true;
 
     Object.keys(obj || {}).forEach((key) => {
-      if (obj[key] === '') {
+      if (obj[key] === "") {
         isEmpty = false;
       }
-      if (key === '') {
+      if (key === "") {
         isEmpty = true;
       }
-      if (obj[key] || key !== '') {
+      if (obj[key] || key !== "") {
         if (Array.isArray(obj[key]) && obj[key].length) {
           isEmpty = false;
         }
-        if (['string'].includes(typeof obj[key]) && !!obj[key]) {
+        if (["string"].includes(typeof obj[key]) && !!obj[key]) {
           isEmpty = false;
         }
-        if (['number', 'boolean'].includes(typeof obj[key])) {
+        if (["number", "boolean"].includes(typeof obj[key])) {
           isEmpty = false;
         }
         if (_.isObject(obj[key]) && !_.isEmpty(obj[key])) {
@@ -435,32 +449,40 @@ export const getFormatValues = (paramValues: any, apiParams, purpose?: string) =
 };
 
 export const getDefaultValue = (schema) => {
-  switch(schema?.type){
-    case 'string' : return "";
-    case 'number' : return 0;
-    case 'boolean': return false;
-    case 'array': return [];
-    case 'object': return {};
-    default: return "";
+  switch (schema?.type) {
+    case "string":
+      return "";
+    case "number":
+      return 0;
+    case "boolean":
+      return false;
+    case "array":
+      return [];
+    case "object":
+      return {};
+    default:
+      return "";
   }
-}
+};
 
-export const getRequiredParamsValue = (product:string,version:string, api:string) => {
+export const getRequiredParamsValue = (product: string, version: string, api: string) => {
   const service = alicloudAPIMessageService;
-    let apis = [];
-    const selectSpec = service.pontManager.localPontSpecs?.find((spec) => spec.name === `${product}::${version}`);
-    const selectAPI = _.find(selectSpec?.apis || {}, item=>item.name === api);
-    
-    const paramsValue = {}
-    const requiredParams = selectAPI?.parameters?.map(param=>{
-      if(param?.schema?.required){
-        paramsValue[param.name] = param.schema?.example || getDefaultValue(param.schema)
-        return param
-      }
-    }) 
+  let apis = [];
+  const selectSpec = service.pontManager.localPontSpecs?.find(
+    (spec) => getSpecInfoFromName(spec.name).product === product && getSpecInfoFromName(spec.name).version === version,
+  );
+  const selectAPI = _.find(selectSpec?.apis || {}, (item) => item.name === api);
 
-  return paramsValue
-}
+  const paramsValue = {};
+  const requiredParams = selectAPI?.parameters?.map((param) => {
+    if (param?.schema?.required) {
+      paramsValue[param.name] = param.schema?.example || getDefaultValue(param.schema);
+      return param;
+    }
+  });
+
+  return paramsValue;
+};
 
 export const fileSel: vscode.DocumentSelector = [
   { scheme: "file", language: "typescript" },
@@ -471,10 +493,10 @@ export const fileSel: vscode.DocumentSelector = [
   { scheme: "file", language: "php" },
 ];
 
- export const containsAnySubstring = (targetStr, substrings) => {
+export const containsAnySubstring = (targetStr, substrings) => {
   const language = vscode.window.activeTextEditor?.document.languageId;
-  if(language !== "typescript"){
-    return false
+  if (language !== "typescript") {
+    return false;
   }
   for (let i = 0; i < substrings.length; i++) {
     if (targetStr.includes(substrings[i])) {
@@ -482,4 +504,39 @@ export const fileSel: vscode.DocumentSelector = [
     }
   }
   return false;
+};
+
+export type SpecInfo = {
+  product: string;
+  version: string;
+};
+
+export const getSpecInfoFromName = (name: string): SpecInfo => {
+  if(typeof name !== "string" ){
+    return {
+      product: "",
+      version: ""
+    }
+  }
+  if ((name).includes("::")) {
+    return {
+      product: name.split("::")[0],
+      version: name.split("::")[1],
+    };
+  }
+  if (name.includes("__")) {
+    return {
+      product: name.split("__")[0],
+      version: name.split("__")[1],
+    };
+  }
+  return {
+    product: "Ecs",
+    version: "2014-05-26",
+  };
+};
+
+export const formatName = (name:string):string => {
+  const {product, version} = getSpecInfoFromName(name)
+  return `${product}__${version}`
 }

@@ -11,6 +11,7 @@ import { request } from "./openApiService/request/request";
 import fs from "fs";
 import fsx from "fs/promises";
 import os from "os";
+import fetch from "node-fetch";
 
 export class AlicloudAPIService {
   pontManager: PontManager;
@@ -142,7 +143,7 @@ export class AlicloudAPIService {
 
   async requestEndpoints(product: string) {
     const resStr = await fetch(
-      `https://pre-api.aliyun.com/meta/v1/products/${product}/endpoints.json?language=zh-CN`,
+      `https://api.aliyun.com/meta/v1/products/${product}/endpoints.json?language=zh-CN`,
       {},
     ).then((res) => res.text());
     const res = JSON.parse(resStr);

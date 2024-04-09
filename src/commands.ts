@@ -1,7 +1,7 @@
 import { PontManager } from "pontx-manager";
 import * as _ from "lodash";
 import * as vscode from "vscode";
-import { findAlicloudAPIConfig, findInterface, plugins, showProgress, viewMetaFile, VSCodeLogger, wait } from "./utils";
+import { findAlicloudAPIConfig, findInterface, getSpecInfoFromName, plugins, showProgress, viewMetaFile, VSCodeLogger, wait } from "./utils";
 import { AlicloudAPIWebview } from "./webview";
 import { alicloudAPIMessageService } from "./Service";
 import { PontSpec } from "pontx-spec";
@@ -103,10 +103,11 @@ export class AlicloudApiCommands {
 
           Promise.resolve(service.pontManager.innerManagerConfig.plugins.generate?.instance).then(
             async (generatePlugin) => {
+              const {product, version} = getSpecInfoFromName(specName || "");
               const snippets = await codeSampleProvider({
                 language: vscode.window.activeTextEditor?.document.languageId || "typescript",
-                product: specName?.split("::")[0],
-                version: specName?.split("::")[1],
+                product: product,
+                version: version,
                 apiName: apiName,
                 simplify: true,
               });
