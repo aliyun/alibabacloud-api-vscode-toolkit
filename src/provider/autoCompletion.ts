@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { alicloudAPIMessageService } from "../Service";
 import { AlicloudApiCommands } from "../commands";
 import _ from "lodash";
-import { fileSel } from "../utils";
+import { fileSel, getSpecInfoFromName } from "../utils";
 import { codeSampleProvider } from "../plugins/generate";
 
 class CompletionItemProvider {
@@ -69,7 +69,7 @@ class CompletionItemProvider {
     token: vscode.CancellationToken,
   ): vscode.ProviderResult<vscode.CompletionItem> {
     const language = vscode.window.activeTextEditor?.document.languageId;
-    const [product, versionAPI] = item?.detail?.split("::");
+    const {product, version:versionAPI} = getSpecInfoFromName(item?.detail);
     const [version, apiName] = versionAPI?.split("/");
     let asyncFetchedCode = "";
     if (product && apiName && version) {

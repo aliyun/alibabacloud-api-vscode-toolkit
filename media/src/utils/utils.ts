@@ -31,3 +31,26 @@ export function useCurrentSpec() {
     currentSpec,
   };
 }
+export type SpecInfo = {
+  product: string;
+  version: string;
+};
+export const getSpecInfoFromName = (name: string): SpecInfo => {
+  if (name.includes("::")) {
+    return {
+      product: name.split("::")[0],
+      version: name.split("::")[1],
+    };
+  }
+  if (name.includes("__")) {
+    return {
+      product: name.split("__")[0],
+      version: name.split("__")[1],
+    };
+  }
+  return {
+    product: "Ecs",
+    version: "2014-05-26",
+  };
+};
+
