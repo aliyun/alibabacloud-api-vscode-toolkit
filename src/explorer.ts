@@ -4,7 +4,7 @@ import { PontAPI, Mod, ObjectMap, PontJsonSchema, PontSpec, WithoutModsName } fr
 import * as vscode from "vscode";
 import { MetaType, PontSpecWithMods } from "./changes/utils";
 import { alicloudAPIMessageService } from "./Service";
-import { findAlicloudAPIConfig, plugins, VSCodeLogger } from "./utils";
+import { findAlicloudAPIConfig, getSpecInfoFromName, plugins, VSCodeLogger } from "./utils";
 import { AlicloudApiCommands } from "./commands";
 import { getProductRequestInstance } from "./productExplorer";
 import { Product } from "./types";
@@ -258,13 +258,13 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
       const productExplorer = getProductRequestInstance();
 
       return this.pontManager.localPontSpecs.map((spec) => {
-        const [specName, version] = spec.name.split("::");
+        const {product, version} = getSpecInfoFromName(spec.name || "")
 
         return {
           specName: spec.name,
           contextValue: "Spec",
           resourceUri: vscode.Uri.parse(`pontx-manager://spec/${spec.name}`),
-          label: `${this.getCNNameOfProduct(productExplorer.products, specName)} v${version}`,
+          label: `${this.getCNNameOfProduct(productExplorer.products, product)} v${version}`,
           collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
         };
       });
@@ -337,13 +337,13 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
 
   async subscribeProduct(product: string, version: string) {
     const pontxConfig = await findAlicloudAPIConfig(this.context);
-    if (pontxConfig.origins?.filter((item) => item.name === `${product}::${version}`)?.length) {
+    if (pontxConfig.origins?.filter((item) => getSpecInfoFromName(item.name || "").product === product && getSpecInfoFromName(item.name || "").version === version)?.length) {
       vscode.window.showInformationMessage("该产品及其版本号已订阅，您可以使用 cmd + ctrl + p 来搜索该产品下的API。");
     } else {
       pontxConfig.origins = [
         ...(pontxConfig.origins || []),
         {
-          name: `${product}::${version}`,
+          name: `${product}__${version}`,
           url: `https://api.aliyun.com/meta/v1/products/${product}/versions/${version}/api-docs.json`,
         },
       ];

@@ -3,6 +3,7 @@ import { createPontxGeneratePlugin, SnippetsProvider, PontxGeneratorPlugin, GetF
 import { PontSpec } from "pontx-spec";
 import { InnerOriginConfig, PontManager } from "pontx-manager";
 import { getRequiredParamsValue } from "../utils";
+import fetch from "node-fetch";
 
 const mySnippetsProvider: SnippetsProvider = (info) => {
   return [];

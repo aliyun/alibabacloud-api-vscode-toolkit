@@ -2113,7 +2113,7 @@ picomatch@^2.2.2:
   resolved "https://registry.npmmirror.com/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
-pontx-async-sdk-plugin@^0.3.83:
+pontx-async-sdk-plugin@0.3.83:
   version "0.3.83"
   resolved "https://registry.npmmirror.com/pontx-async-sdk-plugin/-/pontx-async-sdk-plugin-0.3.83.tgz#dcd13c3b5c919d94d4fd4fde00752bc7956cf927"
   integrity sha512-ewx5ajX/vj3iS1ySL4K8jmgyAARojOfkE80lOKDRvvZm/x1N0xDHrsFPy9GHJ9nMi5fstNRfDQ2aM+ZMoyQNWQ==
@@ -2122,10 +2122,10 @@ pontx-async-sdk-plugin@^0.3.83:
     pontx-sdk-plugin-core "^0.3.83"
     pontx-spec "^0.3.83"
 
-pontx-generate-core@^0.3.83:
-  version "0.3.83"
-  resolved "https://registry.npmmirror.com/pontx-generate-core/-/pontx-generate-core-0.3.83.tgz#5bc4d79d5cf79bdbbcf9981c78cf7fa141852241"
-  integrity sha512-lMO8zvK4hO6bwsfR/5Xd8aa9R/OElpqJix6ejys3rfuFTSQ6H8w4QCs6HfJXO8PVCYbsHiDQZT2Cdk5NBwFzpA==
+pontx-generate-core@0.3.83-beta.0:
+  version "0.3.83-beta.0"
+  resolved "https://registry.npmmirror.com/pontx-generate-core/-/pontx-generate-core-0.3.83-beta.0.tgz#1ce44a8f3399c15641c5bb1d68ea1f3c01af188d"
+  integrity sha512-Yz9orr3u0R/cVuWNytEybaT9AaVP/MvPt9HZpdCdZx5wjKQogdes9sJ/W5C1olk9oGCekTY92KohMggNfPCpdg==
   dependencies:
     fs-extra "*"
     lodash "*"
@@ -2140,25 +2140,25 @@ pontx-generate@^0.3.83:
     lodash "*"
     pontx-spec "^0.3.83"
 
-pontx-manager@^0.3.83:
-  version "0.3.83"
-  resolved "https://registry.npmmirror.com/pontx-manager/-/pontx-manager-0.3.83.tgz#3bfb9eb2b817e8e450ec29772d4611d8001b2197"
-  integrity sha512-OUE9fx4zzb3aSmSujAJ8SNqx9OgpTrDtVGr5zwhrgBlCz0ttkyZ9Hs3YLjexWRf4bE9jkki1fSQm6WflRSLobQ==
+pontx-manager@0.3.83-beta.0:
+  version "0.3.83-beta.0"
+  resolved "https://registry.npmmirror.com/pontx-manager/-/pontx-manager-0.3.83-beta.0.tgz#d037bc62f2010d9f2767a8a16e4ef06860a28b12"
+  integrity sha512-S7Ard26lMLMkMiUcFiez40ro5RtUN7c0qxzl6jtG2MlmYn/gYB93sFtOe4OFbCPDW6xAQwobadl+t1sTO4GfUQ==
   dependencies:
     fast-json-stable-stringify "^2.1.0"
     fs-extra "^10.1.0"
     lodash "*"
-    pontx-async-sdk-plugin "^0.3.83"
-    pontx-generate-core "^0.3.83"
-    pontx-meta-fetch-plugin "^0.3.83"
-    pontx-mocks-plugin "^0.3.83"
-    pontx-oas2-parser-plugin "^0.3.83"
-    pontx-oas3-parser-plugin "^0.3.83"
-    pontx-react-hooks-sdk-plugin "^0.3.83"
-    pontx-spec "^0.3.83"
+    pontx-async-sdk-plugin "0.3.83"
+    pontx-generate-core "0.3.83-beta.0"
+    pontx-meta-fetch-plugin "0.3.83"
+    pontx-mocks-plugin "0.3.83"
+    pontx-oas2-parser-plugin "0.3.83"
+    pontx-oas3-parser-plugin "0.3.83"
+    pontx-react-hooks-sdk-plugin "0.3.83"
+    pontx-spec "0.3.83"
     typescript "^5"
 
-pontx-meta-fetch-plugin@^0.3.83:
+pontx-meta-fetch-plugin@0.3.83:
   version "0.3.83"
   resolved "https://registry.npmmirror.com/pontx-meta-fetch-plugin/-/pontx-meta-fetch-plugin-0.3.83.tgz#bfce0d55edb216d4d056e0ffd3277c812444a240"
   integrity sha512-wSz3RPL0NvDiKu8EBP7QFD5qWpM7V9cEV/IldDOWC1vEu4jCbaOI2kwyOAVBjgKOXC8pzeSdGjyENHlaypmzFQ==
@@ -2168,7 +2168,7 @@ pontx-meta-fetch-plugin@^0.3.83:
     node-fetch "^2.6.7"
     translation.js "^0.7.15"
 
-pontx-mocks-plugin@^0.3.83:
+pontx-mocks-plugin@0.3.83:
   version "0.3.83"
   resolved "https://registry.npmmirror.com/pontx-mocks-plugin/-/pontx-mocks-plugin-0.3.83.tgz#160d176ae590934ebf0b440faa3cb542df747f37"
   integrity sha512-cCnsnlwfAbtbsnfP/ZyGkBo56zOgzWpRwxZjQG67frafQi7tDo6+V1xTflTg5MdA26264KMs4d8ozIbykgSzCQ==
@@ -2177,7 +2177,7 @@ pontx-mocks-plugin@^0.3.83:
     pontx-generate "^0.3.83"
     pontx-spec "^0.3.83"
 
-pontx-oas2-parser-plugin@^0.3.83:
+pontx-oas2-parser-plugin@0.3.83:
   version "0.3.83"
   resolved "https://registry.npmmirror.com/pontx-oas2-parser-plugin/-/pontx-oas2-parser-plugin-0.3.83.tgz#def1d9c11fae660f5e11c1318d0fdaa52e942fa2"
   integrity sha512-4CRWmwHuJ4T0lFXY+JgiP7VUkEre0ICVmr0rWYKPnG64dcS3xzfhqpfsS8hLd8xdcGIAYMYUosECdmeiaAWBNQ==
@@ -2186,7 +2186,7 @@ pontx-oas2-parser-plugin@^0.3.83:
     pontx-oas3-parser-plugin "^0.3.83"
     pontx-spec "^0.3.83"
 
-pontx-oas3-parser-plugin@^0.3.83:
+pontx-oas3-parser-plugin@0.3.83, pontx-oas3-parser-plugin@^0.3.83:
   version "0.3.83"
   resolved "https://registry.npmmirror.com/pontx-oas3-parser-plugin/-/pontx-oas3-parser-plugin-0.3.83.tgz#cb32ecc927343600f04c4f6cc18009949f8610d2"
   integrity sha512-S95RSxPLjl6dgKx+Y51MSdVaf4Sz3CtDDCJbUAwNbk4yLhxlWh256RZITFBCLpbN/FKmdAVuU646KXXlERhytA==
@@ -2194,7 +2194,7 @@ pontx-oas3-parser-plugin@^0.3.83:
     oas-spec-ts "^0.3.83"
     pontx-spec "^0.3.83"
 
-pontx-react-hooks-sdk-plugin@^0.3.83:
+pontx-react-hooks-sdk-plugin@0.3.83:
   version "0.3.83"
   resolved "https://registry.npmmirror.com/pontx-react-hooks-sdk-plugin/-/pontx-react-hooks-sdk-plugin-0.3.83.tgz#b79e1bfdc9ea8e06070bb57511d329081ffbd0b2"
   integrity sha512-r5hYV7DsotNNhmNNF4eRmWTMVNUYL7C/XordlHTuY0eYVjx5ycqqXmUV5qLU/vRuzYtqtGAEP4R4xGt1ovT5PA==
@@ -2211,14 +2211,14 @@ pontx-sdk-plugin-core@^0.3.83:
     pontx-generate "^0.3.83"
     pontx-spec "^0.3.83"
 
-pontx-spec-diff@^0.3.83:
+pontx-spec-diff@0.3.83:
   version "0.3.83"
   resolved "https://registry.npmmirror.com/pontx-spec-diff/-/pontx-spec-diff-0.3.83.tgz#86b5daa6e0acfe7315f33a64aeb73fac03cc1c7b"
   integrity sha512-WQNwgro95srN3SwaJ51ljlnY9dpjhCpMWyDc5Ct1meVzGBNqvFeywJghm+rqlqyAvYa5zCDnfrpeU16EW0kbgQ==
   dependencies:
     pontx-spec "^0.3.83"
 
-pontx-spec@^0.3.83:
+pontx-spec@0.3.83, pontx-spec@^0.3.83:
   version "0.3.83"
   resolved "https://registry.npmmirror.com/pontx-spec/-/pontx-spec-0.3.83.tgz#14e5cd2dfe57f320f8e79a07cea361f8842bd3e0"
   integrity sha512-xTtrTljs75qTmvOacGV1+XoDCz24/8JEKRM/lYuESFtILwbwpQA5kxV8iL5sXO1l6iZuVjbVseRu08LFizby3A==

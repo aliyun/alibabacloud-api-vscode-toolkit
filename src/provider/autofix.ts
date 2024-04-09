@@ -2,7 +2,7 @@
  * @description: Quick fix need to be used with a Linter
  */
 import * as vscode from "vscode";
-import { containsAnySubstring, fileSel } from "../utils";
+import { containsAnySubstring, fileSel, getSpecInfoFromName } from "../utils";
 import { getDepsByLanguage } from "../common/generateImport";
 import { alicloudAPIMessageService } from "../Service";
 
@@ -23,7 +23,7 @@ class CodeActionProvider {
       const service = alicloudAPIMessageService;
       const products = service.pontManager.localPontSpecs
         .map((pontSpec) => {
-          return pontSpec?.name?.split("::")[0];
+          return getSpecInfoFromName(pontSpec?.name)[0];
         })
 
       if (getDepsByLanguage(errorText, item.range)?.includes(errorText) || containsAnySubstring(errorText, products)) {
