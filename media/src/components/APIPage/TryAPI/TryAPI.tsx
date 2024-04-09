@@ -8,7 +8,6 @@ import Editor from "@monaco-editor/react";
 import { Alert, Button, Dropdown, Empty, Spin, message } from "antd";
 import _ from "lodash";
 import React from "react";
-import { apiResponse } from "../../../mocks/openApiResponse";
 import { EditorLanguages } from "../../../types/EditorLanguages";
 import I18N from "../../../utils/I18N";
 import { getEditorMenuItems, parseXml } from "../../utils";
@@ -35,7 +34,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
   const { openAPIResponses, isApiResultLoading, version, apiMeta, product, mode } = APIPageContext.useContainer();
   const doc = `${product}::${version}::${apiMeta.name}`;
   const [tab, setTab] = React.useState(TAB_PANES[0].value);
-  const apiResult = openAPIResponses?.[doc] || apiResponse;
+  const apiResult = openAPIResponses?.[doc];
 
   const noShowMonacoEditor = ["byte"];
 
@@ -158,7 +157,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
         closable
       />
       {apiResult?.result || isApiResultLoading ? (
-        <div className="api-result">
+        <div className="api-result w-full">
           {isApiResultLoading ? (
             <Spin>
               <span></span>
@@ -166,14 +165,14 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
           ) : null}
 
           <div className="api-res-header">
-            <div className="title">{I18N.main.explorer.overview}</div>
+            <div className="title mb-4 text-gray-900 text-sm font-medium">{I18N.main.explorer.overview}</div>
             {/* {apiResult?.result || props.isApiResultLoading ? ( */}
-            <div className="res-info">
-              <div className="item">
-                <div className="debug-res">
+            <div className="res-info mb-4 flex">
+              <div className="item mr-6 mx-1 inline-block">
+                <div className="debug-res flex">
                   <div
                     className={`codicon codicon-${
-                      String(statusCode).startsWith("2") ? "pass-filled success" : "error error-red"
+                      String(statusCode).startsWith("2") ? "pass-filled success text-green-600" : "error error-red text-red-700"
                     }`}
                   ></div>
                   <div className="value">
@@ -182,12 +181,12 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                 </div>
               </div>
               {apiResult && statusCode ? (
-                <div className="item">
+                <div className="item mr-6 mx-1">
                   {/* {httpStatusMessageMap[statusCode] || statusCode} */}
-                  <span className="label">{I18N.main.explorer.statusCode}</span>
+                  <span className="label font-medium mr-1 text-gray-500">{I18N.main.explorer.statusCode}</span>
                   <span
-                    className={`value result-status  ${
-                      String(statusCode).startsWith("2") ? "success" : "error error-red"
+                    className={`value result-status font-medium ${
+                      String(statusCode).startsWith("2") ? "text-green-600 success" : "error error-red text-red-700"
                     }`}
                   >
                     {statusCode}
@@ -195,8 +194,8 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                 </div>
               ) : null}
               {apiResult ? (
-                <div className="item">
-                  <span className="label">{I18N.main.explorer.time}</span>
+                <div className="item mr-6 mx-1">
+                  <span className="label font-medium mr-1 text-gray-500">{I18N.main.explorer.time}</span>
                   <span className="value">{apiResult.cost}ms</span>
                 </div>
               ) : null}

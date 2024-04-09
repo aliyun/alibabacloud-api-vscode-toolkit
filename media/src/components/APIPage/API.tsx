@@ -128,15 +128,15 @@ export const API: React.FC<APIProps> = (props) => {
 
   const [boxWidth, setBoxWidth] = React.useState(0);
   const [isExpand, setIsExpand] = React.useState(true);
-  React.useEffect(() => {
-    const { width = 0, height = 0 } = resizeObserverEntry?.contentRect || {};
-    if (width !== boxWidth) {
-      if (width < 650) {
-        setIsExpand(false);
-      }
-      setBoxWidth(width);
-    }
-  }, [boxWidth, resizeObserverEntry]);
+  // React.useEffect(() => {
+  //   const { width = 0, height = 0 } = resizeObserverEntry?.contentRect || {};
+  //   if (width !== boxWidth) {
+  //     if (width < 650) {
+  //       setIsExpand(false);
+  //     }
+  //     setBoxWidth(width);
+  //   }
+  // }, [boxWidth, resizeObserverEntry]);
 
   const renderContent = React.useMemo(() => {
     const documentComp = (
@@ -181,9 +181,9 @@ export const API: React.FC<APIProps> = (props) => {
       <div className="flex h-[calc(100vh_-_140px)] bg-white">
         <div className={`expand-arrow ${isExpand ? "" : "!left-1"}`} onClick={() => setIsExpand(!isExpand)}>
           {isExpand ? (
-            <div className="codicon codicon-chevron-left"></div>
+            <div className="codicon codicon-chevron-left relative top-6 right-0.5"></div>
           ) : (
-            <div className="codicon codicon-chevron-right"></div>
+            <div className="codicon codicon-chevron-right relative top-6 right-0.5"></div>
           )}
         </div>
         {isExpand && <div className="w-[25rem]">{isExpand && <APIDebugger></APIDebugger>}</div>}

@@ -10,11 +10,11 @@
   border: 1px solid rgb(229, 229, 229);
   border-radius: 0 2px 2px 0;
   cursor: pointer;
-  .codicon {
+  /* .codicon {
     position: relative !important;
     line-height: 79px !important;
     right: 3px !important;
-  }
+  } */
   &:hover {
     background-color: #f5f5f5;
   }

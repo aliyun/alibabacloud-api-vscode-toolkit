@@ -91,6 +91,10 @@ Default Language [zh]: zh
 
 ## Release Notes
 
+### 0.0.8
+- Fixed some Windows compatibility issues.
+- Optimized the UI interface of webview.
+
 ### 0.0.7
 
 - Launch experience satisfaction questionnaire survey.

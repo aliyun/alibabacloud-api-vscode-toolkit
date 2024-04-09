@@ -82,6 +82,10 @@ Submit bug reports and feature requests on [our Github repository](https://githu
 
 ## Release Notes
 
+### 0.0.8
+- Fixed some Windows compatibility issues.
+- Optimized the UI interface of webview.
+
 ### 0.0.7
 - Launch experience satisfaction questionnaire survey
 - You are welcome to submit your questions and suggestions on the [experience questionnaire](https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486).
