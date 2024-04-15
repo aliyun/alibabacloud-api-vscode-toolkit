@@ -1954,6 +1954,11 @@ oas-spec-ts@^0.3.83:
   resolved "https://registry.npmmirror.com/oas-spec-ts/-/oas-spec-ts-0.3.83.tgz#62411728ed72881021beefd5dd53a2a00de81ac6"
   integrity sha512-P2Eftz3DcngFqDgAZhNTNqcJaCcIHjSsmnghXvyamJfDCgUUyzb6zdNP1kfDDzEWn2596Df4Mcwv3hYtIkPnNQ==
 
+oas-spec-ts@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/oas-spec-ts/-/oas-spec-ts-0.4.4.tgz#321d39b5631ea6651fd8ce025b3aba274ca53750"
+  integrity sha512-0b9JJ5aPv0YmerImJA+MoiYKkgJ00uFGr++Hiz1Xt0fzGtWoCKKAWWrLKVMA4M4mT0EP9KQ/53OfdNrlrgHPBQ==
+
 object-assign@^4.0.1:
   version "4.1.1"
   resolved "https://registry.npmmirror.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
@@ -2211,12 +2216,12 @@ pontx-sdk-plugin-core@^0.3.83:
     pontx-generate "^0.3.83"
     pontx-spec "^0.3.83"
 
-pontx-spec-diff@0.3.83:
-  version "0.3.83"
-  resolved "https://registry.npmmirror.com/pontx-spec-diff/-/pontx-spec-diff-0.3.83.tgz#86b5daa6e0acfe7315f33a64aeb73fac03cc1c7b"
-  integrity sha512-WQNwgro95srN3SwaJ51ljlnY9dpjhCpMWyDc5Ct1meVzGBNqvFeywJghm+rqlqyAvYa5zCDnfrpeU16EW0kbgQ==
+pontx-spec-diff@0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/pontx-spec-diff/-/pontx-spec-diff-0.4.4.tgz#7d51ff756efc48ed081ddf49c0abfd76f520f97b"
+  integrity sha512-XORCy0ivP8PaMq2AruxwRSsJB+ri+XZtSFNcjo+NyfDHEFVpYYOEOoE1Wo3FRhDF5tX6THi+/RKJpR08rghJtA==
   dependencies:
-    pontx-spec "^0.3.83"
+    pontx-spec "^0.4.4"
 
 pontx-spec@0.3.83, pontx-spec@^0.3.83:
   version "0.3.83"
@@ -2224,6 +2229,13 @@ pontx-spec@0.3.83, pontx-spec@^0.3.83:
   integrity sha512-xTtrTljs75qTmvOacGV1+XoDCz24/8JEKRM/lYuESFtILwbwpQA5kxV8iL5sXO1l6iZuVjbVseRu08LFizby3A==
   dependencies:
     oas-spec-ts "^0.3.83"
+
+pontx-spec@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/pontx-spec/-/pontx-spec-0.4.4.tgz#26261795aa1117ade0b6cbeda656216268419504"
+  integrity sha512-LD6nkZ+zN5sM3+yv86p2/Suwzqu/Lt+odYoF7lnh8ne2lVuzFV+tbhdfCL1Kez8eDvV5L4Pn9mNpd75aEOqsYw==
+  dependencies:
+    oas-spec-ts "^0.4.4"
 
 postcss-value-parser@^4.0.2:
   version "4.2.0"
