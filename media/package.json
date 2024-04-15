@@ -41,7 +41,7 @@
     "@types/fs-extra": "^5.1.0",
     "@types/lodash": "^4.17.0",
     "@types/node": "^20",
-    "@types/react": "^18.0.8",
+    "@types/react": "^18.2.78",
     "@types/react-dom": "^18.0.3",
     "@types/vscode": "^1.47.0",
     "@types/vscode-webview": "^1.57.5",
