@@ -207,10 +207,10 @@
   "scripts": {
     "clean": "rimraf dist && rimraf tsconfig.tsbuildinfo",
     "watch": "rimraf dist && tsc --build --watch",
-    "build": "npm run esbuild",
+    "build": "rimraf dist && tsc --build",
     "media": "cd media && vite --mode browser",
     "package": "vsce package",
-    "build:media": "cd media && npm run build:ncc",
+    "build:media": "cd media && npm run build",
     "reinstall": "rimraf node_modules && npm i",
     "afterinstall": "cd ../../ && lerna bootstrap",
     "build:ncc": "rimraf dist && ncc build ./src/extension.ts -o dist -m --license licenses.txt && mv dist/index.js dist/extension.js",
@@ -219,7 +219,7 @@
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
     "preview": "cd media && vite build --watch",
-    "pretest": "rimraf dist && tsc --build",
+    "pretest": "yarn && npm run build:media && npm run build",
     "test": "node ./dist/test/runTest.js"
   },
   "dependencies": {
