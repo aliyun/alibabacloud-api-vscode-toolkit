@@ -3,7 +3,7 @@ name: Smoke Test
 on: [push]
 
 jobs:
-  smoke-test:
+  smoke-test-macos:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,11 +13,11 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install yarn
+      - name: Install Yarn
         run: npm install --global yarn
 
       - name: Install Dependencies
-        run: yarn
+        run: yarn install
 
       - name: Run Smoke Test
-        run: yarn -v
+        run: npm run test

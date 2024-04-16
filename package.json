@@ -218,7 +218,9 @@
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --minify",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-    "preview": "cd media && vite build --watch"
+    "preview": "cd media && vite build --watch",
+    "pretest": "rimraf dist && tsc --build",
+    "test": "node ./dist/test/runTest.js"
   },
   "dependencies": {
     "@alicloud/credentials": "^2.1.1",
@@ -255,6 +257,14 @@
     "type": "git"
   },
   "devDependencies": {
+    "@types/mocha": "^10.0.3",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint": "^8.52.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "@vscode/test-electron": "^2.3.6",
     "@types/fs-extra": "^5.1.0",
     "@types/lodash": "^4.14.182",
     "@types/react": "^18.0.8",
