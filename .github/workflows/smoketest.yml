@@ -21,3 +21,21 @@ jobs:
 
       - name: Run Smoke Test
         run: npm run test
+  smoke-test-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "20"
+
+      - name: Install Yarn
+        run: npm install --global yarn
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Run Smoke Test
+        run: npm run test
