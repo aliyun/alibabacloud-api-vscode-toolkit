@@ -23,6 +23,7 @@ media/lib/
 scripts/dev/
 yarn-error.log
 out/
+.nyc_output/
 .vscode-test/
 tsconfig.tsbuildinfo
 *.tsbuildinfo
