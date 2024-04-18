@@ -5,7 +5,7 @@
   "main": "lib/server.js",
   "scripts": {
     "start": "vite --mode browser",
-    "build:client": "NODE_ENV=production vite build",
+    "build:client": "vite build",
     "build:server": "ncc build src/server.ts -o lib -m -e *.css",
     "build": "npm run build:client && npm run build:server",
     "preview": "vite preview",
