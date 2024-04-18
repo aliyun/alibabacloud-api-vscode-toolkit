@@ -47,7 +47,7 @@ export class AlicloudApiCommands {
             label: `${inter.name}`,
             detail: `${pontSpec.name?.split("__").join(" ")}`,
             info: `${pontSpec.name ? pontSpec.name + "/" : ""}${inter.name}`,
-            description: `${inter.deprecated ? "@deprecated " : ""} ${inter.description || inter.summary || ""}`,
+            description: `${inter.deprecated ? "@deprecated\n" : ""} ${inter.description || inter.summary || ""}`,
             summary: `${inter.summary || ""}`,
           };
         });

@@ -59,9 +59,11 @@ export class PontAPIExplorer {
           contextValue: "API",
           resourceUri: vscode.Uri.parse(`pontx-manager://spec/${spec.name}/apis/${dir}`),
           label: `${apiName}`,
-          iconPath: vscode.Uri.joinPath(alicloudAPIMessageService.context.extensionUri, "resources/api-outline.svg"),
-          description: api?.title || api?.summary,
-          tooltip: api?.description || api?.summary,
+          iconPath: api.deprecated
+            ? vscode.Uri.joinPath(alicloudAPIMessageService.context.extensionUri, "resources/deprecated.svg")
+            : vscode.Uri.joinPath(alicloudAPIMessageService.context.extensionUri, "resources/api-outline.svg"),
+          description: ` ${api?.title || api?.summary || ""}`,
+          tooltip: `${api.deprecated ? `@deprecated\n\n` : ""}${api?.description || api?.summary || api.name}`,
           collapsibleState: vscode.TreeItemCollapsibleState.None,
           command: {
             command: "alicloud.api.openDocument",
@@ -117,9 +119,11 @@ export class PontAPIExplorer {
         contextValue: "API",
         resourceUri: vscode.Uri.parse(`pontx-manager://spec/${specName}/apis/${api.name}`),
         label: `${api.name}`,
-        iconPath: vscode.Uri.joinPath(alicloudAPIMessageService.context.extensionUri, "resources/api-outline.svg"),
-        description: api?.title || api?.summary,
-        tooltip: api?.description || api?.summary,
+        iconPath: api.deprecated
+          ? vscode.Uri.joinPath(alicloudAPIMessageService.context.extensionUri, "resources/deprecated.svg")
+          : vscode.Uri.joinPath(alicloudAPIMessageService.context.extensionUri, "resources/api-outline.svg"),
+        description: api?.title || api?.summary || "",
+        tooltip: api?.description || api?.summary || api?.name,
         collapsibleState: vscode.TreeItemCollapsibleState.None,
         command: {
           command: "alicloud.api.openDocument",
@@ -258,7 +262,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
       const productExplorer = getProductRequestInstance();
 
       return this.pontManager.localPontSpecs.map((spec) => {
-        const {product, version} = getSpecInfoFromName(spec.name || "")
+        const { product, version } = getSpecInfoFromName(spec.name || "");
 
         return {
           specName: spec.name,
@@ -285,7 +289,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
           structName: key,
           label: key,
           description: schema?.description || schema?.title,
-          tooltip: schema?.title || schema?.description,
+          tooltip: schema?.title || schema?.description || "",
           contextValue: "Struct",
           iconPath: vscode.Uri.joinPath(this.context.extensionUri, "resources/struct-outline.svg"),
           collapsibleState: vscode.TreeItemCollapsibleState.None,
@@ -337,7 +341,13 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
 
   async subscribeProduct(product: string, version: string) {
     const pontxConfig = await findAlicloudAPIConfig(this.context);
-    if (pontxConfig.origins?.filter((item) => getSpecInfoFromName(item.name || "").product === product && getSpecInfoFromName(item.name || "").version === version)?.length) {
+    if (
+      pontxConfig.origins?.filter(
+        (item) =>
+          getSpecInfoFromName(item.name || "").product === product &&
+          getSpecInfoFromName(item.name || "").version === version,
+      )?.length
+    ) {
       vscode.window.showInformationMessage("该产品及其版本号已订阅，您可以使用 cmd + ctrl + p 来搜索该产品下的API。");
     } else {
       pontxConfig.origins = [
@@ -389,10 +399,9 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
           vscode.Uri.parse("https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486"),
         );
         globalState.update(experienceQuestionnaireKey, 30);
-      }
-      else if (result === "30天内不再弹出") {
+      } else if (result === "30天内不再弹出") {
         globalState.update(experienceQuestionnaireKey, 30);
-      }else {
+      } else {
         globalState.update(experienceQuestionnaireKey, 1);
       }
       globalState.update(lastPromptKey, Date.now());
@@ -614,12 +623,14 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
         modName,
         apiName: api.name,
         description: api.title || api.summary,
-        tooltip: api.description || api.summary,
+        tooltip: api.description || api.summary || api?.name,
         contextValue: contextValue + "API",
         collapsibleState: vscode.TreeItemCollapsibleState.None,
         schema: api,
         // resourceUri: vscode.Uri.parse(`pontx-changes://${contextValue}API/`),
-        iconPath: vscode.Uri.joinPath(alicloudAPIMessageService.context.extensionUri, "resources/api-outline.svg"),
+        iconPath: api.deprecated
+          ? vscode.Uri.joinPath(alicloudAPIMessageService.context.extensionUri, "resources/deprecated.svg")
+          : vscode.Uri.joinPath(alicloudAPIMessageService.context.extensionUri, "resources/api-outline.svg"),
         command: {
           command: "alicloud.api.openDocument",
           title: "open",
