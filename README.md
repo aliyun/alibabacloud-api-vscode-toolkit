@@ -26,7 +26,7 @@ English | [简体中文](./README.zh_CN.md)
 
 ## Extension UI Guide
 
-![VSCode Extension Guide](https://img.alicdn.com/imgextra/i1/O1CN01rOmqbK1pOoGtdWxFO_!!6000000005351-0-tps-2462-1440.jpg)
+![VSCode Extension Guide](https://img.alicdn.com/imgextra/i4/O1CN01EHcqPJ1Y80INXJES6_!!6000000003013-0-tps-2338-1658.jpg)
 
 ### Product Searching `ctrl+cmd+k`
 
