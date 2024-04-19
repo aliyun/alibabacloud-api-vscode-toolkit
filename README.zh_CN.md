@@ -26,7 +26,7 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 
 ## 插件 UI 导览
 
-![VSCode Extension Guide](https://img.alicdn.com/imgextra/i1/O1CN01o9s4TT1GTq3oggW7K_!!6000000000624-0-tps-2456-1446.jpg)
+![VSCode Extension Guide](https://img.alicdn.com/imgextra/i1/O1CN01tlXFtt1mj0vE1ZrhR_!!6000000004989-0-tps-2498-1768.jpg)
 
 ### 产品搜索 `ctrl+cmd+k`
 
@@ -34,14 +34,14 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 
 ### API 搜索 `ctrl+cmd+l`
 
-![API Serching](https://img.alicdn.com/imgextra/i1/O1CN01KaWkBF1UfCUkY0N3v_!!6000000002544-0-tps-1286-518.jpg)
+![API Serching](https://img.alicdn.com/imgextra/i2/O1CN01ySJXt41c4ZnIbj51N_!!6000000003547-0-tps-1986-542.jpg)
 
 ### API 调试
 
 调试功能需要配置你的 AK/SK 信息，配置方法如下：
 
-1. 安装 [Alibaba Cloud CLI Tools](https://marketplace.visualstudio.com/items?itemName=alibabacloud-openapi.aliyuncli) 插件，
-2. 打开命令行安装 aliyun-cli `brew install aliyun-cli`，
+1. 安装阿里云 CLI：[安装指南](https://help.aliyun.com/zh/cli/installation-guide)；
+2. 安装 [Alibaba Cloud CLI Tools](https://marketplace.visualstudio.com/items?；itemName=alibabacloud-openapi.aliyuncli) 插件；
 3. 输入 `aliyun configure` 命令，按照提示进行配置，
 
 ```
@@ -54,20 +54,18 @@ Default output format [json]: json
 Default Language [zh]: zh
 ```
 
-4. 点击 VS Code 状态栏中的阿里云图标，管理你的 profiles，
+4. 点击 VS Code 底部状态栏中的阿里云图标，管理你的 profiles，
    ![](https://img.alicdn.com/imgextra/i1/O1CN0144NU9N1L4G1cq89Uf_!!6000000001245-0-tps-248-46.jpg)
    ![](https://img.alicdn.com/imgextra/i2/O1CN01btLUkc1ldEHJQ0w4S_!!6000000004841-0-tps-1206-190.jpg)
-1. 更多信息请参考 [Alibaba Cloud CLI Documentation](https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure)。
+   更多信息请参考 [Alibaba Cloud CLI Documentation](https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure)。
 
-![API debug](https://img.alicdn.com/imgextra/i4/O1CN01F1qI7S1BunIFJPiAt_!!6000000000006-0-tps-2618-2050.jpg)
-
-![API debug](https://learn.microsoft.com/zh-cn/visualstudio/ide/media/vs-2022/copilot-chat-visual-studio.gif?view=vs-2022#lightbox)
+![API debug](https://img.alicdn.com/imgextra/i3/O1CN01yfMcHl1i6lNdjzmzs_!!6000000004364-2-tps-2688-1820.png)
 
 ### SDK 示例
 
 你能够通过调试表单生成 SDK 代码示例，并在编辑器中打开对应的 SDK 代码。
 
-![sdk demo](https://img.alicdn.com/imgextra/i1/O1CN01GVhWTl1waRdYmCn7E_!!6000000006324-0-tps-2630-2038.jpg)
+![sdk demo](https://img.alicdn.com/imgextra/i1/O1CN01C0vQDB29gTtW5erj4_!!6000000008097-0-tps-2638-1778.jpg)
 
 ### Code Snippets
 
@@ -83,43 +81,12 @@ Default Language [zh]: zh
 
 ## 反馈
 
-欢迎在我们的 [Github repository](https://github.com/aliyun/alibabacloud-api-vscode-toolkit/issues) 上提交你的问题和建议。
+- 欢迎在我们的 [Github repository](https://github.com/aliyun/alibabacloud-api-vscode-toolkit/issues) 上提交你的问题和建议。
+- 您对插件的使用体验满意吗？点击 [体验问卷](https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486) 进行吐槽或夸赞，您的反馈对我们十分重要！
 
 ## Requirements
 
 - Need VS Code 1.75.0 or above.
-
-## Release Notes
-
-### 0.0.8
-- Fixed some Windows compatibility issues.
-- Optimized the UI interface of webview.
-
-### 0.0.7
-
-- Launch experience satisfaction questionnaire survey.
-- You are welcome to submit your questions and suggestions on the [experience questionnaire](https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486).
-
-### 0.0.6
-
-- Surpport code snippets.
-
-### 0.0.5
-
-- Added aliyun-cli installation instructions.
-
-### 0.0.3
-
-- Support API calling.
-- Support SDK code sample.
-
-### 0.0.1
-
-Initial release
-
-- Support product searching and subscription.
-- Support API searching.
-- Support API Document View.
 
 ## License
 
