@@ -181,9 +181,9 @@ export const API: React.FC<APIProps> = (props) => {
       <div className="flex h-[calc(100vh_-_140px)] bg-white">
         <div className={`expand-arrow ${isExpand ? "" : "!left-1"}`} onClick={() => setIsExpand(!isExpand)}>
           {isExpand ? (
-            <div className="codicon codicon-chevron-left relative top-6 right-0.5"></div>
+            <div className="codicon codicon-chevron-left relative right-0.5 top-6"></div>
           ) : (
-            <div className="codicon codicon-chevron-right relative top-6 right-0.5"></div>
+            <div className="codicon codicon-chevron-right relative right-0.5 top-6"></div>
           )}
         </div>
         {isExpand && <div className="w-[25rem]">{isExpand && <APIDebugger></APIDebugger>}</div>}
@@ -246,11 +246,11 @@ export const API: React.FC<APIProps> = (props) => {
                 <div className="flex justify-between">
                   <div>
                     <div className="flex">
-                      {selectedApi.method ? (
+                      {/* {selectedApi.method ? (
                         <div className="h-6 w-16 rounded-sm border-2 border-solid border-emerald-100 bg-emerald-100 text-center text-base font-medium leading-5 text-teal-500 ">
                           {selectedApi.method?.toUpperCase()}
                         </div>
-                      ) : null}
+                      ) : null} */}
                       {selectedApi.deprecated ? (
                         <Tag className="my-auto ml-2">
                           <span className="text-gray-500">deprecated</span>

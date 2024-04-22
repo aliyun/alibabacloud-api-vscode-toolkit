@@ -34,6 +34,7 @@ class CompletionItemProvider {
         let completionItem = new vscode.CompletionItem(api.label, vscode.CompletionItemKind["Interface"]);
         completionItem.detail = api.detail;
         completionItem.documentation = api.summary || api.description;
+        completionItem.tags = api.tags;
 
         // 代码替换位置，查找位置会同步应用
         completionItem.range = new vscode.Range(
@@ -50,6 +51,7 @@ class CompletionItemProvider {
           );
           javaAsyncCompletionItem.detail = api.detail;
           javaAsyncCompletionItem.documentation = api.summary || api.description;
+          javaAsyncCompletionItem.tags = api.tags;
 
           // 代码替换位置，查找位置会同步应用
           javaAsyncCompletionItem.range = new vscode.Range(
@@ -69,9 +71,10 @@ class CompletionItemProvider {
     token: vscode.CancellationToken,
   ): vscode.ProviderResult<vscode.CompletionItem> {
     const language = vscode.window.activeTextEditor?.document.languageId;
-    const {product, version:versionAPI} = getSpecInfoFromName(item?.detail);
-    const [version, apiName] = versionAPI?.split("/");
+    const [product, version] = item?.detail?.split(" ");
+    const apiName = item?.label?.toString().replace("(java-async)", "");
     let asyncFetchedCode = "";
+    let asyncImportList = [];
     if (product && apiName && version) {
       return new Promise<vscode.CompletionItem>(async (resolve) => {
         const snippets = await codeSampleProvider({
@@ -79,17 +82,22 @@ class CompletionItemProvider {
           product: product,
           version: version,
           apiName: apiName,
-          simplify:true
+          simplify: true,
         });
-        
-        if (item.label.toString().includes("(java-async)")) {
-          asyncFetchedCode = snippets?.find((item) => item.language === "java-async")?.code;
-        } else if(snippets?.find((item) => item.language === language)){
-          asyncFetchedCode = snippets?.find((item) => item.language === language)?.code;
-        }else{
-          item.documentation = "暂不支持该语言的 SDK"
+
+        const curLanguage = item.label.toString().includes("(java-async)") ? "java-async" : language;
+
+        const snippet = snippets?.find((item) => item.language === curLanguage);
+        if (snippet) {
+          asyncFetchedCode = snippet?.code;
+          asyncImportList = snippet?.importList;
+        } else {
+          item.documentation = "暂不支持该语言的 SDK";
         }
         // 设置补全项的实际插入文本
+        item.additionalTextEdits = [
+          vscode.TextEdit.insert(new vscode.Position(0, 0), `${asyncImportList?.join("\n")} \n`),
+        ];
         item.insertText = asyncFetchedCode;
         resolve(item);
       });

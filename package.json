@@ -214,7 +214,7 @@
     "reinstall": "rimraf node_modules && npm i",
     "afterinstall": "cd ../../ && lerna bootstrap",
     "build:ncc": "rimraf dist && ncc build ./src/extension.ts -o dist -m --license licenses.txt && mv dist/index.js dist/extension.js",
-    "vscode:prepublish": "npm run build:ncc",
+    "vscode:prepublish": "npm run build:media && npm run build:ncc",
     "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --minify",
     "esbuild": "npm run esbuild-base -- --sourcemap",
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",

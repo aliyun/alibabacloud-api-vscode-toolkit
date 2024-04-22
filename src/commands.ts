@@ -43,9 +43,11 @@ export class AlicloudApiCommands {
       .map((mod) => {
         return mod.interfaces.map((inter) => {
           return {
-            label: `${inter.method ? `[${inter.method}] ` : ""}${inter.path ? inter.path : inter.name}`,
-            detail: `${pontSpec.name ? pontSpec.name + "/" : ""}${inter.name}`,
-            description: `${inter.description || inter.summary || ""}`,
+            tags: inter.deprecated ? [vscode.CompletionItemTag.Deprecated] : [],
+            label: `${inter.name}`,
+            detail: `${pontSpec.name?.split("__").join(" ")}`,
+            info: `${pontSpec.name ? pontSpec.name + "/" : ""}${inter.name}`,
+            description: `${inter.deprecated ? "@deprecated\n" : ""} ${inter.description || inter.summary || ""}`,
             summary: `${inter.summary || ""}`,
           };
         });
@@ -97,7 +99,7 @@ export class AlicloudApiCommands {
             return;
           }
           let specName: string, modName: string, apiName: string;
-          const detailItems = item.detail.split("/");
+          const detailItems = item.info.split("/");
 
           if (hasSpecName) {
             specName = detailItems[0];
