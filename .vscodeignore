@@ -13,3 +13,4 @@ tsconfig.json
 *.d.ts
 *.md
 !README.md
+!CHANGELOG.md
