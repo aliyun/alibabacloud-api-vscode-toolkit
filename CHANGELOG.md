@@ -1,33 +1,33 @@
 # Release Notes
 
-## v0.0.9
+## 0.0.9(2024-04-22)
 
 - The UI was optimized and a deprecated tag was added to indicate that the API is not recommended.
 
-## v0.0.8
+## 0.0.8(2024-04-10)
 
 - Fixed some Windows compatibility issues.
 - Optimized the UI interface of webview.
 
-## v0.0.7
+## 0.0.7(2024-03-27)
 
 - Launch experience satisfaction questionnaire survey
 - You are welcome to submit your questions and suggestions on the [experience questionnaire](https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486).
 
-## v0.0.6
+## 0.0.6(2024-02-21)
 
 - Surpport code snippets.
 
-## v0.0.5
+## 0.0.5(2024-01-22)
 
 - Added aliyun-cli installation instructions.
 
-## v0.0.3
+## 0.0.3(2024-01-03)
 
 - Support API calling.
 - Support SDK code sample.
 
-## v0.0.1
+## 0.0.1(2023-12-24)
 
 Initial release
 
