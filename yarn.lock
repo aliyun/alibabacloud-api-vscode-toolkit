@@ -2874,6 +2874,11 @@ oas-spec-ts@^0.3.83:
   resolved "https://registry.npmmirror.com/oas-spec-ts/-/oas-spec-ts-0.3.83.tgz#62411728ed72881021beefd5dd53a2a00de81ac6"
   integrity sha512-P2Eftz3DcngFqDgAZhNTNqcJaCcIHjSsmnghXvyamJfDCgUUyzb6zdNP1kfDDzEWn2596Df4Mcwv3hYtIkPnNQ==
 
+oas-spec-ts@^0.4.12:
+  version "0.4.12"
+  resolved "https://registry.yarnpkg.com/oas-spec-ts/-/oas-spec-ts-0.4.12.tgz#206056153e80990a7002f7a1a32977b63d1f2250"
+  integrity sha512-SMveFcfw11skSzh6ZRgkjPoGmiBVeR1hWdd9nDjKzI71knK83g9jmUCV0pC5A1xQzlo+m75wRAnI7KDqdcPzRA==
+
 object-assign@^4.0.1:
   version "4.1.1"
   resolved "https://registry.npmmirror.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
@@ -3192,12 +3197,12 @@ pontx-sdk-plugin-core@^0.3.83:
     pontx-generate "^0.3.83"
     pontx-spec "^0.3.83"
 
-pontx-spec-diff@0.3.83:
-  version "0.3.83"
-  resolved "https://registry.npmmirror.com/pontx-spec-diff/-/pontx-spec-diff-0.3.83.tgz#86b5daa6e0acfe7315f33a64aeb73fac03cc1c7b"
-  integrity sha512-WQNwgro95srN3SwaJ51ljlnY9dpjhCpMWyDc5Ct1meVzGBNqvFeywJghm+rqlqyAvYa5zCDnfrpeU16EW0kbgQ==
+pontx-spec-diff@0.4.12:
+  version "0.4.12"
+  resolved "https://registry.yarnpkg.com/pontx-spec-diff/-/pontx-spec-diff-0.4.12.tgz#578abb0ed5939961bea29e6a72990e3ced50b328"
+  integrity sha512-SDjS1NQ2+NDiC8lekL/s3Du3YRwSnUBHAYqRklq+eL77dPHSvhqDxk0YgQg1r6pR+2zMj7CBIkqvkf+ijP63Gw==
   dependencies:
-    pontx-spec "^0.3.83"
+    pontx-spec "^0.4.12"
 
 pontx-spec@0.3.83, pontx-spec@^0.3.83:
   version "0.3.83"
@@ -3205,6 +3210,13 @@ pontx-spec@0.3.83, pontx-spec@^0.3.83:
   integrity sha512-xTtrTljs75qTmvOacGV1+XoDCz24/8JEKRM/lYuESFtILwbwpQA5kxV8iL5sXO1l6iZuVjbVseRu08LFizby3A==
   dependencies:
     oas-spec-ts "^0.3.83"
+
+pontx-spec@^0.4.12:
+  version "0.4.12"
+  resolved "https://registry.yarnpkg.com/pontx-spec/-/pontx-spec-0.4.12.tgz#b369414e6c692eca4293491e4646c2c7f2671440"
+  integrity sha512-8DMD6PVf8IAalksopZqI6iy41wwkm+vy9qqUiIaWlSZSCLhPApz1YvCda4BJheQJJTcPtvGp6mLJ4aBjYAjvFQ==
+  dependencies:
+    oas-spec-ts "^0.4.12"
 
 postcss-value-parser@^4.0.2:
   version "4.2.0"
@@ -3604,8 +3616,16 @@ statuses@^1.3.1:
   resolved "https://registry.npmmirror.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0, string-width@^4.2.0:
-  name string-width-cjs
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://registry.npmmirror.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
+string-width@^4.1.0, string-width@^4.2.0:
   version "4.2.3"
   resolved "https://registry.npmmirror.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -3637,7 +3657,14 @@ string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.npmmirror.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
+  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
+  dependencies:
+    ansi-regex "^5.0.1"
+
+strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmmirror.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -4078,8 +4105,7 @@ workerpool@6.2.1:
   resolved "https://registry.npmmirror.com/workerpool/-/workerpool-6.2.1.tgz#46fc150c17d826b86a008e5a4508656777e9c343"
   integrity sha512-ILEIE97kDZvF9Wb9f6h5aXK4swSlKGUcOEGiIYb2OOu/IrDU9iwj0fD//SsA6E5ibwJxpEvhullJY4Sl4GcpAw==
 
-"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
-  name wrap-ansi-cjs
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
   version "7.0.0"
   resolved "https://registry.npmmirror.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
@@ -4092,6 +4118,15 @@ wrap-ansi@^6.2.0:
   version "6.2.0"
   resolved "https://registry.npmmirror.com/wrap-ansi/-/wrap-ansi-6.2.0.tgz#e9393ba07102e6c91a3b221478f0257cd2856e53"
   integrity sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
+  dependencies:
+    ansi-styles "^4.0.0"
+    string-width "^4.1.0"
+    strip-ansi "^6.0.0"
+
+wrap-ansi@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.npmmirror.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
+  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
   dependencies:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"
