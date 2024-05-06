@@ -16,7 +16,7 @@
     "@monaco-editor/react": "^4.6.0",
     "@vercel/ncc": "^0.38.1",
     "@vscode-elements/elements": "^1.0.0-pre.10",
-    "antd": "^5.12.3",
+    "antd": "^5.17.0",
     "intl-format": "^1.2.0",
     "load-script": "^2.0.0",
     "lodash": "^4.17.20",
