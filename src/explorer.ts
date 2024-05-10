@@ -348,7 +348,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
           getSpecInfoFromName(item.name || "").version === version,
       )?.length
     ) {
-      vscode.window.showInformationMessage("该产品及其版本号已订阅，您可以使用 cmd + ctrl + p 来搜索该产品下的API。");
+      vscode.window.showInformationMessage("该产品及其版本号已订阅，您可以使用 cmd + ctrl + l 来搜索该产品下的API。");
     } else {
       pontxConfig.origins = [
         ...(pontxConfig.origins || []),
