@@ -20,7 +20,7 @@
     "intl-format": "^1.2.0",
     "load-script": "^2.0.0",
     "lodash": "^4.17.20",
-    "next": "^14.0.4",
+    "next": "^14.2.3",
     "pontx-ui": "latest",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
