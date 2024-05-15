@@ -141,7 +141,7 @@ export const API: React.FC<APIProps> = (props) => {
   const renderContent = React.useMemo(() => {
     const documentComp = (
       <div>
-        {selectedApi?.description ? (
+        {selectedApi?.description && selectedApi?.description !== selectedApi?.summary ? (
           <div className="mb-4 bg-white p-4">
             <SemixMarkdown source={selectedApi?.description} />
           </div>
@@ -262,7 +262,7 @@ export const API: React.FC<APIProps> = (props) => {
                       </div>
                     </div>
                     {selectedApi?.summary ? (
-                      <div className="py-2 text-sm font-normal text-gray-500" style={{ width: "100%" }}>
+                      <div className="ml-2 py-2 text-sm font-normal text-gray-500" style={{ width: "100%" }}>
                         {selectedApi?.summary}
                       </div>
                     ) : null}
