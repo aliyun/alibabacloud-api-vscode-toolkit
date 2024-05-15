@@ -3,7 +3,7 @@
  * @description
  */
 import { Tab, Tag } from "@alicloud/console-components";
-import { Segmented } from "antd";
+import { Segmented, notification } from "antd";
 import _ from "lodash";
 import * as PontSpec from "pontx-spec";
 import * as React from "react";
@@ -19,6 +19,7 @@ import { ApiParamsDoc } from "./APIDocument/ApiParamsDoc";
 import { TryAPI } from "./TryAPI/TryAPI";
 import TrySDK from "./TrySDK/TrySDK";
 import { APIPageContext } from "./context";
+import { PontUIService } from "../../service/UIService";
 
 export class APIProps {
   selectedApi?: PontSpec.PontAPI;
@@ -225,6 +226,31 @@ export const API: React.FC<APIProps> = (props) => {
         return debugComp;
     }
   }, [mode, boxWidth, isExpand]);
+
+  const openNotification = () => {
+    notification.open({
+      message: "体验调研",
+      duration: null,
+      description: (
+        <span>
+          您对插件的使用体验满意吗？点击
+          <a href="https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486">体验问卷</a>
+          进行吐槽或夸赞，您的反馈对我们十分重要！
+        </span>
+      ),
+      onClose: () => {
+        PontUIService.updateQuestionnaireExpiration(14);
+      },
+    });
+  };
+
+  React.useEffect(() => {
+    PontUIService.getNoticeFlag().then((res) => {
+      if (res === true) {
+        openNotification();
+      }
+    });
+  }, []);
 
   return (
     <div className="bg-gray-100 pb-4" ref={pageEl}>
