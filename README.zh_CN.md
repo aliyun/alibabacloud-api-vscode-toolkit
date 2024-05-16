@@ -79,6 +79,12 @@ Default Language [zh]: zh
 
 ![code snippets](https://img.alicdn.com/imgextra/i3/O1CN01dmGwmX1ZyVHozyKx4_!!6000000003263-1-tps-842-468.gif)
 
+### 文档增强
+
+你能够在编写 SDK 代码时，通过代码文档看到 OpenAPI 的描述信息以及更多相关示例链接，来获得更多代码示例参考。
+
+![Document enhancement](https://img.alicdn.com/imgextra/i3/O1CN01Yj1PrE1qwzTj3cFn8_!!6000000005561-0-tps-1562-518.jpg)
+
 ## 反馈
 
 - 欢迎在我们的 [Github repository](https://github.com/aliyun/alibabacloud-api-vscode-toolkit/issues) 上提交你的问题和建议。

@@ -78,6 +78,12 @@ Or use the keyboard shortcuts `ctrl+cmd+l` to search the API and select Insert s
 
 ![code snippets](https://img.alicdn.com/imgextra/i3/O1CN01dmGwmX1ZyVHozyKx4_!!6000000003263-1-tps-842-468.gif)
 
+### Document enhancement
+
+When writing SDK code, you can get more code sample references by viewing the OpenAPI description information and additional related sample links through the code documentation.
+
+![Document enhancement](https://img.alicdn.com/imgextra/i3/O1CN01Yj1PrE1qwzTj3cFn8_!!6000000005561-0-tps-1562-518.jpg)
+
 ## Feedback
 
 - Submit bug reports and feature requests on [our Github repository](https://github.com/aliyun/alibabacloud-api-vscode-toolkit/issues).
