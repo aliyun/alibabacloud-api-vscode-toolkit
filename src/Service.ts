@@ -208,6 +208,27 @@ export class AlicloudAPIService {
     return this.context.globalState.get("defaultLanguage");
   }
 
+  async getNoticeFlag() {
+    const globalState = this.context.globalState;
+    const experienceQuestionnaireKey = "questionnaireExpiration";
+    const lastPromptKey = "lastPromptTime";
+    // 检查上次提示的时间
+    const lastPromptTime = globalState.get(lastPromptKey) as any;
+    const questionnaireExpiration = globalState.get(experienceQuestionnaireKey) as any;
+    if (!lastPromptTime || Date.now() - lastPromptTime > (questionnaireExpiration || 0) * 24 * 60 * 60 * 1000) {
+      return true;
+    }
+    return false;
+  }
+
+  async updateQuestionnaireExpiration(days: number) {
+    const globalState = this.context.globalState;
+    const experienceQuestionnaireKey = "questionnaireExpiration";
+    const lastPromptKey = "lastPromptTime";
+    globalState.update(experienceQuestionnaireKey, days);
+    globalState.update(lastPromptKey, Date.now());
+  }
+
   async makeCodeRequest(requestData) {
     const { apiMeta, paramsValue, product, version, endpoint, regionId } = requestData;
     const newParamsValue = getFormatValues(paramsValue, apiMeta?.parameters);
