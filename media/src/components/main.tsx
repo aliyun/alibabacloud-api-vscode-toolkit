@@ -37,7 +37,7 @@ export const App: React.FC<AppProps> = (props) => {
   const [appMeta, setAppMeta] = React.useState(props.routerMeta);
   const { pageType, schemaType, specName, modName, name, spec: metaSpec, remoteSpec } = appMeta || {};
 
-  const {product:popcode,version} = getSpecInfoFromName(specName || "");
+  const { product: popcode, version } = getSpecInfoFromName(specName || "");
 
   const [itemMeta, setItemMeta] = React.useState(metaSpec);
   const [defs, setDefs] = React.useState({});
