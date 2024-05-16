@@ -14,6 +14,7 @@ import { AlicloudApiMetaGeneratePlugin } from "./plugins/generate";
 import { getProductRequestInstance } from "./productExplorer";
 import autoCompletion from "./provider/autoCompletion";
 import autofix from "./provider/autofix";
+import hoverInfo from "./provider/hoverProvider";
 
 export async function activate(context: vscode.ExtensionContext) {
   // if (!vscode.workspace.rootPath) {
@@ -81,6 +82,8 @@ export async function activate(context: vscode.ExtensionContext) {
       autoCompletion(context);
       // 自动修复
       autofix(context);
+      // hover提示
+      hoverInfo(context);
     }
   } catch (e) {
     vscode.window.showErrorMessage(e.message);

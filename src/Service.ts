@@ -141,6 +141,18 @@ export class AlicloudAPIService {
     return {};
   }
 
+  /**
+   * @description 根据 API 查询是否有 CodeSample
+   */
+  async requestSamplesByAPI(product: string, version: string, api: string) {
+    const resStr = await fetch(
+      `https://api.aliyun.com/api/samples/product/${product}/version/${version}/api/${api}`,
+      {},
+    ).then((res) => res.text());
+    const res = JSON.parse(resStr);
+    return res?.data || [];
+  }
+
   async requestEndpoints(product: string) {
     const resStr = await fetch(
       `https://api.aliyun.com/meta/v1/products/${product}/endpoints.json?language=zh-CN`,

@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.0.10(2024-05-16)
+
+- SDK code documentation has been enhanced with the Code Sample link.
+- Fixed some UI issues.
+
 ## 0.0.9(2024-04-22)
 
 - The UI was optimized and a deprecated tag was added to indicate that the API is not recommended.
