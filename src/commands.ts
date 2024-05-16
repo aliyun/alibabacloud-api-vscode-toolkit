@@ -78,7 +78,15 @@ export class AlicloudApiCommands {
     const service = alicloudAPIMessageService;
 
     vscode.commands.registerCommand("alicloud.api.githubIssue", async () => {
-      vscode.env.openExternal(vscode.Uri.parse("https://github.com/aliyun/alibabacloud-api-vscode-toolkit/issues"));
+      vscode.env.openExternal(
+        vscode.Uri.parse("https://github.com/aliyun/alibabacloud-api-vscode-toolkit/issues?q=is%3Aissue+is%3Aclosed"),
+      );
+    });
+
+    vscode.commands.registerCommand("alicloud.api.feedback", async () => {
+      vscode.env.openExternal(
+        vscode.Uri.parse("https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486"),
+      );
     });
 
     vscode.commands.registerCommand("alicloud.api.findInterface", () => {

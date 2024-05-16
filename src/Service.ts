@@ -150,29 +150,30 @@ export class AlicloudAPIService {
     return res?.data?.endpoints || [];
   }
 
-  async openInCode(codeInfo:{code:string,language:string}){
-    const {language, code} = codeInfo
+  async openInCode(codeInfo: { code: string; language: string }) {
+    const { language, code } = codeInfo;
     // 创建新的文件
-    vscode.workspace.openTextDocument({
-      content: code,
-      language: language?.toLocaleLowerCase(),
-  }).then(newDocument => {
-      vscode.window.showTextDocument(newDocument,{
-        viewColumn: vscode.ViewColumn.Beside,
+    vscode.workspace
+      .openTextDocument({
+        content: code,
+        language: language?.toLocaleLowerCase(),
+      })
+      .then((newDocument) => {
+        vscode.window.showTextDocument(newDocument, {
+          viewColumn: vscode.ViewColumn.Beside,
+        });
       });
-  });
-    return {}
+    return {};
   }
 
-  async saveToFile(code:string){
+  async saveToFile(code: string) {
     const uri = await vscode.window.showSaveDialog();
     if (uri) {
-        const buf = Buffer.from(code, 'utf8');
-        await vscode.workspace.fs.writeFile(uri, buf);
+      const buf = Buffer.from(code, "utf8");
+      await vscode.workspace.fs.writeFile(uri, buf);
     }
-    return {}
+    return {};
   }
-
 
   async loadProfiles() {
     const configFilePath = path.join(os.homedir(), ".aliyun/config.json");
@@ -188,11 +189,32 @@ export class AlicloudAPIService {
   }
 
   async updateLocalLanguage(lang) {
-    this.context.globalState.update('defaultLanguage', lang);
+    this.context.globalState.update("defaultLanguage", lang);
   }
 
   async getLocalLanguage() {
-    return this.context.globalState.get('defaultLanguage')
+    return this.context.globalState.get("defaultLanguage");
+  }
+
+  async getNoticeFlag() {
+    const globalState = this.context.globalState;
+    const experienceQuestionnaireKey = "questionnaireExpiration";
+    const lastPromptKey = "lastPromptTime";
+    // 检查上次提示的时间
+    const lastPromptTime = globalState.get(lastPromptKey) as any;
+    const questionnaireExpiration = globalState.get(experienceQuestionnaireKey) as any;
+    if (!lastPromptTime || Date.now() - lastPromptTime > (questionnaireExpiration || 0) * 24 * 60 * 60 * 1000) {
+      return true;
+    }
+    return false;
+  }
+
+  async updateQuestionnaireExpiration(days: number) {
+    const globalState = this.context.globalState;
+    const experienceQuestionnaireKey = "questionnaireExpiration";
+    const lastPromptKey = "lastPromptTime";
+    globalState.update(experienceQuestionnaireKey, days);
+    globalState.update(lastPromptKey, Date.now());
   }
 
   async makeCodeRequest(requestData) {
@@ -208,23 +230,22 @@ export class AlicloudAPIService {
           : "ak"
         : "ak";
     const body = {
-      "apiName": apiMeta?.name,
-      "apiVersion": version,
-      "product": product,
-      "sdkType": "dara",
-      "params": newParamsValue || {},
-      "regionId": regionId,
-      "endpoint": endpoint,
-      "credential": {type: defaultCredentialType},
-      "runtimeOptions": {},
-      "useCommon": false
-    }
-    const resStr = await fetch(
-      `https://api.aliyun.com/api/product/makeCode`,
-      {method: 'post',
+      apiName: apiMeta?.name,
+      apiVersion: version,
+      product: product,
+      sdkType: "dara",
+      params: newParamsValue || {},
+      regionId: regionId,
+      endpoint: endpoint,
+      credential: { type: defaultCredentialType },
+      runtimeOptions: {},
+      useCommon: false,
+    };
+    const resStr = await fetch(`https://api.aliyun.com/api/product/makeCode`, {
+      method: "post",
       body: JSON.stringify(body),
-      headers: {'Content-Type': 'application/json'}},
-    ).then((res) => res.text());
+      headers: { "Content-Type": "application/json" },
+    }).then((res) => res.text());
     const res = JSON.parse(resStr);
     return res;
   }
@@ -247,7 +268,7 @@ export class AlicloudAPIService {
           : "ak"
         : "ak";
     if (profiles?.length) {
-      const profile = profiles?.find(item=>item.name === profilesInfo.current)
+      const profile = profiles?.find((item) => item.name === profilesInfo.current);
       const start = Date.now();
       try {
         data = await request({
@@ -260,7 +281,7 @@ export class AlicloudAPIService {
           productName: product,
           meta: apiMeta,
           bodyStyle: undefined,
-          credential: {type: defaultCredentialType},
+          credential: { type: defaultCredentialType },
         });
         response = data;
         // 设置状态码
@@ -302,13 +323,13 @@ export class AlicloudAPIService {
         requestId: requestData.requestId,
         doc: `${product}::${version}::${apiMeta.name}`,
         type: "openAPIResponse",
-        response
+        response,
       };
-    }else{
-      let result = await vscode.window.showErrorMessage("请完成AK/SK配置后，再发起调用", "查看配置方法","取消");
-        if (result === "查看配置方法") {
-          vscode.env.openExternal(vscode.Uri.parse('https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure'));
-        }
+    } else {
+      let result = await vscode.window.showErrorMessage("请完成AK/SK配置后，再发起调用", "查看配置方法", "取消");
+      if (result === "查看配置方法") {
+        vscode.env.openExternal(vscode.Uri.parse("https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure"));
+      }
     }
   }
 

@@ -25,9 +25,14 @@
         "title": "导入依赖"
       },
       {
-        "command": "alicloud.api.githubIssue",
-        "title": "feedback",
+        "command": "alicloud.api.feedback",
+        "title": "反馈",
         "icon": "$(feedback)"
+      },
+      {
+        "command": "alicloud.api.githubIssue",
+        "title": "Issues",
+        "icon": "$(issues)"
       },
       {
         "command": "alicloud.api.findInterface",
@@ -178,6 +183,11 @@
           "command": "alicloud.api.githubIssue",
           "when": "view == alicloudApiExplorer",
           "group": "navigation@4"
+        },
+        {
+          "command": "alicloud.api.feedback",
+          "when": "view == alicloudApiExplorer",
+          "group": "navigation@5"
         }
       ],
       "view/item/context": [
