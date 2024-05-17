@@ -1,6 +1,6 @@
 # Release Notes
 
-## 0.0.10(2024-05-16)
+## 0.0.10(2024-05-17)
 
 - SDK code documentation has been enhanced with the Code Sample link.
 - Fixed some UI issues.

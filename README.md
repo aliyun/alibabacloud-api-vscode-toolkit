@@ -82,7 +82,7 @@ Or use the keyboard shortcuts `ctrl+cmd+l` to search the API and select Insert s
 
 When writing SDK code, you can get more code sample references by viewing the OpenAPI description information and additional related sample links through the code documentation.
 
-![Document enhancement](https://img.alicdn.com/imgextra/i3/O1CN01Yj1PrE1qwzTj3cFn8_!!6000000005561-0-tps-1562-518.jpg)
+![Document enhancement](https://img.alicdn.com/imgextra/i4/O1CN01jedn431D1Uk8MEhM3_!!6000000000156-0-tps-2562-654.jpg)
 
 ## Feedback
 

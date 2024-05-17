@@ -83,7 +83,7 @@ Default Language [zh]: zh
 
 你能够在编写 SDK 代码时，通过代码文档看到 OpenAPI 的描述信息以及更多相关示例链接，来获得更多代码示例参考。
 
-![Document enhancement](https://img.alicdn.com/imgextra/i3/O1CN01Yj1PrE1qwzTj3cFn8_!!6000000005561-0-tps-1562-518.jpg)
+![Document enhancement](https://img.alicdn.com/imgextra/i4/O1CN01jedn431D1Uk8MEhM3_!!6000000000156-0-tps-2562-654.jpg)
 
 ## 反馈
 
