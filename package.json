@@ -251,7 +251,7 @@
     "@alicloud/credentials": "^2.1.1",
     "@alicloud/openapi-util": "^0.2.2",
     "@alicloud/tea-typescript": "^1.7.0",
-    "@alicloud/tea-util": "^1.4.2",
+    "@alicloud/tea-util": "^1.4.8",
     "@types/node": "^20.10.5",
     "@vscode/codicons": "^0.0.32",
     "debug": "^4.3.0",
