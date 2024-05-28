@@ -253,7 +253,7 @@
     "@alicloud/tea-typescript": "^1.7.0",
     "@alicloud/tea-util": "^1.4.8",
     "@types/node": "^20.10.5",
-    "@vscode/codicons": "^0.0.32",
+    "@vscode/codicons": "^0.0.36",
     "debug": "^4.3.0",
     "fs-extra": "^10.1.0",
     "httpx": "^2.2.6",
