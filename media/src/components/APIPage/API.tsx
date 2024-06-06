@@ -157,6 +157,27 @@ export const API: React.FC<APIProps> = (props) => {
             <InnerSchemaTable
               name=""
               schema={selectedApi?.responses["200"]?.schema as any}
+              renderExpandIcon={(node, onExpand) => {
+                return (
+                  <div
+                    className="hover:bg-darken-3 relative flex cursor-pointer items-center justify-center rounded"
+                    style={{
+                      marginLeft: -23.5,
+                      width: 20,
+                      height: 20,
+                      marginRight: 3,
+                      textAlign: "center",
+                    }}
+                    onClick={() => {
+                      onExpand(node);
+                    }}
+                  >
+                    <i
+                      className={node.isExpanded ? "codicon codicon-chevron-down" : "codicon codicon-chevron-right"}
+                    ></i>
+                  </div>
+                );
+              }}
               renderEmpty={() => {
                 return (
                   <tr>
