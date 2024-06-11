@@ -7,33 +7,42 @@
   resolved "https://registry.npmmirror.com/@aashutoshrathi/word-wrap/-/word-wrap-1.2.6.tgz#bd9154aec9983f77b3a034ecaa015c2e4201f6cf"
   integrity sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==
 
-"@alicloud/console-components@^1.6.2":
-  version "1.6.2"
-  resolved "https://registry.npmmirror.com/@alicloud/console-components/-/console-components-1.6.2.tgz#ee4bf051f3cd61bc1a8b56742f13dc80c9da6eb1"
-  integrity sha512-6nWwpWsO+cWnnyumqcyJzJhjj4+TuBIxSHsi3OZnlDuCho3jXYa1G4LG2V43rtIzZ85SDGK3A+HyGGQkzJOHag==
+"@alicloud/console-components@^2.1.25":
+  version "2.1.25"
+  resolved "https://registry.yarnpkg.com/@alicloud/console-components/-/console-components-2.1.25.tgz#da5b1c891c705b8f669c82ea0d8724cf4ea8a767"
+  integrity sha512-2yx/CCuuhs+bpyCXjIUmMrWQkZO7E1xTCuOCC4lBcmpItH475kz8sm9KcHE5xpwi1jFVz0bT/u4miZ/6AdByrQ==
   dependencies:
-    "@alifd/next" "~1.24.12"
-    classnames "^2.2.6"
+    "@alicloud/react-hook-controllable" "^1.2.0"
+    "@alifd/next" "~1.26.37"
+    classnames "^2.3.2"
+    dayjs "^1.11.7"
     hoist-non-react-statics "^3.3.2"
     react-loading-skeleton "^2.1.1"
 
-"@alifd/field@~1.5.5":
-  version "1.5.8"
-  resolved "https://registry.npmmirror.com/@alifd/field/-/field-1.5.8.tgz#18a0bd92dec109a4efd40def6f52aecf6550296f"
-  integrity sha512-RBbwEeex2lb9fFjsXU3wJp2FZGPS75svKzOcDb9ZtKHiVU3byD6zuB0/hzJ9Exb0DkOgykFc6gF76QoaYF4+Ug==
+"@alicloud/react-hook-controllable@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@alicloud/react-hook-controllable/-/react-hook-controllable-1.2.0.tgz#685f3ffd65e994107036ee672411e5bce1860247"
+  integrity sha512-QCpE+UqICu7vwiMc4U39XGBQwznPJsUllHHVZXU8UiXxdN5766AI85gtYZJnmAG+Y1W8XzuYA+WQ8hRUr1IWug==
+
+"@alifd/field@~1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@alifd/field/-/field-1.7.0.tgz#ccb1be9b4394b992cb4ea7ada3f9d4b01d0b3479"
+  integrity sha512-rXqtuJudWaSl+1EOjUqr1OHUh8PWnzvyMmm6sKev9uTbctrt+pHEkRh3fbXebJhtEXgZbqhh/UM2afqy1nIIeA==
   dependencies:
     "@alifd/validate" "^1.2.0"
     prop-types "^15.5.8"
 
-"@alifd/next@~1.24.12":
-  version "1.24.18"
-  resolved "https://registry.npmmirror.com/@alifd/next/-/next-1.24.18.tgz#5189f6439e156ccbd99e1bfa51322894ae5f4578"
-  integrity sha512-qfpkZxz/81WxloxAJ9ZR3YRwVh7oR9HM0GbChaSAYAJXaawkZcs7obvgmmePq285Qv5agOzmLpFdJwJ8oRTmIQ==
+"@alifd/next@~1.26.37":
+  version "1.26.37"
+  resolved "https://registry.yarnpkg.com/@alifd/next/-/next-1.26.37.tgz#b25d56027b26a9ca0ca48c28028b550795634b68"
+  integrity sha512-+sZgPM7apganmQEUE7fAI9zZr9j0hxGjkWmuzNQIRU+Sb+Jnmmu7eOHAvjkoCWpMCgQHKTnLdiyIbVoSh9I6mQ==
   dependencies:
-    "@alifd/field" "~1.5.5"
+    "@alifd/field" "~1.7.0"
+    "@alifd/overlay" "^0.3.2"
     "@alifd/validate" "~1.2.0"
+    "@types/react-transition-group" "^4.4.6"
     babel-runtime "^6.26.0"
-    bignumber.js "^9.0.1"
+    big.js "^6.2.0"
     classnames "^2.2.3"
     dayjs "^1.9.6"
     hoist-non-react-statics "^3.0.0"
@@ -43,6 +52,13 @@
     react-transition-group "^2.2.1"
     resize-observer-polyfill "^1.5.1"
     shallow-element-equals "^1.0.1"
+
+"@alifd/overlay@^0.3.2":
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/@alifd/overlay/-/overlay-0.3.5.tgz#128d0ede6a1b50d559176daced4c38fdb4522391"
+  integrity sha512-kFud++NuXDoEE1iCvjqoomtuq+m5SDDO37WS85mKR1007qOf7XwhVgrwgxZ9yFfxGHVnHg863nIdDvQk+9/Jiw==
+  dependencies:
+    resize-observer-polyfill "^1.5.1"
 
 "@alifd/validate@^1.2.0":
   version "1.4.0"
@@ -897,6 +913,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-transition-group@^4.4.6":
+  version "4.4.10"
+  resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.10.tgz#6ee71127bdab1f18f11ad8fb3322c6da27c327ac"
+  integrity sha512-hT/+s0VQs2ojCX823m60m5f0sL5idt9SO6Tj6Dg+rdphGPIeJbJ6CxvBYkgkGKrYeDjvIpKTR38UzmtHJOGW3Q==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^18.3.3":
   version "18.3.3"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.3.tgz#9679020895318b0915d7a3ab004d92d33375c45f"
@@ -1393,10 +1416,10 @@ bcp-47-match@^2.0.0:
   resolved "https://registry.npmmirror.com/bcp-47-match/-/bcp-47-match-2.0.3.tgz#603226f6e5d3914a581408be33b28a53144b09d0"
   integrity sha512-JtTezzbAibu8G0R9op9zb3vcWZd9JF6M0xOYGPn0fNCd7wOpRB1mU2mH9T8gaBGbAAyIIVgB2G7xG0GP98zMAQ==
 
-bignumber.js@^9.0.1:
-  version "9.1.2"
-  resolved "https://registry.npmmirror.com/bignumber.js/-/bignumber.js-9.1.2.tgz#b7c4242259c008903b13707983b5f4bbd31eda0c"
-  integrity sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==
+big.js@^6.2.0:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/big.js/-/big.js-6.2.1.tgz#7205ce763efb17c2e41f26f121c420c6a7c2744f"
+  integrity sha512-bCtHMwL9LeDIozFn+oNhhFoq+yQ3BNdnsLSASUxLciOb1vgvpHsIO1dsENiGMgbb4SkP5TrzWzRiLddn8ahVOQ==
 
 binary-extensions@^2.0.0:
   version "2.2.0"
@@ -1822,10 +1845,10 @@ data-view-byte-offset@^1.0.0:
     es-errors "^1.3.0"
     is-data-view "^1.0.1"
 
-dayjs@^1.11.1, dayjs@^1.9.6:
-  version "1.11.10"
-  resolved "https://registry.npmmirror.com/dayjs/-/dayjs-1.11.10.tgz#68acea85317a6e164457d6d6947564029a6a16a0"
-  integrity sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==
+dayjs@^1.11.1, dayjs@^1.11.7, dayjs@^1.9.6:
+  version "1.11.11"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.11.tgz#dfe0e9d54c5f8b68ccf8ca5f72ac603e7e5ed59e"
+  integrity sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==
 
 debug@^3.2.7:
   version "3.2.7"

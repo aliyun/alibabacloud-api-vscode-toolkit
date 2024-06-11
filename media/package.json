@@ -12,7 +12,7 @@
     "dev": "next dev"
   },
   "dependencies": {
-    "@alicloud/console-components": "^1.6.2",
+    "@alicloud/console-components": "^2.1.25",
     "@monaco-editor/react": "^4.6.0",
     "@vercel/ncc": "^0.38.1",
     "@vscode-elements/elements": "^1.3.0",
