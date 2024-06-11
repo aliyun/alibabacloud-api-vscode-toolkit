@@ -149,7 +149,7 @@ export class OpenAPIClient {
           host: this._endpoint,
           "x-acs-version": params.version,
           "x-acs-action": params.action,
-          "user-agent": `Toolkit (${os.type()}; ${os.release()})  alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
+          "user-agent": `Toolkit (${os.type()}; ${os.release()}) alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
           "x-acs-date": OpenApiUtil.getTimestamp(),
           "x-acs-signature-nonce": Util.getNonce(),
           accept: "application/json",

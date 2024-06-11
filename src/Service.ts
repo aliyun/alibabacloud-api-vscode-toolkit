@@ -147,7 +147,7 @@ export class AlicloudAPIService {
   async requestSamplesByAPI(product: string, version: string, api: string) {
     const resStr = await fetch(`https://api.aliyun.com/api/samples/product/${product}/version/${version}/api/${api}`, {
       headers: {
-        "User-Agent": `Toolkit (${os.type()}; ${os.release()})  alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
+        "User-Agent": `Toolkit (${os.type()}; ${os.release()}) alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
       },
     }).then((res) => res.text());
     const res = JSON.parse(resStr);
@@ -157,7 +157,7 @@ export class AlicloudAPIService {
   async requestEndpoints(product: string) {
     const resStr = await fetch(`https://api.aliyun.com/meta/v1/products/${product}/endpoints.json?language=zh-CN`, {
       headers: {
-        "User-Agent": `Toolkit (${os.type()}; ${os.release()})  alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
+        "User-Agent": `Toolkit (${os.type()}; ${os.release()}) alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
       },
     }).then((res) => res.text());
     const res = JSON.parse(resStr);
@@ -260,7 +260,7 @@ export class AlicloudAPIService {
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
-        "User-Agent": `Toolkit (${os.type()}; ${os.release()})  alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
+        "User-Agent": `Toolkit (${os.type()}; ${os.release()}) alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
       },
     }).then((res) => res.text());
     const res = JSON.parse(resStr);

@@ -51,7 +51,7 @@ const codeSampleProvider = async (info: {
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
-      "User-Agent": `Toolkit (${os.type()}; ${os.release()})  alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
+      "User-Agent": `Toolkit (${os.type()}; ${os.release()}) alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
     },
   }).then((res) => res.text());
   const sdkDemos = JSON.parse(makeCodeStr);
