@@ -4,6 +4,8 @@ import { PontSpec } from "pontx-spec";
 import { InnerOriginConfig, PontManager } from "pontx-manager";
 import { getRequiredParamsValue } from "../utils";
 import fetch from "node-fetch";
+import * as vscode from "vscode";
+import os from "os";
 
 const mySnippetsProvider: SnippetsProvider = (info) => {
   return [];
@@ -22,7 +24,14 @@ const myGetFilesBySpecs: GetFilesBySpecs = async (origins) => {
   return fileStructure;
 };
 
-const codeSampleProvider = async (info:{language:string,product:string,version:string,apiName:string,params?:any, simplify?:boolean}):Promise<any> => {
+const codeSampleProvider = async (info: {
+  language: string;
+  product: string;
+  version: string;
+  apiName: string;
+  params?: any;
+  simplify?: boolean;
+}): Promise<any> => {
   const body = {
     apiName: info?.apiName,
     apiVersion: info?.version,
@@ -40,25 +49,26 @@ const codeSampleProvider = async (info:{language:string,product:string,version:s
   const makeCodeStr = await fetch(`https://api.aliyun.com/api/product/makeCode`, {
     method: "post",
     body: JSON.stringify(body),
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "User-Agent": `Toolkit (${os.type()}; ${os.release()})  alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
+    },
   }).then((res) => res.text());
   const sdkDemos = JSON.parse(makeCodeStr);
 
-  const asyncFetchedCodes = (Object.keys(sdkDemos?.data?.demoSdk || {}))?.map(
-    (key)=>{
-      return {
-        name: key,
-        language: key,
-        code: sdkDemos?.data?.demoSdk[key]?.codeSample,
-        importList: sdkDemos?.data?.demoSdk[key]?.importList
-      }
-    }
-  )
+  const asyncFetchedCodes = Object.keys(sdkDemos?.data?.demoSdk || {})?.map((key) => {
+    return {
+      name: key,
+      language: key,
+      code: sdkDemos?.data?.demoSdk[key]?.codeSample,
+      importList: sdkDemos?.data?.demoSdk[key]?.importList,
+    };
+  });
   return asyncFetchedCodes || [];
-}
+};
 
 export const AlicloudApiMetaGeneratePlugin: any = createPontxGeneratePlugin({
   snippetsProvider: mySnippetsProvider,
   getFilesBySpecs: myGetFilesBySpecs,
 });
-export { getFilesBySpecs, snippetsProvider,codeSampleProvider };
+export { getFilesBySpecs, snippetsProvider, codeSampleProvider };

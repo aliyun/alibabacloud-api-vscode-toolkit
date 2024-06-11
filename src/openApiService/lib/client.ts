@@ -1,10 +1,12 @@
-'use strict';
+"use strict";
 
-const { default: OpenApiUtil } = require('@alicloud/openapi-util');
-const { default: Util } = require('@alicloud/tea-util');
-const $Credential = require('@alicloud/credentials');
-const $tea = require('@alicloud/tea-typescript');
-const { default: Credential } = require('@alicloud/credentials');
+const { default: OpenApiUtil } = require("@alicloud/openapi-util");
+const { default: Util } = require("@alicloud/tea-util");
+const $Credential = require("@alicloud/credentials");
+const $tea = require("@alicloud/tea-typescript");
+const { default: Credential } = require("@alicloud/credentials");
+const vscode = require("vscode");
+const os = require("os");
 
 export class OpenAPIClient {
   private _credential: any;
@@ -25,7 +27,7 @@ export class OpenAPIClient {
   constructor(config) {
     if (Util.isUnset($tea.toMap(config))) {
       throw $tea.newError({
-        code: 'ParameterMissing',
+        code: "ParameterMissing",
         message: "'config' can not be unset",
       });
     }
@@ -34,9 +36,9 @@ export class OpenAPIClient {
       this._credential = config.credential;
     } else if (!Util.empty(config.accessKeyId) && !Util.empty(config.accessKeySecret)) {
       if (!Util.empty(config.securityToken)) {
-        config.type = 'sts';
+        config.type = "sts";
       } else {
-        config.type = 'access_key';
+        config.type = "access_key";
       }
 
       let credentialConfig = new $Credential.Config({
@@ -66,7 +68,7 @@ export class OpenAPIClient {
 
   async getAccessKeyId() {
     if (Util.isUnset(this._credential)) {
-      return '';
+      return "";
     }
 
     let accessKeyId = await this._credential.getAccessKeyId();
@@ -79,7 +81,7 @@ export class OpenAPIClient {
    */
   async getAccessKeySecret() {
     if (Util.isUnset(this._credential)) {
-      return '';
+      return "";
     }
 
     let secret = await this._credential.getAccessKeySecret();
@@ -88,7 +90,7 @@ export class OpenAPIClient {
 
   async getSecurityToken() {
     if (Util.isUnset(this._credential)) {
-      return '';
+      return "";
     }
 
     let token = await this._credential.getSecurityToken();
@@ -105,7 +107,7 @@ export class OpenAPIClient {
 
   async doRequest(params, request, runtime) {
     let _runtime = {
-      timeouted: 'retry',
+      timeouted: "retry",
       readTimeout: Util.defaultNumber(runtime.readTimeout, this._readTimeout),
       connectTimeout: Util.defaultNumber(runtime.connectTimeout, this._connectTimeout),
       httpProxy: Util.defaultString(runtime.httpProxy, this._httpProxy),
@@ -117,7 +119,7 @@ export class OpenAPIClient {
         maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: Util.defaultString(runtime.backoffPolicy, 'no'),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
         period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
@@ -126,9 +128,9 @@ export class OpenAPIClient {
     let _lastRequest = null;
     let _now = Date.now();
     let _retryTimes = 0;
-    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+    while ($tea.allowRetry(_runtime["retry"], _retryTimes, _now)) {
       if (_retryTimes > 0) {
-        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        let _backoffTime = $tea.getBackoffTime(_runtime["backoff"], _retryTimes);
         if (_backoffTime > 0) {
           await $tea.sleep(_backoffTime);
         }
@@ -145,139 +147,143 @@ export class OpenAPIClient {
         // endpoint is setted in product client
         request_.headers = {
           host: this._endpoint,
-          'x-acs-version': params.version,
-          'x-acs-action': params.action,
-          'user-agent': 'Alibaba Cloud API Toolkit',
-          'x-acs-date': OpenApiUtil.getTimestamp(),
-          'x-acs-signature-nonce': Util.getNonce(),
-          accept: 'application/json',
+          "x-acs-version": params.version,
+          "x-acs-action": params.action,
+          "user-agent": `Toolkit (${os.type()}; ${os.release()})  alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
+          "x-acs-date": OpenApiUtil.getTimestamp(),
+          "x-acs-signature-nonce": Util.getNonce(),
+          accept: "application/json",
           ...request.headers,
         };
-        if (request.headers && request.headers['Host']) {
-          delete request_.headers['Host'];
-          request_.headers['host'] = request.headers['Host'];
+        if (request.headers && request.headers["Host"]) {
+          delete request_.headers["Host"];
+          request_.headers["host"] = request.headers["Host"];
         }
-        let signatureAlgorithm = Util.defaultString(this._signatureAlgorithm, 'ACS3-HMAC-SHA256');
-        let hashedRequestPayload = OpenApiUtil.hexEncode(OpenApiUtil.hash(Util.toBytes(''), signatureAlgorithm));
+        let signatureAlgorithm = Util.defaultString(this._signatureAlgorithm, "ACS3-HMAC-SHA256");
+        let hashedRequestPayload = OpenApiUtil.hexEncode(OpenApiUtil.hash(Util.toBytes(""), signatureAlgorithm));
         if (!Util.isUnset(request.stream)) {
           let tmp = await Util.readAsBytes(request.stream);
           hashedRequestPayload = OpenApiUtil.hexEncode(OpenApiUtil.hash(tmp, signatureAlgorithm));
           request_.body = new $tea.BytesReadable(tmp);
-          request_.headers['content-type'] = 'application/octet-stream';
-        }
-        else {
+          request_.headers["content-type"] = "application/octet-stream";
+        } else {
           if (!Util.isUnset(request.body)) {
-            if (Util.equalString(params.reqBodyType, 'json')) {
+            if (Util.equalString(params.reqBodyType, "json")) {
               let jsonObj = Util.toJSONString(request.body);
               hashedRequestPayload = OpenApiUtil.hexEncode(OpenApiUtil.hash(Util.toBytes(jsonObj), signatureAlgorithm));
               request_.body = new $tea.BytesReadable(jsonObj);
-              request_.headers['content-type'] = 'application/json; charset=utf-8';
-            }
-            else {
+              request_.headers["content-type"] = "application/json; charset=utf-8";
+            } else {
               let m = Util.assertAsMap(request.body);
               let formObj = OpenApiUtil.toForm(m);
               hashedRequestPayload = OpenApiUtil.hexEncode(OpenApiUtil.hash(Util.toBytes(formObj), signatureAlgorithm));
               request_.body = new $tea.BytesReadable(formObj);
-              request_.headers['content-type'] = 'application/x-www-form-urlencoded';
+              request_.headers["content-type"] = "application/x-www-form-urlencoded";
             }
           }
         }
 
-        request_.headers['x-acs-content-sha256'] = hashedRequestPayload;
-        if (!Util.equalString(params.authType, 'Anonymous')) {
+        request_.headers["x-acs-content-sha256"] = hashedRequestPayload;
+        if (!Util.equalString(params.authType, "Anonymous")) {
           let accessKeyId = await this.getAccessKeyId();
           let accessKeySecret = await this.getAccessKeySecret();
           let securityToken = await this.getSecurityToken();
           if (!Util.empty(securityToken)) {
-            request_.headers['x-acs-accesskey-id'] = accessKeyId;
-            request_.headers['x-acs-security-token'] = securityToken;
+            request_.headers["x-acs-accesskey-id"] = accessKeyId;
+            request_.headers["x-acs-security-token"] = securityToken;
           }
 
-
-          request_.headers['Authorization'] = OpenApiUtil.getAuthorization(request_, signatureAlgorithm, hashedRequestPayload, accessKeyId, accessKeySecret);
+          request_.headers["Authorization"] = OpenApiUtil.getAuthorization(
+            request_,
+            signatureAlgorithm,
+            hashedRequestPayload,
+            accessKeyId,
+            accessKeySecret,
+          );
         }
-        request_.headers['host'] = this._endpoint;
-        if (request.headers && request.headers['Host']) {
-          request_.headers['Host'] = request.headers['Host'];
+        request_.headers["host"] = this._endpoint;
+        if (request.headers && request.headers["Host"]) {
+          request_.headers["Host"] = request.headers["Host"];
         }
 
         _lastRequest = request_;
-        console.log("_lastRequest",_lastRequest)
-        
+        console.log("_lastRequest", _lastRequest);
+
         let response_ = await $tea.doAction(request_, _runtime);
-        entry =  {
+        entry = {
           request: {
-            headers: request_.headers
+            headers: request_.headers,
           },
           response: {
             statusCode: response_.statusCode,
             headers: response_.headers,
-          }
+          },
         };
 
         if (Util.is4xx(response_.statusCode) || Util.is5xx(response_.statusCode)) {
           let _res = await Util.readAsJSON(response_.body);
           let err = Util.assertAsMap(_res);
           return {
-            format: 'json',
+            format: "json",
             result: err,
-            entry
+            entry,
           };
         }
 
-        if (response_.statusCode === 204 && (Util.isUnset(response_.headers['content-type']) || Util.isUnset(response_.headers['content-length']))) {
+        if (
+          response_.statusCode === 204 &&
+          (Util.isUnset(response_.headers["content-type"]) || Util.isUnset(response_.headers["content-length"]))
+        ) {
           let str = await Util.readAsString(response_.body);
           return {
-            format: 'string',
+            format: "string",
             result: str,
-            entry
+            entry,
           };
         }
 
-        if (Util.equalString(params.bodyType, 'binary')) {
+        if (Util.equalString(params.bodyType, "binary")) {
           return {
-            format: 'binary',
+            format: "binary",
             result: response_.body,
-            entry
+            entry,
           };
-        } else if (Util.equalString(params.bodyType, 'byte')) {
+        } else if (Util.equalString(params.bodyType, "byte")) {
           let byt = await Util.readAsBytes(response_.body);
           return {
-            format: 'byte',
+            format: "byte",
             result: byt,
-            entry
+            entry,
           };
-        } else if (Util.equalString(params.bodyType, 'string')) {
+        } else if (Util.equalString(params.bodyType, "string")) {
           let str = await Util.readAsString(response_.body);
           return {
-            format: 'string',
+            format: "string",
             result: str,
-            entry
+            entry,
           };
-        } else if (Util.equalString(params.bodyType, 'json')) {
+        } else if (Util.equalString(params.bodyType, "json")) {
           let obj = await Util.readAsJSON(response_.body);
           let res = Util.assertAsMap(obj);
           return {
-            format: 'json',
+            format: "json",
             result: res,
-            entry
+            entry,
           };
-        } else if (Util.equalString(params.bodyType, 'array')) {
+        } else if (Util.equalString(params.bodyType, "array")) {
           let arr = await Util.readAsJSON(response_.body);
           return {
-            format: 'json',
+            format: "json",
             result: arr,
-            entry
+            entry,
           };
-        } 
+        }
         let str = await Util.readAsString(response_.body);
         return {
-          format: 'string',
+          format: "string",
           result: str,
-          entry
+          entry,
         };
-        
-
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
           continue;
@@ -290,7 +296,6 @@ export class OpenAPIClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 }
-
 
 exports.Client = OpenAPIClient;
 export default OpenAPIClient;
