@@ -260,7 +260,7 @@
     "kitx": "^2.1.0",
     "lodash": "^4.17.20",
     "moment": "^2.24.0",
-    "needle": "^2.5.0",
+    "needle": "^3.3.1",
     "pontx-manager": "0.3.83-beta.0",
     "pontx-meta-fetch-plugin": "0.3.83",
     "pontx-spec": "0.3.83",
