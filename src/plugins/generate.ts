@@ -2,10 +2,8 @@ import { getFilesBySpecs, snippetsProvider } from "pontx-sdk-plugin-core";
 import { createPontxGeneratePlugin, SnippetsProvider, PontxGeneratorPlugin, GetFilesBySpecs } from "pontx-generate";
 import { PontSpec } from "pontx-spec";
 import { InnerOriginConfig, PontManager } from "pontx-manager";
-import { getRequiredParamsValue } from "../utils";
+import { getRequiredParamsValue, getUserAgent } from "../utils";
 import fetch from "node-fetch";
-import * as vscode from "vscode";
-import os from "os";
 
 const mySnippetsProvider: SnippetsProvider = (info) => {
   return [];
@@ -51,7 +49,7 @@ const codeSampleProvider = async (info: {
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
-      "User-Agent": `Toolkit (${os.type()}; ${os.release()}) alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
+      "User-Agent": getUserAgent(),
     },
   }).then((res) => res.text());
   const sdkDemos = JSON.parse(makeCodeStr);

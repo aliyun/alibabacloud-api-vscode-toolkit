@@ -1,5 +1,7 @@
 "use strict";
 
+import { getUserAgent } from "../../utils";
+
 const { default: OpenApiUtil } = require("@alicloud/openapi-util");
 const { default: Util } = require("@alicloud/tea-util");
 const $Credential = require("@alicloud/credentials");
@@ -149,7 +151,7 @@ export class OpenAPIClient {
           host: this._endpoint,
           "x-acs-version": params.version,
           "x-acs-action": params.action,
-          "user-agent": `Toolkit (${os.type()}; ${os.release()}) alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`,
+          "user-agent": getUserAgent(),
           "x-acs-date": OpenApiUtil.getTimestamp(),
           "x-acs-signature-nonce": Util.getNonce(),
           accept: "application/json",
