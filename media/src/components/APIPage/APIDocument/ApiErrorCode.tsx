@@ -47,7 +47,6 @@ export const ApiErrorCode: React.FC<ApiErrorCodeProps> = (props) => {
             | React.ReactElement<any, string | React.JSXElementConstructor<any>>
             | Iterable<React.ReactNode> // import isEmpty from 'lodash/isEmpty'
             | React.ReactPortal
-            | React.PromiseLikeOfReactNode
             | null
             | undefined,
           index: any,

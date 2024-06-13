@@ -11,6 +11,7 @@ import { alicloudAPIMessageService } from "./Service";
 import { AlicloudApiCommands } from "./commands";
 import { AlicloudApiExplorer } from "./explorer";
 const configSchema = require("pontx-spec/configSchema.json");
+import os from "os";
 
 const { createServerContent } = require("../media/lib/index");
 
@@ -59,8 +60,8 @@ export const findAlicloudAPIConfig = async (context: vscode.ExtensionContext) =>
           url: product.url,
         };
       }),
-    }
-    if(!_.isEqual(publicConfig, oldConfig)){
+    };
+    if (!_.isEqual(publicConfig, oldConfig)) {
       const publicConfigUint8Array = new Uint8Array(Buffer.from(JSON.stringify(publicConfig), "utf-8"));
       await vscode.workspace.fs.writeFile(pontxConfigUri, publicConfigUint8Array);
     }
@@ -512,13 +513,13 @@ export type SpecInfo = {
 };
 
 export const getSpecInfoFromName = (name: string): SpecInfo => {
-  if(typeof name !== "string" ){
+  if (typeof name !== "string") {
     return {
       product: "",
-      version: ""
-    }
+      version: "",
+    };
   }
-  if ((name).includes("::")) {
+  if (name.includes("::")) {
     return {
       product: name.split("::")[0],
       version: name.split("::")[1],
@@ -536,7 +537,11 @@ export const getSpecInfoFromName = (name: string): SpecInfo => {
   };
 };
 
-export const formatName = (name:string):string => {
-  const {product, version} = getSpecInfoFromName(name)
-  return `${product}__${version}`
-}
+export const formatName = (name: string): string => {
+  const { product, version } = getSpecInfoFromName(name);
+  return `${product}__${version}`;
+};
+
+export const getUserAgent = () => {
+  return `Toolkit (${os.type()}; ${os.release()}) alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`;
+};

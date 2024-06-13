@@ -6,7 +6,7 @@ import { PontSpec } from "pontx-spec";
 import { PontAPIExplorer, AlicloudApiExplorer } from "./explorer";
 import { AlicloudApiCommands } from "./commands";
 import * as _ from "lodash";
-import { batchDispose, getFormatValues, showProgress, VSCodeLogger } from "./utils";
+import { batchDispose, getFormatValues, getUserAgent, showProgress, VSCodeLogger } from "./utils";
 import { request } from "./openApiService/request/request";
 import fs from "fs";
 import fsx from "fs/promises";
@@ -145,19 +145,21 @@ export class AlicloudAPIService {
    * @description 根据 API 查询是否有 CodeSample
    */
   async requestSamplesByAPI(product: string, version: string, api: string) {
-    const resStr = await fetch(
-      `https://api.aliyun.com/api/samples/product/${product}/version/${version}/api/${api}`,
-      {},
-    ).then((res) => res.text());
+    const resStr = await fetch(`https://api.aliyun.com/api/samples/product/${product}/version/${version}/api/${api}`, {
+      headers: {
+        "User-Agent": getUserAgent(),
+      },
+    }).then((res) => res.text());
     const res = JSON.parse(resStr);
     return res?.data || [];
   }
 
   async requestEndpoints(product: string) {
-    const resStr = await fetch(
-      `https://api.aliyun.com/meta/v1/products/${product}/endpoints.json?language=zh-CN`,
-      {},
-    ).then((res) => res.text());
+    const resStr = await fetch(`https://api.aliyun.com/meta/v1/products/${product}/endpoints.json?language=zh-CN`, {
+      headers: {
+        "User-Agent": getUserAgent(),
+      },
+    }).then((res) => res.text());
     const res = JSON.parse(resStr);
     return res?.data?.endpoints || [];
   }
@@ -256,7 +258,10 @@ export class AlicloudAPIService {
     const resStr = await fetch(`https://api.aliyun.com/api/product/makeCode`, {
       method: "post",
       body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": getUserAgent(),
+      },
     }).then((res) => res.text());
     const res = JSON.parse(resStr);
     return res;
