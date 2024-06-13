@@ -38,7 +38,7 @@
   "repository": "git@github.com:aliyun/alibabacloud-api-vscode-toolkit.git",
   "devDependencies": {
     "@types/blueimp-md5": "^2.7.0",
-    "@types/fs-extra": "^5.1.0",
+    "@types/fs-extra": "^11.0.4",
     "@types/lodash": "^4.17.0",
     "@types/node": "^20",
     "@types/react": "^18.3.3",
