@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.0.11(2024-06-13)
+
+- Fixed some UI issues.
+- Update User-Agent.
+
 ## 0.0.10(2024-05-17)
 
 - SDK code documentation has been enhanced with the Code Sample link.
