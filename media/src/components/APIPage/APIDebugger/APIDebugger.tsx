@@ -10,6 +10,7 @@ import { APIPageContext } from "../context";
 import { APIGuide } from "./APIGuide";
 import RegionSelector from "./RegionSelector";
 import { xconsoleWidgets } from "./widgets/xconsole";
+import { debugForbiddenProducts } from "../../../utils/utils";
 
 export class APIDebuggerProps {}
 
@@ -53,21 +54,27 @@ export const APIDebugger: React.FC<APIDebuggerProps> = (props) => {
         >
           {I18N.main.explorer.empty}
         </Button>
-        <Button
-          type="primary"
-          onClick={() => {
-            changeMode("debug");
-            onDebug({
-              paramsValue: schemaForm.formData,
-              apiMeta: apiMeta,
-              product,
-              version,
-              endpoint: endpoint,
-            });
-          }}
-        >
-          {I18N.main.explorer.debug}
-        </Button>
+        {debugForbiddenProducts?.includes(`${product}__${version}`) ? (
+          <a href={apiMeta?.externalDocs?.url}>
+            <Button type="primary">去门户网页版调试</Button>
+          </a>
+        ) : (
+          <Button
+            type="primary"
+            onClick={() => {
+              changeMode("debug");
+              onDebug({
+                paramsValue: schemaForm.formData,
+                apiMeta: apiMeta,
+                product,
+                version,
+                endpoint: endpoint,
+              });
+            }}
+          >
+            {I18N.main.explorer.debug}
+          </Button>
+        )}
       </div>
     </div>
   );

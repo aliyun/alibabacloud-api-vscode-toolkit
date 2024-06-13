@@ -54,3 +54,4 @@ export const getSpecInfoFromName = (name: string): SpecInfo => {
   };
 };
 
+export const debugForbiddenProducts = ["Kms__2016-01-20", "Oss__2019-05-17", "pds__2022-03-01", "Sls__2020-12-30"];
