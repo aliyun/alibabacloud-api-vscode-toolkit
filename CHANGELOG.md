@@ -2,6 +2,7 @@
 
 ## 0.0.11(2024-06-13)
 
+- Guide special products to web debugging.
 - Fixed some UI issues.
 - Update User-Agent.
 
