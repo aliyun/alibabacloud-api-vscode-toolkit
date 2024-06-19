@@ -12,6 +12,7 @@ import fs from "fs";
 import fsx from "fs/promises";
 import os from "os";
 import fetch from "node-fetch";
+import { getProfileInfoInstance } from "./profileManager";
 
 export class AlicloudAPIService {
   pontManager: PontManager;
@@ -374,6 +375,27 @@ export class AlicloudAPIService {
     this.updatePontManger(newPontManager);
     // PontManager.generateCode(this.pontManager);
     return;
+  }
+
+  async addNewAKProfile(submitValue: {
+    profileName: string;
+    accessKey: string;
+    secretKey: string;
+    defaultRegionId: string;
+  }) {
+    const profileInfo = await getProfileInfoInstance();
+    await profileInfo.addProfile(submitValue);
+    await profileInfo.refreshProfiles();
+    await vscode.commands.executeCommand("alicloud.api.restart");
+    return { success: true };
+  }
+
+  async requestProfiles() {
+    return await getProfileInfoInstance()?.profileInfo;
+  }
+
+  async closeCurrentTab() {
+    vscode.commands.executeCommand("workbench.action.closeActiveEditor");
   }
 
   async requestGenerateSdk() {
