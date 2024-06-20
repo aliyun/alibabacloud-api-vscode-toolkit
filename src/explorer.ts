@@ -458,7 +458,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
     }
 
     items.push({
-      label: `新增 AK/SK 配置`,
+      label: `新增 AK 凭证配置`,
       iconPath: new vscode.ThemeIcon("add"),
       id: "ADD_NEW_PROFILE",
     });
@@ -480,6 +480,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
           name: "配置 AK 凭证",
           specName: "profile",
           pageType: "profile",
+          column: vscode.ViewColumn.Beside,
         });
       }
     });

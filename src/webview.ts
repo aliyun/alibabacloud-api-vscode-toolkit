@@ -9,6 +9,7 @@ export type PanelConfig = {
   name: string;
   pageType: "document" | "changes";
   schemaType: "api" | "struct";
+  column?: number;
 };
 
 const getPanelKey = (panelConfig: PanelConfig) => {
@@ -66,7 +67,7 @@ export class AlicloudAPIWebview {
     AlicloudAPIWebview.webviewPanels[panelKey] = vscode.window.createWebviewPanel(
       AlicloudAPIWebview.viewType, // WebView 面板的标识符
       panelConfig.name, // WebView 面板的标题
-      column || vscode.ViewColumn.One, // WebView 在编辑器中的显示位置
+      panelConfig.column || column || vscode.ViewColumn.One, // WebView 在编辑器中的显示位置
       {
         // Enable javascript in the webview
         enableScripts: true,

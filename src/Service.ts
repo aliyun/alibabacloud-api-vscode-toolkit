@@ -392,11 +392,31 @@ export class AlicloudAPIService {
     secretKey: string;
     defaultRegionId: string;
   }) {
-    const profileInfo = await getProfileInfoInstance();
-    await profileInfo.addProfile(submitValue);
-    await profileInfo.refreshProfiles();
-    await vscode.commands.executeCommand("alicloud.api.restart");
-    return { success: true };
+    try {
+      const profileInfo = await getProfileInfoInstance();
+      await profileInfo.addProfile(submitValue);
+      await profileInfo.refreshProfiles();
+      await vscode.commands.executeCommand("alicloud.api.restart");
+      return { success: true };
+    } catch (e) {
+      return { success: false, error: e };
+    }
+  }
+
+  /** 打开 profile 配置 */
+  async openProfileManager() {
+    await vscode.commands.executeCommand("alicloud.api.openDocument", {
+      name: "配置 AK 凭证",
+      specName: "profile",
+      pageType: "profile",
+      column: vscode.ViewColumn.Beside,
+    });
+    return;
+  }
+  /** 选择 profile */
+  async switchProfile() {
+    await vscode.commands.executeCommand("alicloud.api.switchProfiles");
+    return;
   }
 
   async requestProfiles() {

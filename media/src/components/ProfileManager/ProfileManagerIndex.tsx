@@ -112,7 +112,7 @@ export const ProfileManagerIndex: React.FC<ProfileManagerIndexProps> = (props) =
                 }}
                 className="text-right"
               >
-                提交
+                新增
               </Form.Submit>
               <Form.Reset style={{ marginLeft: 10 }}>重置</Form.Reset>
             </div>

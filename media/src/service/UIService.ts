@@ -95,4 +95,8 @@ export const PontUIService = {
   }) => {
     return { success: true };
   },
+  /** 打开 profile 配置 */
+  openProfileManager: async () => {},
+  /** 选择 profile */
+  switchProfile: async () => {},
 };
