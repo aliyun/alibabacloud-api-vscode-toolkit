@@ -167,6 +167,15 @@ export class AlicloudAPIService {
 
   async openInCode(codeInfo: { code: string; language: string }) {
     const { language, code } = codeInfo;
+    const getViewColumn = () => {
+      if (vscode.window.visibleTextEditors.length > 0) {
+        return vscode.ViewColumn.One;
+      } else {
+        return vscode.ViewColumn.Beside;
+      }
+    };
+    const column = getViewColumn();
+
     // 创建新的文件
     vscode.workspace
       .openTextDocument({
@@ -175,7 +184,7 @@ export class AlicloudAPIService {
       })
       .then((newDocument) => {
         vscode.window.showTextDocument(newDocument, {
-          viewColumn: vscode.ViewColumn.Beside,
+          viewColumn: column,
         });
       });
     return {};
