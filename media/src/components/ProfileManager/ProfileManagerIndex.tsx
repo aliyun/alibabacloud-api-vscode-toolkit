@@ -1,5 +1,5 @@
 /**
- * @author 念依
+ * @author yini-chen
  * @description profiles manager index
  */
 import { Button, Form, Input, Message } from "@alicloud/console-components";
