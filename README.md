@@ -22,11 +22,13 @@ English | [简体中文](./README.zh_CN.md)
 
 - **Code Snippets:** You can use the code snippets to quickly generate the code.
 
+- **Profiles Management :** Manage your Alibaba Cloud profiles.
+
 - More features are under development, please stay tuned.
 
 ## Extension UI Guide
 
-![VSCode Extension Guide](https://img.alicdn.com/imgextra/i2/O1CN01t993u81InC3xh7RVU_!!6000000000937-0-tps-2328-1646.jpg)
+![VSCode Extension Guide](https://gw.alicdn.com/imgextra/i4/O1CN01tkB2bT2AAFeiOYZm6_!!6000000008162-0-tps-2372-1594.jpg)
 
 ### Product Searching `ctrl+cmd+k`
 
@@ -38,28 +40,11 @@ English | [简体中文](./README.zh_CN.md)
 
 ### Call the API
 
-The feature requires you to configure your AK/SK information as follows:
+![API debugging](https://gw.alicdn.com/imgextra/i2/O1CN01fsuDBE1CLMJaBJj32_!!6000000000064-0-tps-3238-1920.jpg)
 
-1. Install Aliyun CLI: [Install guide](https://www.alibabacloud.com/help/en/cli/installation-guide).
-2. Install [Alibaba Cloud CLI Tools](https://marketplace.visualstudio.com/items?itemName=alibabacloud-openapi.aliyuncli) extentions.
-3. You can run the `aliyun configure` command for quick configuration.
+> Note that the debugging needs to configure your AK credentials, click the left identity icon, you can add and switch the current AK credentials configuration.
 
-```
-$ aliyun configure
-Configuring profile 'default' ...
-Aliyun Access Key ID [None]: <Your AccessKey ID>
-Aliyun Access Key Secret [None]: <Your AccessKey Secret>
-Default Region Id [None]: cn-hangzhou
-Default output format [json]: json
-Default Language [zh]: zh
-```
-
-4. Click the Alibaba Cloud icon in VS Code status bar to manage your profiles.
-   ![](https://img.alicdn.com/imgextra/i1/O1CN0144NU9N1L4G1cq89Uf_!!6000000001245-0-tps-248-46.jpg)
-   ![](https://img.alicdn.com/imgextra/i2/O1CN01btLUkc1ldEHJQ0w4S_!!6000000004841-0-tps-1206-190.jpg)
-   More information please refer to the [Alibaba Cloud CLI Documentation](https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure).
-
-![API debug](https://img.alicdn.com/imgextra/i3/O1CN01yfMcHl1i6lNdjzmzs_!!6000000004364-2-tps-2688-1820.png)
+![manage profiles](https://gw.alicdn.com/imgextra/i2/O1CN01HzFhxH20gdVF4MIfq_!!6000000006879-0-tps-1938-378.jpg)
 
 ### SDK Code Sample
 
@@ -83,6 +68,12 @@ Or use the keyboard shortcuts `ctrl+cmd+l` to search the API and select Insert s
 When writing SDK code, you can get more code sample references by viewing the OpenAPI description information and additional related sample links through the code documentation.
 
 ![Document enhancement](https://img.alicdn.com/imgextra/i4/O1CN01jedn431D1Uk8MEhM3_!!6000000000156-0-tps-2562-654.jpg)
+
+### Profiles Management
+
+Add and switch your Alibaba Cloud profiles.
+
+![](https://img.alicdn.com/imgextra/i1/O1CN01NN667S1skk7vLbhr1_!!6000000005805-0-tps-2912-1596.jpg)
 
 ## Feedback
 
