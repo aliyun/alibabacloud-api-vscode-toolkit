@@ -22,11 +22,13 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 
 - **Code Snippets:** 支持代码片段功能，帮助你快速编写 SDK 代码。
 
+- **profiles 管理:** 管理你的阿里云 profiles。
+
 - 更多功能正在开发中，敬请期待...
 
 ## 插件 UI 导览
 
-![VSCode Extension Guide](https://img.alicdn.com/imgextra/i1/O1CN01tlXFtt1mj0vE1ZrhR_!!6000000004989-0-tps-2498-1768.jpg)
+![VSCode Extension Guide](https://gw.alicdn.com/imgextra/i2/O1CN013GxzFK21jDLZNFaos_!!6000000007020-0-tps-2704-1808.jpg)
 
 ### 产品搜索 `ctrl+cmd+k`
 
@@ -38,28 +40,11 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 
 ### API 调试
 
-调试功能需要配置你的 AK/SK 信息，配置方法如下：
+![API debug](https://gw.alicdn.com/imgextra/i2/O1CN01fsuDBE1CLMJaBJj32_!!6000000000064-0-tps-3238-1920.jpg)
 
-1. 安装阿里云 CLI：[安装指南](https://help.aliyun.com/zh/cli/installation-guide)；
-2. 安装 [Alibaba Cloud CLI Tools](https://marketplace.visualstudio.com/items?；itemName=alibabacloud-openapi.aliyuncli) 插件；
-3. 输入 `aliyun configure` 命令，按照提示进行配置，
+> 注意，调试功能需要配置你的 AK 凭证，点击左侧身份图标，可以新增和切换当前的 AK 凭证配置。
 
-```
-$ aliyun configure
-Configuring profile 'default' ...
-Aliyun Access Key ID [None]: <Your AccessKey ID>
-Aliyun Access Key Secret [None]: <Your AccessKey Secret>
-Default Region Id [None]: cn-hangzhou
-Default output format [json]: json
-Default Language [zh]: zh
-```
-
-4. 点击 VS Code 底部状态栏中的阿里云图标，管理你的 profiles，
-   ![](https://img.alicdn.com/imgextra/i1/O1CN0144NU9N1L4G1cq89Uf_!!6000000001245-0-tps-248-46.jpg)
-   ![](https://img.alicdn.com/imgextra/i2/O1CN01btLUkc1ldEHJQ0w4S_!!6000000004841-0-tps-1206-190.jpg)
-   更多信息请参考 [Alibaba Cloud CLI Documentation](https://github.com/aliyun/aliyun-cli?tab=readme-ov-file#configure)。
-
-![API debug](https://img.alicdn.com/imgextra/i3/O1CN01yfMcHl1i6lNdjzmzs_!!6000000004364-2-tps-2688-1820.png)
+![](https://img.alicdn.com/imgextra/i2/O1CN01HzFhxH20gdVF4MIfq_!!6000000006879-0-tps-1938-378.jpg)
 
 ### SDK 示例
 
@@ -84,6 +69,12 @@ Default Language [zh]: zh
 你能够在编写 SDK 代码时，通过代码文档看到 OpenAPI 的描述信息以及更多相关示例链接，来获得更多代码示例参考。
 
 ![Document enhancement](https://img.alicdn.com/imgextra/i4/O1CN01jedn431D1Uk8MEhM3_!!6000000000156-0-tps-2562-654.jpg)
+
+### Profiles 管理
+
+新增和切换你的阿里云 profiles。
+
+![](https://img.alicdn.com/imgextra/i1/O1CN01NN667S1skk7vLbhr1_!!6000000005805-0-tps-2912-1596.jpg)
 
 ## 反馈
 

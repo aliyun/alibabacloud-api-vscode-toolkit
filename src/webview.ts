@@ -7,8 +7,9 @@ export type PanelConfig = {
   specName: string;
   modName: string;
   name: string;
-  pageType: "document" | "changes";
-  schemaType: "api" | "struct";
+  pageType: "document" | "changes" | "profile";
+  schemaType: "api" | "struct" | "others";
+  column?: number;
 };
 
 const getPanelKey = (panelConfig: PanelConfig) => {
@@ -39,6 +40,12 @@ const getPanelConfig = (panelKey: string) => {
   }
 };
 
+const webviewIconPath = {
+  api: "resources/api-outline.svg",
+  struct: "resources/struct-outline.svg",
+  others: "resources/alibabacloud.svg",
+};
+
 export class AlicloudAPIWebview {
   static viewType = "alicloud-api-webview";
   static webviewPanels = {} as ObjectMap<vscode.WebviewPanel>;
@@ -66,7 +73,7 @@ export class AlicloudAPIWebview {
     AlicloudAPIWebview.webviewPanels[panelKey] = vscode.window.createWebviewPanel(
       AlicloudAPIWebview.viewType, // WebView 面板的标识符
       panelConfig.name, // WebView 面板的标题
-      column || vscode.ViewColumn.One, // WebView 在编辑器中的显示位置
+      panelConfig.column || column || vscode.ViewColumn.One, // WebView 在编辑器中的显示位置
       {
         // Enable javascript in the webview
         enableScripts: true,
@@ -80,10 +87,9 @@ export class AlicloudAPIWebview {
       delete AlicloudAPIWebview.webviewPanels[panelKey];
     });
     webview.title = panelConfig.name;
-    const iconPath =
-      panelConfig?.schemaType === "api"
-        ? vscode.Uri.joinPath(extensionUri, "resources/api-outline.svg")
-        : vscode.Uri.joinPath(extensionUri, "resources/struct-outline.svg");
+    const iconPath = panelConfig?.schemaType
+      ? vscode.Uri.joinPath(extensionUri, webviewIconPath[panelConfig.schemaType])
+      : vscode.Uri.joinPath(extensionUri, webviewIconPath["others"]);
     webview.iconPath = iconPath;
     webview.webview.html = htmlTemplate(
       {

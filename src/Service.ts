@@ -12,6 +12,7 @@ import fs from "fs";
 import fsx from "fs/promises";
 import os from "os";
 import fetch from "node-fetch";
+import { getProfileInfoInstance } from "./profileManager";
 
 export class AlicloudAPIService {
   pontManager: PontManager;
@@ -166,6 +167,15 @@ export class AlicloudAPIService {
 
   async openInCode(codeInfo: { code: string; language: string }) {
     const { language, code } = codeInfo;
+    const getViewColumn = () => {
+      if (vscode.window.visibleTextEditors.length > 0) {
+        return vscode.ViewColumn.One;
+      } else {
+        return vscode.ViewColumn.Beside;
+      }
+    };
+    const column = getViewColumn();
+
     // 创建新的文件
     vscode.workspace
       .openTextDocument({
@@ -174,7 +184,7 @@ export class AlicloudAPIService {
       })
       .then((newDocument) => {
         vscode.window.showTextDocument(newDocument, {
-          viewColumn: vscode.ViewColumn.Beside,
+          viewColumn: column,
         });
       });
     return {};
@@ -374,6 +384,47 @@ export class AlicloudAPIService {
     this.updatePontManger(newPontManager);
     // PontManager.generateCode(this.pontManager);
     return;
+  }
+
+  async addNewAKProfile(submitValue: {
+    profileName: string;
+    accessKey: string;
+    secretKey: string;
+    defaultRegionId: string;
+  }) {
+    try {
+      const profileInfo = await getProfileInfoInstance();
+      await profileInfo.addProfile(submitValue);
+      await profileInfo.refreshProfiles();
+      await vscode.commands.executeCommand("alicloud.api.restart");
+      return { success: true };
+    } catch (e) {
+      return { success: false, error: e };
+    }
+  }
+
+  /** 打开 profile 配置 */
+  async openProfileManager() {
+    await vscode.commands.executeCommand("alicloud.api.openDocument", {
+      name: "配置 AK 凭证",
+      specName: "profile",
+      pageType: "profile",
+      column: vscode.ViewColumn.Beside,
+    });
+    return;
+  }
+  /** 选择 profile */
+  async switchProfile() {
+    await vscode.commands.executeCommand("alicloud.api.switchProfiles");
+    return;
+  }
+
+  async requestProfiles() {
+    return await getProfileInfoInstance()?.profileInfo;
+  }
+
+  async closeCurrentTab() {
+    vscode.commands.executeCommand("workbench.action.closeActiveEditor");
   }
 
   async requestGenerateSdk() {

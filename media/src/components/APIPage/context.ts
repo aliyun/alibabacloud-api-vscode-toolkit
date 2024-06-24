@@ -1,15 +1,15 @@
 /**
  * @author yini-chen
  */
-import { createContainer } from 'unstated-next';
-import { SemixFormProps } from '../SemixFormRender';
-import React from 'react';
-import { PontUIService } from '../../service/UIService';
-import { OpenAPIResponse, OpenAPIRequestResult } from '../../types/openAPI';
-import { endpointsMocks } from '../../mocks/endpoints';
-import { getVSCode } from '../../utils/utils';
+import { createContainer } from "unstated-next";
+import { SemixFormProps } from "../SemixFormRender";
+import React from "react";
+import { PontUIService } from "../../service/UIService";
+import { OpenAPIResponse, OpenAPIRequestResult } from "../../types/openAPI";
+import { endpointsMocks } from "../../mocks/endpoints";
+import { getVSCode } from "../../utils/utils";
 
-export class APIPageState  {
+export class APIPageState {
   /**
    * apiMeta
    */
@@ -17,26 +17,26 @@ export class APIPageState  {
   /**
    * schemaForm
    */
-  schemaForm: SemixFormProps['form'];
+  schemaForm: SemixFormProps["form"];
   product: string;
-  version:string;
+  version: string;
   /**
    * openapi sdk 响应组
    */
-  openAPIResponses?= {};
+  openAPIResponses? = {};
   /**
    * 发起调试
    */
-  onDebug?:(value:any)=>void;
+  onDebug?: (value: any) => void;
   /**
    * 发起调用loading
    */
-  isApiResultLoading? = false
+  isApiResultLoading? = false;
   /**
    * 模式选择
    */
-  mode: 'debug' | 'doc' |'sdk' = 'debug';
-  changeMode: (mode: 'debug' | 'doc' | 'sdk') => void;
+  mode: "debug" | "doc" | "sdk" = "debug";
+  changeMode: (mode: "debug" | "doc" | "sdk") => void;
   /**
    * 服务地址
    */
@@ -44,8 +44,12 @@ export class APIPageState  {
   /**
    * regionId
    */
-  regionId? = 'cn-hangzhou';
+  regionId? = "cn-hangzhou";
   setRegionId?: (regionId: string) => void;
+  /**
+   * profileInfo
+   */
+  profileInfo?: any;
 }
 
 export const useAPIPageContext = (initialState = {} as APIPageState): APIPageState => {
@@ -53,6 +57,7 @@ export const useAPIPageContext = (initialState = {} as APIPageState): APIPageSta
   const [isApiResultLoading, setIsApiResultLoading] = React.useState(false);
   const [endpoints, setEndpoints] = React.useState([]);
   const [regionId, setRegionId] = React.useState<string>("cn-hangzhou");
+  const [profileInfo, setProfileInfo] = React.useState({});
 
   React.useEffect(() => {
     if (endpoints.length === 0) {
@@ -63,17 +68,32 @@ export const useAPIPageContext = (initialState = {} as APIPageState): APIPageSta
     }
   }, [initialState.product]);
 
-  const onDebug = (value) =>{
+  React.useEffect(() => {
+    PontUIService.requestProfiles().then((res) => {
+      setProfileInfo(res || {});
+    });
+  }, []);
+
+  const onDebug = (value) => {
     setIsApiResultLoading(true);
-    PontUIService.openAPIRequest(value).then(res=>{
+    PontUIService.openAPIRequest(value).then((res) => {
       setIsApiResultLoading(false);
       const responses = {};
       // 根据文档名存储响应，切换API文档时展示对应的响应
-      responses[res.doc] = res.response
+      responses[res.doc] = res.response;
       setOpenAPIResponse(responses);
     });
-  }
-  return { ...initialState, openAPIResponses, onDebug, isApiResultLoading, endpoints, regionId, setRegionId };
+  };
+  return {
+    ...initialState,
+    openAPIResponses,
+    onDebug,
+    isApiResultLoading,
+    endpoints,
+    regionId,
+    setRegionId,
+    profileInfo,
+  };
 };
 
 export const APIPageContext = createContainer(useAPIPageContext);
