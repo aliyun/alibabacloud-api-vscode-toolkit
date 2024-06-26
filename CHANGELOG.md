@@ -1,5 +1,12 @@
 # Release Notes
 
+## 0.0.11(2024-06-26)
+
+- Profiles management: You can switch between profiles or add a new one.
+- Guide special products to web debugging.
+- Fixed some UI issues.
+- Update User-Agent.
+
 ## 0.0.10(2024-05-17)
 
 - SDK code documentation has been enhanced with the Code Sample link.
