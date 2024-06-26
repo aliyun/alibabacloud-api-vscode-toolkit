@@ -1,6 +1,6 @@
 # Release Notes
 
-## 0.0.11(2024-06-13)
+## 0.0.11(2024-06-26)
 
 - Profiles management: You can switch between profiles or add a new one.
 - Guide special products to web debugging.
