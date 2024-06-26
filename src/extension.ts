@@ -15,6 +15,7 @@ import { getProductRequestInstance } from "./productExplorer";
 import autoCompletion from "./provider/autoCompletion";
 import autofix from "./provider/autofix";
 import hoverInfo from "./provider/hoverProvider";
+import { getProfileInfoInstance } from "./profileManager";
 
 export async function activate(context: vscode.ExtensionContext) {
   // if (!vscode.workspace.rootPath) {
@@ -29,6 +30,8 @@ export async function activate(context: vscode.ExtensionContext) {
 
   // 获取产品列表
   await getProductRequestInstance();
+  // 获取用户的 profileInfo
+  await getProfileInfoInstance();
 
   alicloudAPIMessageService.context = context;
 

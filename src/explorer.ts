@@ -9,6 +9,7 @@ import { AlicloudApiCommands } from "./commands";
 import { getProductRequestInstance } from "./productExplorer";
 import { Product } from "./types";
 import _ from "lodash";
+import { getProfileInfoInstance } from "./profileManager";
 
 type DiffResult<T> = T;
 
@@ -432,6 +433,61 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
     }
   }
 
+  async switchProfile() {
+    const quickPick = vscode.window.createQuickPick();
+    quickPick.placeholder = "Select a profile";
+
+    const items = [];
+
+    const profileInstance = await getProfileInfoInstance();
+
+    const config = profileInstance?.getProfileInfo();
+    const profiles = config?.profiles;
+
+    for (const profile of profiles) {
+      let label = `$(account) ${profile.name}`;
+      if (profile.name === config.current) {
+        label = `$(account) ${profile.name} $(check)`;
+      }
+
+      items.push({
+        profile: profile.name,
+        label: label,
+        detail: `mode: ${profile.mode}, default region: ${profile.region_id}`,
+      });
+    }
+
+    items.push({
+      label: `新增 AK 凭证配置`,
+      iconPath: new vscode.ThemeIcon("add"),
+      id: "ADD_NEW_PROFILE",
+    });
+
+    quickPick.items = items;
+
+    quickPick.onDidAccept(async () => {
+      if ((quickPick.selectedItems[0] as any)?.profile) {
+        vscode.window.showInformationMessage(
+          `Switching profile to ${(quickPick.selectedItems[0] as any).profile}, done`,
+        );
+        config.current = (quickPick.selectedItems[0] as any).profile;
+        await profileInstance.saveProfiles(config);
+        await getProfileInfoInstance();
+        vscode.commands.executeCommand("alicloud.api.restart");
+        quickPick.dispose();
+      } else if ((quickPick.selectedItems[0] as any)?.id === "ADD_NEW_PROFILE") {
+        vscode.commands.executeCommand("alicloud.api.openDocument", {
+          name: "配置 AK 凭证",
+          specName: "profile",
+          pageType: "profile",
+          column: vscode.ViewColumn.Beside,
+        });
+      }
+    });
+
+    quickPick.show();
+  }
+
   constructor(
     private pontManager: PontManager,
     private context: vscode.ExtensionContext,
@@ -548,6 +604,10 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
           this.removeSubscriptions(meta.specName);
         }
       }
+    });
+
+    vscode.commands.registerCommand("alicloud.api.switchProfiles", async (meta) => {
+      this.switchProfile();
     });
   }
   private _onDidChangeTreeData = new vscode.EventEmitter<PontChangeTreeItem | PontAPITreeItem | void>();
@@ -708,18 +768,31 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
 
   getChildren(element?: PontAPITreeItem): vscode.ProviderResult<PontAPITreeItem[]> {
     if (!element) {
+      const profileManager = getProfileInfoInstance();
       return [
+        {
+          label: `${profileManager?.profileInfo?.current?.length ? `当前: ${profileManager?.profileInfo?.current}` : "点击配置您的 AK 信息"}`,
+          tooltip: "点击切换您的 AK 信息",
+          contextValue: "alicloudProfiles",
+          iconPath: new vscode.ThemeIcon("account"),
+          command: {
+            command: "alicloud.api.switchProfiles",
+            title: "open",
+          },
+        },
         {
           label: "阿里云产品",
           contextValue: "alicloudProducts",
           resourceUri: vscode.Uri.parse(`pontx-manager://manager`),
           collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
+          tooltip: "阿里云产品",
         },
         {
           label: "我的订阅",
           contextValue: "alicloudAPISubscriptions",
           resourceUri: vscode.Uri.parse(`pontx-manager://manager`),
           collapsibleState: vscode.TreeItemCollapsibleState.Expanded,
+          tooltip: "我的订阅",
         },
       ];
     }

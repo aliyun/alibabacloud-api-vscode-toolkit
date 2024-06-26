@@ -71,4 +71,32 @@ export const PontUIService = {
   getNoticeFlag: async (): Promise<boolean> => true,
   /** 更新体验弹窗弹出的时间 */
   updateQuestionnaireExpiration: async (days: number): Promise<void> => {},
+  /** get profiles */
+  requestProfiles: async () => {
+    return { current: "", profiles: [] };
+  },
+  /** 新增 AK 凭证 */
+  addNewAKProfile: async (submitValue: {
+    profileName: string;
+    accessKey: string;
+    secretKey: string;
+    defaultRegionId: string;
+  }) => {
+    return { success: true };
+  },
+  /** 关闭当前tab页*/
+  closeCurrentTab: async () => "",
+  /** 删除 AK 凭证 */
+  deleteAKProfile: async (submitValue: {
+    profileName: string;
+    accessKey: string;
+    secretKey: string;
+    defaultRegionId: string;
+  }) => {
+    return { success: true };
+  },
+  /** 打开 profile 配置 */
+  openProfileManager: async () => {},
+  /** 选择 profile */
+  switchProfile: async () => {},
 };

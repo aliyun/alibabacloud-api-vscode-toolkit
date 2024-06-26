@@ -12,6 +12,7 @@ import { EditorLanguages } from "../../../types/EditorLanguages";
 import I18N from "../../../utils/I18N";
 import { getEditorMenuItems, parseXml } from "../../utils";
 import { APIPageContext } from "../context";
+import { PontUIService } from "../../../service/UIService";
 
 export class TryAPIProps {}
 
@@ -31,7 +32,8 @@ const TAB_PANES = [
 ];
 
 export const TryAPI: React.FC<TryAPIProps> = (props) => {
-  const { openAPIResponses, isApiResultLoading, version, apiMeta, product, mode } = APIPageContext.useContainer();
+  const { openAPIResponses, isApiResultLoading, version, apiMeta, product, mode, profileInfo } =
+    APIPageContext.useContainer();
   const doc = `${product}::${version}::${apiMeta.name}`;
   const [tab, setTab] = React.useState(TAB_PANES[0].value);
   const apiResult = openAPIResponses?.[doc];
@@ -138,18 +140,15 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
       <Alert
         message={
           <div>
-            调试需要
-            <a href="https://help.aliyun.com/zh/cli/installation-guide/" target="_blank">
-              安装
-            </a>
-            阿里云 CLI 并
-            <a
-              href="https://help.aliyun.com/zh/cli/interactive-configuration-or-fast-configuration#section-5pj-p7j-06z"
-              target="_blank"
-            >
-              配置
-            </a>
-            您的 AK/SK 信息。{I18N.main.explorer.AKTip}
+            {profileInfo?.current?.length ? null : (
+              <span>
+                调试需要配置您的 AK/SK 信息，
+                <a onClick={() => PontUIService.openProfileManager()} className="text-blue-500">
+                  点击配置。
+                </a>
+              </span>
+            )}
+            {I18N.main.explorer.AKTip}
           </div>
         }
         type="warning"
@@ -165,14 +164,16 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
           ) : null}
 
           <div className="api-res-header">
-            <div className="title mb-4 text-gray-900 text-sm font-medium">{I18N.main.explorer.overview}</div>
+            <div className="title mb-4 text-sm font-medium text-gray-900">{I18N.main.explorer.overview}</div>
             {/* {apiResult?.result || props.isApiResultLoading ? ( */}
             <div className="res-info mb-4 flex">
-              <div className="item mr-6 mx-1 inline-block">
+              <div className="item mx-1 mr-6 inline-block">
                 <div className="debug-res flex">
                   <div
                     className={`codicon codicon-${
-                      String(statusCode).startsWith("2") ? "pass-filled success text-green-600" : "error error-red text-red-700"
+                      String(statusCode).startsWith("2")
+                        ? "pass-filled success text-green-600"
+                        : "error error-red text-red-700"
                     }`}
                   ></div>
                   <div className="value">
@@ -181,12 +182,12 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                 </div>
               </div>
               {apiResult && statusCode ? (
-                <div className="item mr-6 mx-1">
+                <div className="item mx-1 mr-6">
                   {/* {httpStatusMessageMap[statusCode] || statusCode} */}
-                  <span className="label font-medium mr-1 text-gray-500">{I18N.main.explorer.statusCode}</span>
+                  <span className="label mr-1 font-medium text-gray-500">{I18N.main.explorer.statusCode}</span>
                   <span
                     className={`value result-status font-medium ${
-                      String(statusCode).startsWith("2") ? "text-green-600 success" : "error error-red text-red-700"
+                      String(statusCode).startsWith("2") ? "success text-green-600" : "error error-red text-red-700"
                     }`}
                   >
                     {statusCode}
@@ -194,8 +195,8 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                 </div>
               ) : null}
               {apiResult ? (
-                <div className="item mr-6 mx-1">
-                  <span className="label font-medium mr-1 text-gray-500">{I18N.main.explorer.time}</span>
+                <div className="item mx-1 mr-6">
+                  <span className="label mr-1 font-medium text-gray-500">{I18N.main.explorer.time}</span>
                   <span className="value">{apiResult.cost}ms</span>
                 </div>
               ) : null}

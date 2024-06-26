@@ -269,7 +269,6 @@
     "querystring": "0.2.1",
     "styled-components": "^6.1.1",
     "url": "^0.11.0",
-    "urllib": "^2.36.1",
     "xml2js": "^0.6.2"
   },
   "icon": "resources/aliyun_logo_128x128.png",
@@ -278,7 +277,6 @@
     "type": "git"
   },
   "devDependencies": {
-    "mockjs": "^1.0.1-beta3",
     "assert": "^2.0.0",
     "ncc": "^0.3.6",
     "@types/fs-extra": "^5.1.0",
