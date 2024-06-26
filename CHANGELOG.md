@@ -2,6 +2,7 @@
 
 ## 0.0.11(2024-06-13)
 
+- Profiles management: You can switch between profiles or add a new one.
 - Guide special products to web debugging.
 - Fixed some UI issues.
 - Update User-Agent.
