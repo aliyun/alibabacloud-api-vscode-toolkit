@@ -5,6 +5,8 @@
 import { Button, Form, Input, Message } from "@alicloud/console-components";
 import React from "react";
 import { PontUIService } from "../../service/UIService";
+import { message } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 export class ProfileManagerIndexProps {}
 
@@ -30,9 +32,10 @@ export const ProfileManagerIndex: React.FC<ProfileManagerIndexProps> = (props) =
         </div>
         {status === "success" ? (
           <div className="my-4 text-base">
-            <Message type="success" style={{ borderRadius: 4 }}>
-              新增成功！
-            </Message>
+            <div className="flex w-[100%] rounded-sm bg-[#d8f5d8] px-4 py-2 text-sm">
+              <div className="codicon codicon-pass-filled success m-[2px] mr-1  leading-5 text-green-600"></div>
+              <div className="text-[12px] leading-5 text-gray-600">新增成功！</div>
+            </div>
             <div className="my-8 flex justify-end">
               <Button
                 type="primary"
@@ -55,14 +58,10 @@ export const ProfileManagerIndex: React.FC<ProfileManagerIndexProps> = (props) =
         ) : (
           <div>
             {status === "loading" ? (
-              <Message type="loading" className="my-4 text-base" style={{ border: "none" }}>
-                写入中...
-              </Message>
-            ) : null}
-            {status === "faild" ? (
-              <Message type="error" className="my-4 text-base" style={{ borderRadius: 4 }}>
-                添加失败，请重试
-              </Message>
+              <div className="my-4 flex w-[100%] rounded-sm bg-[#f6f6f6] px-4 py-2 text-sm">
+                <LoadingOutlined />
+                <div className="ml-2 text-[12px] leading-5 text-gray-600">写入中...</div>
+              </div>
             ) : null}
             <Form labelAlign="left">
               <Form.Item label={<span className="text-sm font-medium">Profile 名称</span>} required>
@@ -121,7 +120,8 @@ export const ProfileManagerIndex: React.FC<ProfileManagerIndexProps> = (props) =
                         if (res.success === true) {
                           setStatus("success");
                         } else {
-                          setStatus("faild");
+                          message.error("添加失败，请重试");
+                          setStatus("edit");
                         }
                       });
                     }
