@@ -30,7 +30,9 @@ export const ProfileManagerIndex: React.FC<ProfileManagerIndexProps> = (props) =
         </div>
         {status === "success" ? (
           <div className="my-4 text-base">
-            <Message type="success">新增成功！</Message>
+            <Message type="success" style={{ borderRadius: 4 }}>
+              新增成功！
+            </Message>
             <div className="my-8 flex justify-end">
               <Button
                 type="primary"
@@ -51,72 +53,87 @@ export const ProfileManagerIndex: React.FC<ProfileManagerIndexProps> = (props) =
             </div>
           </div>
         ) : (
-          <Form labelAlign="left">
-            <Form.Item label={<span className="text-sm font-medium">Profile 名称</span>} required>
-              <span className="text-gray-500">用于区别不同的 profiles。</span>
-              <Input id="profileName" name="profileName" placeholder="请输入字符串" />
-            </Form.Item>
-            <Form.Item label={<span className="text-sm font-medium">Access Key</span>} required>
-              <span className="text-gray-500">
-                获取方式请参见
-                <a
-                  href="https://help.aliyun.com/zh/ram/user-guide/create-an-accesskey-pair#title-ebf-nrl-l0i"
-                  target="_blank"
+          <div>
+            {status === "loading" ? (
+              <Message type="loading" className="my-4 text-base" style={{ border: "none" }}>
+                写入中...
+              </Message>
+            ) : null}
+            {status === "faild" ? (
+              <Message type="error" className="my-4 text-base" style={{ borderRadius: 4 }}>
+                添加失败，请重试
+              </Message>
+            ) : null}
+            <Form labelAlign="left">
+              <Form.Item label={<span className="text-sm font-medium">Profile 名称</span>} required>
+                <span className="text-gray-500">用于区别不同的 profiles。</span>
+                <Input id="profileName" name="profileName" placeholder="请输入字符串" />
+              </Form.Item>
+              <Form.Item label={<span className="text-sm font-medium">Access Key</span>} required>
+                <span className="text-gray-500">
+                  获取方式请参见
+                  <a
+                    href="https://help.aliyun.com/zh/ram/user-guide/create-an-accesskey-pair#title-ebf-nrl-l0i"
+                    target="_blank"
+                  >
+                    创建 RAM 用户的 AccessKey
+                  </a>
+                  。
+                </span>
+                <Input id="accessKey" name="accessKey" placeholder="指定您的AccessKey ID" />
+              </Form.Item>
+              <Form.Item label={<span className="text-sm font-medium">Secret Key</span>} required>
+                <span className="text-gray-500">
+                  获取方式请参见
+                  <a
+                    href="https://help.aliyun.com/zh/ram/user-guide/create-an-accesskey-pair#title-ebf-nrl-l0i"
+                    target="_blank"
+                  >
+                    创建 RAM 用户的 AccessKey
+                  </a>
+                  。
+                </span>
+                <Input id="secretKey" name="secretKey" placeholder="指定您的AccessKey Secret" />
+              </Form.Item>
+              <Form.Item label={<span className="text-sm font-medium">默认 Region Id</span>} required>
+                <span className="text-gray-500">
+                  阿里云支持的 Region Id ，请参见
+                  <a
+                    href="https://help.aliyun.com/zh/ecs/product-overview/regions-and-zones#concept-2459516"
+                    target="_blank"
+                  >
+                    地域和可用区
+                  </a>
+                  。
+                </span>
+                <Input id="defaultRegionId" name="defaultRegionId" placeholder="指定默认区域的Region Id" />
+              </Form.Item>
+              <div className="flex">
+                <Form.Submit
+                  validate
+                  type="primary"
+                  onClick={(submitValue, errors) => {
+                    if (errors) {
+                      return;
+                    } else {
+                      setStatus("loading");
+                      PontUIService.addNewAKProfile(submitValue).then((res) => {
+                        if (res.success === true) {
+                          setStatus("success");
+                        } else {
+                          setStatus("faild");
+                        }
+                      });
+                    }
+                  }}
+                  className="text-right"
                 >
-                  创建 RAM 用户的 AccessKey
-                </a>
-                。
-              </span>
-              <Input id="accessKey" name="accessKey" placeholder="指定您的AccessKey ID" />
-            </Form.Item>
-            <Form.Item label={<span className="text-sm font-medium">Secret Key</span>} required>
-              <span className="text-gray-500">
-                获取方式请参见
-                <a
-                  href="https://help.aliyun.com/zh/ram/user-guide/create-an-accesskey-pair#title-ebf-nrl-l0i"
-                  target="_blank"
-                >
-                  创建 RAM 用户的 AccessKey
-                </a>
-                。
-              </span>
-              <Input id="secretKey" name="secretKey" placeholder="指定您的AccessKey Secret" />
-            </Form.Item>
-            <Form.Item label={<span className="text-sm font-medium">默认 Region Id</span>} required>
-              <span className="text-gray-500">
-                阿里云支持的 Region Id ，请参见
-                <a
-                  href="https://help.aliyun.com/zh/ecs/product-overview/regions-and-zones#concept-2459516"
-                  target="_blank"
-                >
-                  地域和可用区
-                </a>
-                。
-              </span>
-              <Input id="defaultRegionId" name="defaultRegionId" placeholder="指定默认区域的Region Id" />
-            </Form.Item>
-            <div className="flex">
-              <Form.Submit
-                validate
-                type="primary"
-                onClick={(submitValue, errors) => {
-                  if (errors) {
-                    return;
-                  } else {
-                    PontUIService.addNewAKProfile(submitValue).then((res) => {
-                      if (res.success === true) {
-                        setStatus("success");
-                      }
-                    });
-                  }
-                }}
-                className="text-right"
-              >
-                新增
-              </Form.Submit>
-              <Form.Reset style={{ marginLeft: 10 }}>重置</Form.Reset>
-            </div>
-          </Form>
+                  新增
+                </Form.Submit>
+                <Form.Reset style={{ marginLeft: 10 }}>重置</Form.Reset>
+              </div>
+            </Form>
+          </div>
         )}
       </div>
     </div>
