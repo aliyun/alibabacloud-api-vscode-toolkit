@@ -18,6 +18,7 @@ import * as fs from "fs-extra";
 import { Product } from "./types";
 import { codeSampleProvider } from "./plugins/generate";
 import { generateImport } from "./common/generateImport";
+import { getProfileInfoInstance } from "./profileManager";
 
 const path = require("path");
 
@@ -274,6 +275,8 @@ export class AlicloudApiCommands {
     });
 
     vscode.commands.registerCommand("alicloud.api.restart", async () => {
+      const profileInfo = await getProfileInfoInstance();
+      await profileInfo.refreshProfiles();
       await vscode.window.withProgress(
         {
           location: vscode.ProgressLocation.Window,
