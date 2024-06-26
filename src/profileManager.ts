@@ -71,11 +71,31 @@ export class ProfileManager {
     await this.saveProfiles(config);
   }
 
+  async checkAliyunDir() {
+    const filePath = path.join(os.homedir(), ".aliyun");
+    const { R_OK, W_OK } = fs.constants;
+    try {
+      // 检测写入权限
+      await fsx.access(os.homedir(), R_OK | W_OK);
+      // 检查文件夹是否存在
+      fs.stat(filePath, async (err) => {
+        if (err && err.code === "ENOENT") {
+          // 不存在，创建它
+          await fs.promises.mkdir(filePath);
+        }
+      });
+    } catch (ex) {
+      console.error("创建文件夹时出错:", ex);
+    }
+  }
+
   async loadProfiles() {
     const configFilePath = path.join(os.homedir(), ".aliyun/config.json");
     const { R_OK, W_OK } = fs.constants;
     try {
+      await this.checkAliyunDir();
       await fsx.access(configFilePath, R_OK | W_OK);
+      // 检查 dirTest 文件夹是否存在
       const content = await fsx.readFile(configFilePath, "utf-8");
       return JSON.parse(content);
     } catch (ex) {
