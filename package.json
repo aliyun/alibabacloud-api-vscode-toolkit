@@ -265,7 +265,7 @@
     "pontx-meta-fetch-plugin": "0.3.83",
     "pontx-spec": "0.3.83",
     "pontx-spec-diff": "0.3.83",
-    "qs": "^6.9.4",
+    "qs": "^6.12.1",
     "querystring": "0.2.1",
     "styled-components": "^6.1.1",
     "url": "^0.11.0",
