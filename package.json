@@ -264,7 +264,7 @@
     "pontx-manager": "0.3.83-beta.0",
     "pontx-meta-fetch-plugin": "0.3.83",
     "pontx-spec": "0.3.83",
-    "pontx-spec-diff": "0.3.83",
+    "pontx-spec-diff": "0.5.2",
     "qs": "^6.9.4",
     "querystring": "0.2.1",
     "styled-components": "^6.1.1",
