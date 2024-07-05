@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.0.12(2024-07-05)
+
+- Fix Request User-Agent.
+
 ## 0.0.11(2024-06-26)
 
 - Profiles management: You can switch between profiles or add a new one.
