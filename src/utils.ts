@@ -543,5 +543,5 @@ export const formatName = (name: string): string => {
 };
 
 export const getUserAgent = () => {
-  return `Toolkit (${os.type()}; ${os.release()}) alibababcloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`;
+  return `Toolkit (${os.type()}; ${os.release()}) alibabacloud-api-toolkit/${vscode.extensions.getExtension("alibabacloud-openapi.vscode-alicloud-api").packageJSON.version} VS Code/${vscode.version}`;
 };
