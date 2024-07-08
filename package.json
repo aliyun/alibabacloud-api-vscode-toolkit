@@ -263,7 +263,7 @@
     "needle": "^2.5.0",
     "pontx-manager": "0.3.83-beta.0",
     "pontx-meta-fetch-plugin": "0.3.83",
-    "pontx-spec": "0.3.83",
+    "pontx-spec": "0.5.2",
     "pontx-spec-diff": "0.3.83",
     "qs": "^6.12.1",
     "querystring": "0.2.1",

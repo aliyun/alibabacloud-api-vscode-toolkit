@@ -2862,6 +2862,11 @@ oas-spec-ts@^0.3.83:
   resolved "https://registry.npmmirror.com/oas-spec-ts/-/oas-spec-ts-0.3.83.tgz#62411728ed72881021beefd5dd53a2a00de81ac6"
   integrity sha512-P2Eftz3DcngFqDgAZhNTNqcJaCcIHjSsmnghXvyamJfDCgUUyzb6zdNP1kfDDzEWn2596Df4Mcwv3hYtIkPnNQ==
 
+oas-spec-ts@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/oas-spec-ts/-/oas-spec-ts-0.5.2.tgz#2afd10cd525bee1408d1c233b8bf680f7adddcd3"
+  integrity sha512-g9slbTclvz76ncO9Ujc7k7EE5ZuJpVR+5BztjAfs76el7JNmtI2XhmX9XW56k9T/kobLUa9GWrd9jAv8X8MLOw==
+
 object-inspect@^1.13.1:
   version "1.13.2"
   resolved "https://registry.yarnpkg.com/object-inspect/-/object-inspect-1.13.2.tgz#dea0088467fb991e67af4058147a24824a3043ff"
@@ -3188,6 +3193,13 @@ pontx-spec@0.3.83, pontx-spec@^0.3.83:
   integrity sha512-xTtrTljs75qTmvOacGV1+XoDCz24/8JEKRM/lYuESFtILwbwpQA5kxV8iL5sXO1l6iZuVjbVseRu08LFizby3A==
   dependencies:
     oas-spec-ts "^0.3.83"
+
+pontx-spec@0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/pontx-spec/-/pontx-spec-0.5.2.tgz#59a1e1f743d0a0a52736a96d2c1589566f8469a2"
+  integrity sha512-y75jmga1GXaXkK9ABZSUpwUj2zKeEg0x3SUw/lgSwCECUPXxfv38C9GtyZKKNpJCFnxvfyuq6C8Jo7BrU6Oe6A==
+  dependencies:
+    oas-spec-ts "^0.5.2"
 
 postcss-value-parser@^4.0.2:
   version "4.2.0"
