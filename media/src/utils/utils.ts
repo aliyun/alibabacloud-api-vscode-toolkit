@@ -5,12 +5,14 @@ import { WebviewApi } from "vscode-webview";
 import { PontUIService } from "../service/UIService";
 
 declare let acquireVsCodeApi: any;
+
+export const isDevelopment = process.env.NODE_ENV === "development";
 export const getVSCode = () => {
   if ((window as any).vscode) {
     return (window as any).vscode;
   }
 
-  const vscode: WebviewApi<any> = acquireVsCodeApi?.();
+  const vscode: WebviewApi<any> = isDevelopment ? null : acquireVsCodeApi?.();
   (window as any).vscode = vscode;
 
   return vscode;

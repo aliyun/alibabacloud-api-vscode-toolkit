@@ -20,6 +20,7 @@ import { TryAPI } from "./TryAPI/TryAPI";
 import TrySDK from "./TrySDK/TrySDK";
 import { APIPageContext } from "./context";
 import { PontUIService } from "../../service/UIService";
+import ApiResponseDoc from "./APIDocument/ApiResponseDoc";
 
 export class APIProps {
   selectedApi?: PontSpec.PontAPI;
@@ -129,15 +130,6 @@ export const API: React.FC<APIProps> = (props) => {
 
   const [boxWidth, setBoxWidth] = React.useState(0);
   const [isExpand, setIsExpand] = React.useState(true);
-  // React.useEffect(() => {
-  //   const { width = 0, height = 0 } = resizeObserverEntry?.contentRect || {};
-  //   if (width !== boxWidth) {
-  //     if (width < 650) {
-  //       setIsExpand(false);
-  //     }
-  //     setBoxWidth(width);
-  //   }
-  // }, [boxWidth, resizeObserverEntry]);
 
   const renderContent = React.useMemo(() => {
     const documentComp = (
@@ -153,48 +145,7 @@ export const API: React.FC<APIProps> = (props) => {
         </div>
         <div className="mb-4 bg-white">
           <div className="border-t border-gray-100 px-5 py-4 text-base font-medium">出参</div>
-          <div className="px-4 pb-4">
-            <InnerSchemaTable
-              name=""
-              schema={selectedApi?.responses["200"]?.schema as any}
-              renderExpandIcon={(node, onExpand) => {
-                return (
-                  <div
-                    className="hover:bg-darken-3 relative flex cursor-pointer items-center justify-center rounded"
-                    style={{
-                      marginLeft: -23.5,
-                      width: 20,
-                      height: 20,
-                      marginRight: 3,
-                      textAlign: "center",
-                    }}
-                    onClick={() => {
-                      onExpand(node);
-                    }}
-                  >
-                    <i
-                      className={node.isExpanded ? "codicon codicon-chevron-down" : "codicon codicon-chevron-right"}
-                    ></i>
-                  </div>
-                );
-              }}
-              renderEmpty={() => {
-                return (
-                  <tr>
-                    <td
-                      colSpan={2}
-                      style={{
-                        padding: "15px 0",
-                        textAlign: "center",
-                      }}
-                    >
-                      无出参定义
-                    </td>
-                  </tr>
-                );
-              }}
-            />
-          </div>
+          <ApiResponseDoc selectedApi={selectedApi}></ApiResponseDoc>
         </div>
         {props.renderMore?.()}
       </div>
@@ -218,7 +169,7 @@ export const API: React.FC<APIProps> = (props) => {
           >
             <Tab.Item key="debug-doc" title="API 文档">
               <div className="grid h-[calc(100vh_-_177px)] w-full bg-white">
-                <div className="overflow-scroll">{documentComp}</div>
+                <div className="scrollbar-custom overflow-scroll">{documentComp}</div>
               </div>
             </Tab.Item>
             <Tab.Item key="sdk" title="示例代码">

@@ -3,11 +3,12 @@
  * @description
  */
 
-import * as PontSpec from 'pontx-spec';
-import * as React from 'react';
-import { SemixJsonSchema } from 'semix-core';
-import { InnerSchemaTable } from 'semix-schema-table';
-import { getRefSchema } from '../../utils';
+import * as PontSpec from "pontx-spec";
+import * as React from "react";
+import { SemixJsonSchema } from "semix-core";
+import { InnerSchemaTable } from "semix-schema-table";
+import { getRefSchema } from "../../utils";
+import useCustomFixScrollBar from "../../common/useCustomFixScrollBar";
 
 export class PontxParamsDocProps {
   parameters?: PontSpec.Parameter[];
@@ -18,7 +19,7 @@ export class PontxParamsDocProps {
 export const ApiParamsDoc: React.FC<PontxParamsDocProps> = (props) => {
   const schema = React.useMemo(() => {
     const schema = {
-      type: 'object',
+      type: "object",
       properties: {},
     } as SemixJsonSchema;
     if (props.parameters) {
@@ -45,10 +46,15 @@ export const ApiParamsDoc: React.FC<PontxParamsDocProps> = (props) => {
     [props.schemas],
   );
 
-  return React.useMemo(() => {
-    return (
-      <div className="px-4 pb-4">
-        {props.parameters?.length ? (
+  const tableRef = React.useRef(null);
+
+  const CustomFixScrollBar = useCustomFixScrollBar(".parameters-content", tableRef as any);
+
+  return (
+    <div className="parameters-content scrollbar-custom overflow-x-scroll px-4 pb-4">
+      {props.parameters?.length ? (
+        <div ref={tableRef}>
+          {CustomFixScrollBar}
           <InnerSchemaTable
             name=""
             renderExpandIcon={(node, onExpand) => {
@@ -60,20 +66,20 @@ export const ApiParamsDoc: React.FC<PontxParamsDocProps> = (props) => {
                     width: 20,
                     height: 20,
                     marginRight: 3,
-                    textAlign: 'center',
+                    textAlign: "center",
                   }}
                   onClick={() => {
                     onExpand(node);
                   }}
                 >
-                  <i className={node.isExpanded ? 'codicon codicon-chevron-down' : 'codicon codicon-chevron-right'}></i>
+                  <i className={node.isExpanded ? "codicon codicon-chevron-down" : "codicon codicon-chevron-right"}></i>
                 </div>
               );
             }}
             renderEmpty={() => {
               return (
                 <tr>
-                  <td colSpan={2} style={{ padding: '15px 0', textAlign: 'center' }}>
+                  <td colSpan={2} style={{ padding: "15px 0", textAlign: "center" }}>
                     无参数定义
                   </td>
                 </tr>
@@ -81,12 +87,12 @@ export const ApiParamsDoc: React.FC<PontxParamsDocProps> = (props) => {
             }}
             schema={schema}
           />
-        ) : (
-          <div style={{ padding: 20, fontSize: 14 }}>调用该 OpenAPI 无需参数。</div>
-        )}
-      </div>
-    );
-  }, [schema, propSchemaCnt, props.schemas]);
+        </div>
+      ) : (
+        <div style={{ padding: 20, fontSize: 14 }}>调用该 OpenAPI 无需参数。</div>
+      )}
+    </div>
+  );
 };
 
 ApiParamsDoc.defaultProps = new PontxParamsDocProps();

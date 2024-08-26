@@ -14,7 +14,7 @@
     "Other"
   ],
   "activationEvents": [
-    "*",
+    "onStartFinished",
     "onWebviewPanel:alicloud-api-webview"
   ],
   "main": "./dist/extension",
