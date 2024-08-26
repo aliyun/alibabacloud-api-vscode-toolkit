@@ -53,7 +53,7 @@
     "less": "^4.2.0",
     "postcss": "^8",
     "prettier": "^3.3.3",
-    "tailwindcss": "^3.4.3",
+    "tailwindcss": "^3.4.10",
     "typescript": "^5",
     "vite": "^2.9.18"
   }
