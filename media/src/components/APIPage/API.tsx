@@ -151,7 +151,7 @@ export const API: React.FC<APIProps> = (props) => {
       </div>
     );
     const debugComp = (
-      <div className="flex h-[calc(100vh_-_140px)] bg-white">
+      <div className="debugComp flex h-[calc(100vh_-_140px)] overflow-y-hidden overflow-x-scroll bg-white">
         <div className={`expand-arrow ${isExpand ? "" : "!left-1"}`} onClick={() => setIsExpand(!isExpand)}>
           {isExpand ? (
             <div className="codicon codicon-chevron-left relative right-0.5 top-6"></div>

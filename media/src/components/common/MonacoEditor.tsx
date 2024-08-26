@@ -4,7 +4,7 @@
  */
 import { Balloon } from "@alicloud/console-components";
 import { Editor } from "@monaco-editor/react";
-import { Button, message } from "antd";
+import { Button, Dropdown, message } from "antd";
 import React, { ReactNode } from "react";
 import { PontUIService } from "../../service/UIService";
 import { DARA_SDK_LANGUAGES, LanguageSwitcher } from "../APIPage/TrySDK/LanguageSwitcher";
@@ -71,9 +71,35 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
     ) : null;
   }, [languageTab, value]);
 
+  const divRef = React.useRef(null);
+  const [width, setWidth] = React.useState(0);
+
+  React.useEffect(() => {
+    const handleResize = (entries) => {
+      for (let entry of entries) {
+        setWidth(entry.contentRect.width);
+      }
+    };
+
+    const observer = new ResizeObserver(handleResize);
+
+    if (divRef.current) {
+      observer.observe(divRef.current);
+    }
+
+    // Clean up observer on unmount
+    return () => {
+      if (divRef.current) {
+        observer.unobserve(divRef.current);
+      }
+    };
+  }, []);
+
+  console.log(width);
+
   return (
     <div className="editor-content">
-      <div className="operations">
+      <div className="operations" ref={divRef}>
         <div className="left-area">
           {languageSelector ? (
             <LanguageSwitcher
@@ -89,7 +115,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
           ) : null}
           {header || null}
         </div>
-        <div className="right-area">
+        <div className="right-area ml-2">
           {copyable ? (
             <Balloon
               closable={false}
@@ -113,39 +139,36 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
           ) : null}
           {items?.length ? (
             <div className="menu-icon">
-              {/* <Dropdown menu={{ items }}>
-                <Button onClick={(e) => e.preventDefault()}>
-                  <div className="codicon codicon-list-selection" />
-                </Button>
-              </Dropdown> */}
-              {items?.map((item) => {
-                return (
-                  <Balloon
-                    closable={false}
-                    align="t"
-                    trigger={
-                      <Button
-                        // className="copy-button"
-                        href={item.externalLink ? item.externalLink : ""}
-                        target="_blank"
-                        onClick={item.onClick}
-                      >
-                        <div className={`codicon codicon-${item.codicon}`} />
-                      </Button>
-                    }
-                  >
-                    {item.label}
-                  </Balloon>
-                );
-              })}
-              {/* {(window as any).vscode ? (
-                <Dropdown menu={{ items: menuItems }}>
-                  <a onClick={(e) => e.preventDefault()}>
-                    fff
+              {width < 400 ? (
+                <Dropdown menu={{ items }}>
+                  <Button onClick={(e) => e.preventDefault()}>
                     <div className="codicon codicon-list-selection" />
-                  </a>
+                  </Button>
                 </Dropdown>
-              ) : null} */}
+              ) : (
+                <>
+                  {items?.map((item) => {
+                    return (
+                      <Balloon
+                        closable={false}
+                        align="t"
+                        trigger={
+                          <Button
+                            // className="copy-button"
+                            href={item.externalLink ? item.externalLink : ""}
+                            target="_blank"
+                            onClick={item.onClick}
+                          >
+                            <div className={`codicon codicon-${item.codicon}`} />
+                          </Button>
+                        }
+                      >
+                        {item.label}
+                      </Balloon>
+                    );
+                  })}
+                </>
+              )}
             </div>
           ) : null}
         </div>
