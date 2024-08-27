@@ -20,6 +20,27 @@ $delete-color: #b01011;
 $update-color: #895503;
 $create-color: #007100;
 
+::-webkit-scrollbar {
+  width: 18px;
+}
+
+::-webkit-scrollbar-corner {
+  background: #fafafa;
+}
+
+::-webkit-scrollbar-track {
+  background: #fafafa;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a2b8c3;
+  border: 3px solid #f4f4f4;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #89a6b5;
+}
+
 .semix-markdown {
   color: #333;
 

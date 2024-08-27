@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-@font-face {
+/* @font-face {
   font-family: "codicon";
   font-display: block;
   src: url(73cfd30c1c6a73629503.ttf?f6ab4abcfdcac2bb563bb55b9602bc7f) format("truetype");
-}
+} */
 
 .codicon[class*="codicon-"] {
   font: normal normal normal 16px/1 codicon;
@@ -51621,10 +51621,10 @@ table .semix-markdown p {
   width: fit-content;
   padding: 0;
 }
-@font-face {
+/* @font-face {
   font-family: NextIcon;
   src: url(5c61c7adbfc2d25aa4cd.ttf) format("truetype");
-}
+} */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",

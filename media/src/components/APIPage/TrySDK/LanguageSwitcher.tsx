@@ -23,13 +23,13 @@ export const OLD_SDK_LANGUAAGES = [
 ];
 
 export const DARA_SDK_LANGUAGES = [
-  { value: EditorLanguages.JavaAsync, text: EditorLanguages.JavaAsync, icon: "java" },
+  { value: EditorLanguages.JavaAsync, text: "Java (async)", icon: "java" },
   { value: EditorLanguages.Java, text: EditorLanguages.Java, icon: "java" },
   { value: EditorLanguages.TypeScript, text: "TypeScript", icon: "typescript" },
   { value: EditorLanguages.Go, text: EditorLanguages.Go, icon: "go" },
   { value: EditorLanguages.PHP, text: EditorLanguages.PHP, icon: "php" },
   { value: EditorLanguages.Python, text: EditorLanguages.Python, icon: "python" },
-  { value: EditorLanguages.Python2, text: EditorLanguages.Python2, icon: "python" },
+  // { value: EditorLanguages.Python2, text: EditorLanguages.Python2, icon: "python" },
 
   { value: EditorLanguages.CSharp, text: "C#", icon: "csharp" },
   { value: EditorLanguages.CPP, text: "C++", icon: "cpp" },
@@ -55,7 +55,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = (props) => {
       value: language.value,
       label: language.text,
       key: language.value,
-      disabled:language.disabled
+      disabled: language.disabled,
     };
   });
 

@@ -1,21 +1,24 @@
-.expand-arrow {
-  position: absolute;
-  top: 256px;
-  left: 413px;
-  z-index: 999;
-  width: 12px;
-  height: 82px;
-  line-height: 36px;
-  background-color: #fff;
-  border: 1px solid rgb(229, 229, 229);
-  border-radius: 0 2px 2px 0;
-  cursor: pointer;
-  /* .codicon {
-    position: relative !important;
-    line-height: 79px !important;
-    right: 3px !important;
-  } */
-  &:hover {
-    background-color: #f5f5f5;
+.debugComp {
+  position: relative;
+  .expand-arrow {
+    position: absolute;
+    top: 256px;
+    left: 396px;
+    z-index: 999;
+    width: 12px;
+    height: 82px;
+    line-height: 36px;
+    background-color: #fff;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 0 2px 2px 0;
+    cursor: pointer;
+    /* .codicon {
+      position: relative !important;
+      line-height: 79px !important;
+      right: 3px !important;
+    } */
+    &:hover {
+      background-color: #f5f5f5;
+    }
   }
 }

@@ -32,7 +32,7 @@ export const APIDebugger: React.FC<APIDebuggerProps> = (props) => {
           product={product}
         ></RegionSelector>
       </div>
-      <div className="h-full overflow-y-scroll p-4">
+      <div className="scrollbar-custom h-full overflow-y-scroll p-4">
         <SemixForm
           widgets={xconsoleWidgets}
           renderTitle={(props) => {
