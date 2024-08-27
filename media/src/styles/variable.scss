@@ -17,8 +17,8 @@ $medium-font-weight: 600;
 // 背景颜色
 $primary-bg-color: var(--vscode-editor-background);
 $code-bg: var(--vscode-editor-selectionHighlightBackground);
-$table-hover-bg: var(--vscode-editorHoverWidget-background);
-$table-th-bg: var(--vscode-editor-findMatchBackground);
+$table-hover-bg: var(--vscode-editor-hoverHighlightBackground);
+$table-th-bg: var(--vscode-badge-background);
 $disabled-bg: var(--vscode-disabledForeground);
 
 $hover-bg: var(--vscode-editor-hoverHighlightBackground);

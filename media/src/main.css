@@ -3,13 +3,6 @@
 @tailwind utilities;
 
 :root {
-  /* --vscode-editor-background: #fff;
-  --vscode-textBlockQuote-background: #f6f8fa;
-  --vscode-editorWidget-foreground: #24292f;
-  --vscode-textPreformat-foreground: #57606a;
-  --vscode-editorHint-foreground: #6c6c6c;
-  --vscode-editorLink-activeForeground: #0000ff; */
-  --opacity: 0.5; /* 透明度 */
   --vscode-foreground: #cccccc;
   --vscode-disabledForeground: rgba(204, 204, 204, 0.5);
   --vscode-errorForeground: #f48771;

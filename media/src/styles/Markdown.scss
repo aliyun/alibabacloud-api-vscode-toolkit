@@ -2567,3 +2567,10 @@ table .semix-markdown {
     opacity: 0.7;
   }
 }
+
+.next-table table {
+  background: transparent;
+  .next-table-cell-wrapper {
+    color: $primary-font-color !important;
+  }
+}
