@@ -21,7 +21,7 @@
     "intl-format": "^1.2.0",
     "load-script": "^2.0.0",
     "lodash": "^4.17.20",
-    "next": "^14.1.1",
+    "next": "^14.2.6",
     "pontx-ui": "latest",
     "react": "^18.3.1",
     "react-copy-to-clipboard": "^5.1.0",
