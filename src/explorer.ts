@@ -337,16 +337,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
       });
     } else if (element.contextValue === "Dir" && spec) {
       return PontAPIExplorer.getDirItems(spec, element);
-    }
-    // else if (element.contextValue === "productGroup-1") {
-    //   const productExplorer = getProductRequestInstance();
-    //   const productGroups = _.groupBy(
-    //     productExplorer?.products?.filter((item) => item.category2Name === element.modName),
-    //     (product) => product.categoryName,
-    //   );
-    //   return this.getAPIManagerChildren(element);
-    // }
-    else if (element.contextValue === "productGroup" || element.contextValue === "productGroup2") {
+    } else if (element.contextValue === "productGroup" || element.contextValue === "productGroup2") {
       const productExplorer = getProductRequestInstance();
       // const productGroups = _.groupBy(productExplorer?.products, (product) => product.category2Name);
       return PontAPIExplorer.getProductItems(element);
