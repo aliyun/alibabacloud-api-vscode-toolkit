@@ -10,7 +10,7 @@ import _ from "lodash";
 import React from "react";
 import { EditorLanguages } from "../../../types/EditorLanguages";
 import I18N from "../../../utils/I18N";
-import { getEditorMenuItems, parseXml } from "../../utils";
+import { getEditorMenuItems, getMonacoTheme, parseXml } from "../../utils";
 import { APIPageContext } from "../context";
 import { PontUIService } from "../../../service/UIService";
 
@@ -32,7 +32,7 @@ const TAB_PANES = [
 ];
 
 export const TryAPI: React.FC<TryAPIProps> = (props) => {
-  const { openAPIResponses, isApiResultLoading, version, apiMeta, product, mode, profileInfo } =
+  const { openAPIResponses, isApiResultLoading, version, apiMeta, product, mode, profileInfo, theme } =
     APIPageContext.useContainer();
   const doc = `${product}::${version}::${apiMeta.name}`;
   const [tab, setTab] = React.useState(TAB_PANES[0].value);
@@ -196,7 +196,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
               ) : null}
               {apiResult ? (
                 <div className="item mx-1 mr-6">
-                  <span className="label mr-1 font-medium text-gray-500">{I18N.main.explorer.time}</span>
+                  <span className="label mr-1 font-medium">{I18N.main.explorer.time}</span>
                   <span className="value">{apiResult.cost}ms</span>
                 </div>
               ) : null}
@@ -276,6 +276,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                         {!(tab.value === "preview" && noShowMonacoEditor.includes(apiResult?.format)) ? (
                           <Editor
                             height={"calc(100vh - 450px)"}
+                            theme={getMonacoTheme(theme)}
                             options={{
                               readOnly: true,
                             }}

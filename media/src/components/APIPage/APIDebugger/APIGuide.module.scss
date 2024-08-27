@@ -1,3 +1,4 @@
+@import "../../../styles/variable.scss";
 .api-debugger-guide-wrapper {
   .list-item {
     display: block;
@@ -19,7 +20,7 @@
     .name {
       margin-right: 4px;
       // margin-right: 8px;
-      color: #333333;
+      color: $primary-font-color;
       font-weight: 500;
       font-size: 12px;
       font-family: Alibaba-PuHuiTi;
@@ -31,7 +32,8 @@
       max-width: 290px;
       margin-right: 4px;
       overflow: hidden;
-      color: #787878;
+      color: $primary-2-font-color;
+      opacity: 0.7;
       font-size: 12px;
       line-height: 24px;
       white-space: nowrap;
@@ -41,7 +43,7 @@
       cursor: pointer;
     }
     .api-debugger-param-desc {
-      color: #787878;
+      color: $primary-font-color;
     }
   }
 }

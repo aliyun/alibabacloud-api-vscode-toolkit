@@ -6,12 +6,15 @@
 import * as React from "react";
 import { CommonWidgetProps } from "../types";
 import { Editor } from "@monaco-editor/react";
+import { APIPageContext } from "../../../context";
+import { getMonacoTheme } from "../../../../utils";
 
 export class JsonEditProps extends CommonWidgetProps {}
 
 export const JsonEdit: React.FC<JsonEditProps> = (props) => {
   const [curval, setCurval] = React.useState("");
   const [errMsg, setErrMsg] = React.useState("");
+  const { theme } = APIPageContext.useContainer();
   React.useEffect(() => {
     setErrMsg("");
     if (typeof props.value !== "string") {
@@ -35,17 +38,22 @@ export const JsonEdit: React.FC<JsonEditProps> = (props) => {
         }
       }}
     >
-      <div className="editor-content" style={{padding:4,border: "1px #eee solid"}}><Editor
-        height={200}
-        language="json"
-        value={curval || ""}
-        onChange={(value) => {
-          setCurval(value);
-        }}
-        options={{minimap:{
-            enabled:false
-        }}}
-      ></Editor></div>
+      <div className="editor-content" style={{ padding: 4, border: "1px #eee solid" }}>
+        <Editor
+          height={200}
+          theme={getMonacoTheme(theme)}
+          language="json"
+          value={curval || ""}
+          onChange={(value) => {
+            setCurval(value);
+          }}
+          options={{
+            minimap: {
+              enabled: false,
+            },
+          }}
+        ></Editor>
+      </div>
       {errMsg?.length ? <div style={{ color: "red" }}>{errMsg}</div> : null}
     </div>
   );

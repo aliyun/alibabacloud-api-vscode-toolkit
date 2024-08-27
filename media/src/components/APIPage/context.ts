@@ -50,6 +50,10 @@ export class APIPageState {
    * profileInfo
    */
   profileInfo?: any;
+  /**
+   * vscode 主题
+   */
+  theme?: string;
 }
 
 export const useAPIPageContext = (initialState = {} as APIPageState): APIPageState => {
@@ -58,6 +62,13 @@ export const useAPIPageContext = (initialState = {} as APIPageState): APIPageSta
   const [endpoints, setEndpoints] = React.useState([]);
   const [regionId, setRegionId] = React.useState<string>("cn-hangzhou");
   const [profileInfo, setProfileInfo] = React.useState({});
+  const [theme, setTheme] = React.useState("light");
+
+  React.useEffect(() => {
+    PontUIService.getTheme()?.then((res) => {
+      setTheme(res);
+    });
+  }, [initialState.product]);
 
   React.useEffect(() => {
     if (endpoints.length === 0) {
@@ -93,6 +104,7 @@ export const useAPIPageContext = (initialState = {} as APIPageState): APIPageSta
     regionId,
     setRegionId,
     profileInfo,
+    theme,
   };
 };
 

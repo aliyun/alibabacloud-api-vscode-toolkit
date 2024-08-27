@@ -8,7 +8,7 @@ import { Button, Dropdown, message } from "antd";
 import React, { ReactNode } from "react";
 import { PontUIService } from "../../service/UIService";
 import { DARA_SDK_LANGUAGES, LanguageSwitcher } from "../APIPage/TrySDK/LanguageSwitcher";
-import { getEditorLanguage, getEditorMenuItems } from "../utils";
+import { getEditorLanguage, getEditorMenuItems, getMonacoTheme } from "../utils";
 
 export class MonacoEditorProps {
   languageTab?: string;
@@ -20,6 +20,7 @@ export class MonacoEditorProps {
   readOnly? = true;
   height? = 800 as string | number;
   languages? = DARA_SDK_LANGUAGES;
+  theme?: string;
   menuItems?: Array<{
     key: string;
     label: ReactNode | string;
@@ -41,6 +42,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
     readOnly,
     height,
     menuItems,
+    theme,
   } = props;
 
   const items: Array<{
@@ -56,6 +58,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
       <div className="tab-content">
         <Editor
           height={height}
+          theme={getMonacoTheme(theme)}
           options={{
             readOnly: readOnly,
             tabCompletion: "on",

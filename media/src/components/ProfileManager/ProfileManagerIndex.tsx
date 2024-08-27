@@ -22,9 +22,11 @@ export const ProfileManagerIndex: React.FC<ProfileManagerIndexProps> = (props) =
         <span className="text-alicloud-theme ml-4 text-5xl font-bold leading-[80px]">OpenAPI</span>
       </div>
       <div className="flex-col ">
-        <div className="text-base font-medium">AK 凭证配置</div>
+        <div className="text-base font-medium text-gray-700">AK 凭证配置</div>
         <div className="my-2 text-gray-500">
-          <span>凭证将存储于您个人用户目录下的 .aliyun 文件夹中，个人用户目录位置因操作系统而异：</span>
+          <span className="text-gray-500">
+            凭证将存储于您个人用户目录下的 .aliyun 文件夹中，个人用户目录位置因操作系统而异：
+          </span>
           <ul className="list-inside list-disc">
             <li>Windows环境：C:\Users\USERNAME\.aliyun</li>
             <li>Linux或macOS：~/.aliyun</li>
@@ -64,11 +66,11 @@ export const ProfileManagerIndex: React.FC<ProfileManagerIndexProps> = (props) =
               </div>
             ) : null}
             <Form labelAlign="left">
-              <Form.Item label={<span className="text-sm font-medium">Profile 名称</span>} required>
+              <Form.Item label={<span className="text-sm font-medium text-gray-900">Profile 名称</span>} required>
                 <span className="text-gray-500">用于区别不同的 profiles。</span>
                 <Input id="profileName" name="profileName" placeholder="请输入字符串" />
               </Form.Item>
-              <Form.Item label={<span className="text-sm font-medium">Access Key</span>} required>
+              <Form.Item label={<span className="text-sm font-medium text-gray-900">Access Key</span>} required>
                 <span className="text-gray-500">
                   获取方式请参见
                   <a
@@ -81,7 +83,7 @@ export const ProfileManagerIndex: React.FC<ProfileManagerIndexProps> = (props) =
                 </span>
                 <Input id="accessKey" name="accessKey" placeholder="指定您的AccessKey ID" />
               </Form.Item>
-              <Form.Item label={<span className="text-sm font-medium">Secret Key</span>} required>
+              <Form.Item label={<span className="text-sm font-medium text-gray-900">Secret Key</span>} required>
                 <span className="text-gray-500">
                   获取方式请参见
                   <a
@@ -94,7 +96,7 @@ export const ProfileManagerIndex: React.FC<ProfileManagerIndexProps> = (props) =
                 </span>
                 <Input id="secretKey" name="secretKey" placeholder="指定您的AccessKey Secret" />
               </Form.Item>
-              <Form.Item label={<span className="text-sm font-medium">默认 Region Id</span>} required>
+              <Form.Item label={<span className="text-sm font-medium text-gray-900">默认 Region Id</span>} required>
                 <span className="text-gray-500">
                   阿里云支持的 Region Id ，请参见
                   <a

@@ -3,7 +3,9 @@
 /*----- 字体 -----*/
 
 //中文字体
-$fontFamily-zh: PingFangSC, Microsoft YaHei;
+$fontFamily-zh:
+  PingFangSC,
+  Microsoft YaHei;
 $fontFamily-en: HelveticaNeue, Arial;
 //代码字体
 $fontFamily-code: Menlo, Consolas;
@@ -12,14 +14,28 @@ $fontFamily-code: Menlo, Consolas;
 $primary-font: 400 12px;
 $medium-font-weight: 600;
 
+// 背景颜色
+$primary-bg-color: var(--vscode-editor-background);
+$code-bg: var(--vscode-editor-selectionHighlightBackground);
+$table-hover-bg: var(--vscode-editor-hoverHighlightBackground);
+$table-th-bg: var(--vscode-badge-background);
+$disabled-bg: var(--vscode-disabledForeground);
+
+$hover-bg: var(--vscode-editor-hoverHighlightBackground);
+
+// 边框颜色
+$border-color: var(--vscode-editor-selectionBackground);
+$hover-border: var(--vscode-editorHoverWidget-foreground);
+
 //字体颜色
 //用于标题、正文的主文字色
-$primary-font-color: #333333;
+$primary-font-color: var(--vscode-editor-foreground);
 //主文字色2
-$primary-2-font-color: #696969;
+$primary-2-font-color: var(--vscode-editor-foreground);
 //辅助说明文字色
-$minor-font-color: #808080;
+$minor-font-color: var(--vscode-textPreformat-foreground);
 //disable、提示等文字色
-$disable-font-color: #aaaaaa;
+$disable-font-color: var(--vscode-editorHint-foreground);
 //链接颜色
-$primary-anchor-color: #0064c8;
+$primary-anchor-color: var(--vscode-editorLink-activeForeground);
+$hover-text-color: var(--vscode-editorHoverWidget-foreground);

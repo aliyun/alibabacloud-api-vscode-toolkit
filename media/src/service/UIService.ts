@@ -99,4 +99,6 @@ export const PontUIService = {
   openProfileManager: async () => {},
   /** 选择 profile */
   switchProfile: async () => {},
+  /** 获取vscode主题 */
+  getTheme: async () => "light",
 };
