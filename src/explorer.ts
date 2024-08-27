@@ -22,8 +22,27 @@ export class PontAPITreeItem extends vscode.TreeItem {
 }
 
 export class PontAPIExplorer {
-  static getProductItems(products: Array<Product>, element: PontAPITreeItem = null) {
-    return products?.map((product) => {
+  static getProductItems(element = null) {
+    if (element.contextValue === "productGroup2") {
+      const productGroups = _.groupBy(element.children, (item) => {
+        if (item?.categoryName?.length) {
+          return item.categoryName;
+        } else {
+          return "其他";
+        }
+      });
+      return Object.keys(productGroups || {})?.map((group) => {
+        return {
+          specName: group,
+          contextValue: "productGroup",
+          label: `${group}`,
+          modName: group,
+          children: productGroups[group],
+          collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
+        };
+      });
+    }
+    return element.children?.map((product) => {
       return {
         specName: product.code,
         modName: "",
@@ -243,13 +262,20 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
   getAPIManagerChildren(element?: PontAPITreeItem): vscode.ProviderResult<PontAPITreeItem[]> {
     if (element.contextValue === "alicloudProducts") {
       const productExplorer = getProductRequestInstance();
-      const productGroups = _.groupBy(productExplorer?.products, (product) => product.group);
+      const productGroups = _.groupBy(productExplorer?.products, (product) => {
+        if (product?.category2Name?.length) {
+          return product.category2Name;
+        } else {
+          return "其他";
+        }
+      });
       return Object.keys(productGroups || {})?.map((group) => {
         return {
           specName: group,
-          contextValue: "productGroup",
+          contextValue: "productGroup2",
           label: `${group}`,
           modName: group,
+          children: productGroups[group],
           collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
         };
       });
@@ -311,10 +337,19 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
       });
     } else if (element.contextValue === "Dir" && spec) {
       return PontAPIExplorer.getDirItems(spec, element);
-    } else if (element.contextValue === "productGroup") {
+    }
+    // else if (element.contextValue === "productGroup-1") {
+    //   const productExplorer = getProductRequestInstance();
+    //   const productGroups = _.groupBy(
+    //     productExplorer?.products?.filter((item) => item.category2Name === element.modName),
+    //     (product) => product.categoryName,
+    //   );
+    //   return this.getAPIManagerChildren(element);
+    // }
+    else if (element.contextValue === "productGroup" || element.contextValue === "productGroup2") {
       const productExplorer = getProductRequestInstance();
-      const productGroups = _.groupBy(productExplorer?.products, (product) => product.group);
-      return PontAPIExplorer.getProductItems(productGroups[element?.modName?.toString()], element);
+      // const productGroups = _.groupBy(productExplorer?.products, (product) => product.category2Name);
+      return PontAPIExplorer.getProductItems(element);
     } else {
       return PontAPIExplorer.getDirItems(spec);
     }
@@ -349,7 +384,9 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
           getSpecInfoFromName(item.name || "").version === version,
       )?.length
     ) {
-      vscode.window.showInformationMessage("该产品及其版本号已订阅，您可以使用 cmd + ctrl + l 来搜索该产品下的API。");
+      vscode.window.showInformationMessage(
+        "该产品及其版本号已订阅，您可以使用「mac: ctrl+cmd+l」，「win: ctrl+alt+l」来搜索该产品下的API。",
+      );
     } else {
       pontxConfig.origins = [
         ...(pontxConfig.origins || []),

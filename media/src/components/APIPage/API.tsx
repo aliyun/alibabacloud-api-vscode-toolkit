@@ -229,7 +229,7 @@ export const API: React.FC<APIProps> = (props) => {
   }, []);
 
   return (
-    <div className="bg-[var(--vscode-textBlockQuote-background)] pb-4" ref={pageEl}>
+    <div className="h-full bg-[var(--vscode-textBlockQuote-background)] pb-4" ref={pageEl}>
       {/*  */}
       <APIPageContext.Provider
         initialState={{
