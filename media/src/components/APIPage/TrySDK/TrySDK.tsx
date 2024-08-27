@@ -17,7 +17,7 @@ export class TrySDKProps {
 
 export const TrySDK: React.FC<TrySDKProps> = (props) => {
   // const daraSdkLannguages = SDKPublishInfo.getDaraLanguages(props.sdkInfos || [], product, version);
-  const { apiMeta, schemaForm, product, version, onDebug, changeMode, endpoints, regionId, mode } =
+  const { theme, apiMeta, schemaForm, product, version, onDebug, changeMode, endpoints, regionId, mode } =
     APIPageContext.useContainer();
   const [languageTab, setLanguageTab] = React.useState("Java");
   const [sdkDemos, setSdkDemos] = React.useState(codes.demoSdk as any);
@@ -94,6 +94,7 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
       <div className="sdk-demo-content h-[calc(100vh_-_194px)]">
         <MonacoEditor
           languageTab={languageTab}
+          theme={theme}
           height={"100vh"}
           setLanguageTab={setLanguageTab}
           header={

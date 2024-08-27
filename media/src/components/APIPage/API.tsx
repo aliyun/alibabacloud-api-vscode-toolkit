@@ -135,23 +135,27 @@ export const API: React.FC<APIProps> = (props) => {
     const documentComp = (
       <div>
         {selectedApi?.description && selectedApi?.description !== selectedApi?.summary ? (
-          <div className="mb-4 bg-white p-4">
+          <div className="mb-4 bg-[var(--vscode-editor-background)] p-4">
             <SemixMarkdown source={selectedApi?.description} />
           </div>
         ) : null}
-        <div className="mb-4 bg-white">
-          <div className="border-t border-gray-100 px-5 py-4 text-base font-medium">请求参数</div>
+        <div className="mb-4 bg-[var(--vscode-editor-background)]">
+          <div className="border-t border-gray-100 px-5 py-4 text-base font-medium text-[var(--vscode-foreground)]">
+            请求参数
+          </div>
           <ApiParamsDoc parameters={selectedApi?.parameters} apiName={selectedApi?.name} schemas={definitions as any} />
         </div>
-        <div className="mb-4 bg-white">
-          <div className="border-t border-gray-100 px-5 py-4 text-base font-medium">出参</div>
+        <div className="mb-4 bg-[var(--vscode-editor-background)]">
+          <div className="border-t border-gray-100 px-5 py-4 text-base font-medium text-[var(--vscode-foreground)]">
+            出参
+          </div>
           <ApiResponseDoc selectedApi={selectedApi}></ApiResponseDoc>
         </div>
         {props.renderMore?.()}
       </div>
     );
     const debugComp = (
-      <div className="debugComp flex h-[calc(100vh_-_140px)] overflow-y-hidden overflow-x-scroll bg-white">
+      <div className="debugComp flex h-[calc(100vh_-_140px)] overflow-y-hidden overflow-x-scroll bg-[var(--vscode-editor-background)]">
         <div className={`expand-arrow ${isExpand ? "" : "!left-1"}`} onClick={() => setIsExpand(!isExpand)}>
           {isExpand ? (
             <div className="codicon codicon-chevron-left relative right-0.5 top-6"></div>
@@ -168,7 +172,7 @@ export const API: React.FC<APIProps> = (props) => {
             }}
           >
             <Tab.Item key="debug-doc" title="API 文档">
-              <div className="grid h-[calc(100vh_-_177px)] w-full bg-white">
+              <div className="grid h-[calc(100vh_-_177px)] w-full bg-[var(--vscode-editor-background)]">
                 <div className="scrollbar-custom overflow-scroll">{documentComp}</div>
               </div>
             </Tab.Item>
@@ -225,7 +229,7 @@ export const API: React.FC<APIProps> = (props) => {
   }, []);
 
   return (
-    <div className="bg-gray-100 pb-4" ref={pageEl}>
+    <div className="bg-[var(--vscode-textBlockQuote-background)] pb-4" ref={pageEl}>
       {/*  */}
       <APIPageContext.Provider
         initialState={{
@@ -240,7 +244,7 @@ export const API: React.FC<APIProps> = (props) => {
         <RootContext.Provider initialState={initValue}>
           {selectedApi ? (
             <>
-              <div className="bg-white p-4">
+              <div className="bg-[var(--vscode-editor-background)] p-4">
                 <div className="flex justify-between">
                   <div>
                     <div className="flex">
@@ -250,23 +254,27 @@ export const API: React.FC<APIProps> = (props) => {
                         </div>
                       ) : null} */}
                       {selectedApi.deprecated ? (
-                        <Tag className="my-auto ml-2">
-                          <span className="text-gray-500">deprecated</span>
+                        <Tag className="my-auto ml-2" color="var(--vscode-textSeparator-foreground)">
+                          <span className="text-[$primary-2-font-color]">deprecated</span>
                         </Tag>
                       ) : null}
-                      <div className="my-auto ml-2 text-base font-medium">
+                      <div className="my-auto ml-2 text-base font-medium text-[var(--vscode-editorWidget-foreground)]">
                         {apiNameEle}
                         {selectedApi?.title ? <span> - {selectedApi.title}</span> : null}
                       </div>
                     </div>
                     {selectedApi?.summary ? (
-                      <div className="ml-2 py-2 text-sm font-normal text-gray-500" style={{ width: "100%" }}>
+                      <div
+                        className="ml-2 py-2 text-sm font-normal  text-[$primary-2-font-color] opacity-70"
+                        style={{ width: "100%" }}
+                      >
                         {selectedApi?.summary}
                       </div>
                     ) : null}
                   </div>
                   <div className="my-auto">
                     <Segmented
+                      className="document-segmented"
                       value={mode}
                       onChange={(val) => changeMode(val)}
                       options={tabs.map((teb) => {

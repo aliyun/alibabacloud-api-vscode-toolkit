@@ -1,3 +1,4 @@
+@import "../../styles/variable.scss";
 .editor-content {
   .operations {
     display: flex;
@@ -9,15 +10,14 @@
       .ant-btn {
         margin-left: 8px;
         padding: 0px;
-        background-color: #f8f9fa;
+        background-color: $primary-bg-color;
         border: 1px #f8f9fa solid;
       }
-      .ant-btn:hover{
-        background-color: #fff;
-        border: 1px #2f84ae solid;
-        color: #2f84ae;
+      .ant-btn:hover {
+        background-color: $code-bg;
+        border: 1px $hover-border solid;
+        color: $hover-text-color;
       }
-
     }
     .left-area {
       display: flex;
@@ -30,17 +30,17 @@
     .codicon {
       padding: 8px;
       cursor: pointer;
-      color:#6e6e6e;
+      color: $primary-font-color;
     }
-    .codicon:hover{
-      color: #2f84ae;
+    .codicon:hover {
+      color: $hover-text-color;
     }
   }
   .tab-content {
     position: relative;
   }
 }
-.content{
+.content {
   .ant-btn {
     margin-left: 8px;
     padding: 8px;

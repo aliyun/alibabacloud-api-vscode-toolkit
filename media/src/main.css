@@ -2,24 +2,185 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* --vscode-editor-background: #fff;
+  --vscode-textBlockQuote-background: #f6f8fa;
+  --vscode-editorWidget-foreground: #24292f;
+  --vscode-textPreformat-foreground: #57606a;
+  --vscode-editorHint-foreground: #6c6c6c;
+  --vscode-editorLink-activeForeground: #0000ff; */
+  --opacity: 0.5; /* 透明度 */
+  --vscode-foreground: #cccccc;
+  --vscode-disabledForeground: rgba(204, 204, 204, 0.5);
+  --vscode-errorForeground: #f48771;
+  --vscode-descriptionForeground: rgba(204, 204, 204, 0.7);
+  --vscode-icon-foreground: #c5c5c5;
+  --vscode-focusBorder: #007fd4;
+  --vscode-textLink-foreground: #3794ff;
+  --vscode-textLink-activeForeground: #3794ff;
+  --vscode-textSeparator-foreground: rgba(255, 255, 255, 0.18);
+  --vscode-textPreformat-foreground: #d7ba7d;
+  --vscode-textPreformat-background: rgba(255, 255, 255, 0.1);
+  --vscode-textBlockQuote-background: #222222;
+  --vscode-textBlockQuote-border: rgba(0, 122, 204, 0.5);
+  --vscode-textCodeBlock-background: rgba(10, 10, 10, 0.4);
+  --vscode-sash-hoverBorder: #007fd4;
+  --vscode-badge-background: #4d4d4d;
+  --vscode-badge-foreground: #ffffff;
+  --vscode-scrollbar-shadow: #000000;
+  --vscode-scrollbarSlider-background: rgba(121, 121, 121, 0.4);
+  --vscode-scrollbarSlider-hoverBackground: rgba(100, 100, 100, 0.7);
+  --vscode-scrollbarSlider-activeBackground: rgba(191, 191, 191, 0.4);
+  --vscode-progressBar-background: #0e70c0;
+  --vscode-editor-background: #1e1e1e;
+  --vscode-editor-foreground: #d4d4d4;
+  --vscode-editorStickyScroll-background: #1e1e1e;
+  --vscode-editorStickyScrollHover-background: #2a2d2e;
+  --vscode-editorStickyScroll-shadow: #000000;
+  --vscode-editorWidget-background: #252526;
+  --vscode-editorWidget-foreground: #cccccc;
+  --vscode-editorWidget-border: #454545;
+  --vscode-editorError-foreground: #f14c4c;
+  --vscode-editorWarning-foreground: #cca700;
+  --vscode-editorInfo-foreground: #3794ff;
+  --vscode-editorHint-foreground: rgba(238, 238, 238, 0.7);
+  --vscode-editorLink-activeForeground: #4e94ce;
+  --vscode-editor-selectionBackground: #264f78;
+  --vscode-editor-inactiveSelectionBackground: #3a3d41;
+  --vscode-editor-selectionHighlightBackground: rgba(173, 214, 255, 0.15);
+  --vscode-editor-findMatchBackground: #515c6a;
+  --vscode-editor-findMatchHighlightBackground: rgba(234, 92, 0, 0.33);
+  --vscode-editor-findRangeHighlightBackground: rgba(58, 61, 65, 0.4);
+  --vscode-editor-hoverHighlightBackground: rgba(38, 79, 120, 0.25);
+  --vscode-editorHoverWidget-background: #252526;
+  --vscode-editorHoverWidget-foreground: #cccccc;
+  --vscode-editorHoverWidget-border: #454545;
+  --vscode-editorHoverWidget-statusBarBackground: #2c2c2d;
+  --vscode-editorInlayHint-foreground: #969696;
+  --vscode-editorInlayHint-background: rgba(77, 77, 77, 0.1);
+  --vscode-editorInlayHint-typeForeground: #969696;
+  --vscode-editorInlayHint-typeBackground: rgba(77, 77, 77, 0.1);
+}
+
 .pontx-page .next-icon {
   font-family: NextIcon !important;
 }
 html body {
   padding: 0;
   border-left: 1px solid #d7d7d7;
+  div,
+  span {
+    color: var(--vscode-foreground);
+  }
 }
-/* .vscode-page {
-  padding: 20px 20px 0 20px;
-  width: 100%;
-  .api-page-content {
-    position: relative;
-    margin-top: 16px;
-    display: flex;
-    width: 100%;
-    .content{
+
+.pontx-ui-api {
+  .header {
+    background-color: #d6e0e5;
+    border-radius: 2px;
+    padding: 24px 24px 18px;
+    line-height: 30px;
+    color: black;
+    &.deprecated {
+      color: gray;
+    }
+
+    .heading {
+      display: flex;
+      justify-content: space-between;
       width: 100%;
-      padding:0 0 16px 20px
+      font-size: 16px;
+
+      .method {
+        border-radius: 2px;
+        background-color: #2f84ae;
+        color: white;
+        font-size: 16px;
+        display: inline-block;
+        width: 80px;
+        line-height: 30px;
+        text-align: center;
+      }
+
+      .title {
+        font-weight: bold;
+      }
+
+      .desc {
+        margin-left: 10px;
+        display: inline-block;
+        font-style: italic;
+      }
+
+      .path {
+        display: inline-block;
+        color: black;
+        margin-left: 10px;
+        font-weight: bold;
+      }
+
+      .left {
+        display: flex;
+        align-items: center;
+
+        .method {
+          margin-right: 12px;
+        }
+      }
+    }
+
+    .footer {
+      margin-top: 4px;
+      color: #4f4f4f;
     }
   }
-} */
+
+  .semix-table-header-th.param-name {
+    min-width: 100px;
+  }
+
+  .desc-mod {
+    border: 1px solid #89a6b5;
+    border-radius: 2px;
+    padding: 8px 18px;
+
+    .wmde-markdown {
+      background-color: unset;
+    }
+  }
+
+  .diff-text {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+
+  .content .mod {
+    border: 1px solid #89a6b5;
+    border-radius: 2px;
+    margin-top: 20px;
+
+    .mod-title {
+      background-color: #d6e0e5;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      padding: 8px 18px;
+      line-height: 28px;
+    }
+
+    .next-table {
+      .param-name {
+        .name {
+          color: black;
+          font-weight: bold;
+        }
+
+        &.required .name::before {
+          content: "*";
+          color: red;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+}

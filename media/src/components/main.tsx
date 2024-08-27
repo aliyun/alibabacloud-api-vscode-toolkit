@@ -1,5 +1,4 @@
 import * as React from "react";
-import "../pages/document/index.scss";
 import { PontUIService } from "../service/UIService";
 import { parseAPIMetaDescription } from "../utils/parseAPIMetaDescription";
 import { getSpecInfoFromName, getVSCode } from "../utils/utils";
@@ -7,9 +6,6 @@ import { API as APIPage } from "./APIPage/API";
 import { ApiErrorCode } from "./APIPage/APIDocument/ApiErrorCode";
 import { BaseClass as StructDocument } from "./APIPage/APIDocument/BaseClass";
 import ProfileManagerIndex from "./ProfileManager/ProfileManagerIndex";
-// import { definitions } from "../mocks/definitions";
-// import { routerMeta } from "../mocks/routerMeta";
-// import { definitions } from "../mocks/definitions";
 
 if (typeof window !== "undefined") {
   (window as any).routerMeta = {};

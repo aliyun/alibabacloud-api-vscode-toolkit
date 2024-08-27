@@ -50,7 +50,7 @@ export class AlicloudAPIWebview {
   static viewType = "alicloud-api-webview";
   static webviewPanels = {} as ObjectMap<vscode.WebviewPanel>;
 
-  openTab(extensionUri: vscode.Uri, panelConfig: PanelConfig) {
+  openTab(extensionUri: vscode.Uri, panelConfig: PanelConfig, context) {
     const panelKey = getPanelKey(panelConfig);
     const activeEditor = vscode.window.activeTextEditor;
     const getViewColumn = () => {

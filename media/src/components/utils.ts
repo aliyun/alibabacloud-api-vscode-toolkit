@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { APIResponse } from "../types/WorkbenchAPI";
-import { Parser } from 'xml2js';
+import { Parser } from "xml2js";
 import { EditorLanguages } from "./define";
 import { PontUIService } from "../service/UIService";
 import { getVSCode } from "../utils/utils";
@@ -15,7 +15,7 @@ export const getRefSchema = (schemas: any) => ($ref: string) => {
 };
 
 export function getIsUploadApi(response: APIResponse | APIResponse[]) {
-  return ((_.isArray(response) ? response : response) as any)?.type === 'Binary';
+  return ((_.isArray(response) ? response : response) as any)?.type === "Binary";
 }
 
 export const parseXml = (body: string): any => {
@@ -33,50 +33,50 @@ export const parseXml = (body: string): any => {
 
 export const getLanguageEditorByLang = (
   lang:
-    | 'JAVA'
-    | 'NODEJS'
-    | 'GO'
-    | 'PHP'
-    | 'PYTHON'
-    | 'PYTHON2'
-    | 'CSHARP'
-    | 'RUBY'
-    | 'TYPESCRIPT'
-    | 'JAVAASYNC'
-    | 'SWIFT',
+    | "JAVA"
+    | "NODEJS"
+    | "GO"
+    | "PHP"
+    | "PYTHON"
+    | "PYTHON2"
+    | "CSHARP"
+    | "RUBY"
+    | "TYPESCRIPT"
+    | "JAVAASYNC"
+    | "SWIFT",
 ) => {
   switch (lang) {
-    case 'CSHARP': {
+    case "CSHARP": {
       return EditorLanguages.CSharp;
     }
-    case 'GO': {
+    case "GO": {
       return EditorLanguages.Go;
     }
-    case 'JAVA': {
+    case "JAVA": {
       return EditorLanguages.Java;
     }
-    case 'JAVAASYNC': {
+    case "JAVAASYNC": {
       return EditorLanguages.JavaAsync;
     }
-    case 'NODEJS': {
+    case "NODEJS": {
       return EditorLanguages.Javascript;
     }
-    case 'PHP': {
+    case "PHP": {
       return EditorLanguages.PHP;
     }
-    case 'PYTHON': {
+    case "PYTHON": {
       return EditorLanguages.Python;
     }
-    case 'PYTHON2': {
+    case "PYTHON2": {
       return EditorLanguages.Python2;
     }
-    case 'RUBY': {
+    case "RUBY": {
       return EditorLanguages.Ruby;
     }
-    case 'TYPESCRIPT': {
+    case "TYPESCRIPT": {
       return EditorLanguages.TypeScript;
     }
-    case 'SWIFT': {
+    case "SWIFT": {
       return EditorLanguages.Swift;
     }
     default: {
@@ -88,40 +88,40 @@ export const getLanguageEditorByLang = (
 export const getLangByLanguageEditor = (language: EditorLanguages) => {
   switch (language) {
     case EditorLanguages.TypeScript: {
-      return 'TYPESCRIPT';
+      return "TYPESCRIPT";
     }
     case EditorLanguages.CSharp: {
-      return 'CSHARP';
+      return "CSHARP";
     }
     case EditorLanguages.Go: {
-      return 'GO';
+      return "GO";
     }
     case EditorLanguages.Java: {
-      return 'JAVA';
+      return "JAVA";
     }
     case EditorLanguages.JavaAsync: {
-      return 'JAVAASYNC';
+      return "JAVAASYNC";
     }
     case EditorLanguages.Javascript: {
-      return 'NODEJS';
+      return "NODEJS";
     }
     case EditorLanguages.PHP: {
-      return 'PHP';
+      return "PHP";
     }
     case EditorLanguages.Python: {
-      return 'PYTHON';
+      return "PYTHON";
     }
     case EditorLanguages.Python2: {
-      return 'PYTHON2';
+      return "PYTHON2";
     }
     case EditorLanguages.Ruby: {
-      return 'RUBY';
+      return "RUBY";
     }
     case EditorLanguages.CPP: {
-      return 'CPP';
+      return "CPP";
     }
     case EditorLanguages.Swift: {
-      return 'SWIFT';
+      return "SWIFT";
     }
     default: {
       return language;
@@ -129,7 +129,10 @@ export const getLangByLanguageEditor = (language: EditorLanguages) => {
   }
 };
 
-export const getEditorMenuItems = (code, language):Array<{ key: string; label: string; codicon?: string; onClick: () => void }> => {
+export const getEditorMenuItems = (
+  code,
+  language,
+): Array<{ key: string; label: string; codicon?: string; onClick: () => void }> => {
   return [
     {
       key: "openInCode",
@@ -151,7 +154,7 @@ export const getEditorMenuItems = (code, language):Array<{ key: string; label: s
       },
     },
   ];
-}
+};
 
 export const getEditorLanguage = (lang) => {
   switch (lang) {
@@ -178,4 +181,13 @@ export const getEditorLanguage = (lang) => {
     default:
       return "javascript";
   }
+};
+
+export const getMonacoTheme = (vscodeTheme: string) => {
+  if (vscodeTheme?.toLocaleLowerCase()?.includes("dark")) {
+    return "vs-dark";
+  } else if (vscodeTheme?.toLocaleLowerCase()?.includes("light")) {
+    return "vs";
+  }
+  return "vs";
 };

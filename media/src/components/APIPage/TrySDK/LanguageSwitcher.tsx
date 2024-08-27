@@ -2,14 +2,12 @@
  * @author yini-chen
  * @description 语言切换
  */
-import { Card, Empty, Select, Tabs } from "antd";
 import * as React from "react";
 // import { WorkbenchIcon } from './Icon/Icon';
 // import { EditorLanguages } from './MonacoEditor/define';
 // import { I18N } from '../utils/I18N';
 import { EditorLanguages } from "../../define";
-import I18N from "../../../utils/I18N";
-import { WorkbenchIcon } from "../../../Icon/Icon";
+import { Select } from "@alicloud/console-components";
 
 export const OLD_SDK_LANGUAAGES = [
   { value: EditorLanguages.Java, text: EditorLanguages.Java, icon: "java" },
@@ -65,7 +63,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = (props) => {
         style={{ width: 130 }}
         value={props.language}
         onChange={(tab) => props.onLanguageChange(tab as EditorLanguages)}
-        options={options}
+        dataSource={options}
       ></Select>
     </div>
   );

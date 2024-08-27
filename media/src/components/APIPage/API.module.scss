@@ -1,0 +1,120 @@
+@import "../../styles/variable.scss";
+.debugComp {
+  position: relative;
+  .expand-arrow {
+    position: absolute;
+    top: 256px;
+    left: 396px;
+    z-index: 999;
+    width: 12px;
+    height: 82px;
+    line-height: 36px;
+    background-color: $primary-bg-color;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 0 2px 2px 0;
+    cursor: pointer;
+    /* .codicon {
+      position: relative !important;
+      line-height: 79px !important;
+      right: 3px !important;
+    } */
+    &:hover {
+      background-color: $code-bg;
+    }
+  }
+  .next-input.next-focus {
+    background-color: $code-bg;
+  }
+  .next-input {
+    background-color: $primary-bg-color;
+    input {
+      background-color: $primary-bg-color;
+      color: $primary-font-color;
+    }
+    &:hover {
+      background-color: $code-bg;
+    }
+    &:focus {
+      background-color: $code-bg;
+    }
+  }
+  .ant-select-selector {
+    background-color: $primary-bg-color !important;
+    input {
+      background-color: $primary-bg-color !important;
+      color: $primary-font-color !important;
+    }
+  }
+}
+
+.next-menu {
+  background-color: $primary-bg-color !important;
+  .next-menu-item:hover {
+    background-color: $code-bg !important;
+  }
+  .next-menu-item.next-selected {
+    background-color: $code-bg !important;
+  }
+  .next-focused {
+    background-color: $primary-bg-color !important;
+  }
+  .next-disabled {
+    background-color: $primary-bg-color !important;
+    span {
+      color: var(--vscode-badge-background) !important;
+    }
+  }
+}
+.document-segmented {
+  div,
+  span {
+    color: #aaaaaa;
+  }
+  .ant-segmented-item-selected {
+    div,
+    span {
+      color: #4d4d4d;
+      font-weight: 400;
+    }
+  }
+}
+.ant-alert-content {
+  div,
+  span {
+    color: #4d4d4d;
+  }
+}
+.next-overlay-wrapper {
+  .next-balloon {
+    background-color: $primary-bg-color !important;
+  }
+  .next-balloon-normal:after {
+    background-color: $primary-bg-color !important;
+  }
+}
+
+.next-btn-normal {
+  background-color: $primary-bg-color !important;
+}
+.next-btn-primary {
+  background-color: rgb(59, 89, 153) !important;
+  span,
+  div {
+    color: #fff !important;
+  }
+}
+
+.ant-dropdown {
+  span,
+  div {
+    color: #505050 !important;
+  }
+}
+.ant-notification-notice {
+  background-color: $primary-bg-color !important;
+  border: 1px solid $primary-font-color;
+  border-radius: 5px;
+  .ant-notification-notice-message {
+    color: $primary-font-color !important;
+  }
+}

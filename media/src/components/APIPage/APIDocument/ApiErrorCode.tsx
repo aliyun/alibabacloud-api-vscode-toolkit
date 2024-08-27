@@ -90,9 +90,9 @@ export const ApiErrorCode: React.FC<ApiErrorCodeProps> = (props) => {
   const CustomFixScrollBar = useCustomFixScrollBar(".error-codes-scroll-content", tableRef as any);
 
   return (
-    <div className="mb-4 bg-white">
+    <div className="bg-[var(--vscode-editor-background)]] semix-markdown mb-4">
       <div className="flex justify-between border-t border-gray-100 ">
-        <div className="px-5 py-4 text-base font-medium">错误码</div>
+        <div className="px-5 py-4 text-base font-medium text-[var(--vscode-editor-foreground)]">错误码</div>
         <div className="my-auto mr-4 text-sm">
           <a href={`https://api.aliyun.com/document/${props.popcode}/${props.version}/errorCode`} target="_blank">
             所有错误码

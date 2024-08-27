@@ -263,7 +263,7 @@ export class AlicloudApiCommands {
     });
 
     vscode.commands.registerCommand("alicloud.api.openDocument", (config) => {
-      new AlicloudAPIWebview().openTab(context.extensionUri, config);
+      new AlicloudAPIWebview().openTab(context.extensionUri, config, context);
     });
 
     // 刷新问卷调查弹窗过期设置

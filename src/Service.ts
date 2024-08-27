@@ -165,6 +165,10 @@ export class AlicloudAPIService {
     return res?.data?.endpoints || [];
   }
 
+  async getTheme() {
+    return vscode.workspace.getConfiguration().get("workbench.colorTheme") || "light";
+  }
+
   async openInCode(codeInfo: { code: string; language: string }) {
     const { language, code } = codeInfo;
     const getViewColumn = () => {
