@@ -65,6 +65,13 @@ html body {
   span {
     color: var(--vscode-foreground);
   }
+  .semix-schema-preview-popup {
+    background-color: var(--vscode-editor-background);
+    .header {
+      font-size: 14px;
+      background-color: var(--vscode-editor-background);
+    }
+  }
 }
 
 .pontx-ui-api {
