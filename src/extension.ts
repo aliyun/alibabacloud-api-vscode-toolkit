@@ -18,7 +18,7 @@ import { updateDiagnostics } from "./provider/linter";
 
 export async function activate(context: vscode.ExtensionContext) {
   // 插件诊断器
-  const collection = vscode.languages.createDiagnosticCollection("test");
+  const collection = vscode.languages.createDiagnosticCollection("alicloud-linter");
   if (vscode.window.activeTextEditor) {
     updateDiagnostics(vscode.window.activeTextEditor.document, collection);
   }

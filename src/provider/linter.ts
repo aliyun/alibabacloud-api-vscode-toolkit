@@ -17,37 +17,32 @@ class Rule {
 }
 export const LintRules: Array<Rule> = [
   {
-    LintName: "AccessKey-KeyValue",
-    source: "Alicloud AccessKey Lint",
-    pattern:
-      '(?<keyword>access|key|secret|scret|ak|sk)[^\\w\\n]*(?:\\n)?(?<separator>["\'\\s]*[:=@,]\\s*(?:"|\')?|\\w*"\\s*?,\\s*?")[\\s"\']*(?<key>[0-9A-Za-z]{14,40})(?<suffix>["\'\\s]*)',
-    message: "工程代码泄露可能会导致 AccessKey 泄露，并威胁账号下所有资源的安全性。",
-    information: "在此处透露了 AccessKey。",
-    methods: [{ title: "凭据的安全使用方案", command: "alicloud.api.akSecurityHelper" }],
-  },
-  {
     LintName: "AccessKey-NewAK",
     source: "Alicloud AccessKey Lint",
     information: "在此处透露了 AccessKey。",
-    pattern:
-      "^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{12}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{16}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{18}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{20}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{22}$",
+    pattern: `^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{12}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{16}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{18}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{20}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{22}$`,
     message: "工程代码泄露可能会导致 AccessKey 泄露，并威胁账号下所有资源的安全性。",
     methods: [{ title: "凭据的安全使用方案", command: "alicloud.api.akSecurityHelper" }],
   },
 ];
 
-function searchCode(
+export function searchCode(
   diagnosticCollection: vscode.Diagnostic[],
   rule: Rule,
   text: string,
   document: vscode.TextDocument,
 ) {
   const regex = new RegExp(rule.pattern, "gi");
-  let match;
-  while ((match = regex.exec(text)) !== null) {
-    const range = new vscode.Range(document.positionAt(match.index), document.positionAt(regex.lastIndex));
+  const strRegex = new RegExp(`[\'\"\`](.*?)[\'\"\`]`, "gi");
+  let strMatch;
+  let matchTexts = [];
+  while ((strMatch = strRegex.exec(text)) !== null) {
+    const range = new vscode.Range(document.positionAt(strMatch.index), document.positionAt(strRegex.lastIndex));
     const matchText = document.getText(range);
-    if (!diagnosticCollection?.find((item) => item.code === matchText)) {
+    const pureString = matchText.substring(1, matchText.length - 1);
+    const isMatch = regex.test(pureString);
+    if (isMatch) {
+      matchTexts.push(pureString);
       diagnosticCollection.push({
         code: "",
         message: rule.message,
@@ -60,6 +55,7 @@ function searchCode(
       });
     }
   }
+  return matchTexts;
 }
 
 export async function updateDiagnostics(
