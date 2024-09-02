@@ -1,6 +1,4 @@
 "use strict";
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import { PontManager } from "pontx-manager";
 import PontMetaFetchPlugin from "pontx-meta-fetch-plugin";
 import * as vscode from "vscode";
@@ -16,12 +14,29 @@ import autoCompletion from "./provider/autoCompletion";
 import autofix from "./provider/autofix";
 import hoverInfo from "./provider/hoverProvider";
 import { getProfileInfoInstance } from "./profileManager";
+import { updateDiagnostics } from "./provider/linter";
 
 export async function activate(context: vscode.ExtensionContext) {
-  // if (!vscode.workspace.rootPath) {
-  //   return;
-  // }
-  // registerConfigSchema(context);
+  // 插件诊断器
+  const collection = vscode.languages.createDiagnosticCollection("test");
+  if (vscode.window.activeTextEditor) {
+    updateDiagnostics(vscode.window.activeTextEditor.document, collection);
+  }
+  context.subscriptions.push(
+    vscode.window.onDidChangeActiveTextEditor((editor) => {
+      if (editor) {
+        updateDiagnostics(editor.document, collection);
+      }
+    }),
+  );
+  context.subscriptions.push(
+    vscode.workspace.onDidChangeTextDocument((editor) => {
+      if (editor) {
+        updateDiagnostics(editor.document, collection);
+      }
+    }),
+  );
+
   const pontxConfig = await findAlicloudAPIConfig(context);
 
   if (!pontxConfig) {
