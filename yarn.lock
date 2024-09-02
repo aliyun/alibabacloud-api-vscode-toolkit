@@ -7,10 +7,10 @@
   resolved "https://registry.npmmirror.com/@aashutoshrathi/word-wrap/-/word-wrap-1.2.6.tgz#bd9154aec9983f77b3a034ecaa015c2e4201f6cf"
   integrity sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==
 
-"@alicloud/credentials@^2.1.1":
-  version "2.3.0"
-  resolved "https://registry.npmmirror.com/@alicloud/credentials/-/credentials-2.3.0.tgz#941233a07ba74cd2fdaa3f6a5d2a3cca5a10c184"
-  integrity sha512-x0vf/m1BzkqYXAj2Hkd22O35josx5P4VCzq/9EvTBjA7aGLX/P6JDz7QVp+gnhLjPJyvwAbErvJRYq4gIo4IMA==
+"@alicloud/credentials@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@alicloud/credentials/-/credentials-2.3.1.tgz#ab79046cee47af2ba161954f82ad09a30fa5a3de"
+  integrity sha512-FK8N1YNVqUGOl7qOFn8h3zTwv2Tj8ON3459XXnJkAa08YBECj8o/V81D/ubxpX0yZub4RVKjknxNSHEbrASc+A==
   dependencies:
     "@alicloud/tea-typescript" "^1.5.3"
     httpx "^2.2.0"
