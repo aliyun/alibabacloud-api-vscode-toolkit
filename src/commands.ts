@@ -245,6 +245,26 @@ export class AlicloudApiCommands {
       new AlicloudAPIWebview().openTab(context.extensionUri, config, context);
     });
 
+    vscode.commands.registerCommand("alicloud.api.quickOpenDocument", (arg) => {
+      const { apiName, product, version } = arg;
+      const specName = `${product}__${version}`;
+
+      const pontSpec =
+        service.pontManager.localPontSpecs.find((spec) => spec.name === specName) ||
+        service.pontManager.localPontSpecs[0];
+
+      const apiMeta = pontSpec?.apis[apiName];
+
+      vscode.commands.executeCommand("alicloud.api.openDocument", {
+        specName,
+        apiName,
+        name: apiName,
+        spec: apiMeta,
+        pageType: "document",
+        schemaType: "api",
+      });
+    });
+
     // 刷新问卷调查弹窗过期设置
     vscode.commands.registerCommand("alicloud.api.updateCloseQuestionnaire", () => {
       const lastPromptKey = "lastPromptTime";
