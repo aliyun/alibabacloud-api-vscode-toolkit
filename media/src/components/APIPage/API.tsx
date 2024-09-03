@@ -229,8 +229,7 @@ export const API: React.FC<APIProps> = (props) => {
   }, []);
 
   return (
-    <div className="h-full bg-[var(--vscode-textBlockQuote-background)] pb-4" ref={pageEl}>
-      {/*  */}
+    <div className="bg-[var(--vscode-textBlockQuote-background)] pb-4" ref={pageEl}>
       <APIPageContext.Provider
         initialState={{
           apiMeta: selectedApi,
@@ -265,7 +264,7 @@ export const API: React.FC<APIProps> = (props) => {
                     </div>
                     {selectedApi?.summary ? (
                       <div
-                        className="ml-2 py-2 text-sm font-normal  text-[$primary-2-font-color] opacity-70"
+                        className="ml-2 py-2 text-sm font-normal text-[$primary-2-font-color] opacity-70"
                         style={{ width: "100%" }}
                       >
                         {selectedApi?.summary}

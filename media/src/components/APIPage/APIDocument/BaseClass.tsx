@@ -21,7 +21,7 @@ export const BaseClass: React.FC<BaseClassProps> = (props) => {
   return (
     <div className={classNames("pontx-ui-baseclass", (schema as any)?.type)}>
       <div className="header">
-        <div className="title text-base">
+        <div className="title p-4 text-base">
           数据结构 - {name}
           {schema?.templateArgs?.length
             ? `<${schema?.templateArgs.map((arg, argIndex) => "T" + argIndex).join(", ")}>`
