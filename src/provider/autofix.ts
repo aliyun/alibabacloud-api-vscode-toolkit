@@ -2,9 +2,10 @@
  * @description: Quick fix need to be used with a Linter
  */
 import * as vscode from "vscode";
-import { containsAnySubstring, fileSel, getSpecInfoFromName } from "../utils";
+import { containsAnySubstring, fileSel, getSpecInfoFromName, SDKLanguageLabel } from "../utils";
 import { getDepsByLanguage } from "../common/generateImport";
 import { alicloudAPIMessageService } from "../Service";
+import { LintRules } from "./linter";
 
 class CodeActionProvider {
   provideCodeActions(
@@ -21,16 +22,13 @@ class CodeActionProvider {
       const document = editor.document;
       const errorText = document.getText(item?.range);
       const service = alicloudAPIMessageService;
-      const products = service.pontManager.localPontSpecs
-        .map((pontSpec) => {
-          return getSpecInfoFromName(pontSpec?.name)[0];
-        })
+      const products = service.pontManager.localPontSpecs.map((pontSpec) => {
+        return getSpecInfoFromName(pontSpec?.name)[0];
+      });
 
+      // 未导入依赖的诊断建议
       if (getDepsByLanguage(errorText, item.range)?.includes(errorText) || containsAnySubstring(errorText, products)) {
-        const autoImportAction = new vscode.CodeAction(
-          item.message + "导入依赖",
-          vscode.CodeActionKind.QuickFix,
-        );
+        const autoImportAction = new vscode.CodeAction(item.message + "导入依赖", vscode.CodeActionKind.QuickFix);
         const newDiagnostic = new vscode.Diagnostic(item.range, "importLists", vscode.DiagnosticSeverity.Error);
         // 自动修复命令注册
         autoImportAction.command = {
@@ -39,6 +37,23 @@ class CodeActionProvider {
           arguments: [newDiagnostic, errorText, item.range],
         };
         return autoImportAction;
+      }
+
+      // AccessKey 可能泄露的诊断建议
+      const lintResult = LintRules?.find((rule) => rule.source === item.source);
+      if (lintResult) {
+        // 自动修复命令注册
+        const codeAction = new vscode.CodeAction(
+          `${lintResult.methods[0]?.title}（${SDKLanguageLabel[document.languageId] || "阿里云 SDK"}）`,
+          vscode.CodeActionKind.QuickFix,
+        );
+        codeAction.command = {
+          title: `${lintResult.methods[0]?.title}（${SDKLanguageLabel[document.languageId] || "阿里云 SDK"}）`,
+          command: lintResult.methods[0]?.command,
+          arguments: [document],
+        };
+
+        return codeAction;
       }
     });
 

@@ -15,7 +15,13 @@
   ],
   "activationEvents": [
     "onStartFinished",
-    "onWebviewPanel:alicloud-api-webview"
+    "onWebviewPanel:alicloud-api-webview",
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:go",
+    "onLanguage:php",
+    "onLanguage:python",
+    "onLanguage:java"
   ],
   "main": "./dist/extension",
   "contributes": {
@@ -23,6 +29,10 @@
       {
         "command": "alicloud.api.autoImport",
         "title": "导入依赖"
+      },
+      {
+        "command": "alicloud.api.akSecurityHelper",
+        "title": "凭据的安全使用方案"
       },
       {
         "command": "alicloud.api.feedback",

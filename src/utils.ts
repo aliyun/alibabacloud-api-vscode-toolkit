@@ -487,12 +487,31 @@ export const getRequiredParamsValue = (product: string, version: string, api: st
 
 export const fileSel: vscode.DocumentSelector = [
   { scheme: "file", language: "typescript" },
+  { scheme: "file", language: "javascript" },
   { scheme: "file", language: "go" },
   { scheme: "file", language: "java" },
   { scheme: "file", language: "csharp" },
   { scheme: "file", language: "python" },
   { scheme: "file", language: "php" },
 ];
+
+export const SDKLanguageLabel = {
+  typescript: "V2.0 Node.js SDK",
+  javascript: "V2.0 Node.js SDK",
+  go: "V2.0 Go SDK",
+  java: "V2.0 Java SDK",
+  python: "V2.0 Python SDK",
+  php: "V2.0 PHP SDK",
+};
+
+export const AKHelperWithLanguage = {
+  typescript: "https://help.aliyun.com/zh/sdk/developer-reference/v2-manage-node-js-access-credentials",
+  javascript: "https://help.aliyun.com/zh/sdk/developer-reference/v2-manage-node-js-access-credentials",
+  java: "https://help.aliyun.com/zh/sdk/developer-reference/v2-manage-access-credentials",
+  go: "https://help.aliyun.com/zh/sdk/developer-reference/v2-manage-go-access-credentials",
+  python: "https://help.aliyun.com/zh/sdk/developer-reference/v2-manage-python-access-credentials",
+  php: "https://help.aliyun.com/zh/sdk/developer-reference/v2-manage-php-access-credentials",
+};
 
 export const containsAnySubstring = (targetStr, substrings) => {
   const language = vscode.window.activeTextEditor?.document.languageId;
