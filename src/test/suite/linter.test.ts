@@ -1,5 +1,4 @@
 import * as assert from "assert";
-import { after, before } from "mocha";
 import path from "path";
 import * as vscode from "vscode";
 import { LintRules, searchCode } from "../../provider/linter";
@@ -37,8 +36,6 @@ suite("Alicloud linter Test Suite", function () {
 
   // 测试指定单词是否存在于文档中
   test("Check if document contains the AK", async function () {
-    // 指定要查找的单词
-    const wordToFind = "sample";
     const text = document.getText();
 
     let diagnosticCollection: vscode.Diagnostic[] = [];
@@ -49,16 +46,15 @@ suite("Alicloud linter Test Suite", function () {
       matches = matches.concat(matches, searchCode(diagnosticCollection, rule, text, document));
     });
 
-    console.log(diagnosticCollection);
-
-    const mock = [
+    const result = [
       "LTAIAbcd1234abcd",
       "LTAIAbcd1234abcdefghij",
       "LTAIAbcd1234abcdefghijklmn",
       "LTAIabcd1234abcdefghij",
       "LTAIAbcd1234abcdefghiJ",
     ];
-    assert.equal(matches.toString(), mock.toString());
+
+    assert.equal(matches.toString(), result.toString());
     // assert.ok(matches, `test failed`);
   });
 
