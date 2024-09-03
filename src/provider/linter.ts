@@ -18,10 +18,18 @@ class Rule {
 export const LintRules: Array<Rule> = [
   {
     LintName: "AccessKey-NewAK",
-    source: "Alicloud AccessKey Lint",
-    information: "在此处透露了 AccessKey。",
+    source: "Alicloud Access Key Lint",
+    information: "在此处透露了 Access Key。",
     pattern: `^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{12}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{16}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{18}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{20}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{22}$`,
-    message: "工程代码泄露可能会导致 AccessKey 泄露，并威胁账号下所有资源的安全性。",
+    message: "在工程中硬编码 Access Key ID/Secret 容易发生凭证数据泄漏，并进而威胁到您账号下所有资源的安全性。",
+    methods: [{ title: "凭据的安全使用方案", command: "alicloud.api.akSecurityHelper" }],
+  },
+  {
+    LintName: "AccessSecret",
+    source: "Alicloud AccessKey Lint",
+    information: "在此处透露了 Access Secret。",
+    pattern: `[a-zA-Z0-9]{30}`,
+    message: "在工程中硬编码 Access Key ID/Secret 容易发生凭证数据泄漏，并进而威胁到您账号下所有资源的安全性。",
     methods: [{ title: "凭据的安全使用方案", command: "alicloud.api.akSecurityHelper" }],
   },
 ];
