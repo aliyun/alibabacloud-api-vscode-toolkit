@@ -14,7 +14,7 @@ import autoCompletion from "./provider/autoCompletion";
 import autofix from "./provider/autofix";
 import hoverInfo from "./provider/hoverProvider";
 import { getProfileInfoInstance } from "./profileManager";
-import { registerLinter, updateDiagnostics } from "./provider/linter";
+import { registerLinter } from "./provider/linter";
 
 export async function activate(context: vscode.ExtensionContext) {
   const pontxConfig = await findAlicloudAPIConfig(context);
