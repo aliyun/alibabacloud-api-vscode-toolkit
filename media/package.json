@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@alicloud/console-components": "^1.6.2",
-    "@ant-design/icons": "^5.3.7",
+    "@ant-design/icons": "^5.4.0",
     "@monaco-editor/react": "^4.6.0",
     "@vercel/ncc": "^0.38.1",
     "@vscode-elements/elements": "^1.3.0",
@@ -21,7 +21,7 @@
     "intl-format": "^1.2.0",
     "load-script": "^2.0.0",
     "lodash": "^4.17.20",
-    "next": "^14.1.1",
+    "next": "^14.2.6",
     "pontx-ui": "latest",
     "react": "^18.3.1",
     "react-copy-to-clipboard": "^5.1.0",
