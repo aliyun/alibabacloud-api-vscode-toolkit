@@ -14,29 +14,9 @@ import autoCompletion from "./provider/autoCompletion";
 import autofix from "./provider/autofix";
 import hoverInfo from "./provider/hoverProvider";
 import { getProfileInfoInstance } from "./profileManager";
-import { updateDiagnostics } from "./provider/linter";
+import { registerLinter, updateDiagnostics } from "./provider/linter";
 
 export async function activate(context: vscode.ExtensionContext) {
-  // 插件诊断器
-  const collection = vscode.languages.createDiagnosticCollection("alicloud-linter");
-  if (vscode.window.activeTextEditor) {
-    updateDiagnostics(vscode.window.activeTextEditor.document, collection);
-  }
-  context.subscriptions.push(
-    vscode.window.onDidChangeActiveTextEditor((editor) => {
-      if (editor) {
-        updateDiagnostics(editor.document, collection);
-      }
-    }),
-  );
-  context.subscriptions.push(
-    vscode.workspace.onDidChangeTextDocument((editor) => {
-      if (editor) {
-        updateDiagnostics(editor.document, collection);
-      }
-    }),
-  );
-
   const pontxConfig = await findAlicloudAPIConfig(context);
 
   if (!pontxConfig) {
@@ -102,6 +82,8 @@ export async function activate(context: vscode.ExtensionContext) {
       autofix(context);
       // hover提示
       hoverInfo(context);
+      // 代码诊断
+      registerLinter(context);
     }
   } catch (e) {
     vscode.window.showErrorMessage(e.message);
