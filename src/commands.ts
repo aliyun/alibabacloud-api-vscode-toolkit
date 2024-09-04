@@ -242,10 +242,15 @@ export class AlicloudApiCommands {
     });
 
     vscode.commands.registerCommand("alicloud.api.openDocument", (config) => {
-      new AlicloudAPIWebview().openTab(context.extensionUri, config, context);
+      try {
+        new AlicloudAPIWebview().openTab(context.extensionUri, config, context);
+        return "ok";
+      } catch (e) {
+        return e;
+      }
     });
 
-    vscode.commands.registerCommand("alicloud.api.quickOpenDocument", (arg) => {
+    vscode.commands.registerCommand("alicloud.api.quickOpenDocument", async (arg) => {
       const { apiName, product, version } = arg;
       const specName = `${product}__${version}`;
 
@@ -255,7 +260,7 @@ export class AlicloudApiCommands {
 
       const apiMeta = pontSpec?.apis[apiName];
 
-      vscode.commands.executeCommand("alicloud.api.openDocument", {
+      const result = await vscode.commands.executeCommand("alicloud.api.openDocument", {
         specName,
         apiName,
         name: apiName,
@@ -263,6 +268,7 @@ export class AlicloudApiCommands {
         pageType: "document",
         schemaType: "api",
       });
+      return result;
     });
 
     // 刷新问卷调查弹窗过期设置

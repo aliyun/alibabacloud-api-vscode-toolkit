@@ -25,4 +25,12 @@ suite("Extension Test Suite", () => {
     console.log("alicloud.api.restart successfully executed");
     assert.strictEqual("ok", result);
   });
+
+  test("Test alicloud.api.quickOpenDocument command", async () => {
+    const args = [{ apiName: "RunInstances", product: "Ecs", version: "2014-05-26" }];
+
+    const result = await vscode.commands.executeCommand("alicloud.api.quickOpenDocument", args);
+    console.log("alicloud.api.quickOpenDocument successfully executed");
+    assert.strictEqual("ok", result);
+  });
 });
