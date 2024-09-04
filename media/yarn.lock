@@ -1051,9 +1051,9 @@ acorn@^8.9.0:
   resolved "https://registry.npmmirror.com/acorn/-/acorn-8.11.3.tgz#71e0b14e13a4ec160724b38fb7b0f233b1b81d7a"
   integrity sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==
 
-ahooks@^3.8.1:
+ahooks@3.8.1:
   version "3.8.1"
-  resolved "https://registry.yarnpkg.com/ahooks/-/ahooks-3.8.1.tgz#3a19d0e4085618a7a38a22a34b568c8d3fd974c0"
+  resolved "https://registry.npmmirror.com/ahooks/-/ahooks-3.8.1.tgz#3a19d0e4085618a7a38a22a34b568c8d3fd974c0"
   integrity sha512-JoP9+/RWO7MnI/uSKdvQ8WB10Y3oo1PjLv+4Sv4Vpm19Z86VUMdXh+RhWvMGxZZs06sq2p0xVtFk8Oh5ZObsoA==
   dependencies:
     "@babel/runtime" "^7.21.0"
@@ -4525,6 +4525,15 @@ pirates@^4.0.1:
   resolved "https://registry.npmmirror.com/pirates/-/pirates-4.0.6.tgz#3018ae32ecfcff6c29ba2267cbf21166ac1f36b9"
   integrity sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==
 
+pontx-semix-table@0.5.3:
+  version "0.5.3"
+  resolved "https://registry.npmmirror.com/pontx-semix-table/-/pontx-semix-table-0.5.3.tgz#6be8eaad14f9af8f4fee3bdf2fbc6b5db58ea7c4"
+  integrity sha512-82j/7r3xbfIfh1P1QpB/0V6foNFZGwh23E1zaXq4n4GR+IVSTTq8pLJmaUGTCCYB+eI05KeQoINOW1kILoeMgQ==
+  dependencies:
+    classnames "^2.2.6"
+    react-window "^1.8.8"
+    semix-core "^0.0.11"
+
 pontx-spec-diff@^0.3.83:
   version "0.3.83"
   resolved "https://registry.npmmirror.com/pontx-spec-diff/-/pontx-spec-diff-0.3.83.tgz#86b5daa6e0acfe7315f33a64aeb73fac03cc1c7b"
@@ -5493,7 +5502,7 @@ semix-core@^0.0.11:
   resolved "https://registry.npmmirror.com/semix-core/-/semix-core-0.0.11.tgz#d8f586fd7e53eb3963dc896578e25e63bab9e911"
   integrity sha512-y4qAqFXYfMFclxqgIUkmINaoEajVGtWtDy5zi+tXbS2dSKz/zFkUv2s8mhq4oOALqjELSsrvilkaZlVBTM1ApA==
 
-semix-schema-table@^0.0.13, semix-schema-table@^0.1.3:
+semix-schema-table@0.1.3, semix-schema-table@^0.0.13:
   version "0.1.3"
   resolved "https://registry.npmmirror.com/semix-schema-table/-/semix-schema-table-0.1.3.tgz#038937bb1703167b3287529e926682c04f33fb3a"
   integrity sha512-dWdJYmQPUiHKeEdmLJrSInOVPbVoOGSGYjyE6dt3IunTOKoKmgS2k1uKA3s8mJAaAvbOf5BnOf0J5P48psgKkw==
@@ -5670,6 +5679,7 @@ string-convert@^0.2.0:
   integrity sha512-u/1tdPl4yQnPBjnVrmdLo9gtuLvELKsAoRapekWggdiQNvvvum+jYF329d84NAa660KQw7pB2n36KrIKVoXa3A==
 
 "string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0:
+  name string-width-cjs
   version "4.2.3"
   resolved "https://registry.npmmirror.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==

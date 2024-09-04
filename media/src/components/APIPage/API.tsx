@@ -21,6 +21,7 @@ import TrySDK from "./TrySDK/TrySDK";
 import { APIPageContext } from "./context";
 import { PontUIService } from "../../service/UIService";
 import ApiResponseDoc from "./APIDocument/ApiResponseDoc";
+import Searcher from "../common/Searcher";
 
 export class APIProps {
   selectedApi?: PontSpec.PontAPI;
@@ -228,69 +229,99 @@ export const API: React.FC<APIProps> = (props) => {
     });
   }, []);
 
+  const contentRef = React.useRef(null);
+
+  const [isSearchVisible, setIsSearchVisible] = React.useState(false);
+
+  const handleKeyDown = (event) => {
+    // 假设我们监听 Ctrl + M 组合键
+    if ((event.ctrlKey || event.metaKey) && event.key === "f") {
+      setIsSearchVisible((prev) => !prev); // 切换 DOM 可见性
+      const input = document.getElementById("page-search-input");
+      input.focus();
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+
+    // 清除事件监听器
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
-    <div className="bg-[var(--vscode-textBlockQuote-background)] pb-4" ref={pageEl}>
-      <APIPageContext.Provider
-        initialState={{
-          apiMeta: selectedApi,
-          schemaForm: form,
-          product: props.product,
-          version: props.version,
-          mode: mode,
-          changeMode: changeMode,
-        }}
-      >
-        <RootContext.Provider initialState={initValue}>
-          {selectedApi ? (
-            <>
-              <div className="bg-[var(--vscode-editor-background)] p-4">
-                <div className="flex justify-between">
-                  <div>
-                    <div className="flex">
-                      {/* {selectedApi.method ? (
+    <div>
+      <Searcher
+        contentRef={contentRef}
+        isVisible={isSearchVisible}
+        setIsVisible={setIsSearchVisible}
+        mode={mode}
+      ></Searcher>
+      <div className="bg-[var(--vscode-textBlockQuote-background)] pb-4" ref={contentRef}>
+        <APIPageContext.Provider
+          initialState={{
+            apiMeta: selectedApi,
+            schemaForm: form,
+            product: props.product,
+            version: props.version,
+            mode: mode,
+            changeMode: changeMode,
+          }}
+        >
+          <RootContext.Provider initialState={initValue}>
+            {selectedApi ? (
+              <>
+                <div className="bg-[var(--vscode-editor-background)] p-4">
+                  <div className="flex justify-between">
+                    <div>
+                      <div className="flex">
+                        {/* {selectedApi.method ? (
                         <div className="h-6 w-16 rounded-sm border-2 border-solid border-emerald-100 bg-emerald-100 text-center text-base font-medium leading-5 text-teal-500 ">
                           {selectedApi.method?.toUpperCase()}
                         </div>
                       ) : null} */}
-                      {selectedApi.deprecated ? (
-                        <Tag className="my-auto ml-2" color="var(--vscode-textSeparator-foreground)">
-                          <span className="text-[$primary-2-font-color]">deprecated</span>
-                        </Tag>
+                        {selectedApi.deprecated ? (
+                          <Tag className="my-auto ml-2" color="var(--vscode-textSeparator-foreground)">
+                            <span className="text-[$primary-2-font-color]">deprecated</span>
+                          </Tag>
+                        ) : null}
+                        <div className="my-auto ml-2 text-base font-medium text-[var(--vscode-editorWidget-foreground)]">
+                          {apiNameEle}
+                          {selectedApi?.title ? <span> - {selectedApi.title}</span> : null}
+                        </div>
+                      </div>
+                      {selectedApi?.summary ? (
+                        <div
+                          className="ml-2 py-2 text-sm font-normal text-[$primary-2-font-color] opacity-70"
+                          style={{ width: "100%" }}
+                        >
+                          {selectedApi?.summary}
+                        </div>
                       ) : null}
-                      <div className="my-auto ml-2 text-base font-medium text-[var(--vscode-editorWidget-foreground)]">
-                        {apiNameEle}
-                        {selectedApi?.title ? <span> - {selectedApi.title}</span> : null}
-                      </div>
                     </div>
-                    {selectedApi?.summary ? (
-                      <div
-                        className="ml-2 py-2 text-sm font-normal text-[$primary-2-font-color] opacity-70"
-                        style={{ width: "100%" }}
-                      >
-                        {selectedApi?.summary}
-                      </div>
-                    ) : null}
-                  </div>
-                  <div className="my-auto">
-                    <Segmented
-                      className="document-segmented"
-                      value={mode}
-                      onChange={(val) => changeMode(val)}
-                      options={tabs.map((teb) => {
-                        return {
-                          label: teb.tab,
-                          value: teb.key,
-                        };
-                      })}
-                    ></Segmented>
+                    <div className="my-auto">
+                      <Segmented
+                        className="document-segmented"
+                        value={mode}
+                        onChange={(val) => changeMode(val)}
+                        options={tabs.map((teb) => {
+                          return {
+                            label: teb.tab,
+                            value: teb.key,
+                          };
+                        })}
+                      ></Segmented>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="m-4">{renderContent}</div>
-            </>
-          ) : null}
-        </RootContext.Provider>
-      </APIPageContext.Provider>
+                <div className="m-4">{renderContent}</div>
+              </>
+            ) : null}
+          </RootContext.Provider>
+        </APIPageContext.Provider>
+      </div>
     </div>
   );
 };
