@@ -234,7 +234,6 @@ export const API: React.FC<APIProps> = (props) => {
   const [isSearchVisible, setIsSearchVisible] = React.useState(false);
 
   const handleKeyDown = (event) => {
-    // 假设我们监听 Ctrl + M 组合键
     if ((event.ctrlKey || event.metaKey) && event.key === "f") {
       setIsSearchVisible((prev) => !prev); // 切换 DOM 可见性
       const input = document.getElementById("page-search-input");
