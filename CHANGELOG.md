@@ -1,5 +1,15 @@
 # Release Notes
 
+## 0.0.13(2024-09-05)
+
+- feat: Supports theme synchronization between webview and vscode.
+- feat: Sensitive information warning Linter.
+- feat: Added the ability to obtain SDK installation information.
+- feat: Document enhancement - API documentation can be opened through the API in hover code.
+- feat: Supports searching and highlighting webview content.
+- fix: Optimize document layout.
+- fix: Update cloud product categories.
+
 ## 0.0.12(2024-07-05)
 
 - Fix Request User-Agent.

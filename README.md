@@ -22,7 +22,13 @@ English | [简体中文](./README.zh_CN.md)
 
 - **Code Snippets:** You can use the code snippets to quickly generate the code.
 
-- **Profiles Management :** Manage your Alibaba Cloud profiles.
+- **Profiles Management:** Manage your Alibaba Cloud profiles.
+
+- **Document Enhancement:** Extension provides a document enhancement function, you can write SDK code, through the hover code to see the description of OpenAPI information and more related example links, to get more code example reference, or directly open the document for reference.
+
+- **Sensitive Information Linter:** Extension provides sensitive information detection, during the code writing process, the extension will automatically detect AK information, and prompt you to use the AK in a more secure way.
+
+- **Quickly Search the Contents of the Document:** You can quickly search the contents of the document by using `ctrl+f` or `cmd+f`.
 
 - More features are under development, please stay tuned.
 
@@ -63,17 +69,27 @@ Or use the keyboard shortcuts `ctrl+cmd+l` to search the API and select Insert s
 
 ![code snippets](https://img.alicdn.com/imgextra/i3/O1CN01dmGwmX1ZyVHozyKx4_!!6000000003263-1-tps-842-468.gif)
 
-### Document enhancement
-
-When writing SDK code, you can get more code sample references by viewing the OpenAPI description information and additional related sample links through the code documentation.
-
-![Document enhancement](https://img.alicdn.com/imgextra/i4/O1CN01jedn431D1Uk8MEhM3_!!6000000000156-0-tps-2562-654.jpg)
-
 ### Profiles Management
 
 Add and switch your Alibaba Cloud profiles.
 
 ![](https://img.alicdn.com/imgextra/i1/O1CN01NN667S1skk7vLbhr1_!!6000000005805-0-tps-2912-1596.jpg)
+
+### Document Enhancement
+
+When writing SDK code, you can get more code sample references by viewing the OpenAPI description information and additional related sample links through the code documentation.
+
+![Document enhancement](https://gw.alicdn.com/imgextra/i2/O1CN01ymjnpo1l2aeq8D3lQ_!!6000000004761-0-tps-1496-646.jpg)
+
+## Sensitive Information Warning Linter
+
+![](https://gw.alicdn.com/imgextra/i4/O1CN01u787jO241C9LmbQ57_!!6000000007330-0-tps-1970-848.jpg)
+
+## Quickly Search the Contents of the Document
+
+Use `ctrl+f` or `cmd+f` to quickly search for the contents of the document.
+
+![](https://gw.alicdn.com/imgextra/i2/O1CN01YmSwSz1Rn2VcqQILP_!!6000000002155-0-tps-2514-2098.jpg)
 
 ## Feedback
 
