@@ -27,6 +27,10 @@
   "contributes": {
     "commands": [
       {
+        "command": "alicloud.api.quickOpenDocument",
+        "title": "查看API文档"
+      },
+      {
         "command": "alicloud.api.autoImport",
         "title": "导入依赖"
       },
@@ -166,12 +170,7 @@
       ]
     },
     "menus": {
-      "editor/context": [
-        {
-          "command": "alicloud.api.openDocument",
-          "group": "navigation"
-        }
-      ],
+      "editor/context": [],
       "editor/title": [],
       "view/title": [
         {

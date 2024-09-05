@@ -52,7 +52,14 @@ class HoverProvider {
       const { product, version } = getSpecInfoFromName(hoverdAPI?.info?.split("/")[0]);
       const service = new AlicloudAPIService();
       const samples = await service.requestSamplesByAPI(product, version, keyWord);
+      const args = [{ apiName, product, version }];
+      const docCommandUri = vscode.Uri.parse(
+        `command:alicloud.api.quickOpenDocument?${encodeURIComponent(JSON.stringify(args))}`,
+      );
+      const contents = new vscode.MarkdownString(`🔖 [查阅 ${apiName} 的文档](${docCommandUri})`);
+      contents.isTrusted = true;
       return new vscode.Hover([
+        contents,
         samples?.length
           ? `💡 [查看更多「${apiName}」相关代码示例](https://api.aliyun.com/api/${product}/${version}/${apiName}?tab=CodeSample)`
           : `💡 [查看更多「${product}」的相关代码示例](https://api.aliyun.com/api-tools/demo/${product})`,
