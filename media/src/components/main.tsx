@@ -95,7 +95,7 @@ export const App: React.FC<AppProps> = (props) => {
         );
       } else if (schemaType === "struct") {
         return (
-          <div className="vscode-page">
+          <div className="vscode-page bg-[var(--vscode-editor-background)]">
             <StructDocument
               name={name}
               schema={itemMeta}
@@ -112,7 +112,7 @@ export const App: React.FC<AppProps> = (props) => {
       return <ProfileManagerIndex />;
     }
 
-    return <div className="vscode-page"></div>;
+    return <div className="vscode-page bg-[var(--vscode-editor-background)]"></div>;
   }, [itemMeta, defs, popcode, version]);
 };
 

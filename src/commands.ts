@@ -242,7 +242,33 @@ export class AlicloudApiCommands {
     });
 
     vscode.commands.registerCommand("alicloud.api.openDocument", (config) => {
-      new AlicloudAPIWebview().openTab(context.extensionUri, config, context);
+      try {
+        new AlicloudAPIWebview().openTab(context.extensionUri, config, context);
+        return "ok";
+      } catch (e) {
+        return e;
+      }
+    });
+
+    vscode.commands.registerCommand("alicloud.api.quickOpenDocument", async (arg) => {
+      const { apiName, product, version } = arg;
+      const specName = `${product}__${version}`;
+
+      const pontSpec =
+        service.pontManager.localPontSpecs.find((spec) => spec.name === specName) ||
+        service.pontManager.localPontSpecs[0];
+
+      const apiMeta = pontSpec?.apis[apiName];
+
+      const result = await vscode.commands.executeCommand("alicloud.api.openDocument", {
+        specName,
+        apiName,
+        name: apiName,
+        spec: apiMeta,
+        pageType: "document",
+        schemaType: "api",
+      });
+      return result;
     });
 
     // 刷新问卷调查弹窗过期设置
