@@ -72,6 +72,9 @@ html body {
       background-color: var(--vscode-editor-background);
     }
   }
+  .anticon {
+    color: var(--vscode-icon-foreground);
+  }
 }
 
 .pontx-ui-api {

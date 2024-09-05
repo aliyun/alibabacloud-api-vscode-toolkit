@@ -165,8 +165,38 @@ export class AlicloudAPIService {
     return res?.data?.endpoints || [];
   }
 
+  async requestSDKInfo(params: { product: string; version: string }) {
+    const resStr = await fetch(
+      `https://api.aliyun.com/api/sdk/product/info?product=${params.product}&version=${params.version}`,
+      {
+        headers: {
+          "User-Agent": getUserAgent(),
+        },
+      },
+    ).then((res) => res.text());
+    const res = JSON.parse(resStr);
+    return res?.data?.lastSdkInfo;
+  }
+
   async getTheme() {
     return vscode.workspace.getConfiguration().get("workbench.colorTheme") || "light";
+  }
+
+  async executeCli(params: { code: string; language: string }) {
+    // 执行命令
+    if (params.language === "node") {
+      function openTerminalAndExecute(command) {
+        // 创建一个新的终端
+        const terminal = vscode.window.createTerminal("Alibaba CLoud");
+
+        // 打开终端
+        terminal.show();
+
+        // 执行给定的命令
+        terminal.sendText(command, true); // true 表示不换行
+      }
+      openTerminalAndExecute(params.code);
+    }
   }
 
   async openInCode(codeInfo: { code: string; language: string }) {

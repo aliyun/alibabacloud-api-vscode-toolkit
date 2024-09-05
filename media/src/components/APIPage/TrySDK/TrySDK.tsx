@@ -10,16 +10,18 @@ import { getVSCode } from "../../../utils/utils";
 import MonacoEditor from "../../common/MonacoEditor";
 import { APIPageContext } from "../context";
 import { DARA_SDK_LANGUAGES } from "./LanguageSwitcher";
+import { SDKInfo } from "./SDKInfo";
+import { Balloon } from "@alicloud/console-components";
+import { EditorLanguages } from "../../../types/EditorLanguages";
 
 export class TrySDKProps {
   isExpand? = true;
 }
 
 export const TrySDK: React.FC<TrySDKProps> = (props) => {
-  // const daraSdkLannguages = SDKPublishInfo.getDaraLanguages(props.sdkInfos || [], product, version);
-  const { theme, apiMeta, schemaForm, product, version, onDebug, changeMode, endpoints, regionId, mode } =
+  const { sdkInfo, theme, apiMeta, schemaForm, product, version, endpoints, regionId, mode } =
     APIPageContext.useContainer();
-  const [languageTab, setLanguageTab] = React.useState("Java");
+  const [languageTab, setLanguageTab] = React.useState(EditorLanguages.TypeScript);
   const [sdkDemos, setSdkDemos] = React.useState(codes.demoSdk as any);
 
   React.useEffect(() => {
@@ -27,7 +29,7 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
       if (res?.length) {
         setLanguageTab(res);
       } else {
-        setLanguageTab("Java");
+        setLanguageTab(EditorLanguages.Java);
       }
     });
   });
@@ -89,6 +91,8 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
     return sdkDemos[languageTab?.toLocaleLowerCase()];
   }, [sdkDemos, languageTab]);
 
+  const sdkDetail = sdkInfo?.[`${languageTab.toLocaleLowerCase()}-tea`];
+
   return React.useMemo(() => {
     return (
       <div className="sdk-demo-content h-[calc(100vh_-_194px)]">
@@ -98,9 +102,32 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
           height={"100vh"}
           setLanguageTab={setLanguageTab}
           header={
-            <div className="head-info">
-              <Tag color="#3b5999">sdk | v2.0</Tag>
-            </div>
+            <>
+              <div className="head-info">
+                <Tag color="#3b5999">sdk | v2.0</Tag>
+              </div>
+              {sdkDetail ? (
+                <Balloon
+                  align="b"
+                  triggerType="click"
+                  style={{ maxWidth: "380px" }}
+                  closable={false}
+                  trigger={
+                    <span className="m-auto cursor-pointer text-xs text-[var(--vscode-textPreformat-foreground)]">
+                      SDK 安装信息
+                    </span>
+                  }
+                >
+                  <SDKInfo
+                    sdkDetail={sdkDetail}
+                    theme={theme}
+                    lanKey={languageTab.toLocaleLowerCase()}
+                    product={product}
+                    version={version}
+                  ></SDKInfo>
+                </Balloon>
+              ) : null}
+            </>
           }
           menuItems={[
             {

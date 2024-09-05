@@ -101,4 +101,10 @@ export const PontUIService = {
   switchProfile: async () => {},
   /** 获取vscode主题 */
   getTheme: async () => "light",
+  /** 执行cli代码 */
+  executeCli: async (params: { code: string; language: string }) => {},
+  /** 获取 SDK Info */
+  requestSDKInfo: async (params: { product: string; version: string }) => {
+    return null as any;
+  },
 };
