@@ -98,8 +98,6 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
     };
   }, []);
 
-  console.log(width);
-
   return (
     <div className="editor-content">
       <div className="operations" ref={divRef}>
@@ -142,7 +140,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
           ) : null}
           {items?.length ? (
             <div className="menu-icon">
-              {width < 400 ? (
+              {width < 500 ? (
                 <Dropdown menu={{ items }}>
                   <Button onClick={(e) => e.preventDefault()}>
                     <div className="codicon codicon-list-selection" />

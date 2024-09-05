@@ -5,9 +5,8 @@ import { createContainer } from "unstated-next";
 import { SemixFormProps } from "../SemixFormRender";
 import React from "react";
 import { PontUIService } from "../../service/UIService";
-import { OpenAPIResponse, OpenAPIRequestResult } from "../../types/openAPI";
 import { endpointsMocks } from "../../mocks/endpoints";
-import { getVSCode } from "../../utils/utils";
+import { lastSdkInfo } from "../../mocks/allSdkInfo";
 
 export class APIPageState {
   /**
@@ -54,6 +53,7 @@ export class APIPageState {
    * vscode 主题
    */
   theme?: string;
+  sdkInfo?: any;
 }
 
 export const useAPIPageContext = (initialState = {} as APIPageState): APIPageState => {
@@ -63,6 +63,7 @@ export const useAPIPageContext = (initialState = {} as APIPageState): APIPageSta
   const [regionId, setRegionId] = React.useState<string>("cn-hangzhou");
   const [profileInfo, setProfileInfo] = React.useState({});
   const [theme, setTheme] = React.useState("light");
+  const [sdkInfo, setSdkInfo] = React.useState(lastSdkInfo);
 
   React.useEffect(() => {
     PontUIService.getTheme()?.then((res) => {
@@ -77,7 +78,15 @@ export const useAPIPageContext = (initialState = {} as APIPageState): APIPageSta
         setEndpoints(res?.length ? res : endpointsMocks);
       });
     }
-  }, [initialState.product]);
+    if (initialState.product && initialState.version) {
+      PontUIService.requestSDKInfo({
+        product: initialState.product,
+        version: initialState.version,
+      }).then((res) => {
+        setSdkInfo(res || lastSdkInfo);
+      });
+    }
+  }, [initialState.product, initialState.version]);
 
   React.useEffect(() => {
     PontUIService.requestProfiles().then((res) => {
@@ -105,6 +114,7 @@ export const useAPIPageContext = (initialState = {} as APIPageState): APIPageSta
     setRegionId,
     profileInfo,
     theme,
+    sdkInfo,
   };
 };
 
