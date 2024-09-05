@@ -24,6 +24,12 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 
 - **profiles 管理:** 管理你的阿里云 profiles。
 
+- **文档增强:** 插件提供了文档增强功能，你可以在编写 SDK 代码时，通过 hover 代码看到 OpenAPI 的描述信息以及更多相关示例链接，来获得更多代码示例参考, 或直接打开文档进行查阅。
+
+- **敏感信息检测:** 插件提供了敏感信息检测功能，在代码编写过程中，插件会自动检测 AK 信息，并提示你用更安全的方式使用 AK。
+
+- **快速搜索文档中的内容:** 你可以通过 `ctrl+f`或`cmd+f` 快速搜索文档中的内容。
+
 - 更多功能正在开发中，敬请期待...
 
 ## 插件 UI 导览
@@ -64,17 +70,27 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 
 ![code snippets](https://img.alicdn.com/imgextra/i3/O1CN01dmGwmX1ZyVHozyKx4_!!6000000003263-1-tps-842-468.gif)
 
-### 文档增强
-
-你能够在编写 SDK 代码时，通过代码文档看到 OpenAPI 的描述信息以及更多相关示例链接，来获得更多代码示例参考。
-
-![Document enhancement](https://img.alicdn.com/imgextra/i4/O1CN01jedn431D1Uk8MEhM3_!!6000000000156-0-tps-2562-654.jpg)
-
 ### Profiles 管理
 
 新增和切换你的阿里云 profiles。
 
 ![](https://img.alicdn.com/imgextra/i1/O1CN01NN667S1skk7vLbhr1_!!6000000005805-0-tps-2912-1596.jpg)
+
+### 文档增强
+
+你能够在编写 SDK 代码时，通过代码文档看到 OpenAPI 的描述信息以及更多相关示例链接，来获得更多代码示例参考。
+
+![Document enhancement](https://gw.alicdn.com/imgextra/i2/O1CN01ymjnpo1l2aeq8D3lQ_!!6000000004761-0-tps-1496-646.jpg)
+
+## 敏感信息检测
+
+![](https://gw.alicdn.com/imgextra/i4/O1CN01u787jO241C9LmbQ57_!!6000000007330-0-tps-1970-848.jpg)
+
+## 快速搜索文档中的内容
+
+你可以通过 `ctrl+f` 或 `cmd+f` 快速搜索文档中的内容。
+
+![](https://gw.alicdn.com/imgextra/i2/O1CN01YmSwSz1Rn2VcqQILP_!!6000000002155-0-tps-2514-2098.jpg)
 
 ## 反馈
 
