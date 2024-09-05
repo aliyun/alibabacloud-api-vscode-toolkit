@@ -109,7 +109,7 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
               {sdkDetail ? (
                 <Balloon
                   align="b"
-                  triggerType="click"
+                  triggerType="hover"
                   style={{ maxWidth: "380px" }}
                   closable={false}
                   trigger={
