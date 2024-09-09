@@ -264,7 +264,7 @@
     "@types/node": "^20.10.5",
     "@vscode/codicons": "^0.0.36",
     "debug": "^4.3.0",
-    "fs-extra": "^10.1.0",
+    "fs-extra": "^11.2.0",
     "httpx": "^2.2.6",
     "kitx": "^2.1.0",
     "lodash": "^4.17.20",
@@ -288,7 +288,7 @@
   "devDependencies": {
     "assert": "^2.0.0",
     "ncc": "^0.3.6",
-    "@types/fs-extra": "^5.1.0",
+    "@types/fs-extra": "^11.0.4",
     "@types/lodash": "^4.17.7",
     "@types/mocha": "^10.0.7",
     "@types/react": "^18.3.3",
