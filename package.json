@@ -308,7 +308,7 @@
     "prettier-plugin-tailwindcss": "^0.6.6",
     "rimraf": "^3.0.2",
     "typescript": "^5.5.4",
-    "vite": "^2.9.18",
+    "vite": "^3.2.11",
     "vsce": "^2.15.0"
   }
 }
