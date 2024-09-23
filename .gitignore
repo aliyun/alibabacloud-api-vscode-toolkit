@@ -43,4 +43,4 @@ media/dist/assets
 *.local.ts
 *.local.mjs
 
-src/scripts
+scripts

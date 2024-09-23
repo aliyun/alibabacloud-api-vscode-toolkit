@@ -241,8 +241,8 @@
     "preview": "cd media && vite build --watch",
     "pretest": "npm run build:media && npm run build",
     "test": "node ./dist/test/runTest.js",
-    "translate:mds": "node src/scripts/mds.local.js",
-    "fetch:mds": "node src/scripts/devFetch.local.mjs",
+    "translate:mds": "node scripts/mds.local.js",
+    "fetch:mds": "node scripts/devFetch.local.mjs",
     "test-coverage": "nyc npm run test"
   },
   "nyc": {
