@@ -110,6 +110,12 @@ export async function registerLinter(context: vscode.ExtensionContext) {
     }),
   );
   context.subscriptions.push(
+    vscode.workspace.onDidCloseTextDocument((document) => {
+      // 文件关闭（删除）后清空诊断
+      collection.clear();
+    }),
+  );
+  context.subscriptions.push(
     vscode.workspace.onDidChangeTextDocument((editor) => {
       if (editor) {
         updateDiagnostics(editor.document, collection);
