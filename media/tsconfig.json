@@ -32,7 +32,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "rootDir": "./src",
+    "rootDir": "./..",
     "noEmit": true,
     "incremental": true
   },

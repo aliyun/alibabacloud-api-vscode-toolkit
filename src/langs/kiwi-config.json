@@ -3,10 +3,9 @@
   "configFile": "../langs/kiwi-config.json",
   "srcLang": "zh_CN",
   "mds": {
-    "tagName": "api-workbench-core-all",
+    "tagName": "IDE-Toolkit",
     "appName": "api-workbench-core-all"
   },
-  "distLangs": ["en_US"],
   "translateOptions": {
     "concurrentLimit": 10,
     "requestOptions": {}

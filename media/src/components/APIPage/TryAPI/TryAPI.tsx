@@ -148,7 +148,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                 </a>
               </span>
             )}
-            {I18N.main.explorer.AKTip}
+            {I18N.ide.main.explorer.AKTip}
           </div>
         }
         type="warning"
@@ -164,7 +164,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
           ) : null}
 
           <div className="api-res-header">
-            <div className="title mb-4 text-sm font-medium text-gray-900">{I18N.main.explorer.overview}</div>
+            <div className="title mb-4 text-sm font-medium text-gray-900">{I18N.ide.main.explorer.overview}</div>
             {/* {apiResult?.result || props.isApiResultLoading ? ( */}
             <div className="res-info mb-4 flex">
               <div className="item mx-1 mr-6 inline-block">
@@ -177,14 +177,14 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                     }`}
                   ></div>
                   <div className="value">
-                    {String(statusCode).startsWith("2") ? I18N.main.explorer.success : I18N.main.explorer.error}
+                    {String(statusCode).startsWith("2") ? I18N.ide.main.explorer.success : I18N.ide.main.explorer.error}
                   </div>
                 </div>
               </div>
               {apiResult && statusCode ? (
                 <div className="item mx-1 mr-6">
                   {/* {httpStatusMessageMap[statusCode] || statusCode} */}
-                  <span className="label mr-1 font-medium text-gray-500">{I18N.main.explorer.statusCode}</span>
+                  <span className="label mr-1 font-medium text-gray-500">{I18N.ide.main.explorer.statusCode}</span>
                   <span
                     className={`value result-status font-medium ${
                       String(statusCode).startsWith("2") ? "success text-green-600" : "error error-red text-red-700"
@@ -196,7 +196,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
               ) : null}
               {apiResult ? (
                 <div className="item mx-1 mr-6">
-                  <span className="label mr-1 font-medium">{I18N.main.explorer.time}</span>
+                  <span className="label mr-1 font-medium">{I18N.ide.main.explorer.time}</span>
                   <span className="value">{apiResult.cost}ms</span>
                 </div>
               ) : null}
@@ -207,12 +207,12 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
               type="error"
               message={
                 <span>
-                  {I18N.main.explorer.callFailCheck}
+                  {I18N.ide.main.explorer.callFailCheck}
                   <a
                     target="_blank"
                     href={`https://api.aliyun.com/troubleshoot?q=${troubleshootQuery}&product=${product}`}
                   >
-                    {I18N.main.explorer.troubleshootResult}
+                    {I18N.ide.main.explorer.troubleshootResult}
                   </a>
                 </span>
               }
@@ -224,12 +224,12 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                 type="info"
                 message={
                   <span>
-                    {I18N.main.explorer.callHasIssues}
+                    {I18N.ide.main.explorer.callHasIssues}
                     <a
                       target="_blank"
                       href={`https://api.aliyun.com/troubleshoot?q=${troubleshootQuery}&product=${product}`}
                     >
-                      {I18N.main.explorer.checkCallTroubleshoot}
+                      {I18N.ide.main.explorer.checkCallTroubleshoot}
                     </a>
                   </span>
                 }
@@ -292,7 +292,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                             // schema={getResponseSchema(statusCode, props.responseSchema) || {}}
                           />
                         ) : (
-                          <div>{I18N.main.explorer.specialresponsetip}</div>
+                          <div>{I18N.ide.main.explorer.specialresponsetip}</div>
                         )}
                       </div>
                     </div>
@@ -312,8 +312,8 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
           }}
           description={
             <>
-              <div>{I18N.main.explorer.noResult}</div>
-              <div>{I18N.main.explorer.startCallResult}</div>
+              <div>{I18N.ide.main.explorer.noResult}</div>
+              <div>{I18N.ide.main.explorer.startCallResult}</div>
             </>
           }
         ></Empty>

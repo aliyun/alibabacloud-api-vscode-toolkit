@@ -2,9 +2,9 @@
  * @file 多语言工具
  */
 import IntlFormat from "intl-format";
-import zhCNLangs from "../../../src/langs/zh_CN/index";
+import zhCNLangs from "../langs/zh_CN/index";
 import * as _ from "lodash";
-import mds from '../../../src/langs/mds.json';
+import mds from '../langs/mds.json';
 
 function treegifyI18NLang(i18N: { [x: string]: string }) {
   if (!i18N) return {};

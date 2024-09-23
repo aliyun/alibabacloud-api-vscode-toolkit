@@ -4,6 +4,7 @@ import { AlicloudApiCommands } from "../commands";
 import _ from "lodash";
 import { fileSel, getSpecInfoFromName } from "../utils";
 import { codeSampleProvider } from "../plugins/generate";
+import I18N from "../utils/I18N";
 
 class CompletionItemProvider {
   async provideCompletionItems(
@@ -25,7 +26,7 @@ class CompletionItemProvider {
       new vscode.Range(new vscode.Position(position.line, position.character - 1), position),
     );
 
-    let completionItems = [];
+    let completionItems = [] as any;
 
     // 支持已订阅的API搜索
     if (items?.find((item) => item?.label?.toLocaleLowerCase()?.includes(text?.toLocaleLowerCase()))) {
@@ -70,8 +71,8 @@ class CompletionItemProvider {
     item: vscode.CompletionItem,
     token: vscode.CancellationToken,
   ): vscode.ProviderResult<vscode.CompletionItem> {
-    const language = vscode.window.activeTextEditor?.document.languageId;
-    const [product, version] = item?.detail?.split(" ");
+    const language = vscode.window.activeTextEditor?.document.languageId || '';
+    const [product, version] = item?.detail?.split(" ") as any;
     const apiName = item?.label?.toString().replace("(java-async)", "");
     let asyncFetchedCode = "";
     let asyncImportList = [];
@@ -92,7 +93,7 @@ class CompletionItemProvider {
           asyncFetchedCode = snippet?.code;
           asyncImportList = snippet?.importList;
         } else {
-          item.documentation = "暂不支持该语言的 SDK";
+          item.documentation = I18N.provider.autoCompletion.notSurpportSDK;
         }
         // 设置补全项的实际插入文本
         item.additionalTextEdits = [

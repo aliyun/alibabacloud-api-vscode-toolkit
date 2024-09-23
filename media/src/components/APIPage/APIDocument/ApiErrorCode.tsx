@@ -5,6 +5,7 @@
 import { Table } from "@alicloud/console-components";
 import * as React from "react";
 import useCustomFixScrollBar from "../../common/useCustomFixScrollBar";
+import I18N from "../../../utils/I18N";
 // import isEmpty from 'lodash/isEmpty'
 
 export class ApiErrorCodeProps {
@@ -91,11 +92,11 @@ export const ApiErrorCode: React.FC<ApiErrorCodeProps> = (props) => {
 
   return (
     <div className="bg-[var(--vscode-editor-background)]] semix-markdown mb-4">
-      <div className="flex justify-between border-t border-gray-100 ">
+      <div className="flex justify-between border-t border-gray-100">
         <div className="px-5 py-4 text-base font-medium text-[$primary-font-color]">错误码</div>
         <div className="my-auto mr-4 text-sm">
           <a href={`https://api.aliyun.com/document/${props.popcode}/${props.version}/errorCode`} target="_blank">
-            所有错误码
+            {I18N.ide.main.docIframe.overallErrorCode}
           </a>
         </div>
       </div>

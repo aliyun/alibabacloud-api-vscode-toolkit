@@ -13,7 +13,7 @@ import { AlicloudApiExplorer } from "./explorer";
 const configSchema = require("pontx-spec/configSchema.json");
 import os from "os";
 
-const { createServerContent } = require("../media/lib/index");
+// const { createServerContent } = require("../media/lib/index");
 
 export const pontConsole = vscode.window.createOutputChannel("Alibaba Cloud API Toolkit");
 

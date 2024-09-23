@@ -4,13 +4,13 @@
  */
 import { Button } from "@alicloud/console-components";
 import React from "react";
-import I18N from "../../../utils/I18N";
 import { SemixForm } from "../../SemixFormRender";
 import { APIPageContext } from "../context";
 import { APIGuide } from "./APIGuide";
 import RegionSelector from "./RegionSelector";
 import { xconsoleWidgets } from "./widgets/xconsole";
 import { debugForbiddenProducts } from "../../../utils/utils";
+import I18N from "../../../utils/I18N";
 
 export class APIDebuggerProps {}
 
@@ -52,7 +52,7 @@ export const APIDebugger: React.FC<APIDebuggerProps> = (props) => {
             schemaForm.setFormData({});
           }}
         >
-          {I18N.main.explorer.empty}
+          {I18N.ide.main.explorer.empty}
         </Button>
         {debugForbiddenProducts?.includes(`${product}__${version}`) ? (
           <a href={apiMeta?.externalDocs?.url}>
@@ -72,7 +72,7 @@ export const APIDebugger: React.FC<APIDebuggerProps> = (props) => {
               });
             }}
           >
-            {I18N.main.explorer.debug}
+            {I18N.ide.main.explorer.debug}
           </Button>
         )}
       </div>

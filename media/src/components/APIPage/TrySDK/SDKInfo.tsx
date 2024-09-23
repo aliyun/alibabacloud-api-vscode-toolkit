@@ -58,7 +58,7 @@ export const SDKInfo: React.FC<SDKInfoProps> = (props) => {
     //       }&tab=history-version&sdkReportVersion=${sdkDetail?.last_version}`}
     //       target="_blank"
     //     >
-    //       {I18N.main.explorer.SDKReport}
+    //       {I18N.ide.main.explorer.SDKReport}
     //     </a>
     //   ),
     // },
@@ -109,7 +109,7 @@ export const SDKInfo: React.FC<SDKInfoProps> = (props) => {
               </Row>
             );
           })}
-          <div className="text=[var(--vscode-editor-foreground)] mt-2 opacity-70">{I18N.main.explorer.syncDelay}</div>
+          <div className="text=[var(--vscode-editor-foreground)] mt-2 opacity-70">{I18N.ide.main.explorer.syncDelay}</div>
         </div>
       ) : null}
     </div>

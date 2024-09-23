@@ -52,7 +52,7 @@ const isEmptyObject = (object) => {
 //         }
 
 //         if (item.required && isEmpty && item.type !== 'Array') {
-//           message.error(I18N.template(I18N.main.explorer.isRequied, { val1: showName }));
+//           message.error(I18N.template(I18N.ide.main.explorer.isRequied, { val1: showName }));
 //           return false;
 //         }
 
@@ -63,7 +63,7 @@ const isEmptyObject = (object) => {
 //           ['Boolean', 'String', 'Double', 'Float', 'Integer', 'Long', 'RequestBody'].includes(item.subType)
 //         ) {
 //           if (Array.isArray(curV) && (curV || [])?.some((v) => !v)) {
-//             message.error(I18N.template(I18N.main.explorer.isRequied, { val1: showName }));
+//             message.error(I18N.template(I18N.ide.main.explorer.isRequied, { val1: showName }));
 //             return false;
 //           }
 //         }
