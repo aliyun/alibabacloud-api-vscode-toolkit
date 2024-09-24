@@ -113,7 +113,7 @@
             "English",
             "简体中文"
           ],
-          "default": "System",
+          "default": "简体中文",
           "title": "Display Language",
           "description": "%displayLanguage%"
         }

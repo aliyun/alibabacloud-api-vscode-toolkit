@@ -10,7 +10,7 @@ import _ from "lodash";
 import { alicloudAPIMessageService } from "./Service";
 const configSchema = require("pontx-spec/configSchema.json");
 import os from "os";
-import { getCurrentLang } from "./utils/I18N";
+import I18N, { getCurrentLang } from "./utils/I18N";
 
 // const { createServerContent } = require("../media/lib/index");
 
@@ -234,13 +234,13 @@ export async function findInterface(editor: vscode.TextEditor, hasMultiOrigins: 
   const codeAtLine = editor.document.getText().split("\n")[pos.line];
 
   if (!codeAtLine) {
-    return Promise.reject(new Error(`[findInterface]:找不到接口 ${codeAtLine}`));
+    return Promise.reject(new Error(I18N.template(I18N.src.utils.cannotFindApi, { val1: codeAtLine })));
   }
 
   const words = codeAtLine.split(".");
 
   if (words.length < 2) {
-    return Promise.reject(new Error(`[findInterface]:找不到接口 ${words}`));
+    return Promise.reject(new Error(I18N.template(I18N.src.utils.cannotFindApi2, { val1: words })));
   }
 
   let wordIndex = 0;

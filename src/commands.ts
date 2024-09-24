@@ -21,6 +21,7 @@ import { codeSampleProvider } from "./plugins/generate";
 import { generateImport } from "./common/generateImport";
 import { getProfileInfoInstance } from "./profileManager";
 import { getProductRequestInstance, ProductExplorer } from "./productExplorer";
+import I18N from "./utils/I18N";
 
 const path = require("path");
 
@@ -65,13 +66,13 @@ export class AlicloudApiCommands {
     return {
       label: `[${product.code}]${product.name}`,
       code: product.code,
-      detail: `推荐版本：${product.defaultVersion || ""}`,
+      detail: I18N.template(I18N.src.commands.recommandVersion, { val1: product.defaultVersion || "" }),
       description: `${product.description || ""}`,
       versions: product.versions?.map((version) => {
         return {
-          label: `选择 API 版本: ${version}`,
+          label: I18N.template(I18N.src.commands.chooseAPIVersion, { val1: version }),
           key: version,
-          description: version === product.defaultVersion ? "推荐版本" : "",
+          description: version === product.defaultVersion ? I18N.src.commands.recmmandVersion2 : "",
         } as vscode.QuickPickItem;
       }),
     };
@@ -140,7 +141,7 @@ export class AlicloudApiCommands {
               const VIEW_API_DOC_ID = "VSCODE_PONTX_SHOW_PICK_ITEM_VIEW_API_DOC";
               let pickItems = [
                 {
-                  label: "查看文档",
+                  label: I18N.ide.main.explorer.seeDoc,
                   id: VIEW_API_DOC_ID,
                 },
               ];
@@ -149,7 +150,7 @@ export class AlicloudApiCommands {
                   ...pickItems,
                   ...snippets.map((snippet) => {
                     return {
-                      label: "插入代码段: " + snippet.name,
+                      label: I18N.src.commands.insertCode + snippet.name,
                       id: snippet.name,
                       description: snippet.description,
                     };
@@ -181,20 +182,6 @@ export class AlicloudApiCommands {
         });
     });
 
-    vscode.commands.registerCommand("alicloud.api.generateMocks", () => {
-      const pontManager = service.pontManager;
-
-      showProgress("生成Mocks", pontManager, async (log) => {
-        log("代码生成中...");
-        await wait(100);
-
-        await PontManager.generateMocks(pontManager);
-
-        log("mocks 生成成功！");
-        vscode.window.showInformationMessage("Mocks生成成功！");
-      });
-    });
-
     vscode.commands.registerCommand("alicloud.api.autoImport", (...argus) => {
       const diagnostic = argus[0];
       const missingDep = argus[1];
@@ -219,18 +206,17 @@ export class AlicloudApiCommands {
     vscode.commands.registerCommand("alicloud.api.fetchRemote", (config) => {
       const pontManager = service.pontManager;
 
-      showProgress("拉取远程元数据", pontManager, async (log) => {
+      showProgress(I18N.src.commands.pullRemoteMeta, pontManager, async (log) => {
         try {
-          log("元数据拉取中...");
+          log(I18N.src.commands.pullingMeta);
           await wait(100);
 
           const manager = await PontManager.fetchRemotePontMeta(pontManager);
           service.updatePontManger(manager);
 
-          log("元数据拉取成功！");
-          // vscode.window.showInformationMessage("元数据拉取成功！");
+          log(I18N.src.commands.pullMetaSuccess);
         } catch (e) {
-          vscode.window.showErrorMessage("阿里云API元数据拉取失败：" + e.message);
+          vscode.window.showErrorMessage(I18N.src.commands.pullMetaFailed + e.message);
         }
       });
     });
@@ -285,7 +271,7 @@ export class AlicloudApiCommands {
           title: "Alibaba Cloud API Toolkit",
         },
         async (progress, token) => {
-          progress.report({ message: "重启中...", increment: 0 });
+          progress.report({ message: I18N.src.commands.restarting, increment: 0 });
           try {
             const pontxConfig = await findAlicloudAPIConfig(context);
             const pontManager = await PontManager.constructorFromPontConfigAndPlugins(
@@ -300,9 +286,9 @@ export class AlicloudApiCommands {
             };
 
             alicloudAPIMessageService.updatePontManger(newManager);
-            progress.report({ message: "启动成功", increment: 100 });
+            progress.report({ message: I18N.src.commands.startSuccess, increment: 100 });
           } catch (e) {
-            vscode.window.showErrorMessage("启动失败: " + e.message);
+            vscode.window.showErrorMessage(I18N.src.commands.startFailed + e.message);
           }
         },
       );
@@ -317,7 +303,7 @@ export class AlicloudApiCommands {
       const spec = PontManager.getSpec(service.pontManager, result.specName);
 
       if (!result.apiName) {
-        vscode.window.showErrorMessage("未找到该 OpenAPI");
+        vscode.window.showErrorMessage(I18N.src.commands.cannotFindOpenAPI);
         return;
       }
 

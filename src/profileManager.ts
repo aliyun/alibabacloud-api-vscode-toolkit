@@ -2,6 +2,7 @@ import os from "os";
 import fs from "fs";
 import fsx from "fs/promises";
 import path from "path";
+import I18N from "./utils/I18N";
 
 let profileInfo = null;
 
@@ -85,7 +86,7 @@ export class ProfileManager {
         }
       });
     } catch (ex) {
-      console.error("创建文件夹时出错:", ex);
+      console.error(I18N.src.profileManager.creatFileError, ex);
     }
   }
 

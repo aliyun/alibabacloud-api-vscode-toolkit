@@ -48,11 +48,11 @@ class CodeActionProvider {
       if (lintResult) {
         // 自动修复命令注册
         const codeAction = new vscode.CodeAction(
-          `${lintResult.methods[0]?.title}（${SDKLanguageLabel[document.languageId] || "阿里云 SDK"}）`,
+          `${lintResult.methods[0]?.title}(${SDKLanguageLabel[document.languageId] || I18N.provider.autofix.aliyunSdk})`,
           vscode.CodeActionKind.QuickFix,
         );
         codeAction.command = {
-          title: `${lintResult.methods[0]?.title}（${SDKLanguageLabel[document.languageId] || "阿里云 SDK"}）`,
+          title: `${lintResult.methods[0]?.title}(${SDKLanguageLabel[document.languageId] || I18N.provider.autofix.aliyunSdk})`,
           command: lintResult.methods[0]?.command,
           arguments: [document],
         };

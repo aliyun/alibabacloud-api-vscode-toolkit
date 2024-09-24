@@ -13,6 +13,7 @@ import fsx from "fs/promises";
 import os from "os";
 import fetch from "node-fetch";
 import { getProfileInfoInstance } from "./profileManager";
+import I18N, { getCurrentLang } from "./utils/I18N";
 
 export class AlicloudAPIService {
   pontManager: PontManager;
@@ -84,7 +85,7 @@ export class AlicloudAPIService {
   }
 
   private async _watchPontLock(e) {
-    await showProgress("本地数据源更新中", this.pontManager, async (report) => {
+    await showProgress(I18N.src.Service.updateLocalMeta, this.pontManager, async (report) => {
       // report("检测到 api-lock.json 文件变化，本地数据源已自动更新");
       // const pontManager = await PontManager.readLocalPontMeta(pontService.pontManager);
       // const equal = _.isEqual(pontManager.localPontSpecs, pontService.pontManager.localPontSpecs);
@@ -106,17 +107,15 @@ export class AlicloudAPIService {
 
   private async _watchPontConfig(uri: vscode.Uri, isChange = false) {
     const logger = this.pontManager ? this.pontManager.logger : new VSCodeLogger();
-    const message = isChange
-      ? "检测到 alicloud-api-toolkit-config.json 内容变化，Alibaba Cloud API Toolkit 重启中..."
-      : "检测到 alicloud-api-toolkit-config.json 创建，Alibaba Cloud API Toolkit 重启中...";
+    const message = isChange ? I18N.src.Service.listenConfigUpdate : I18N.src.Service.listenConfigCreate;
 
-    await showProgress("Alibaba Cloud API Toolkit 重启中", this.pontManager, async (report) => {
+    await showProgress(I18N.src.Service.restart2, this.pontManager, async (report) => {
       report(message);
       const manager = await PontManager.constructorFromRootDir(path.join(uri.path, ".."), logger);
 
       if (manager) {
         this.updatePontManger(manager);
-        report("Alibaba Cloud API Toolkit 启动成功");
+        report(I18N.src.Service.startSuccess);
       }
     });
   }
@@ -155,18 +154,21 @@ export class AlicloudAPIService {
   }
 
   async requestEndpoints(product: string) {
-    const resStr = await fetch(`https://api.aliyun.com/meta/v1/products/${product}/endpoints.json?language=zh-CN`, {
-      headers: {
-        "User-Agent": getUserAgent(),
+    const resStr = await fetch(
+      `https://api.aliyun.com/meta/v1/products/${product}/endpoints.json${getCurrentLang() === "en_US" ? "?language=EN_US" : ""}`,
+      {
+        headers: {
+          "User-Agent": getUserAgent(),
+        },
       },
-    }).then((res) => res.text());
+    ).then((res) => res.text());
     const res = JSON.parse(resStr);
     return res?.data?.endpoints || [];
   }
 
   async requestSDKInfo(params: { product: string; version: string }) {
     const resStr = await fetch(
-      `https://api.aliyun.com/api/sdk/product/info?product=${params.product}&version=${params.version}`,
+      `https://api.aliyun.com/api/sdk/product/info?product=${params.product}&version=${params.version}${getCurrentLang() === "en_US" ? "&language=EN_US" : ""}`,
       {
         headers: {
           "User-Agent": getUserAgent(),
@@ -298,14 +300,17 @@ export class AlicloudAPIService {
       runtimeOptions: {},
       useCommon: false,
     };
-    const resStr = await fetch(`https://api.aliyun.com/api/product/makeCode`, {
-      method: "post",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-        "User-Agent": getUserAgent(),
+    const resStr = await fetch(
+      `https://api.aliyun.com/api/product/makeCode${getCurrentLang() === "en_US" ? "?language=EN_US" : ""}`,
+      {
+        method: "post",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+          "User-Agent": getUserAgent(),
+        },
       },
-    }).then((res) => res.text());
+    ).then((res) => res.text());
     const res = JSON.parse(resStr);
     return res;
   }
@@ -386,8 +391,12 @@ export class AlicloudAPIService {
         response,
       };
     } else {
-      let result = await vscode.window.showErrorMessage("请完成AK/SK配置后，再发起调用", "去配置", "取消");
-      if (result === "去配置") {
+      let result = await vscode.window.showErrorMessage(
+        I18N.src.Service.AKSKTip,
+        I18N.src.Service.gotoConfig,
+        I18N.src.Service.cancel,
+      );
+      if (result === I18N.src.Service.gotoConfig) {
         this.openProfileManager();
       }
     }
@@ -439,7 +448,7 @@ export class AlicloudAPIService {
   /** 打开 profile 配置 */
   async openProfileManager() {
     await vscode.commands.executeCommand("alicloud.api.openDocument", {
-      name: "配置 AK 凭证",
+      name: I18N.src.explorer.configAKProfile,
       specName: "profile",
       pageType: "profile",
       column: vscode.ViewColumn.Beside,

@@ -1,6 +1,7 @@
 import * as PontSpec from "pontx-spec";
 import { PontxParserPlugin } from "pontx-manager";
 import * as _ from "lodash";
+import I18N from "../utils/I18N";
 
 function mapObject<T, V>(obj: any, mapper: (val: T, key: string) => V) {
   if (!obj) {
@@ -169,7 +170,7 @@ function parseAlicloudAPI(apiName: string, api: any, style = "RPC", meta: Simple
     parameters: _.unionBy<PontSpec.Parameter>(newParameters, "name"),
     responses: parseResponses(responses, meta),
     externalDocs: {
-      description: "去调试",
+      description: I18N.plugins.parser.gotoDebug,
       url: apiLink,
     },
     ext: {
@@ -223,7 +224,7 @@ export class AlicloudAPIPontParserPlugin extends PontxParserPlugin {
       try {
         alicloudSpecData = JSON.parse(metaStr);
       } catch (e) {
-        this.logger.error("当前获取到的远程元数据不符合 JSON 格式，无法解析为 pont spec。元数据为：" + metaStr);
+        this.logger.error(I18N.plugins.parser.specParseErrorTip + metaStr);
         return null;
       }
 

@@ -3,6 +3,7 @@
  */
 import * as vscode from "vscode";
 import { fileSel } from "../utils";
+import I18N from "../utils/I18N";
 
 class Rule {
   LintName: string;
@@ -20,19 +21,19 @@ export const LintRules: Array<Rule> = [
   {
     LintName: "AccessKey-NewAK",
     source: "Alibaba Cloud AK Lint",
-    information: "在此处透露了 Access Key。",
+    information: I18N.provider.linter.leakAK,
     pattern: `^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{12}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{16}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{18}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{20}$|^LTAI(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{22}$`,
-    message: "在工程中硬编码 Access Key ID/Secret 容易发生凭证数据泄漏，并进而威胁到您账号下所有资源的安全性。",
-    methods: [{ title: "凭据的安全使用方案", command: "alicloud.api.akSecurityHelper" }],
+    message: I18N.provider.linter.akLintTip,
+    methods: [{ title: I18N.provider.linter.srcurityCredential, command: "alicloud.api.akSecurityHelper" }],
   },
   {
     LintName: "AccessSecret",
     source: "Alibaba Cloud AK Lint",
-    information: "在此处透露了 Access Secret。",
+    information: I18N.provider.linter.leakSK,
     pattern: `(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{30}`,
     length: 30,
-    message: "在工程中硬编码 Access Key ID/Secret 容易发生凭证数据泄漏，并进而威胁到您账号下所有资源的安全性。",
-    methods: [{ title: "凭据的安全使用方案", command: "alicloud.api.akSecurityHelper" }],
+    message: I18N.provider.linter.akLintTip,
+    methods: [{ title: I18N.provider.linter.srcurityCredential, command: "alicloud.api.akSecurityHelper" }],
   },
 ];
 

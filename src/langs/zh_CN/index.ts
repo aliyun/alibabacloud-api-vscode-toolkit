@@ -1,5 +1,7 @@
 import main from "./main";
 import provider from "./provider";
+import src from "./src";
+import plugins from "./plugins";
 
 const ide = {
   main,
@@ -7,5 +9,7 @@ const ide = {
 
 export default {
   ide,
+  src,
+  plugins,
   provider,
 };
