@@ -28,19 +28,24 @@
     "commands": [
       {
         "command": "alicloud.api.quickOpenDocument",
-        "title": "查看API文档"
+        "title": "%checkAPIDoc%"
+      },
+      {
+        "command": "alicloud.api.openConfig",
+        "title": "%settings%",
+        "icon": "$(settings-gear)"
       },
       {
         "command": "alicloud.api.autoImport",
-        "title": "导入依赖"
+        "title": "%importDev%"
       },
       {
         "command": "alicloud.api.akSecurityHelper",
-        "title": "凭据的安全使用方案"
+        "title": "%secureUseOfCredentials%"
       },
       {
         "command": "alicloud.api.feedback",
-        "title": "反馈",
+        "title": "%feedback%",
         "icon": "$(feedback)"
       },
       {
@@ -50,58 +55,70 @@
       },
       {
         "command": "alicloud.api.findInterface",
-        "title": "查找 API",
+        "title": "%lookForAPIs%",
         "icon": "$(search)"
       },
       {
-        "command": "alicloud.api.regenerate",
-        "title": "生成本地代码",
-        "icon": "$(debug-start)"
-      },
-      {
         "command": "alicloud.api.restart",
-        "title": "重启 Alibaba Cloud API Toolkit",
+        "title": "%restart%",
         "icon": "$(debug-restart)"
       },
       {
         "command": "alicloud.api.fetchRemote",
-        "title": "拉取远程数据",
+        "title": "%fetchMeta%",
         "icon": "$(cloud-download)"
       },
       {
         "command": "alicloud.api.openMetaDocument",
-        "title": "查看文档"
+        "title": "%checkAPIDoc%"
       },
       {
         "command": "alicloud.api.openDocument",
         "icon": "$(book)",
-        "title": "查看文档"
+        "title": "%checkAPIDoc%"
       },
       {
         "command": "alicloud.api.addSubscriptions",
         "icon": "$(add)",
-        "title": "订阅更多产品"
+        "title": "%addSubscriptions%"
       },
       {
         "command": "alicloud.api.searchProducts",
         "icon": "$(search)",
-        "title": "搜索产品并订阅"
+        "title": "%searchProducts%"
       },
       {
         "command": "alicloud.api.addSubscription",
         "icon": "$(add)",
-        "title": "订阅产品"
+        "title": "%addSubscription%"
       },
       {
         "command": "alicloud.api.removeSubscriptions",
         "icon": "$(notebook-delete-cell)",
-        "title": "取消订阅"
+        "title": "%removeSubscriptions%"
       },
       {
         "command": "alicloud.api.updateCloseQuestionnaire",
-        "title": "刷新体验问卷弹出设置"
+        "title": "%updateCloseQuestionnaire%"
       }
     ],
+    "configuration": {
+      "type": "object",
+      "title": "Alibaba Cloud API Toolkit Configuration",
+      "properties": {
+        "alibabacloud-openapi.vscode-alicloud-api.displayLanguage": {
+          "type": "string",
+          "enum": [
+            "System",
+            "English",
+            "简体中文"
+          ],
+          "default": "System",
+          "title": "Display Language",
+          "description": "%displayLanguage%"
+        }
+      }
+    },
     "keybindings": [
       {
         "command": "alicloud.api.addSubscriptions",
@@ -197,6 +214,11 @@
           "command": "alicloud.api.feedback",
           "when": "view == alicloudApiExplorer",
           "group": "navigation@5"
+        },
+        {
+          "command": "alicloud.api.openConfig",
+          "when": "view == alicloudApiExplorer",
+          "group": "navigation@6"
         }
       ],
       "view/item/context": [

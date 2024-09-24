@@ -91,6 +91,10 @@ export class AlicloudApiCommands {
       );
     });
 
+    vscode.commands.registerCommand("alicloud.api.openConfig", async () => {
+      vscode.commands.executeCommand("workbench.action.openSettings", `@ext:alibabacloud-openapi.vscode-alicloud-api`);
+    });
+
     vscode.commands.registerCommand("alicloud.api.findInterface", () => {
       const hasSpecName = service.pontManager.localPontSpecs.some((spec) => spec.name);
       const items = service.pontManager.localPontSpecs
@@ -174,17 +178,6 @@ export class AlicloudApiCommands {
             },
           );
         });
-    });
-
-    vscode.commands.registerCommand("alicloud.api.regenerate", () => {
-      // const pontManager = service.pontManager;
-      // showProgress("生成代码", pontManager, async (log) => {
-      //   log("代码生成中...");
-      //   await wait(100);
-      //   await PontManager.generateCode(pontManager);
-      //   log("代码生成成功！");
-      //   vscode.window.showInformationMessage("文件生成成功！");
-      // });
     });
 
     vscode.commands.registerCommand("alicloud.api.generateMocks", () => {

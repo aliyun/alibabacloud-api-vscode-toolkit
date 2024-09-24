@@ -52,7 +52,6 @@ export class AlicloudAPIService {
     } else {
       this.treeDataProvider = new AlicloudApiExplorer(this.pontManager, this.context, (newManager: PontManager) => {
         this.updatePontManger(newManager);
-        vscode.commands.executeCommand("alicloud.api.regenerate");
       });
     }
 

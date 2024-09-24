@@ -4,7 +4,8 @@
 import IntlFormat from "intl-format";
 import zhCNLangs from "../langs/zh_CN/index";
 import * as _ from "lodash";
-import mds from '../langs/mds.json';
+import mds from "../langs/mds.json";
+import * as vscode from "vscode";
 
 function treegifyI18NLang(i18N: { [x: string]: string }) {
   if (!i18N) return {};
@@ -45,11 +46,6 @@ interface API {
 
 type Langs = typeof zhCNLangs & API;
 
-// mdsTexts是从美杜莎获取的文案
-// const langs = {
-//   zh_CN: zhCNLangs,
-// };
-
 export function treegifyI18N(i18N: { [lang: string]: any }) {
   if (!i18N) return {};
 
@@ -60,9 +56,19 @@ export function treegifyI18N(i18N: { [lang: string]: any }) {
   return I18N;
 }
 
-const langs = treegifyI18N({ en_US: mds['en_US'], zh_CN: mds['zh_CN'], zh_HK: mds['zh_CN'], ja_JP: mds['en_US'] });
+const langs = treegifyI18N({ en_US: mds["en_US"], zh_CN: mds["zh_CN"], zh_HK: mds["zh_CN"], ja_JP: mds["en_US"] });
 
-let curLang = "zh_CN";
+export function getI18NLang(lang?: string): "en_US" | "zh_CN" {
+  if (lang?.length && lang !== "System") {
+    return lang === "English" ? "en_US" : "zh_CN";
+  } else {
+    // 获取系统的语言
+    const locale = vscode.env.language;
+    return locale.startsWith("en") ? "en_US" : "zh_CN";
+  }
+}
+
+let curLang = getI18NLang();
 
 // 初始化I18N，curLang 是当前语言
 let I18N = IntlFormat.init(curLang, langs) as any as Langs;
