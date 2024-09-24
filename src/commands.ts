@@ -20,6 +20,7 @@ import { Product } from "./types";
 import { codeSampleProvider } from "./plugins/generate";
 import { generateImport } from "./common/generateImport";
 import { getProfileInfoInstance } from "./profileManager";
+import { getProductRequestInstance, ProductExplorer } from "./productExplorer";
 
 const path = require("path");
 
@@ -274,6 +275,8 @@ export class AlicloudApiCommands {
 
     vscode.commands.registerCommand("alicloud.api.restart", async () => {
       const profileInfo = await getProfileInfoInstance();
+      const product = await getProductRequestInstance();
+      await product.refreshProducts();
       await profileInfo.refreshProfiles();
       await vscode.window.withProgress(
         {

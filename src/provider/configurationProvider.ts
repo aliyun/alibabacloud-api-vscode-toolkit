@@ -21,6 +21,7 @@ export async function registerConfiguration(context: vscode.ExtensionContext) {
     vscode.workspace.onDidChangeConfiguration((event) => {
       if (event.affectsConfiguration(`${myPlugin}.${mySettings.displayLanguage}`)) {
         initializeLanguage();
+        vscode.commands.executeCommand("alicloud.api.restart");
       }
     }),
   );

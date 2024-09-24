@@ -68,6 +68,13 @@ export function getI18NLang(lang?: string): "en_US" | "zh_CN" {
   }
 }
 
+export function getCurrentLang() {
+  // 读取配置项
+  const config = vscode.workspace.getConfiguration("alibabacloud-openapi.vscode-alicloud-api");
+  const currentLanguage = config.get<string>("displayLanguage");
+  return getI18NLang(currentLanguage);
+}
+
 let curLang = getI18NLang();
 
 // 初始化I18N，curLang 是当前语言

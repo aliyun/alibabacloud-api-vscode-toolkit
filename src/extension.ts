@@ -71,7 +71,13 @@ export async function activate(context: vscode.ExtensionContext) {
 
     if (pontManager) {
       console.log('Congratulations, your extension "Alibaba Cloud API Toolkit" is now active!');
-      alicloudAPIMessageService.startup(pontManager, context);
+      alicloudAPIMessageService.startup(
+        {
+          ...pontManager,
+          localPontSpecs: pontManager.remotePontSpecs,
+        },
+        context,
+      );
       context.subscriptions.push(
         vscode.window.registerWebviewPanelSerializer(AlicloudAPIWebview.viewType, new AlicloudAPISerializer()),
       );
