@@ -5,8 +5,9 @@
 // import { AmpIcon } from '@ali/amp-base';
 // import { CommonWidgetProps } from '@ali/api-component';
 // import { LinkButton } from '@alicloud/console-components-actions';
-import React from 'react';
-import { CommonWidgetProps } from '../types';
+import React from "react";
+import { CommonWidgetProps } from "../types";
+import I18N from "../../../../../utils/I18N";
 // import { addParamStruct } from './utils';
 // import { addParamStruct } from '../utils';
 
@@ -17,7 +18,7 @@ export class StructProps extends CommonWidgetProps {
 
 export const Struct: React.FC<StructProps> = (props) => {
   if (props.value) {
-    if (typeof props.value === 'string') {
+    if (typeof props.value === "string") {
       let value = props.value;
       try {
         value = JSON.parse(props.value);
@@ -27,17 +28,17 @@ export const Struct: React.FC<StructProps> = (props) => {
     // addParamStruct(props.schemaPath, props.schema);
   }
   return (
-    <div style={{ marginBottom: '16px' }}>
+    <div style={{ marginBottom: "16px" }}>
       <a
         // href="javascript:;"
-        style={{ textDecoration: 'none' }}
+        style={{ textDecoration: "none" }}
         className="op"
         onClick={() => {
           // addParamStruct(props.schemaPath, props.schema);
         }}
       >
-        <div className='codicon codicon-add' style={{ marginRight: '5px', marginTop: '1px' }}></div>
-        添加数据结构
+        <div className="codicon codicon-add" style={{ marginRight: "5px", marginTop: "1px" }}></div>
+        {I18N.xconsole.Struct.addStruct}
       </a>
     </div>
   );

@@ -3,9 +3,6 @@
  * @description 语言切换
  */
 import * as React from "react";
-// import { WorkbenchIcon } from './Icon/Icon';
-// import { EditorLanguages } from './MonacoEditor/define';
-// import { I18N } from '../utils/I18N';
 import { EditorLanguages } from "../../define";
 import { Select } from "@alicloud/console-components";
 

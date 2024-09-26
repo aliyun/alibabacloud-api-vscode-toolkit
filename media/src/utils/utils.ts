@@ -3,6 +3,7 @@ import * as React from "react";
 import { useEffect } from "react";
 import { WebviewApi } from "vscode-webview";
 import { PontUIService } from "../service/UIService";
+import I18N from "./I18N";
 
 declare let acquireVsCodeApi: any;
 
@@ -57,3 +58,18 @@ export const getSpecInfoFromName = (name: string): SpecInfo => {
 };
 
 export const debugForbiddenProducts = ["Kms__2016-01-20", "Oss__2019-05-17", "pds__2022-03-01", "Sls__2020-12-30"];
+
+export class TableI18N {
+  structLabel = I18N.ide.main.common.struct;
+  viewDoc = I18N.ide.main.explorer.seeDoc;
+  fieldName = I18N.ide.main.common.fieldName;
+  defaultText = I18N.ide.main.common.defaultValue;
+  fieldDetail = I18N.ide.main.common.fieldDetail;
+  expandDetail = I18N.ide.main.common.expandDetail;
+  sampleValue = I18N.ide.main.explorer.sampleValue;
+  enums = I18N.ide.main.common.enum;
+  pattern = I18N.ide.main.common.regular;
+  fieldValue = I18N.ide.main.common.value;
+  itemsCnt = I18N.ide.main.common.itemsCut;
+  charLength = I18N.ide.main.common.chatLenght;
+}

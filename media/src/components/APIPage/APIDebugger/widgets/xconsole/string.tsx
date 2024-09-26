@@ -2,31 +2,26 @@
  * @author yini-chen
  * @description string类型
  */
-// import { SwapOutlined } from '@ant-design/icons';
-import { Tooltip } from 'antd';
-
-// import { AmpIcon } from '@ali/amp-base';
-// import { CommonWidgetProps } from '@ali/api-component';
-import { Input } from '@alicloud/console-components';
-import * as React from 'react';
-// import APIParamGenerate from 'viteSrc/pages/designAwesome/APIDesign/QuickTest/APIParams/APIParamGenerate';
-// import APIParamGenerate from '../APIParamGenerate';
-import './string.module.scss';
-import { CommonWidgetProps } from '../types';
+import { Tooltip } from "antd";
+import { Input } from "@alicloud/console-components";
+import * as React from "react";
+import "./string.module.scss";
+import { CommonWidgetProps } from "../types";
+import I18N from "../../../../../utils/I18N";
 // import { onGetRandomValue } from './utils';
 
 export class StringProps extends CommonWidgetProps {}
 
 export const String: React.FC<StringProps> = (props) => {
   const { schema, ...rest } = props;
-  const [curvalue, setCurvalue] = React.useState('');
+  const [curvalue, setCurvalue] = React.useState("");
   const [isToTextArea, setIsToTextArea] = React.useState(false);
 
   React.useEffect(() => {
     if (props.value !== curvalue) {
-      if (props.value && typeof props.value !== 'string') {
-        setCurvalue(props.value + '');
-        props.onChange(props.value + '');
+      if (props.value && typeof props.value !== "string") {
+        setCurvalue(props.value + "");
+        props.onChange(props.value + "");
       } else {
         setCurvalue(props.value);
       }
@@ -43,7 +38,7 @@ export const String: React.FC<StringProps> = (props) => {
   const textareaRef = React.useRef();
 
   const changeCurValue = React.useCallback((val: any) => {
-    const value = val === '' ? (undefined as any) : val;
+    const value = val === "" ? (undefined as any) : val;
     if (value) {
       setCurvalue(value);
     } else {
@@ -77,35 +72,35 @@ export const String: React.FC<StringProps> = (props) => {
   };
 
   let formItem = null;
-  let inputType = 'input';
+  let inputType = "input";
 
-  if ((isToTextArea || (typeof curvalue === 'string' && curvalue.includes('\n'))) && props.schema?.type !== 'number') {
-    inputType = 'textarea';
+  if ((isToTextArea || (typeof curvalue === "string" && curvalue.includes("\n"))) && props.schema?.type !== "number") {
+    inputType = "textarea";
   }
 
   const placeholder = React.useMemo(() => {
-    if (curvalue === '') {
-      return '空字符串';
-    } else if (props.schema?.format === 'int64' || props.schema?.format === 'double') {
-      return '请输入数值';
+    if (curvalue === "") {
+      return I18N.ide.main.explorer.emptystring;
+    } else if (props.schema?.format === "int64" || props.schema?.format === "double") {
+      return I18N.ide.main.explorer.entryNumber;
     } else {
-      return schema?.placeholder || '请输入字符串';
+      return schema?.placeholder || I18N.ide.main.explorer.inputString;
     }
   }, [curvalue, props.schema]);
 
   const errorMsg = React.useMemo(() => {
-    if (props.schema?.format === 'int64' || props.schema?.format === 'double') {
-      return !curvalue || Number(curvalue) || Number(curvalue) === 0 ? null : '请输入数值';
+    if (props.schema?.format === "int64" || props.schema?.format === "double") {
+      return !curvalue || Number(curvalue) || Number(curvalue) === 0 ? null : I18N.ide.main.explorer.entryNumber;
     }
     return null;
   }, [props.schema, curvalue]);
 
   switch (inputType) {
-    case 'textarea':
+    case "textarea":
       formItem = (
-        <div className="generate-form-text-area" style={{position:"relative"}}>
+        <div className="generate-form-text-area" style={{ position: "relative" }}>
           <Input.TextArea
-            style={{ resize: 'none', width: schema?.inputWidth || '100%' }}
+            style={{ resize: "none", width: schema?.inputWidth || "100%" }}
             ref={textareaRef}
             rows={3}
             value={curvalue}
@@ -114,16 +109,16 @@ export const String: React.FC<StringProps> = (props) => {
             onChange={changeCurValue}
           />
 
-          <Tooltip title="转换为 Input，转换后将丢失换行符">
+          <Tooltip title={I18N.ide.main.explorer.changeInput}>
             <span
               className="generate-form-text-area-icon"
-              style={{ position:"absolute", right:6, bottom:6}}
+              style={{ position: "absolute", right: 6, bottom: 6 }}
               onClick={() => {
-                setCurvalue((curvalue || '').replace(/\n/gi, ''));
+                setCurvalue((curvalue || "").replace(/\n/gi, ""));
                 setIsToTextArea(false);
               }}
             >
-              <div className='codicon codicon-fold'></div>
+              <div className="codicon codicon-fold"></div>
               {/* <SwapOutlined translate={undefined} /> */}
             </span>
           </Tooltip>
@@ -131,11 +126,11 @@ export const String: React.FC<StringProps> = (props) => {
       );
       break;
     default:
-    case 'input':
+    case "input":
       formItem = (
         <div className="input-area">
           <Input
-            style={{ width: schema?.inputWidth || '100%' }}
+            style={{ width: schema?.inputWidth || "100%" }}
             placeholder={placeholder}
             // innerAfter={
             //   curvalue || curvalue === '' ? (
@@ -153,8 +148,8 @@ export const String: React.FC<StringProps> = (props) => {
             onChange={changeCurValue}
             ref={ref}
             onPaste={(e) => {
-              const v = e.clipboardData.getData('text');
-              if (typeof v === 'string' && v.includes('\n')) {
+              const v = e.clipboardData.getData("text");
+              if (typeof v === "string" && v.includes("\n")) {
                 setIsToTextArea(true);
                 e.preventDefault();
                 const { value: newValue, position } = getNewTextareaValueAndPosition(v);
@@ -190,7 +185,7 @@ export const String: React.FC<StringProps> = (props) => {
   return (
     <div className="jsonschema-form-widget workbench-string-item">
       <div>{formItem}</div>
-        <div style={{ color: 'red' }}>{errorMsg}</div>
+      <div style={{ color: "red" }}>{errorMsg}</div>
     </div>
   );
 };

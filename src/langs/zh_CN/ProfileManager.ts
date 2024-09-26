@@ -1,0 +1,23 @@
+export default {
+  ProfileManagerIndex: {
+    tip1: "凭证将存储于您个人用户目录下的 .aliyun 文件夹中，个人用户目录位置因操作系统而异：",
+    Tip2: "Windows环境：C:\\Users\\USERNAME\\.aliyun",
+    tip3: "Linux或macOS：~/.aliyun",
+    addSuccess: "新增成功！",
+    continueAdd: "继续新增",
+    writing: "写入中...",
+    title: "Profile 名称",
+    tip4: "用于区别不同的 profiles。",
+    look: "获取方式请参见",
+    createRamAK: "创建 RAM 用户的 AccessKey",
+    defaultRegionId: "默认 Region Id",
+    look2: "阿里云支持的 Region Id ，请参见",
+    regionsAndZone: "地域和可用区",
+    faildToAdd: "添加失败，请重试",
+    add: "新增",
+    reset: "重置",
+    akInputTip: "指定您的 AccessKey ID",
+    skInputTip: "指定您的 AccessKey Secret",
+    regionInputTip: "指定默认区域的Region Id",
+  },
+};

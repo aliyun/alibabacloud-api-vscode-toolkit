@@ -5,6 +5,7 @@
 import { Balloon, Tag } from "@alicloud/console-components";
 import React from "react";
 import { SemixMarkdown } from "semix-schema-table";
+import I18N from "../../../utils/I18N";
 
 export class APIGuideProps {
   schema?: any;
@@ -109,14 +110,14 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
                       }
                     >
                       <div className="api-debugger-param-desc !text-xs">
-                        <span className="config-title-desc text-gray-500">描述</span>
+                        <span className="config-title-desc text-gray-500">{I18N.ide.main.explorer.description}</span>
                         <div className="!text-xs">
                           <SemixMarkdown source={description}></SemixMarkdown>
                         </div>
                         {props.schema?.example ? (
                           <>
-                            <div className="config-title mt-2  text-gray-500">
-                              <span>示例值</span>
+                            <div className="config-title mt-2 text-gray-500">
+                              <span>{I18N.ide.main.explorer.sampleValue}</span>
                             </div>
 
                             <div className="config-content">{props.schema?.example}</div>
@@ -124,25 +125,25 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
                         ) : null}
                         {props.schema?.maximum ? (
                           <>
-                            <div className="config-title mt-2  text-gray-500">最大值</div>
+                            <div className="config-title mt-2 text-gray-500">{I18N.ide.main.common.maximum}</div>
                             <div className="config-content">{props.schema?.maximum}</div>
                           </>
                         ) : null}
                         {props.schema?.minimum ? (
                           <>
-                            <div className="config-title mt-2 text-gray-500">最小值</div>
+                            <div className="config-title mt-2 text-gray-500">{I18N.ide.main.common.minimum}</div>
                             <div className="config-content">{props.schema?.minimum}</div>
                           </>
                         ) : null}
                         {props.schema?.format ? (
                           <>
-                            <div className="config-title mt-2 text-gray-500">格式</div>
+                            <div className="config-title mt-2 text-gray-500">{I18N.ide.main.common.format}</div>
                             <div className="config-content">{props.schema?.format}</div>
                           </>
                         ) : null}
                         {props.schema?.enum?.length ? (
                           <>
-                            <div className="config-title mt-2 text-gray-500">枚举值</div>
+                            <div className="config-title mt-2 text-gray-500">{I18N.ide.main.common.enum}</div>
                             {props.schema?.enum?.map((item) => (
                               <Tag size="small" type="normal" style={{ marginRight: "4px", borderRadius: "2px" }}>
                                 {item.value || item}
@@ -152,7 +153,7 @@ export const APIGuide = React.memo((props: APIGuideProps) => {
                         ) : null}
                         {props.schema?.pattern ? (
                           <>
-                            <div className="config-title mt-2 text-gray-500">正则</div>
+                            <div className="config-title mt-2 text-gray-500">{I18N.ide.main.common.regular}</div>
                             <div className="config-content">{props.schema?.pattern}</div>
                           </>
                         ) : null}

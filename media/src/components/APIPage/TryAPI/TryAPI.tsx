@@ -125,7 +125,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
       key: "gotoweb",
       label: (
         <a style={{ textDecoration: "none" }} href={apiMeta?.externalDocs?.url}>
-          去门户网页版调试
+          {I18N.ide.main.common.gotoPortal}
         </a>
       ),
       codicon: "link-external",
@@ -142,9 +142,9 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
           <div>
             {profileInfo?.current?.length ? null : (
               <span>
-                调试需要配置您的 AK/SK 信息，
+                {I18N.TryAPI.needToCofnigAK}
                 <a onClick={() => PontUIService.openProfileManager()} className="text-blue-500">
-                  点击配置。
+                  {I18N.TryAPI.clickToConfig}
                 </a>
               </span>
             )}
@@ -249,7 +249,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                         onClick={() => {
                           if (navigator.clipboard) {
                             navigator.clipboard.writeText(getTabValue(tab));
-                            message.success("复制成功");
+                            message.success(I18N.ide.main.explorer.copySuccess);
                           }
                         }}
                       >
@@ -257,7 +257,7 @@ export const TryAPI: React.FC<TryAPIProps> = (props) => {
                       </Button>
                     }
                   >
-                    复制
+                    {I18N.ide.main.explorer.copy}
                   </Balloon>
                   <Dropdown menu={{ items }}>
                     <Button onClick={(e) => e.preventDefault()}>

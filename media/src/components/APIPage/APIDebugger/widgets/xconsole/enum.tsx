@@ -4,10 +4,11 @@
  */
 
 // import { CommonWidgetProps } from '@ali/api-component';
-import { Select } from '@alicloud/console-components';
-import * as React from 'react';
-import './enum.module.scss';
-import { CommonWidgetProps } from '../types';
+import { Select } from "@alicloud/console-components";
+import * as React from "react";
+import "./enum.module.scss";
+import { CommonWidgetProps } from "../types";
+import I18N from "../../../../../utils/I18N";
 
 export class EnumSelectProps extends CommonWidgetProps {}
 
@@ -32,7 +33,7 @@ export const EnumSelect: React.FC<EnumSelectProps> = (props) => {
     });
   }
   const options = enumValueTitles?.map((item: any) => {
-    if (item.value === '') {
+    if (item.value === "") {
       return;
     }
     return {
@@ -76,7 +77,7 @@ export const EnumSelect: React.FC<EnumSelectProps> = (props) => {
       <Select
         style={{ width: "100%" }}
         className="jsonschema-form-widget"
-        placeholder={schema?.placeholder || '请输入字符串'}
+        placeholder={schema?.placeholder || I18N.ide.main.explorer.inputString}
         hasClear
         value={curvalue}
         onBlur={emitvalues}

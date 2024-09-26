@@ -140,6 +140,10 @@ export class AlicloudAPIService {
     return {};
   }
 
+  async requestDisplayLanguage() {
+    return getCurrentLang();
+  }
+
   /**
    * @description 根据 API 查询是否有 CodeSample
    */

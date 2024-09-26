@@ -9,6 +9,7 @@ import React, { ReactNode } from "react";
 import { PontUIService } from "../../service/UIService";
 import { DARA_SDK_LANGUAGES, LanguageSwitcher } from "../APIPage/TrySDK/LanguageSwitcher";
 import { getEditorLanguage, getEditorMenuItems, getMonacoTheme } from "../utils";
+import I18N from "../../utils/I18N";
 
 export class MonacoEditorProps {
   languageTab?: string;
@@ -127,7 +128,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
                   onClick={() => {
                     if (navigator.clipboard) {
                       navigator.clipboard.writeText(value);
-                      message.success("复制成功");
+                      message.success(I18N.ide.main.explorer.copySuccess);
                     }
                   }}
                 >
@@ -135,7 +136,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
                 </Button>
               }
             >
-              复制
+              {I18N.ide.main.explorer.copy}
             </Balloon>
           ) : null}
           {items?.length ? (

@@ -66,7 +66,7 @@ export const ApiErrorCode: React.FC<ApiErrorCodeProps> = (props) => {
       },
     },
     {
-      title: "操作",
+      title: I18N.ide.main.explorer.operation,
       dataIndex: "op",
       width: 100,
       cell: (_: any, index: any, record: { errorCode: any }) => {
@@ -75,7 +75,7 @@ export const ApiErrorCode: React.FC<ApiErrorCodeProps> = (props) => {
             target="_blank"
             href={`https://api.aliyun.com/troubleshoot?q=${record.errorCode}&product=${props.popcode}&version=${props.version}`}
           >
-            去诊断
+            {I18N.ide.main.docIframe.diagnosis}
           </a>
         );
       },
@@ -93,7 +93,9 @@ export const ApiErrorCode: React.FC<ApiErrorCodeProps> = (props) => {
   return (
     <div className="bg-[var(--vscode-editor-background)]] semix-markdown mb-4">
       <div className="flex justify-between border-t border-gray-100">
-        <div className="px-5 py-4 text-base font-medium text-[$primary-font-color]">错误码</div>
+        <div className="px-5 py-4 text-base font-medium text-[$primary-font-color]">
+          {I18N.ide.main.docIframe.errorCode}
+        </div>
         <div className="my-auto mr-4 text-sm">
           <a href={`https://api.aliyun.com/document/${props.popcode}/${props.version}/errorCode`} target="_blank">
             {I18N.ide.main.docIframe.overallErrorCode}

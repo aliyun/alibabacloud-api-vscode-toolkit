@@ -3,24 +3,21 @@
  * @description 上传文件
  */
 
-import { Button, message, Upload } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-import * as React from 'react';
-import { CommonWidgetProps } from '../types';
-import { APIPageContext } from '../../../context';
+import * as React from "react";
+import { CommonWidgetProps } from "../types";
+import { APIPageContext } from "../../../context";
+import I18N from "../../../../../utils/I18N";
 // import { CommonWidgetProps } from '@ali/api-component';
 // import { useLocation } from 'react-router-dom';
 
 export class UploadFileProps extends CommonWidgetProps {
-    onChange: (value: any) => void;
+  onChange: (value: any) => void;
 }
 
 export const UploadFile: React.FC<UploadFileProps> = (props) => {
   const [isUpload, changeIsUpload] = React.useState(false);
   const { apiMeta } = APIPageContext.useContainer();
-//   const location = useLocation();
-//   const [product, version, apiName] = location?.pathname?.replace('/api/', '').split('/');
-  const [fileInfo, setFileInfo] = React.useState({ fileName: '', mime: '' } as FileInfo);
+  const [fileInfo, setFileInfo] = React.useState({ fileName: "", mime: "" } as FileInfo);
 
   type FileInfo = {
     fileName: string;
@@ -36,7 +33,13 @@ export const UploadFile: React.FC<UploadFileProps> = (props) => {
   };
 
   return (
-    <div>暂不支持文件传输调试，您可以到<a href={apiMeta?.externalDocs?.url} target='_blank'>开发者门户网页版</a>进行调试</div>
+    <div>
+      {I18N.xconsole.UploadFile.notSupportDebug}
+      <a href={apiMeta?.externalDocs?.url} target="_blank">
+        {I18N.xconsole.UploadFile.explorerWebsite}
+      </a>
+      {I18N.xconsole.UploadFile.processDebug}
+    </div>
     // <Upload
     //   className="jsonschema-form-widget"
     //   action={getUploadPath(product, version, apiName, fileInfo)}

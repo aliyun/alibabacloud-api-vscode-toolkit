@@ -3,6 +3,7 @@ import { ObjectMap } from "pontx-spec";
 import * as vscode from "vscode";
 import { alicloudAPIMessageService } from "./Service";
 import { htmlTemplate } from "./utils";
+import { getCurrentLang } from "./utils/I18N";
 export type PanelConfig = {
   specName: string;
   modName: string;
@@ -10,6 +11,7 @@ export type PanelConfig = {
   pageType: "document" | "changes" | "profile";
   schemaType: "api" | "struct" | "others";
   column?: number;
+  displayLanguage?: string;
 };
 
 const getPanelKey = (panelConfig: PanelConfig) => {
@@ -91,6 +93,7 @@ export class AlicloudAPIWebview {
       ? vscode.Uri.joinPath(extensionUri, webviewIconPath[panelConfig.schemaType])
       : vscode.Uri.joinPath(extensionUri, webviewIconPath["others"]);
     webview.iconPath = iconPath;
+    panelConfig.displayLanguage = getCurrentLang();
     webview.webview.html = htmlTemplate(
       {
         getUri: (assetUri) => webview.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, assetUri)),
@@ -163,6 +166,7 @@ export class AlicloudAPIWebview {
         spec: apiMeta,
         pageType: "document",
         schemaType: "api",
+        displayLanguage: getCurrentLang(),
       },
     );
     webview.webview.onDidReceiveMessage((message) => {

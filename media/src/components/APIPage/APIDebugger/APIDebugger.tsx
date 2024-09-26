@@ -56,7 +56,7 @@ export const APIDebugger: React.FC<APIDebuggerProps> = (props) => {
         </Button>
         {debugForbiddenProducts?.includes(`${product}__${version}`) ? (
           <a href={apiMeta?.externalDocs?.url}>
-            <Button type="primary">去门户网页版调试</Button>
+            <Button type="primary">{I18N.ide.main.common.gotoPortal}</Button>
           </a>
         ) : (
           <Button

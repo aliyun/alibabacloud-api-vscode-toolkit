@@ -6,6 +6,7 @@ import { API as APIPage } from "./APIPage/API";
 import { ApiErrorCode } from "./APIPage/APIDocument/ApiErrorCode";
 import { BaseClass as StructDocument } from "./APIPage/APIDocument/BaseClass";
 import ProfileManagerIndex from "./ProfileManager/ProfileManagerIndex";
+import I18N from "../utils/I18N";
 
 if (typeof window !== "undefined") {
   (window as any).routerMeta = {};
@@ -32,7 +33,9 @@ export class AppProps {
 
 export const App: React.FC<AppProps> = (props) => {
   const [appMeta, setAppMeta] = React.useState(props.routerMeta);
-  const { pageType, schemaType, specName, modName, name, spec: metaSpec, remoteSpec } = appMeta || {};
+  const { pageType, schemaType, specName, modName, name, spec: metaSpec, remoteSpec, displayLanguage } = appMeta || {};
+
+  I18N.setLang(displayLanguage || "zh_CN");
 
   const { product: popcode, version } = getSpecInfoFromName(specName || "");
 

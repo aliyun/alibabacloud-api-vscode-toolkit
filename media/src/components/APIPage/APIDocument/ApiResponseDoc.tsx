@@ -3,8 +3,10 @@
  * @description
  */
 import React from "react";
-import { InnerSchemaTable } from "semix-schema-table";
+import { SemixSchemaTable } from "semix-schema-table";
 import useCustomFixScrollBar from "../../common/useCustomFixScrollBar";
+import I18N from "../../../utils/I18N";
+import { TableI18N } from "../../../utils/utils";
 
 export class ApiResponseDocProps {
   selectedApi: any;
@@ -17,7 +19,8 @@ export const ApiResponseDoc: React.FC<ApiResponseDocProps> = (props) => {
 
   return (
     <div className="response-doc-scroll-content scrollbar-custom overflow-x-scroll px-4 pb-4" ref={tableRef}>
-      <InnerSchemaTable
+      <SemixSchemaTable
+        I18N={new TableI18N()}
         name=""
         schema={props.selectedApi?.responses["200"]?.schema as any}
         renderExpandIcon={(node, onExpand) => {
@@ -49,7 +52,7 @@ export const ApiResponseDoc: React.FC<ApiResponseDocProps> = (props) => {
                   textAlign: "center",
                 }}
               >
-                无出参定义
+                {I18N.ide.main.common.noOutputParameterDefinition}
               </td>
             </tr>
           );

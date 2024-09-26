@@ -13,6 +13,7 @@ import { DARA_SDK_LANGUAGES } from "./LanguageSwitcher";
 import { SDKInfo } from "./SDKInfo";
 import { Balloon } from "@alicloud/console-components";
 import { EditorLanguages } from "../../../types/EditorLanguages";
+import I18N from "../../../utils/I18N";
 
 export class TrySDKProps {
   isExpand? = true;
@@ -86,7 +87,7 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
 
   const getCode = React.useCallback(() => {
     if (!sdkDemos[languageTab?.toLocaleLowerCase()]) {
-      return "// API 暂未支持该语言的 SDK";
+      return I18N.TrySDK.notSupportSDK;
     }
     return sdkDemos[languageTab?.toLocaleLowerCase()];
   }, [sdkDemos, languageTab]);
@@ -114,7 +115,7 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
                   closable={false}
                   trigger={
                     <span className="m-auto cursor-pointer text-xs text-[var(--vscode-textPreformat-foreground)]">
-                      SDK 安装信息
+                      {I18N.TrySDK.sdkInstallInfo}
                     </span>
                   }
                 >
@@ -132,7 +133,7 @@ export const TrySDK: React.FC<TrySDKProps> = (props) => {
           menuItems={[
             {
               key: "gotoweb",
-              label: "去门户网页版调试",
+              label: I18N.ide.main.common.gotoPortal,
               codicon: "link-external",
               externalLink: apiMeta?.externalDocs?.url,
               onClick: () => {

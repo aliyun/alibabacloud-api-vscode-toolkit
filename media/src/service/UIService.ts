@@ -107,4 +107,6 @@ export const PontUIService = {
   requestSDKInfo: async (params: { product: string; version: string }) => {
     return null as any;
   },
+  /** 获取当前语言 */
+  requestDisplayLanguage: async () => "en_US",
 };
