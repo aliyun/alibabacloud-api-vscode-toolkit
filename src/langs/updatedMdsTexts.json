@@ -768,5 +768,6 @@
   "xconsole.UploadFile.processDebug": "进行调试",
   "ProfileManager.ProfileManagerIndex.akInputTip": "指定您的 AccessKey ID",
   "ProfileManager.ProfileManagerIndex.skInputTip": "指定您的 AccessKey Secret",
-  "ProfileManager.ProfileManagerIndex.regionInputTip": "指定默认区域的Region Id"
+  "ProfileManager.ProfileManagerIndex.regionInputTip": "指定默认区域的Region Id",
+  "TrySDK.SDKInfo.runCli": "运行脚本"
 }

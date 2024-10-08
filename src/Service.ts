@@ -159,7 +159,7 @@ export class AlicloudAPIService {
 
   async requestEndpoints(product: string) {
     const resStr = await fetch(
-      `https://api.aliyun.com/meta/v1/products/${product}/endpoints.json${getCurrentLang() === "en_US" ? "?language=EN_US" : ""}`,
+      `https://api.aliyun.com/meta/v1/products/${product}/endpoints.json${getCurrentLang() === "en_US" ? "?language=en-US" : ""}`,
       {
         headers: {
           "User-Agent": getUserAgent(),

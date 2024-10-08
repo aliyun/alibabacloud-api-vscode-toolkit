@@ -71,7 +71,7 @@ export const SDKInfo: React.FC<SDKInfoProps> = (props) => {
           language={lanKey === "java" ? "java" : "powershell"}
           otherTag={
             lanKey === "javascript" || lanKey === "typescript" ? (
-              <Tooltip title={<span className="text-xs text-white">运行脚本</span>}>
+              <Tooltip title={<span className="text-xs text-white">{I18N.TrySDK.SDKInfo.runCli}</span>}>
                 <div
                   className="codicon codicon-debug-start mx-1 cursor-pointer"
                   style={{
