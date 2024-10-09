@@ -23,6 +23,7 @@ import { PontUIService } from "../../service/UIService";
 import ApiResponseDoc from "./APIDocument/ApiResponseDoc";
 import Searcher from "../common/Searcher";
 import I18N from "../../utils/I18N";
+import { TableI18N } from "../../utils/utils";
 
 export class APIProps {
   selectedApi?: PontSpec.PontAPI;
@@ -49,6 +50,7 @@ export const API: React.FC<APIProps> = (props) => {
   const initValue = React.useMemo(() => {
     return {
       schemas: definitions as any,
+      I18N: new TableI18N(),
       getRefSchema: getSchema,
       renderTypeColAppendix: (node: any) => {
         if (node?.nodeValue?.schema.in) {

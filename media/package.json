@@ -21,7 +21,7 @@
     "antd": "^5.20.5",
     "load-script": "^2.0.0",
     "lodash": "^4.17.20",
-    "next": "^14.2.6",
+    "next": "^14.2.13",
     "pontx-semix-table": "0.5.3",
     "pontx-ui": "latest",
     "react": "^18.3.1",
@@ -41,7 +41,7 @@
   "devDependencies": {
     "@types/blueimp-md5": "^2.7.0",
     "@types/fs-extra": "^5.1.0",
-    "@types/lodash": "^4.17.6",
+    "@types/lodash": "^4.17.10",
     "@types/node": "^20",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
@@ -55,8 +55,8 @@
     "postcss": "^8",
     "prettier": "^3.3.3",
     "react-syntax-highlighter": "^15.5.0",
-    "tailwindcss": "^3.4.10",
+    "tailwindcss": "^3.4.13",
     "typescript": "^5",
-    "vite": "^2.9.18"
+    "vite": "^5.4.8"
   }
 }

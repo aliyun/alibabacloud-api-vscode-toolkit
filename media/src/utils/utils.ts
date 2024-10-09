@@ -61,7 +61,7 @@ export const debugForbiddenProducts = ["Kms__2016-01-20", "Oss__2019-05-17", "pd
 
 export class TableI18N {
   structLabel = I18N.ide.main.common.struct;
-  viewDoc = I18N.ide.main.explorer.seeDoc;
+  viewDoc = "";
   fieldName = I18N.ide.main.common.fieldName;
   defaultText = I18N.ide.main.common.defaultValue;
   fieldDetail = I18N.ide.main.common.fieldDetail;

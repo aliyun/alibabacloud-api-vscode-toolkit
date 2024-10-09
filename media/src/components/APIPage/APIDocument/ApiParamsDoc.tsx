@@ -6,11 +6,10 @@
 import * as PontSpec from "pontx-spec";
 import * as React from "react";
 import { SemixJsonSchema } from "semix-core";
-import { SemixSchemaTable } from "semix-schema-table";
+import { InnerSchemaTable } from "semix-schema-table";
 import { getRefSchema } from "../../utils";
 import useCustomFixScrollBar from "../../common/useCustomFixScrollBar";
 import I18N from "../../../utils/I18N";
-import { TableI18N } from "../../../utils/utils";
 
 export class PontxParamsDocProps {
   parameters?: PontSpec.Parameter[];
@@ -57,8 +56,7 @@ export const ApiParamsDoc: React.FC<PontxParamsDocProps> = (props) => {
       {props.parameters?.length ? (
         <div ref={tableRef}>
           {CustomFixScrollBar}
-          <SemixSchemaTable
-            I18N={new TableI18N()}
+          <InnerSchemaTable
             name=""
             renderExpandIcon={(node, onExpand) => {
               return (
