@@ -648,10 +648,10 @@
   resolved "https://registry.npmmirror.com/@types/vscode-webview/-/vscode-webview-1.57.4.tgz#12b0dd73afeeaed5a1f48dbdb3824af75773bc8c"
   integrity sha512-RrVw9s6gBJuY1IkUHMNznWgj/ktjwLpATyOTcKxUDIbbp7AQeK7S0E1+P/8Z75OgAW13OMqSAmaiuWw25dh59Q==
 
-"@types/vscode@^1.47.0":
-  version "1.85.0"
-  resolved "https://registry.npmmirror.com/@types/vscode/-/vscode-1.85.0.tgz#46beb07f0f626665b52d1e2294382b2bc63b602e"
-  integrity sha512-CF/RBon/GXwdfmnjZj0WTUMZN5H6YITOfBCP4iEZlOtVQXuzw6t7Le7+cR+7JzdMrnlm7Mfp49Oj2TuSXIWo3g==
+"@types/vscode@^1.94.0":
+  version "1.94.0"
+  resolved "https://registry.yarnpkg.com/@types/vscode/-/vscode-1.94.0.tgz#ccd2111b6ecaba6ad4da19c2d524828fa73ae250"
+  integrity sha512-UyQOIUT0pb14XSqJskYnRwD2aG0QrPVefIfrW1djR+/J4KeFQ0i1+hjZoaAmeNf3Z2jleK+R2hv+EboG/m8ruw==
 
 "@typescript-eslint/eslint-plugin@^6.9.0":
   version "6.21.0"
