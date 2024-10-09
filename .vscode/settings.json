@@ -1,7 +1,5 @@
 {
   "editor.formatOnSave": true,
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "vscode-i18n-linter.importI18nPath": "import I18N from \"src/utils/I18N\";",
-  "vscode-i18n-linter.langPrefix": "./src/langs/zh_CN/"
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
