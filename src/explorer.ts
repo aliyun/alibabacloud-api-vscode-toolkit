@@ -10,7 +10,7 @@ import { getProductRequestInstance } from "./productExplorer";
 import { Product } from "./types";
 import _ from "lodash";
 import { getProfileInfoInstance } from "./profileManager";
-import I18N from "./utils/I18N";
+import I18N, { getCurrentLang } from "./utils/I18N";
 
 type DiffResult<T> = T;
 
@@ -382,7 +382,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
         ...(pontxConfig.origins || []),
         {
           name: `${product}__${version}`,
-          url: `https://api.aliyun.com/meta/v1/products/${product}/versions/${version}/api-docs.json`,
+          url: `https://api.aliyun.com/meta/v1/products/${product}/versions/${version}/api-docs.json${getCurrentLang() === "en_US" ? "?language=en_US" : ""}`,
         },
       ];
       this.rewriteConfig(pontxConfig);
