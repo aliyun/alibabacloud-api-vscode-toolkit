@@ -34,7 +34,8 @@
     "xml2js": "^0.6.2"
   },
   "resolutions": {
-    "semix-schema-table": "0.1.3"
+    "semix-schema-table": "0.1.3",
+    "xml2js": "^0.6.2"
   },
   "version": "0.3.70",
   "repository": "git@github.com:aliyun/alibabacloud-api-vscode-toolkit.git",

@@ -309,6 +309,10 @@
     "url": "git@github.com:aliyun/alibabacloud-api-vscode-toolkit.git",
     "type": "git"
   },
+  "resolutions": {
+    "ws": "5.2.4",
+    "xml2js": "0.6.2"
+  },
   "devDependencies": {
     "@types/fs-extra": "^5.1.0",
     "@types/lodash": "^4.17.7",
