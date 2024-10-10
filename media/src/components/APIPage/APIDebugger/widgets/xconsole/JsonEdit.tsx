@@ -8,6 +8,7 @@ import { CommonWidgetProps } from "../types";
 import { Editor } from "@monaco-editor/react";
 import { APIPageContext } from "../../../context";
 import { getMonacoTheme } from "../../../../utils";
+import I18N from "../../../../../utils/I18N";
 
 export class JsonEditProps extends CommonWidgetProps {}
 
@@ -34,7 +35,7 @@ export const JsonEdit: React.FC<JsonEditProps> = (props) => {
           const val = JSON.parse(curval);
           props.onChange(val);
         } catch {
-          setErrMsg("json 格式错误");
+          setErrMsg(I18N.xconsole.JsonEdit.formatError);
         }
       }}
     >

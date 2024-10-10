@@ -10,6 +10,7 @@ import { a11yLight, a11yDark } from "react-syntax-highlighter/dist/esm/styles/hl
 import { APIPageContext } from "../APIPage/context";
 import { getMonacoTheme } from "../utils";
 import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
+import I18N from "../../utils/I18N";
 
 export interface HighlightCodeProps {
   language: string;
@@ -61,7 +62,7 @@ const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
       </SyntaxHighlighter>
       {props.otherTag ? props.otherTag : null}
       {props?.isShowCopyIcon && !isCopy ? (
-        <Tooltip title={<span className="text-xs text-white">复制</span>}>
+        <Tooltip title={<span className="text-xs text-white">{I18N.ide.main.explorer.copy}</span>}>
           <CopyOutlined
             style={{
               fontSize: "12px",
@@ -70,7 +71,7 @@ const HighlightCode: React.FC<HighlightCodeProps> = (props) => {
             }}
             onClick={() => {
               copyToClipBoard(props?.source, true);
-              message.success("复制成功");
+              message.success(I18N.ide.main.explorer.copySuccess);
               setIsCopy(true);
             }}
           />

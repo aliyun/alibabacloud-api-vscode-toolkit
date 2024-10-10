@@ -10,7 +10,7 @@ import { Tooltip } from "antd";
 import { xconsoleWidgets } from ".";
 import { getTypeOfValue, simpleType } from "./utils";
 import { AnyProps } from "../types";
-
+import I18N from "../../../../../utils/I18N";
 
 export class TypeSelectorProps extends AnyProps {
   value: any;
@@ -19,13 +19,12 @@ export class TypeSelectorProps extends AnyProps {
 export const TypeSelector: React.FC<TypeSelectorProps> = (props) => {
   const { dataPath, onChange, schema, Icon, value } = props;
 
-  const [type, handleTypeChange] = React.useState(value !== undefined ? getTypeOfValue(value) : "string" as any);
+  const [type, handleTypeChange] = React.useState(value !== undefined ? getTypeOfValue(value) : ("string" as any));
 
   React.useEffect(() => {
     props.onChange(undefined);
-    schema.type = type
+    schema.type = type;
   }, [type]);
-  
 
   const getUIType = (type: string) => {
     if (type === "boolean") return "booleanSwitch";
@@ -54,24 +53,26 @@ export const TypeSelector: React.FC<TypeSelectorProps> = (props) => {
 
   return (
     <div>
-      参数类型
+      {I18N.ide.main.explorer.parameterType}
       {Icon ? (
         <Tooltip
-          overlay="该参数值为 any 类型，调试时请先选择参数类型，再输入参数值。"
+          overlay={I18N.ide.main.explorer.paramAnyTip}
           placement="top"
-          overlayStyle={{ background: "#FDF9F9", minWidth: 300 }}>
+          overlayStyle={{ background: "#FDF9F9", minWidth: 300 }}
+        >
           <span>
             <Icon type="tips1" />
           </span>
         </Tooltip>
       ) : null}
-      ：
+      {I18N.ide.main.explorer.colon}
       <Select
-        value={value !== undefined? getTypeOfValue(value) : type}
+        value={value !== undefined ? getTypeOfValue(value) : type}
         style={{ width: 150 }}
         onChange={(value) => {
           handleTypeChange(value);
-        }}>
+        }}
+      >
         {renderTypes}
       </Select>
       <div style={{ margin: "10px 0" }}>

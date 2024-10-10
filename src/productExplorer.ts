@@ -1,8 +1,7 @@
 import { Product } from "./types";
 import fetch from "node-fetch";
-import * as vscode from "vscode";
-import os from "os";
 import { getUserAgent } from "./utils";
+import { getCurrentLang } from "./utils/I18N";
 
 let productRequest = null;
 
@@ -10,13 +9,20 @@ export class ProductExplorer {
   products: Array<Product>;
 
   async requestProducts() {
-    const productsResponse = await fetch("https://api.aliyun.com/meta/v1/products", {
-      headers: {
-        "User-Agent": getUserAgent(),
+    const productsResponse = await fetch(
+      `https://api.aliyun.com/meta/v1/products${getCurrentLang() === "en_US" ? "?language=en_US" : ""}`,
+      {
+        headers: {
+          "User-Agent": getUserAgent(),
+        },
       },
-    }).then((res) => res.text());
+    ).then((res) => res.text());
     this.products = JSON.parse(productsResponse);
     return JSON.parse(productsResponse);
+  }
+
+  async refreshProducts() {
+    productRequest = createProductRequestInstance();
   }
 
   getProducts() {
@@ -30,7 +36,7 @@ export class ProductExplorer {
   }
 }
 
-function createProductRequestInstance() {
+export function createProductRequestInstance() {
   var instance = new ProductExplorer();
   return instance;
 }

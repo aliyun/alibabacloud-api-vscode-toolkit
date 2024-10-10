@@ -28,19 +28,24 @@
     "commands": [
       {
         "command": "alicloud.api.quickOpenDocument",
-        "title": "查看API文档"
+        "title": "%checkAPIDoc%"
+      },
+      {
+        "command": "alicloud.api.openConfig",
+        "title": "%settings%",
+        "icon": "$(settings-gear)"
       },
       {
         "command": "alicloud.api.autoImport",
-        "title": "导入依赖"
+        "title": "%importDev%"
       },
       {
         "command": "alicloud.api.akSecurityHelper",
-        "title": "凭据的安全使用方案"
+        "title": "%secureUseOfCredentials%"
       },
       {
         "command": "alicloud.api.feedback",
-        "title": "反馈",
+        "title": "%feedback%",
         "icon": "$(feedback)"
       },
       {
@@ -50,58 +55,70 @@
       },
       {
         "command": "alicloud.api.findInterface",
-        "title": "查找 API",
+        "title": "%lookForAPIs%",
         "icon": "$(search)"
       },
       {
-        "command": "alicloud.api.regenerate",
-        "title": "生成本地代码",
-        "icon": "$(debug-start)"
-      },
-      {
         "command": "alicloud.api.restart",
-        "title": "重启 Alibaba Cloud API Toolkit",
+        "title": "%restart%",
         "icon": "$(debug-restart)"
       },
       {
         "command": "alicloud.api.fetchRemote",
-        "title": "拉取远程数据",
+        "title": "%fetchMeta%",
         "icon": "$(cloud-download)"
       },
       {
         "command": "alicloud.api.openMetaDocument",
-        "title": "查看文档"
+        "title": "%checkAPIDoc%"
       },
       {
         "command": "alicloud.api.openDocument",
         "icon": "$(book)",
-        "title": "查看文档"
+        "title": "%checkAPIDoc%"
       },
       {
         "command": "alicloud.api.addSubscriptions",
         "icon": "$(add)",
-        "title": "订阅更多产品"
+        "title": "%addSubscriptions%"
       },
       {
         "command": "alicloud.api.searchProducts",
         "icon": "$(search)",
-        "title": "搜索产品并订阅"
+        "title": "%searchProducts%"
       },
       {
         "command": "alicloud.api.addSubscription",
         "icon": "$(add)",
-        "title": "订阅产品"
+        "title": "%addSubscription%"
       },
       {
         "command": "alicloud.api.removeSubscriptions",
         "icon": "$(notebook-delete-cell)",
-        "title": "取消订阅"
+        "title": "%removeSubscriptions%"
       },
       {
         "command": "alicloud.api.updateCloseQuestionnaire",
-        "title": "刷新体验问卷弹出设置"
+        "title": "%updateCloseQuestionnaire%"
       }
     ],
+    "configuration": {
+      "type": "object",
+      "title": "Alibaba Cloud API Toolkit Configuration",
+      "properties": {
+        "alibabacloud-openapi.vscode-alicloud-api.displayLanguage": {
+          "type": "string",
+          "enum": [
+            "System",
+            "English",
+            "简体中文"
+          ],
+          "default": "简体中文",
+          "title": "Display Language",
+          "description": "%displayLanguage%"
+        }
+      }
+    },
     "keybindings": [
       {
         "command": "alicloud.api.addSubscriptions",
@@ -197,6 +214,11 @@
           "command": "alicloud.api.feedback",
           "when": "view == alicloudApiExplorer",
           "group": "navigation@5"
+        },
+        {
+          "command": "alicloud.api.openConfig",
+          "when": "view == alicloudApiExplorer",
+          "group": "navigation@6"
         }
       ],
       "view/item/context": [
@@ -241,6 +263,8 @@
     "preview": "cd media && vite build --watch",
     "pretest": "npm run build:media && npm run build",
     "test": "node ./dist/test/runTest.js",
+    "translate:mds": "node scripts/mds.local.js",
+    "fetch:mds": "node scripts/devFetch.local.mjs",
     "test-coverage": "nyc npm run test"
   },
   "nyc": {
@@ -286,8 +310,6 @@
     "type": "git"
   },
   "devDependencies": {
-    "assert": "^2.0.0",
-    "ncc": "^0.3.6",
     "@types/fs-extra": "^5.1.0",
     "@types/lodash": "^4.17.7",
     "@types/mocha": "^10.0.7",
@@ -300,15 +322,20 @@
     "@vercel/ncc": "^0.38.1",
     "@vitejs/plugin-react": "^1.3.2",
     "@vscode/test-electron": "^2.4.0",
+    "assert": "^2.0.0",
+    "axios": "^1.4.0",
     "eslint": "^8.52.0",
     "glob": "^10.3.10",
+    "intl-format": "^1.2.0",
     "mocha": "^10.7.3",
+    "ncc": "^0.3.6",
     "nyc": "^15.1.0",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
     "rimraf": "^3.0.2",
-    "typescript": "^5.5.4",
-    "vite": "^2.9.18",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8",
     "vsce": "^2.15.0"
   }
 }

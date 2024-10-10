@@ -26,7 +26,7 @@ export const SDKInfo: React.FC<SDKInfoProps> = (props) => {
 
   const items = [
     {
-      title: "SDK包名称：",
+      title: I18N.TrySDK.SDKInfo.name,
       content: (
         <Typography.Text className="text-xs text-[var(--vscode-textPreformat-foreground)]" copyable>
           {sdkDetail.package_name}
@@ -34,7 +34,7 @@ export const SDKInfo: React.FC<SDKInfoProps> = (props) => {
       ),
     },
     {
-      title: "SDK包版本：",
+      title: I18N.TrySDK.SDKInfo.version,
       content: (
         <Typography.Text className="text-xs text-[var(--vscode-textPreformat-foreground)]" copyable>
           {sdkDetail.last_version}
@@ -42,7 +42,7 @@ export const SDKInfo: React.FC<SDKInfoProps> = (props) => {
       ),
     },
     {
-      title: "SDK 包管理平台：",
+      title: I18N.TrySDK.SDKInfo.platform,
       content: (
         <Typography.Text className="text-xs text-[var(--vscode-textPreformat-foreground)]" copyable>
           {sdkDetail.platform}
@@ -58,12 +58,12 @@ export const SDKInfo: React.FC<SDKInfoProps> = (props) => {
     //       }&tab=history-version&sdkReportVersion=${sdkDetail?.last_version}`}
     //       target="_blank"
     //     >
-    //       {I18N.main.explorer.SDKReport}
+    //       {I18N.ide.main.explorer.SDKReport}
     //     </a>
     //   ),
     // },
     {
-      title: "SDK 安装命令：",
+      title: I18N.TrySDK.SDKInfo.installCli,
       content: (
         <HighlightCode
           isShowCopyIcon
@@ -71,7 +71,7 @@ export const SDKInfo: React.FC<SDKInfoProps> = (props) => {
           language={lanKey === "java" ? "java" : "powershell"}
           otherTag={
             lanKey === "javascript" || lanKey === "typescript" ? (
-              <Tooltip title={<span className="text-xs text-white">运行脚本</span>}>
+              <Tooltip title={<span className="text-xs text-white">{I18N.TrySDK.SDKInfo.runCli}</span>}>
                 <div
                   className="codicon codicon-debug-start mx-1 cursor-pointer"
                   style={{
@@ -109,7 +109,9 @@ export const SDKInfo: React.FC<SDKInfoProps> = (props) => {
               </Row>
             );
           })}
-          <div className="text=[var(--vscode-editor-foreground)] mt-2 opacity-70">{I18N.main.explorer.syncDelay}</div>
+          <div className="text=[var(--vscode-editor-foreground)] mt-2 opacity-70">
+            {I18N.ide.main.explorer.syncDelay}
+          </div>
         </div>
       ) : null}
     </div>

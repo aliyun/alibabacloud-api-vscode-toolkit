@@ -3,7 +3,7 @@ import { APIResponse } from "../types/WorkbenchAPI";
 import { Parser } from "xml2js";
 import { EditorLanguages } from "./define";
 import { PontUIService } from "../service/UIService";
-import { getVSCode } from "../utils/utils";
+import I18N from "../utils/I18N";
 
 export const getRefSchema = (schemas: any) => ($ref: string) => {
   const schemaName = $ref?.split("/").pop();
@@ -136,7 +136,7 @@ export const getEditorMenuItems = (
   return [
     {
       key: "openInCode",
-      label: "在 IDE 中打开",
+      label: I18N.components.utils.openInIDE,
       codicon: "file-code",
       onClick: () => {
         PontUIService.openInCode({
@@ -147,7 +147,7 @@ export const getEditorMenuItems = (
     },
     {
       key: "saveToFile",
-      label: "另存为...",
+      label: I18N.components.utils.saveAs,
       codicon: "save-as",
       onClick: () => {
         PontUIService.saveToFile(code || "");

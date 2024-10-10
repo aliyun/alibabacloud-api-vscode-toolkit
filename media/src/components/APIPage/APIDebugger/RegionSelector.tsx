@@ -37,7 +37,7 @@ export const RegionSelector: React.FC<RegionSelectorProps> = (props) => {
 
   return (
     <div className="flex">
-      <div className="m-auto w-16">{I18N.main.explorer.endPoint}:</div>
+      <div className="m-auto w-16">{I18N.ide.main.explorer.endPoint}:</div>
       <Select
         style={{ width: "300px" }}
         value={props.regionId?.length ? props.regionId : "cn-hangzhou"}

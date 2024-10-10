@@ -1,4 +1,4 @@
-import { lookForFiles, PontInnerManagerConfig, PontLogger, PontManager, PontxConfigPlugin } from "pontx-manager";
+import { PontInnerManagerConfig, PontLogger, PontManager, PontxConfigPlugin } from "pontx-manager";
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs-extra";
@@ -8,12 +8,11 @@ import { AlicloudAPIPontParserPlugin } from "./plugins/parser";
 import { AlicloudApiMetaGeneratePlugin } from "./plugins/generate";
 import _ from "lodash";
 import { alicloudAPIMessageService } from "./Service";
-import { AlicloudApiCommands } from "./commands";
-import { AlicloudApiExplorer } from "./explorer";
 const configSchema = require("pontx-spec/configSchema.json");
 import os from "os";
+import I18N, { getCurrentLang } from "./utils/I18N";
 
-const { createServerContent } = require("../media/lib/index");
+// const { createServerContent } = require("../media/lib/index");
 
 export const pontConsole = vscode.window.createOutputChannel("Alibaba Cloud API Toolkit");
 
@@ -42,7 +41,7 @@ export const findAlicloudAPIConfig = async (context: vscode.ExtensionContext) =>
     origins: [
       {
         name: "Ecs__2014-05-26",
-        url: "https://api.aliyun.com/meta/v1/products/Ecs/versions/2014-05-26/api-docs.json",
+        url: `https://api.aliyun.com/meta/v1/products/Ecs/versions/2014-05-26/api-docs.json${getCurrentLang() === "en_US" ? "?language=en_US" : ""}`,
       },
     ],
   } as any;
@@ -55,9 +54,10 @@ export const findAlicloudAPIConfig = async (context: vscode.ExtensionContext) =>
     publicConfig = {
       outDir: oldConfig?.outDir || "./alicloud-services",
       origins: (oldConfig?.origins || []).map((product) => {
+        const url = product.url?.split("?")[0];
         return {
           name: formatName(product.name),
-          url: product.url,
+          url: `${url}${getCurrentLang() === "en_US" ? "?language=en_US" : ""}`,
         };
       }),
     };
@@ -234,13 +234,13 @@ export async function findInterface(editor: vscode.TextEditor, hasMultiOrigins: 
   const codeAtLine = editor.document.getText().split("\n")[pos.line];
 
   if (!codeAtLine) {
-    return Promise.reject(new Error(`[findInterface]:找不到接口 ${codeAtLine}`));
+    return Promise.reject(new Error(I18N.template(I18N.src.utils.cannotFindApi, { val1: codeAtLine })));
   }
 
   const words = codeAtLine.split(".");
 
   if (words.length < 2) {
-    return Promise.reject(new Error(`[findInterface]:找不到接口 ${words}`));
+    return Promise.reject(new Error(I18N.template(I18N.src.utils.cannotFindApi2, { val1: words })));
   }
 
   let wordIndex = 0;

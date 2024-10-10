@@ -13,13 +13,6 @@ export const NumberInput: React.FC<NumberInputProps> = (props) => {
   const { schema, ...rest } = props;
   const [curvalue, setCurvalue] = React.useState(undefined);
 
-  const textMap = {
-    double: "浮点数值",
-    float: "浮点数值",
-    int32: "整型数字",
-    int64: "整型数字",
-  } as any;
-
   // const numberProps = {} as any;
   // if (schema.maximum) {
   //   numberProps.max = schema.maximum;

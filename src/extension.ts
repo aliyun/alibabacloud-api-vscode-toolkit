@@ -15,6 +15,7 @@ import autofix from "./provider/autofix";
 import hoverInfo from "./provider/hoverProvider";
 import { getProfileInfoInstance } from "./profileManager";
 import { registerLinter } from "./provider/linter";
+import { registerConfiguration } from "./provider/configurationProvider";
 
 export async function activate(context: vscode.ExtensionContext) {
   const pontxConfig = await findAlicloudAPIConfig(context);
@@ -70,7 +71,13 @@ export async function activate(context: vscode.ExtensionContext) {
 
     if (pontManager) {
       console.log('Congratulations, your extension "Alibaba Cloud API Toolkit" is now active!');
-      alicloudAPIMessageService.startup(pontManager, context);
+      alicloudAPIMessageService.startup(
+        {
+          ...pontManager,
+          localPontSpecs: pontManager.remotePontSpecs,
+        },
+        context,
+      );
       context.subscriptions.push(
         vscode.window.registerWebviewPanelSerializer(AlicloudAPIWebview.viewType, new AlicloudAPISerializer()),
       );
@@ -84,6 +91,8 @@ export async function activate(context: vscode.ExtensionContext) {
       hoverInfo(context);
       // 代码诊断
       registerLinter(context);
+      // 插件配置生效
+      registerConfiguration(context);
     }
   } catch (e) {
     vscode.window.showErrorMessage(e.message);

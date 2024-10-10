@@ -9,6 +9,7 @@ import { SemixJsonSchema } from "semix-core";
 import { InnerSchemaTable } from "semix-schema-table";
 import { getRefSchema } from "../../utils";
 import useCustomFixScrollBar from "../../common/useCustomFixScrollBar";
+import I18N from "../../../utils/I18N";
 
 export class PontxParamsDocProps {
   parameters?: PontSpec.Parameter[];
@@ -80,7 +81,7 @@ export const ApiParamsDoc: React.FC<PontxParamsDocProps> = (props) => {
               return (
                 <tr>
                   <td colSpan={2} style={{ padding: "15px 0", textAlign: "center" }}>
-                    无参数定义
+                    {I18N.ide.main.common.noParameterDefinition}
                   </td>
                 </tr>
               );
@@ -89,7 +90,7 @@ export const ApiParamsDoc: React.FC<PontxParamsDocProps> = (props) => {
           />
         </div>
       ) : (
-        <div style={{ padding: 20, fontSize: 14 }}>调用该 OpenAPI 无需参数。</div>
+        <div style={{ padding: 20, fontSize: 14 }}>{I18N.ide.main.common.notRequireParam}</div>
       )}
     </div>
   );

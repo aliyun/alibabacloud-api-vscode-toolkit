@@ -1,0 +1,16 @@
+{
+  "feedback": "Feedback",
+  "checkAPIDoc": "View API Documentation",
+  "settings": "Settings",
+  "importDev": "Import Dependencies",
+  "secureUseOfCredentials": "Secure Use of Credentials",
+  "lookForAPIs": "Look for APIs",
+  "restart": "Restart Alibaba Cloud API Toolkit",
+  "fetchMeta": "Fetch Remote Data",
+  "addSubscriptions": "Subscribe to More Products",
+  "searchProducts": "Search Products and Subscribe",
+  "addSubscription": "Subscribe to Product",
+  "removeSubscriptions": "Unsubscribe",
+  "updateCloseQuestionnaire": "Refresh Experience Questionnaire Popup Settings",
+  "displayLanguage": "Display Language"
+}

@@ -4,6 +4,7 @@ import { PontSpec } from "pontx-spec";
 import { InnerOriginConfig, PontManager } from "pontx-manager";
 import { getRequiredParamsValue, getUserAgent } from "../utils";
 import fetch from "node-fetch";
+import { getCurrentLang } from "../utils/I18N";
 
 const mySnippetsProvider: SnippetsProvider = (info) => {
   return [];
@@ -44,14 +45,17 @@ const codeSampleProvider = async (info: {
   };
 
   // 补全的 code 来源
-  const makeCodeStr = await fetch(`https://api.aliyun.com/api/product/makeCode`, {
-    method: "post",
-    body: JSON.stringify(body),
-    headers: {
-      "Content-Type": "application/json",
-      "User-Agent": getUserAgent(),
+  const makeCodeStr = await fetch(
+    `https://api.aliyun.com/api/product/makeCode${getCurrentLang() === "en_US" ? "?language=EN_US" : ""}`,
+    {
+      method: "post",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": getUserAgent(),
+      },
     },
-  }).then((res) => res.text());
+  ).then((res) => res.text());
   const sdkDemos = JSON.parse(makeCodeStr);
 
   const asyncFetchedCodes = Object.keys(sdkDemos?.data?.demoSdk || {})?.map((key) => {

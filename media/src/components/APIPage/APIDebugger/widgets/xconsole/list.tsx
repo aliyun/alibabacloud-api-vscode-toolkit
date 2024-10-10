@@ -8,6 +8,7 @@ import * as React from "react";
 import { Field } from "../../../../SemixFormRender/common/Field";
 import { ListProps } from "../types";
 import "./list.module.scss";
+import I18N from "../../../../../utils/I18N";
 
 export class SimpleListProps extends ListProps {}
 
@@ -61,7 +62,7 @@ export const SimpleList: React.FC<SimpleListProps> = (props) => {
             }}
           >
             <div className="codicon codicon-add m-1 !text-xs"></div>
-            添加
+            {I18N.ide.main.explorer.add}
           </a>
         </div>
       </div>

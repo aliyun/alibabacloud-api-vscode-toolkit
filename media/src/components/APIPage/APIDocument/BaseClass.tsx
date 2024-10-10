@@ -7,6 +7,8 @@ import * as PontSpec from "pontx-spec";
 import * as React from "react";
 import { SemixSchemaTable } from "semix-schema-table";
 import { getRefSchema } from "../../utils";
+import I18N from "../../../utils/I18N";
+import { TableI18N } from "../../../utils/utils";
 
 export class BaseClassProps {
   name?: string;
@@ -22,7 +24,7 @@ export const BaseClass: React.FC<BaseClassProps> = (props) => {
     <div className={classNames("pontx-ui-baseclass", (schema as any)?.type)}>
       <div className="header">
         <div className="title p-4 text-base">
-          数据结构 - {name}
+          {I18N.ide.main.common.struct} - {name}
           {schema?.templateArgs?.length
             ? `<${schema?.templateArgs.map((arg, argIndex) => "T" + argIndex).join(", ")}>`
             : ""}
@@ -32,6 +34,7 @@ export const BaseClass: React.FC<BaseClassProps> = (props) => {
         <div className="mod">
           <SemixSchemaTable
             name={name || ""}
+            I18N={new TableI18N()}
             schema={schema as any}
             schemas={props.definitions as any}
             getRefSchema={getRefSchema(props.definitions)}

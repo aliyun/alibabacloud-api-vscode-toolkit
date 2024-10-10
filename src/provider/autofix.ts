@@ -6,6 +6,7 @@ import { containsAnySubstring, fileSel, getSpecInfoFromName, SDKLanguageLabel } 
 import { getDepsByLanguage } from "../common/generateImport";
 import { alicloudAPIMessageService } from "../Service";
 import { LintRules } from "./linter";
+import I18N from "../utils/I18N";
 
 class CodeActionProvider {
   provideCodeActions(
@@ -28,11 +29,14 @@ class CodeActionProvider {
 
       // 未导入依赖的诊断建议
       if (getDepsByLanguage(errorText, item.range)?.includes(errorText) || containsAnySubstring(errorText, products)) {
-        const autoImportAction = new vscode.CodeAction(item.message + "导入依赖", vscode.CodeActionKind.QuickFix);
+        const autoImportAction = new vscode.CodeAction(
+          item.message + I18N.provider.autofix.importDev,
+          vscode.CodeActionKind.QuickFix,
+        );
         const newDiagnostic = new vscode.Diagnostic(item.range, "importLists", vscode.DiagnosticSeverity.Error);
         // 自动修复命令注册
         autoImportAction.command = {
-          title: "导入依赖",
+          title: I18N.provider.autofix.importDev,
           command: "alicloud.api.autoImport",
           arguments: [newDiagnostic, errorText, item.range],
         };
@@ -44,11 +48,11 @@ class CodeActionProvider {
       if (lintResult) {
         // 自动修复命令注册
         const codeAction = new vscode.CodeAction(
-          `${lintResult.methods[0]?.title}（${SDKLanguageLabel[document.languageId] || "阿里云 SDK"}）`,
+          `${lintResult.methods[0]?.title}(${SDKLanguageLabel[document.languageId] || I18N.provider.autofix.aliyunSdk})`,
           vscode.CodeActionKind.QuickFix,
         );
         codeAction.command = {
-          title: `${lintResult.methods[0]?.title}（${SDKLanguageLabel[document.languageId] || "阿里云 SDK"}）`,
+          title: `${lintResult.methods[0]?.title}(${SDKLanguageLabel[document.languageId] || I18N.provider.autofix.aliyunSdk})`,
           command: lintResult.methods[0]?.command,
           arguments: [document],
         };

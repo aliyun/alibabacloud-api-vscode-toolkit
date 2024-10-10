@@ -10,6 +10,7 @@ import { getProductRequestInstance } from "./productExplorer";
 import { Product } from "./types";
 import _ from "lodash";
 import { getProfileInfoInstance } from "./profileManager";
+import I18N from "./utils/I18N";
 
 type DiffResult<T> = T;
 
@@ -28,7 +29,7 @@ export class PontAPIExplorer {
         if (item?.categoryName?.length) {
           return item.categoryName;
         } else {
-          return "其他";
+          return I18N.src.explorer.other;
         }
       });
       return Object.keys(productGroups || {})?.map((group) => {
@@ -121,8 +122,8 @@ export class PontAPIExplorer {
         contextValue: "Definitions",
         label: `definitions`,
         resourceUri: vscode.Uri.parse(`pontx-manager://spec/${spec.name}/definitions`),
-        description: "数据结构",
-        tooltip: "数据结构",
+        description: I18N.src.explorer.struct,
+        tooltip: I18N.src.explorer.struct,
         collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
       };
       return [defs, ...results];
@@ -183,10 +184,10 @@ export class PontFileDecoration implements vscode.FileDecorationProvider, vscode
         untracked: "U",
       };
       const labelMap = {
-        delete: "传入的新元数据中已删除",
-        update: "传入的新元数据中已更新",
-        create: "传入的新元数据中已新增",
-        equal: "与传入的新元数据等同，但子元数据存在不同",
+        delete: I18N.src.explorer.deleteNewMeta,
+        update: I18N.src.explorer.updateNewMeta,
+        create: I18N.src.explorer.createNewMeta,
+        equal: I18N.src.explorer.sameNewMeta,
         untracked: "Untracked",
       };
       const colorMap = {
@@ -266,7 +267,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
         if (product?.category2Name?.length) {
           return product.category2Name;
         } else {
-          return "其他";
+          return I18N.src.explorer.other;
         }
       });
       return Object.keys(productGroups || {})?.map((group) => {
@@ -375,9 +376,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
           getSpecInfoFromName(item.name || "").version === version,
       )?.length
     ) {
-      vscode.window.showInformationMessage(
-        "该产品及其版本号已订阅，您可以使用「mac: ctrl+cmd+l」，「win: ctrl+alt+l」来搜索该产品下的API。",
-      );
+      vscode.window.showInformationMessage(I18N.src.explorer.allreadySub);
     } else {
       pontxConfig.origins = [
         ...(pontxConfig.origins || []),
@@ -401,7 +400,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
 
         this.updatePontManager(newManager);
         this.updateDiffs();
-        vscode.window.showInformationMessage("订阅成功");
+        vscode.window.showInformationMessage(I18N.src.explorer.subSuccess);
         this.launchExperienceQuestionnaire();
       }
     }
@@ -418,17 +417,17 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
     if (!lastPromptTime || Date.now() - lastPromptTime > (questionnaireExpiration || 0) * 24 * 60 * 60 * 1000) {
       // 显示信息弹窗
       let result = await vscode.window.showInformationMessage(
-        "您在使用插件期间是否遇到问题？欢迎吐槽或点赞，您的反馈对我们十分重要！",
-        "去反馈",
-        "关闭",
-        "30天内不再弹出",
+        I18N.src.explorer.feedbackInfo,
+        I18N.src.explorer.gotoFeedback,
+        I18N.ide.main.common.close,
+        I18N.src.explorer.limit30,
       );
-      if (result === "去反馈") {
+      if (result === I18N.src.explorer.gotoFeedback) {
         vscode.env.openExternal(
           vscode.Uri.parse("https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486"),
         );
         globalState.update(experienceQuestionnaireKey, 30);
-      } else if (result === "30天内不再弹出") {
+      } else if (result === I18N.src.explorer.limit30) {
         globalState.update(experienceQuestionnaireKey, 30);
       } else {
         globalState.update(experienceQuestionnaireKey, 1);
@@ -456,7 +455,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
       };
 
       await this.updatePontManager(newManager);
-      vscode.window.showInformationMessage("取消订阅成功");
+      vscode.window.showInformationMessage(I18N.src.explorer.successToCancelSub);
       this.launchExperienceQuestionnaire();
     }
   }
@@ -486,7 +485,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
     }
 
     items.push({
-      label: `新增 AK 凭证配置`,
+      label: I18N.src.explorer.newSKProfile,
       iconPath: new vscode.ThemeIcon("add"),
       id: "ADD_NEW_PROFILE",
     });
@@ -505,7 +504,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
         quickPick.dispose();
       } else if ((quickPick.selectedItems[0] as any)?.id === "ADD_NEW_PROFILE") {
         vscode.commands.executeCommand("alicloud.api.openDocument", {
-          name: "配置 AK 凭证",
+          name: I18N.src.explorer.configAKProfile,
           specName: "profile",
           pageType: "profile",
           column: vscode.ViewColumn.Beside,
@@ -537,7 +536,11 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
     vscode.commands.registerCommand("alicloud.api.addSubscription", async (element) => {
       if (element.modName === "clickItem") {
         // 取消订阅
-        let result = await vscode.window.showInformationMessage(`是否订阅${element.label}?`, "Yes", "No");
+        let result = await vscode.window.showInformationMessage(
+          I18N.template(I18N.src.explorer.isSub, { val1: element.label }),
+          "Yes",
+          "No",
+        );
         if (result === "No") {
           return;
         }
@@ -627,7 +630,7 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
     vscode.commands.registerCommand("alicloud.api.removeSubscriptions", async (meta) => {
       if (meta.specName) {
         // 取消订阅
-        let result = await vscode.window.showInformationMessage("确定取消订阅?", "Yes", "No");
+        let result = await vscode.window.showInformationMessage(I18N.src.explorer.comfireToCancelSub, "Yes", "No");
         if (result === "Yes") {
           this.removeSubscriptions(meta.specName);
         }
@@ -799,8 +802,8 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
       const profileManager = getProfileInfoInstance();
       return [
         {
-          label: `${profileManager?.profileInfo?.current?.length ? `当前: ${profileManager?.profileInfo?.current}` : "点击配置您的 AK 信息"}`,
-          tooltip: "点击切换您的 AK 信息",
+          label: `${profileManager?.profileInfo?.current?.length ? `${I18N.src.explorer.current} ${profileManager?.profileInfo?.current}` : I18N.src.explorer.configProfiles}`,
+          tooltip: I18N.src.explorer.switchAKProfiles,
           contextValue: "alicloudProfiles",
           iconPath: new vscode.ThemeIcon("account"),
           command: {
@@ -809,18 +812,18 @@ export class AlicloudApiExplorer implements vscode.TreeDataProvider<PontChangeTr
           },
         },
         {
-          label: "阿里云产品",
+          label: I18N.src.explorer.aliyunProduct,
           contextValue: "alicloudProducts",
           resourceUri: vscode.Uri.parse(`pontx-manager://manager`),
           collapsibleState: vscode.TreeItemCollapsibleState.Collapsed,
-          tooltip: "阿里云产品",
+          tooltip: I18N.src.explorer.aliyunProduct,
         },
         {
-          label: "我的订阅",
+          label: I18N.src.explorer.mySubs,
           contextValue: "alicloudAPISubscriptions",
           resourceUri: vscode.Uri.parse(`pontx-manager://manager`),
           collapsibleState: vscode.TreeItemCollapsibleState.Expanded,
-          tooltip: "我的订阅",
+          tooltip: I18N.src.explorer.mySubs,
         },
       ];
     }

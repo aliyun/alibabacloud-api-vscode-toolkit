@@ -8,6 +8,7 @@ import { fileSel, getSpecInfoFromName } from "../utils";
 import { AlicloudAPIService, alicloudAPIMessageService } from "../Service";
 import { AlicloudApiCommands } from "../commands";
 import { getProductRequestInstance } from "../productExplorer";
+import I18N from "../utils/I18N";
 
 const getKeyWord = (word: string) => {
   if (/^[A-Za-z].*Request$/.test(word)) {
@@ -56,20 +57,30 @@ class HoverProvider {
       const docCommandUri = vscode.Uri.parse(
         `command:alicloud.api.quickOpenDocument?${encodeURIComponent(JSON.stringify(args))}`,
       );
-      const contents = new vscode.MarkdownString(`🔖 [查阅 ${apiName} 的文档](${docCommandUri})`);
+      const contents = new vscode.MarkdownString(
+        I18N.template(I18N.provider.hoverProvider.checkDoc, { val1: apiName, val2: docCommandUri }),
+      );
       contents.isTrusted = true;
       return new vscode.Hover([
         contents,
         samples?.length
-          ? `💡 [查看更多「${apiName}」相关代码示例](https://api.aliyun.com/api/${product}/${version}/${apiName}?tab=CodeSample)`
-          : `💡 [查看更多「${product}」的相关代码示例](https://api.aliyun.com/api-tools/demo/${product})`,
+          ? I18N.template(I18N.provider.hoverProvider.checkCodeSample, {
+              val1: apiName,
+              val2: product,
+              val3: version,
+              val4: apiName,
+            })
+          : I18N.template(I18N.provider.hoverProvider.checkCodeSampleProduct, { val1: product, val2: product }),
         hoverdAPI?.summary || "",
       ]);
     }
     // 匹配关键字为产品名称
     if (hoverdProduct) {
       return new vscode.Hover([
-        `💡 [查看更多「${hoverdProduct?.name || hoverdProduct?.code}」的相关代码示例](https://api.aliyun.com/api-tools/demo/${hoverdProduct?.code})`,
+        I18N.template(I18N.provider.hoverProvider.checkCodeSampleProduct2, {
+          val1: hoverdProduct?.name || hoverdProduct?.code,
+          val2: hoverdProduct?.code,
+        }),
         hoverdProduct?.description || hoverdProduct?.name,
       ]);
     }

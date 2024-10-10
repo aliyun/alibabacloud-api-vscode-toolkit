@@ -1,0 +1,16 @@
+{
+  "feedback": "反馈",
+  "checkAPIDoc": "查看API文档",
+  "settings": "设置",
+  "importDev": "导入依赖",
+  "secureUseOfCredentials": "凭据的安全使用方案",
+  "lookForAPIs": "查找 API",
+  "restart": "重启 Alibaba Cloud API Toolkit",
+  "fetchMeta": "拉取远程数据",
+  "addSubscriptions": "订阅更多产品",
+  "searchProducts": "搜索产品并订阅",
+  "addSubscription": "订阅产品",
+  "removeSubscriptions": "取消订阅",
+  "updateCloseQuestionnaire": "刷新体验问卷弹出设置",
+  "displayLanguage": "显示语言"
+}

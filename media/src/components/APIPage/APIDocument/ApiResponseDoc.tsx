@@ -5,6 +5,7 @@
 import React from "react";
 import { InnerSchemaTable } from "semix-schema-table";
 import useCustomFixScrollBar from "../../common/useCustomFixScrollBar";
+import I18N from "../../../utils/I18N";
 
 export class ApiResponseDocProps {
   selectedApi: any;
@@ -49,7 +50,7 @@ export const ApiResponseDoc: React.FC<ApiResponseDocProps> = (props) => {
                   textAlign: "center",
                 }}
               >
-                无出参定义
+                {I18N.ide.main.common.noOutputParameterDefinition}
               </td>
             </tr>
           );

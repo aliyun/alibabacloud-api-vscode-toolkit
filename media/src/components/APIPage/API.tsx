@@ -22,6 +22,8 @@ import { APIPageContext } from "./context";
 import { PontUIService } from "../../service/UIService";
 import ApiResponseDoc from "./APIDocument/ApiResponseDoc";
 import Searcher from "../common/Searcher";
+import I18N from "../../utils/I18N";
+import { TableI18N } from "../../utils/utils";
 
 export class APIProps {
   selectedApi?: PontSpec.PontAPI;
@@ -48,6 +50,7 @@ export const API: React.FC<APIProps> = (props) => {
   const initValue = React.useMemo(() => {
     return {
       schemas: definitions as any,
+      I18N: new TableI18N(),
       getRefSchema: getSchema,
       renderTypeColAppendix: (node: any) => {
         if (node?.nodeValue?.schema.in) {
@@ -72,7 +75,7 @@ export const API: React.FC<APIProps> = (props) => {
         return (
           <tr>
             <td colSpan={2} style={{ padding: "15px 0", textAlign: "center" }}>
-              无出参定义
+              {I18N.ide.main.common.noOutputParameterDefinition}
             </td>
           </tr>
         );
@@ -122,9 +125,9 @@ export const API: React.FC<APIProps> = (props) => {
   });
 
   const tabs = [
-    { tab: "文档", key: "doc" },
-    { tab: "调试", key: "debug" },
-    { tab: "代码示例", key: "sdk" },
+    { tab: I18N.ide.main.home.document, key: "doc" },
+    { tab: I18N.ide.main.explorer.debug, key: "debug" },
+    { tab: I18N.ide.main.common.codeSample, key: "sdk" },
   ];
 
   const [pageEl, resizeObserverEntry] = useResizeObserver();
@@ -142,13 +145,13 @@ export const API: React.FC<APIProps> = (props) => {
         ) : null}
         <div className="mb-4 bg-[var(--vscode-editor-background)]">
           <div className="border-t border-gray-100 px-5 py-4 text-base font-medium text-[var(--vscode-foreground)]">
-            请求参数
+            {I18N.ide.main.explorer.requestParameter}
           </div>
           <ApiParamsDoc parameters={selectedApi?.parameters} apiName={selectedApi?.name} schemas={definitions as any} />
         </div>
         <div className="mb-4 bg-[var(--vscode-editor-background)]">
           <div className="border-t border-gray-100 px-5 py-4 text-base font-medium text-[var(--vscode-foreground)]">
-            出参
+            {I18N.ide.main.explorer.response}
           </div>
           <ApiResponseDoc selectedApi={selectedApi}></ApiResponseDoc>
         </div>
@@ -172,17 +175,17 @@ export const API: React.FC<APIProps> = (props) => {
               changeMode(key);
             }}
           >
-            <Tab.Item key="debug-doc" title="API 文档">
+            <Tab.Item key="debug-doc" title={I18N.ide.main.notFound.APIDoc}>
               <div className="grid h-[calc(100vh_-_177px)] w-full bg-[var(--vscode-editor-background)]">
                 <div className="scrollbar-custom overflow-scroll">{documentComp}</div>
               </div>
             </Tab.Item>
-            <Tab.Item key="sdk" title="示例代码">
+            <Tab.Item key="sdk" title={I18N.ide.main.common.codeSample}>
               <div className="content">
                 <TrySDK isExpand={isExpand}></TrySDK>
               </div>
             </Tab.Item>
-            <Tab.Item key="debug" title="调试结果">
+            <Tab.Item key="debug" title={I18N.ide.main.common.debugResult}>
               <div className="content">
                 <TryAPI></TryAPI>
               </div>
@@ -206,13 +209,15 @@ export const API: React.FC<APIProps> = (props) => {
 
   const openNotification = () => {
     notification.open({
-      message: "体验调研",
+      message: I18N.ide.main.common.experienceResearch,
       duration: null,
       description: (
         <span>
-          您对插件的使用体验满意吗？点击
-          <a href="https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486">体验问卷</a>
-          进行吐槽或夸赞，您的反馈对我们十分重要！
+          {I18N.ide.main.common.noSatisfiedToClick}
+          <a href="https://g.alicdn.com/aes/tracker-survey-preview/0.0.13/survey.html?pid=fePxMy&id=3486">
+            {I18N.ide.main.common.experienceQuestionnaire}
+          </a>
+          {I18N.ide.main.common.feedbackIsImportant}
         </span>
       ),
       onClose: () => {

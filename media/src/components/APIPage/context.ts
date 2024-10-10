@@ -7,6 +7,7 @@ import React from "react";
 import { PontUIService } from "../../service/UIService";
 import { endpointsMocks } from "../../mocks/endpoints";
 import { lastSdkInfo } from "../../mocks/allSdkInfo";
+import I18N from "../../utils/I18N";
 
 export class APIPageState {
   /**
@@ -91,6 +92,12 @@ export const useAPIPageContext = (initialState = {} as APIPageState): APIPageSta
   React.useEffect(() => {
     PontUIService.requestProfiles().then((res) => {
       setProfileInfo(res || {});
+    });
+  }, []);
+
+  React.useEffect(() => {
+    PontUIService.requestDisplayLanguage().then((res) => {
+      I18N.setLang(res || "zh_CN");
     });
   }, []);
 
