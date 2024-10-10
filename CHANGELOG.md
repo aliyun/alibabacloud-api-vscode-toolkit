@@ -1,5 +1,13 @@
 # Release Notes
 
+## 0.0.14(2024-10-10)
+
+- feat: Supports English version.
+
+  The extension default display language is Chinese, while supporting English, by modifying the extension configuration, you can easily switch the extension language, or follow the system language automatically switch.
+
+- fix: Fixed issues of Sensitive Information Warning Linter.
+
 ## 0.0.13(2024-09-05)
 
 - feat: Supports theme synchronization between webview and vscode.

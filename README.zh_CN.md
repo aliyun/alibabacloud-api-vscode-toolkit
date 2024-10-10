@@ -18,6 +18,7 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 - **API 文档预览:** 点击 API 可以打开一个新的标签页，并显示对应的 API 文档，包括描述、请求参数、响应参数和错误码。
 
 - **API 调试:** 你可以在插件中使用表单的方式调试阿里云 API，并查看结果。
+
 - **SDK 代码示例:** 你可以在插件中获得 SDK 代码示例，并在编辑器中快速打开对应的 SDK 代码。
 
 - **Code Snippets:** 支持代码片段功能，帮助你快速编写 SDK 代码。
@@ -30,11 +31,13 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 
 - **快速搜索文档中的内容:** 你可以通过 `ctrl+f`或`cmd+f` 快速搜索文档中的内容。
 
+- **设置扩展的语言:** 扩展默认为中文，同时支持英文版，通过修改扩展的配置，你可以轻松切换扩展的语言，或跟随系统语言自动切换。
+
 - 更多功能正在开发中，敬请期待...
 
 ## 插件 UI 导览
 
-![VSCode Extension Guide](https://gw.alicdn.com/imgextra/i2/O1CN013GxzFK21jDLZNFaos_!!6000000007020-0-tps-2704-1808.jpg)
+![VSCode Extension Guide](https://img.alicdn.com/imgextra/i4/O1CN01KRNVOF21LOmfmi9gt_!!6000000006968-0-tps-2076-1328.jpg)
 
 ### 产品搜索 `ctrl+cmd+k`
 
@@ -82,15 +85,21 @@ Alibaba Cloud API Toolkit 是一个轻量化的阿里云 API 工具，支持在 
 
 ![Document enhancement](https://gw.alicdn.com/imgextra/i2/O1CN01ymjnpo1l2aeq8D3lQ_!!6000000004761-0-tps-1496-646.jpg)
 
-## 敏感信息检测
+### 敏感信息检测
 
 ![](https://gw.alicdn.com/imgextra/i4/O1CN01u787jO241C9LmbQ57_!!6000000007330-0-tps-1970-848.jpg)
 
-## 快速搜索文档中的内容
+### 快速搜索文档中的内容
 
 你可以通过 `ctrl+f` 或 `cmd+f` 快速搜索文档中的内容。
 
 ![](https://gw.alicdn.com/imgextra/i2/O1CN01YmSwSz1Rn2VcqQILP_!!6000000002155-0-tps-2514-2098.jpg)
+
+### 设置扩展的语言
+
+点击设置图标，可以快速打开扩展配置，在这里你可以切换扩展的语言。
+
+![](https://img.alicdn.com/imgextra/i1/O1CN01Hl6ziV1pR6KIelNba_!!6000000005356-0-tps-2484-1506.jpg)
 
 ## 反馈
 
