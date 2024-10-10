@@ -30,11 +30,13 @@ English | [简体中文](./README.zh_CN.md)
 
 - **Quickly Search the Contents of the Document:** You can quickly search the contents of the document by using `ctrl+f` or `cmd+f`.
 
+- **Set the display language of extension:** The extension default language is Chinese, while supporting English, by modifying the extension configuration, you can easily switch the extension language, or follow the system language automatically switch.
+
 - More features are under development, please stay tuned.
 
 ## Extension UI Guide
 
-![VSCode Extension Guide](https://gw.alicdn.com/imgextra/i4/O1CN01tkB2bT2AAFeiOYZm6_!!6000000008162-0-tps-2372-1594.jpg)
+![VSCode Extension Guide](https://img.alicdn.com/imgextra/i4/O1CN01Nir1nE1NUU0bblcEy_!!6000000001573-0-tps-1954-1234.jpg)
 
 ### Product Searching `ctrl+cmd+k`
 
@@ -81,15 +83,21 @@ When writing SDK code, you can get more code sample references by viewing the Op
 
 ![Document enhancement](https://gw.alicdn.com/imgextra/i2/O1CN01ymjnpo1l2aeq8D3lQ_!!6000000004761-0-tps-1496-646.jpg)
 
-## Sensitive Information Warning Linter
+### Sensitive Information Warning Linter
 
 ![](https://gw.alicdn.com/imgextra/i4/O1CN01u787jO241C9LmbQ57_!!6000000007330-0-tps-1970-848.jpg)
 
-## Quickly Search the Contents of the Document
+### Quickly Search the Contents of the Document
 
 Use `ctrl+f` or `cmd+f` to quickly search for the contents of the document.
 
 ![](https://gw.alicdn.com/imgextra/i2/O1CN01YmSwSz1Rn2VcqQILP_!!6000000002155-0-tps-2514-2098.jpg)
+
+### Set the display language of extension
+
+Tap the Settings icon to quickly open the extension configuration, where you can switch the display language of the extension.
+
+![](https://img.alicdn.com/imgextra/i1/O1CN01Hl6ziV1pR6KIelNba_!!6000000005356-0-tps-2484-1506.jpg)
 
 ## Feedback
 
