@@ -295,7 +295,7 @@
     "moment": "^2.24.0",
     "needle": "^2.5.0",
     "pontx-manager": "0.3.83-beta.0",
-    "pontx-meta-fetch-plugin": "0.3.83",
+    "pontx-meta-fetch-plugin": "0.6.3",
     "pontx-spec": "0.3.83",
     "pontx-spec-diff": "0.3.83",
     "qs": "^6.13.0",
