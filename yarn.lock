@@ -3364,6 +3364,16 @@ pontx-meta-fetch-plugin@0.3.83:
     node-fetch "^2.6.7"
     translation.js "^0.7.15"
 
+pontx-meta-fetch-plugin@0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/pontx-meta-fetch-plugin/-/pontx-meta-fetch-plugin-0.6.3.tgz#6d55b12ee595ee613e05d48c373efec0b594fef5"
+  integrity sha512-+aw5qS/5EInyU0YKfoyoy01o5OeHiP6EDYAHj6JbfcCaeUWdIzHiLVdUe4TQao/ZAWgj6jNRfWyJr3/xFG1cZg==
+  dependencies:
+    baidu-translate-service "^1.0.0"
+    fs-extra "*"
+    node-fetch "^2.6.7"
+    translation.js "^0.7.15"
+
 pontx-mocks-plugin@0.3.83:
   version "0.3.83"
   resolved "https://registry.npmmirror.com/pontx-mocks-plugin/-/pontx-mocks-plugin-0.3.83.tgz"
