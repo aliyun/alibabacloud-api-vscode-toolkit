@@ -15,7 +15,7 @@
     "@alicloud/console-components": "^1.6.2",
     "@ant-design/icons": "^5.4.0",
     "@monaco-editor/react": "^4.6.0",
-    "@vercel/ncc": "^0.38.1",
+    "@vercel/ncc": "^0.38.2",
     "@vscode-elements/elements": "^1.3.0",
     "ahooks": "3.8.1",
     "antd": "^5.20.5",
