@@ -263,7 +263,7 @@ export const API: React.FC<APIProps> = (props) => {
         setIsVisible={setIsSearchVisible}
         mode={mode}
       ></Searcher>
-      <div className="bg-[var(--vscode-textBlockQuote-background)] pb-4" ref={contentRef}>
+      <div className="bg-[var(--vscode-editorWidget-background)] pb-4" ref={contentRef}>
         <APIPageContext.Provider
           initialState={{
             apiMeta: selectedApi,
