@@ -40,25 +40,25 @@ English | [简体中文](./README.zh_CN.md)
 
 ### Product Searching `ctrl+cmd+k`
 
-![Product Searching](https://img.alicdn.com/imgextra/i1/O1CN01bcJ5DM1RpmnlOjDHK_!!6000000002161-0-tps-1202-798.jpg)
+![Product Searching](https://img.alicdn.com/imgextra/i1/O1CN019u2pa61o8UckRnqni_!!6000000005180-2-tps-1244-944.png)
 
 ### API Searching `ctrl+cmd+l`
 
-![API Serching](https://img.alicdn.com/imgextra/i4/O1CN01KCrc1a1vooTmC9a1h_!!6000000006220-0-tps-1986-542.jpg)
+![API Serching](https://img.alicdn.com/imgextra/i4/O1CN014n1bop1fkf5WH815m_!!6000000004045-2-tps-1742-642.png)
 
 ### Call the API
 
-![API debugging](https://gw.alicdn.com/imgextra/i2/O1CN01fsuDBE1CLMJaBJj32_!!6000000000064-0-tps-3238-1920.jpg)
+![API debugging](https://img.alicdn.com/imgextra/i1/O1CN01tJwQXu1cm5TQ9afy2_!!6000000003642-2-tps-3306-2150.png)
 
 > Note that the debugging needs to configure your AK credentials, click the left identity icon, you can add and switch the current AK credentials configuration.
 
-![manage profiles](https://gw.alicdn.com/imgextra/i2/O1CN01HzFhxH20gdVF4MIfq_!!6000000006879-0-tps-1938-378.jpg)
+![manage profiles](https://img.alicdn.com/imgextra/i3/O1CN016oSAO51GR5lqATMhr_!!6000000000618-2-tps-1916-386.png)
 
 ### SDK Code Sample
 
 You can generate the SDK Sample by using the debugger form and then open it in your editor.
 
-![sdk demo](https://img.alicdn.com/imgextra/i1/O1CN01C0vQDB29gTtW5erj4_!!6000000008097-0-tps-2638-1778.jpg)
+![sdk demo](https://img.alicdn.com/imgextra/i4/O1CN01vsCXCO1hHvTDcCuvf_!!6000000004253-2-tps-3088-2114.png)
 
 ### Code Snippets
 
@@ -75,29 +75,29 @@ Or use the keyboard shortcuts `ctrl+cmd+l` to search the API and select Insert s
 
 Add and switch your Alibaba Cloud profiles.
 
-![](https://img.alicdn.com/imgextra/i1/O1CN01NN667S1skk7vLbhr1_!!6000000005805-0-tps-2912-1596.jpg)
+![Profiles Management](https://img.alicdn.com/imgextra/i4/O1CN01pcpjRV1F6C5BrXmh6_!!6000000000437-2-tps-3088-2114.png)
 
 ### Document Enhancement
 
 When writing SDK code, you can get more code sample references by viewing the OpenAPI description information and additional related sample links through the code documentation.
 
-![Document enhancement](https://gw.alicdn.com/imgextra/i2/O1CN01ymjnpo1l2aeq8D3lQ_!!6000000004761-0-tps-1496-646.jpg)
+![Document enhancement](https://img.alicdn.com/imgextra/i1/O1CN01DpAon51MRuAYkrsTT_!!6000000001432-2-tps-1482-522.png)
 
 ### Sensitive Information Warning Linter
 
-![](https://gw.alicdn.com/imgextra/i4/O1CN01u787jO241C9LmbQ57_!!6000000007330-0-tps-1970-848.jpg)
+![Sensitive Information Warning Linter](https://img.alicdn.com/imgextra/i2/O1CN01jqCkYG20wfOwVtSIg_!!6000000006914-2-tps-2532-812.png)
 
 ### Quickly Search the Contents of the Document
 
 Use `ctrl+f` or `cmd+f` to quickly search for the contents of the document.
 
-![](https://gw.alicdn.com/imgextra/i2/O1CN01YmSwSz1Rn2VcqQILP_!!6000000002155-0-tps-2514-2098.jpg)
+![](https://img.alicdn.com/imgextra/i1/O1CN01JImHwN1y4VKftTDBV_!!6000000006525-2-tps-3088-2114.png)
 
 ### Set the display language of extension
 
 Tap the Settings icon to quickly open the extension configuration, where you can switch the display language of the extension.
 
-![](https://img.alicdn.com/imgextra/i1/O1CN01Hl6ziV1pR6KIelNba_!!6000000005356-0-tps-2484-1506.jpg)
+![](https://img.alicdn.com/imgextra/i2/O1CN01tzj3Hx1pwheyJuX1X_!!6000000005425-2-tps-2526-864.png)
 
 ## Feedback
 
