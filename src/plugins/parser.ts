@@ -166,6 +166,7 @@ function parseAlicloudAPI(apiName: string, api: any, style = "RPC", meta: Simple
     title: (api as any).title || summary,
     name: apiName,
     method: methods?.[0],
+    methods: methods,
     path,
     parameters: _.unionBy<PontSpec.Parameter>(newParameters, "name"),
     responses: parseResponses(responses, meta),

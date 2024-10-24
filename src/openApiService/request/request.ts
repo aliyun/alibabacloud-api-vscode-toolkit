@@ -30,7 +30,7 @@ function _bodyType(types) {
   return "none";
 }
 
-function getMethod(method) {
+function getMethodByString(method) {
   let methodArray;
   if (method.includes("|")) {
     methodArray = method.split("|");
@@ -47,6 +47,16 @@ function getMethod(method) {
     return vaildMethod[0];
   }
   return methodArray[0];
+}
+
+function getMethod(methods: string[]) {
+  const vaildMethod = methods?.filter((item) => FILTER_METHOD.indexOf(item?.toUpperCase()) <= -1);
+  if (methods?.includes("post")) {
+    return "POST";
+  } else if (vaildMethod.length > 0) {
+    return vaildMethod[0]?.toUpperCase();
+  }
+  return methods[0]?.toUpperCase();
 }
 
 export class OpenAPIOptions {
@@ -87,7 +97,8 @@ export class OpenAPIOptions {
 export const request = async function (options: OpenAPIOptions) {
   let { endpoint, action, apiVersion, params, accessKeyId, accessKeySecret, productName, meta, bodyStyle, credential } =
     options;
-  let method = meta?.method?.toUpperCase();
+  // let method = meta?.method?.toUpperCase();
+  let method = getMethod(meta?.methods);
   let protocol = "https";
   endpoint = endpoint
     ? endpoint.replace("http://", "").replace("https://", "")
