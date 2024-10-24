@@ -1,53 +1,62 @@
-'use strict';
-const $Credential = require('@alicloud/credentials');
-const { default: Credential } = require('@alicloud/credentials');
-const FILTER_METHOD = ['HEAD', 'TRACE', 'OPTIONS', 'PATCH', 'CONNECT'];
-import {OpenAPIClient} from '../lib/client'
+"use strict";
+const $Credential = require("@alicloud/credentials");
+const { default: Credential } = require("@alicloud/credentials");
+const FILTER_METHOD = ["HEAD", "TRACE", "OPTIONS", "PATCH", "CONNECT"];
+import { OpenAPIClient } from "../lib/client";
 
 function _bodyType(types) {
   if (!types || types.length < 1) {
-    return 'none';
+    return "none";
   }
 
   const type = types[0];
 
-  if (type === 'application/json') {
-    return 'json';
+  if (type === "application/json") {
+    return "json";
   }
 
-  if (type === 'application/xml') {
-    return 'xml';
+  if (type === "application/xml") {
+    return "xml";
   }
 
-  if (type === 'application/x-www-form-urlencoded') {
-    return 'form';
+  if (type === "application/x-www-form-urlencoded") {
+    return "form";
   }
 
-  if (type === 'application/octet-stream') {
-    return 'binary';
+  if (type === "application/octet-stream") {
+    return "binary";
   }
 
-  return 'none';
+  return "none";
 }
 
-function getMethod(method) {
+function getMethodByString(method) {
   let methodArray;
-  if (method.includes('|')) {
-    methodArray = method.split('|');
-  } else if (method.includes(',')) {
-    methodArray = method.split(',');
+  if (method.includes("|")) {
+    methodArray = method.split("|");
+  } else if (method.includes(",")) {
+    methodArray = method.split(",");
   } else {
     return method;
   }
-  if (methodArray.includes('POST')) {
-    return 'POST';
+  if (methodArray.includes("POST")) {
+    return "POST";
   }
-  const vaildMethod = methodArray.filter(item => FILTER_METHOD.indexOf(item) <= -1);
+  const vaildMethod = methodArray.filter((item) => FILTER_METHOD.indexOf(item) <= -1);
   if (vaildMethod.length > 0) {
     return vaildMethod[0];
-  } 
+  }
   return methodArray[0];
-  
+}
+
+function getMethod(methods: string[]) {
+  const vaildMethod = methods?.filter((item) => FILTER_METHOD.indexOf(item?.toUpperCase()) <= -1);
+  if (methods?.includes("post")) {
+    return "POST";
+  } else if (vaildMethod.length > 0) {
+    return vaildMethod[0]?.toUpperCase();
+  }
+  return methods[0]?.toUpperCase();
 }
 
 export class OpenAPIOptions {
@@ -86,47 +95,40 @@ export class OpenAPIOptions {
 }
 
 export const request = async function (options: OpenAPIOptions) {
-  let {
-    endpoint,
-    action,
-    apiVersion,
-    params,
-    accessKeyId,
-    accessKeySecret,
-    productName,
-    meta,
-    bodyStyle,
-    credential
-  } = options;
-  let method = meta?.method?.toUpperCase();
-  let protocol = 'https';
-  endpoint = endpoint ? endpoint.replace('http://', '').replace('https://', '') : `${productName.toLowerCase()}.cn-hangzhou.aliyuncs.com`;
-  let pathname = '/';
-  const schema = meta?.responses['200'] && meta?.responses['200'].schema;
+  let { endpoint, action, apiVersion, params, accessKeyId, accessKeySecret, productName, meta, bodyStyle, credential } =
+    options;
+  // let method = meta?.method?.toUpperCase();
+  let method = getMethod(meta?.methods);
+  let protocol = "https";
+  endpoint = endpoint
+    ? endpoint.replace("http://", "").replace("https://", "")
+    : `${productName.toLowerCase()}.cn-hangzhou.aliyuncs.com`;
+  let pathname = meta?.path?.length ? meta.path : "/";
+  const schema = meta?.responses["200"] && meta?.responses["200"].schema;
   let requestType;
-  if(meta?.consumes){
-    requestType = _bodyType(meta?.consumes)
-  }else{
-    requestType = bodyStyle === 'json' ? 'json' : 'formData';
+  if (meta?.consumes) {
+    requestType = _bodyType(meta?.consumes);
+  } else {
+    requestType = bodyStyle === "json" ? "json" : "formData";
   }
   let responseType;
-  
+
   if (!schema) {
     responseType = _bodyType(meta.apis[action] && meta.apis[action].produces);
   } else if (schema.xml) {
-    responseType = 'xml';
-  } else if (schema.type && schema.type !== 'object') {
+    responseType = "xml";
+  } else if (schema.type && schema.type !== "object") {
     responseType = schema.format || schema.type;
-  } else if (meta?.ext?.produces){
+  } else if (meta?.ext?.produces) {
     responseType = _bodyType(meta.ext.produces);
-  }else {
-    responseType = 'json';
+  } else {
+    responseType = "json";
   }
 
   let request = {} as any;
   request.headers = {};
-  if (productName === 'ROS' && params.RegionId) {
-    request.headers['x-acs-region-id'] = params.RegionId;
+  if (productName === "ROS" && params.RegionId) {
+    request.headers["x-acs-region-id"] = params.RegionId;
   }
 
   // const newParams = {};
@@ -136,9 +138,9 @@ export const request = async function (options: OpenAPIOptions) {
   // });
   // paramObject.params = newParams;
   const parameters = {};
-  meta?.parameters?.map(param=>{
+  meta?.parameters?.map((param) => {
     parameters[param.name] = param;
-  })
+  });
   // paramObject.params = params;
 
   // eslint-disable-next-line guard-for-in
@@ -146,70 +148,67 @@ export const request = async function (options: OpenAPIOptions) {
     let paramInfo = parameters[name];
     let value = params[name];
     if (paramInfo) {
-      if (paramInfo.style
-        && paramInfo.style === 'json'
-        && typeof value !== 'string') {
+      if (paramInfo.style && paramInfo.style === "json" && typeof value !== "string") {
         value = JSON.stringify(value);
       }
-      if (paramInfo.style
-        && Array.isArray(value)) {
+      if (paramInfo.style && Array.isArray(value)) {
         switch (paramInfo.style) {
-          case 'simple':
-            value = value.join(',');
+          case "simple":
+            value = value.join(",");
             break;
-          case 'spaceDelimited':
-            value = value.join(' ');
+          case "spaceDelimited":
+            value = value.join(" ");
             break;
-          case 'pipeDelimited':
-            value = value.join('|');
+          case "pipeDelimited":
+            value = value.join("|");
             break;
         }
       }
 
       switch (paramInfo.in) {
-        case 'path':
+        case "path":
           // path:"/repos/{RepoNamespace}/{RepoName}/build/[BuildId]/cancel"
-          if (pathname.indexOf('*') !== -1 && name === 'requestPath') {
+          if (pathname.indexOf("*") !== -1 && name === "requestPath") {
             pathname = value;
           } else if (pathname.includes(name)) {
             pathname = pathname.replace(`{${name}}`, value);
           }
           break;
-        case 'host':
+        case "host":
           // endpoint 已经在前端处理过了
           // host 一般是 regionId
           break;
-        case 'query':
+        case "query":
           if (!request.query) {
             request.query = {};
           }
           request.query[name] = value;
           break;
-        case 'body':
-        case 'formData':
+        case "body":
+        case "formData":
           if (!request.body) {
             request.body = {};
           }
-          if (bodyStyle === 'json') {
+          if (bodyStyle === "json") {
             request.body = params[name];
-          } else if (name === 'RequestBody' && paramInfo.type === 'RequestBody') {
+          } else if (name === "RequestBody" && paramInfo.type === "RequestBody") {
             request.body = params[name];
           } else {
             request.body[name] = value;
           }
-          if (paramInfo.type === 'Binary') {
+          if (paramInfo.type === "Binary") {
             // TODO：上传文件
             // request.stream = await ossUtil.getStream(`tmpFile/${params[name]}`);
           }
           break;
-        case 'header':
+        case "header":
           request.headers[name] = value;
           break;
       }
-    } else if (bodyStyle === 'json' && name === 'body' && params.body) {
+    } else if (bodyStyle === "json" && name === "body" && params.body) {
       // 兼容 bodyStyle 为 json，且不传 body 层的情况
       // 兼容 bodyStyle 为 json，且不传 body 层的情况
-      if (typeof params.body === 'string') {
+      if (typeof params.body === "string") {
         request.body = JSON.parse(params.body);
       } else {
         request.body = params.body;
@@ -217,9 +216,9 @@ export const request = async function (options: OpenAPIOptions) {
     }
   }
   let _credential;
-  if (credential && credential.type === 'bearer') {
+  if (credential && credential.type === "bearer") {
     let credentialConfig = new $Credential.Config({
-      type: 'bearer',
+      type: "bearer",
       bearerToken: credential.token,
     });
     _credential = new Credential(credentialConfig);
@@ -231,7 +230,7 @@ export const request = async function (options: OpenAPIOptions) {
     credential: _credential,
     protocol: protocol,
     readTimeout: 50000,
-    connectTimeout: 50000
+    connectTimeout: 50000,
   });
   const data = {
     version: apiVersion,
@@ -240,7 +239,7 @@ export const request = async function (options: OpenAPIOptions) {
     action,
     reqBodyType: requestType,
     bodyType: responseType,
-    authType: 'AK',
+    authType: "AK",
   };
   return await client.doRequest(data, request, {});
 };
