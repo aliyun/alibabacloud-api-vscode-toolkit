@@ -285,7 +285,7 @@
     "@alicloud/openapi-util": "^0.3.2",
     "@alicloud/tea-typescript": "^1.7.0",
     "@alicloud/tea-util": "^1.4.9",
-    "@types/node": "^20.10.5",
+    "@types/node": "^22.13.14",
     "@vscode/codicons": "^0.0.36",
     "debug": "^4.3.7",
     "fs-extra": "^10.1.0",
