@@ -3287,6 +3287,26 @@ intersection-observer@^0.12.0:
   resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.12.2.tgz#4a45349cc0cd91916682b1f44c28d7ec737dc375"
   integrity sha512-7m1vEcPCxXYI8HqnL8CKI6siDyD+eIWSwgB3DZA+ZTogxk9I4CDnj4wilt9x/+/QbHI4YG5YZNmC6458/e9Ktg==
 
+intl-format@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.anpm.alibaba-inc.com/intl-format/-/intl-format-1.2.0.tgz#3d4a3e9b9517d1fbf0cc914e90cad81b0bf820dc"
+  integrity sha512-ZejRVMY64lj/TWW4jeKIrd658fEoRQfydADvO+NWRsE6g9SDmpcTDj7NOr/K9XtCKum8wQgA87Spe2jrcUjFkQ==
+  dependencies:
+    intl-messageformat "^2.2.0"
+    lodash.get "^4.4.2"
+
+intl-messageformat-parser@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.anpm.alibaba-inc.com/intl-messageformat-parser/-/intl-messageformat-parser-1.4.0.tgz#b43d45a97468cadbe44331d74bb1e8dea44fc075"
+  integrity sha512-/XkqFHKezO6UcF4Av2/Lzfrez18R0jyw7kRFhSeB/YRakdrgSc9QfFZUwNJI9swMwMoNPygK1ArC5wdFSjPw+A==
+
+intl-messageformat@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.anpm.alibaba-inc.com/intl-messageformat/-/intl-messageformat-2.2.0.tgz#345bcd46de630b7683330c2e52177ff5eab484fc"
+  integrity sha512-I+tSvHnXqJYjDfNmY95tpFMj30yoakC6OXAo+wu/wTMy6tA/4Fd4mvV7Uzs4cqK/Ap29sHhwjcY+78a8eifcXw==
+  dependencies:
+    intl-messageformat-parser "1.4.0"
+
 is-alphabetical@^1.0.0:
   version "1.0.4"
   resolved "https://registry.npmmirror.com/is-alphabetical/-/is-alphabetical-1.0.4.tgz#9e7d6b94916be22153745d184c298cbf986a686d"
@@ -3766,6 +3786,11 @@ lodash.clonedeep@^4.5.0:
   version "4.5.0"
   resolved "https://registry.npmmirror.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==
+
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.anpm.alibaba-inc.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==
 
 lodash.merge@^4.6.2:
   version "4.6.2"
