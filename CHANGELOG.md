@@ -1,4 +1,7 @@
 # Release Notes
+## 0.0.16-beta.1(2026-02-09)
+
+- fix: Fix the API debugging issues.
 
 ## 0.0.14(2024-10-10)
 
