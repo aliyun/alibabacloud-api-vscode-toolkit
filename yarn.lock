@@ -1151,6 +1151,17 @@ asynckit@^0.4.0:
   resolved "https://registry.npmmirror.com/asynckit/-/asynckit-0.4.0.tgz"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
+autoprefixer@^10.4.23:
+  version "10.4.23"
+  resolved "https://registry.anpm.alibaba-inc.com/autoprefixer/-/autoprefixer-10.4.23.tgz#c6aa6db8e7376fcd900f9fd79d143ceebad8c4e6"
+  integrity sha512-YYTXSFulfwytnjAPlw8QHncHJmlvFKtczb8InXaAx9Q0LbfDnfEYDE55omerIJKihhmU61Ft+cAOSzQVaBUmeA==
+  dependencies:
+    browserslist "^4.28.1"
+    caniuse-lite "^1.0.30001760"
+    fraction.js "^5.3.4"
+    picocolors "^1.1.1"
+    postcss-value-parser "^4.2.0"
+
 available-typed-arrays@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npmmirror.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz"
@@ -1190,6 +1201,11 @@ base64-js@^1.3.1:
   version "1.5.1"
   resolved "https://registry.npmmirror.com/base64-js/-/base64-js-1.5.1.tgz"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
+
+baseline-browser-mapping@^2.9.0:
+  version "2.9.12"
+  resolved "https://registry.anpm.alibaba-inc.com/baseline-browser-mapping/-/baseline-browser-mapping-2.9.12.tgz#fbed5f37edf24b708e6e0b1fb26c70982a577dfc"
+  integrity sha512-Mij6Lij93pTAIsSYy5cyBQ975Qh9uLEc5rwGTpomiZeXZL9yIS6uORJakb3ScHgfs0serMMfIbXzokPMuEiRyw==
 
 binary-extensions@^2.0.0:
   version "2.3.0"
@@ -1260,6 +1276,17 @@ browserslist@^4.22.2:
     electron-to-chromium "^1.4.601"
     node-releases "^2.0.14"
     update-browserslist-db "^1.0.13"
+
+browserslist@^4.28.1:
+  version "4.28.1"
+  resolved "https://registry.anpm.alibaba-inc.com/browserslist/-/browserslist-4.28.1.tgz#7f534594628c53c63101079e27e40de490456a95"
+  integrity sha512-ZC5Bd0LgJXgwGqUknZY/vkUQ04r8NXnJZ3yYi4vDmSiZmC/pdSN0NbNRPxZpbtO4uAfDUAFffO8IZoM3Gj8IkA==
+  dependencies:
+    baseline-browser-mapping "^2.9.0"
+    caniuse-lite "^1.0.30001759"
+    electron-to-chromium "^1.5.263"
+    node-releases "^2.0.27"
+    update-browserslist-db "^1.2.0"
 
 buffer-crc32@~0.2.3:
   version "0.2.13"
@@ -1341,6 +1368,11 @@ caniuse-lite@^1.0.30001565:
   version "1.0.30001568"
   resolved "https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001568.tgz"
   integrity sha512-vSUkH84HontZJ88MiNrOau1EBrCqEQYgkC5gIySiDlpsm8sGVrhU7Kx4V6h0tnqaHzIHZv08HlJIwPbL4XL9+A==
+
+caniuse-lite@^1.0.30001759, caniuse-lite@^1.0.30001760:
+  version "1.0.30001763"
+  resolved "https://registry.anpm.alibaba-inc.com/caniuse-lite/-/caniuse-lite-1.0.30001763.tgz#9397446dd110b1aeadb0df249c41b2ece7f90f09"
+  integrity sha512-mh/dGtq56uN98LlNX9qdbKnzINhX0QzhiWBFEkFfsFO4QyCvL8YegrJAazCwXIeqkIob8BlZPGM3xdnY+sgmvQ==
 
 chalk@^2.4.2:
   version "2.4.2"
@@ -1559,6 +1591,11 @@ csstype@3.1.3, csstype@^3.0.2:
   resolved "https://registry.npmmirror.com/csstype/-/csstype-3.1.3.tgz"
   integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
 
+data-uri-to-buffer@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.anpm.alibaba-inc.com/data-uri-to-buffer/-/data-uri-to-buffer-4.0.1.tgz#d8feb2b2881e6a4f58c2e08acfd0e2834e26222e"
+  integrity sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==
+
 dateformat@3.0.3:
   version "3.0.3"
   resolved "https://registry.npmmirror.com/dateformat/-/dateformat-3.0.3.tgz"
@@ -1713,6 +1750,11 @@ electron-to-chromium@^1.4.601:
   resolved "https://registry.npmmirror.com/electron-to-chromium/-/electron-to-chromium-1.4.610.tgz"
   integrity sha512-mqi2oL1mfeHYtOdCxbPQYV/PL7YrQlxbvFEZ0Ee8GbDdShimqt2/S6z2RWqysuvlwdOrQdqvE0KZrBTipAeJzg==
 
+electron-to-chromium@^1.5.263:
+  version "1.5.267"
+  resolved "https://registry.anpm.alibaba-inc.com/electron-to-chromium/-/electron-to-chromium-1.5.267.tgz#5d84f2df8cdb6bfe7e873706bb21bd4bfb574dc7"
+  integrity sha512-0Drusm6MVRXSOJpGbaSVgcQsuB4hEkMpHXaVstcPmhu5LIedxs1xNK/nIxmQIU/RPC0+1/o0AVZfBTkTNJOdUw==
+
 emoji-regex@^10.2.1:
   version "10.3.0"
   resolved "https://registry.npmjs.org/emoji-regex/-/emoji-regex-10.3.0.tgz"
@@ -1795,6 +1837,11 @@ escalade@^3.1.1:
   version "3.1.1"
   resolved "https://registry.npmmirror.com/escalade/-/escalade-3.1.1.tgz"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
+
+escalade@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.anpm.alibaba-inc.com/escalade/-/escalade-3.2.0.tgz#011a3f69856ba189dffa7dc8fcce99d2a87903e5"
+  integrity sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==
 
 escape-string-regexp@^1.0.5:
   version "1.0.5"
@@ -1951,6 +1998,14 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
+fetch-blob@^3.1.2, fetch-blob@^3.1.4:
+  version "3.2.0"
+  resolved "https://registry.anpm.alibaba-inc.com/fetch-blob/-/fetch-blob-3.2.0.tgz#f09b8d4bbd45adc6f0c20b7e787e793e309dcce9"
+  integrity sha512-7yAQpD2UMJzLi1Dqv7qFYnPbaPx7ZfFK6PiIxQ4PfkGPyNyl2Ugx+a/umUonmKqjhM4DnfbMvdX6otXq83soQQ==
+  dependencies:
+    node-domexception "^1.0.0"
+    web-streams-polyfill "^3.0.3"
+
 file-entry-cache@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmmirror.com/file-entry-cache/-/file-entry-cache-6.0.1.tgz"
@@ -2050,6 +2105,18 @@ format-util@^1.0.3:
   version "1.0.5"
   resolved "https://registry.npmmirror.com/format-util/-/format-util-1.0.5.tgz"
   integrity sha512-varLbTj0e0yVyRpqQhuWV+8hlePAgaoFRhNFj50BNjEIrw1/DphHSObtqwskVCPWNgzwPoQrZAbfa/SBiicNeg==
+
+formdata-polyfill@^4.0.10:
+  version "4.0.10"
+  resolved "https://registry.anpm.alibaba-inc.com/formdata-polyfill/-/formdata-polyfill-4.0.10.tgz#24807c31c9d402e002ab3d8c720144ceb8848423"
+  integrity sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==
+  dependencies:
+    fetch-blob "^3.1.2"
+
+fraction.js@^5.3.4:
+  version "5.3.4"
+  resolved "https://registry.anpm.alibaba-inc.com/fraction.js/-/fraction.js-5.3.4.tgz#8c0fcc6a9908262df4ed197427bdeef563e0699a"
+  integrity sha512-1X1NTtiJphryn/uLQz3whtY6jK3fTqoE3ohKs0tT+Ujr1W59oopxmoEh7Lu5p6vBaPbgoM0bzveAW4Qi5RyWDQ==
 
 fromentries@^1.2.0:
   version "1.3.2"
@@ -3020,12 +3087,26 @@ node-addon-api@^4.3.0:
   resolved "https://registry.npmmirror.com/node-addon-api/-/node-addon-api-4.3.0.tgz"
   integrity sha512-73sE9+3UaLYYFmDsFZnqCInzPyh3MqIwZO9cw58yIqAZhONrrabrYyYe3TuIqtIiOuTXVhsGau8hcrhhwSsDIQ==
 
+node-domexception@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.anpm.alibaba-inc.com/node-domexception/-/node-domexception-1.0.0.tgz#6888db46a1f71c0b76b3f7555016b63fe64766e5"
+  integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
+
 node-fetch@^2.6.11, node-fetch@^2.6.7:
   version "2.7.0"
   resolved "https://registry.npmmirror.com/node-fetch/-/node-fetch-2.7.0.tgz"
   integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
   dependencies:
     whatwg-url "^5.0.0"
+
+node-fetch@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.anpm.alibaba-inc.com/node-fetch/-/node-fetch-3.3.2.tgz#d1e889bacdf733b4ff3b2b243eb7a12866a0b78b"
+  integrity sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==
+  dependencies:
+    data-uri-to-buffer "^4.0.0"
+    fetch-blob "^3.1.4"
+    formdata-polyfill "^4.0.10"
 
 node-preload@^0.2.1:
   version "0.2.1"
@@ -3038,6 +3119,11 @@ node-releases@^2.0.14:
   version "2.0.14"
   resolved "https://registry.npmmirror.com/node-releases/-/node-releases-2.0.14.tgz"
   integrity sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==
+
+node-releases@^2.0.27:
+  version "2.0.27"
+  resolved "https://registry.anpm.alibaba-inc.com/node-releases/-/node-releases-2.0.27.tgz#eedca519205cf20f650f61d56b070db111231e4e"
+  integrity sha512-nmh3lCkYZ3grZvqcCH+fjmQ7X+H0OeZgP40OierEaAptX4XofMh5kwNbWh7lBduUzCcV/8kZ+NDLCwm2iorIlA==
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
@@ -3084,10 +3170,20 @@ nyc@^15.1.0:
     test-exclude "^6.0.0"
     yargs "^15.0.2"
 
+oas-spec-ts@^0.3.113:
+  version "0.3.113"
+  resolved "https://registry.anpm.alibaba-inc.com/oas-spec-ts/-/oas-spec-ts-0.3.113.tgz#fb5207b00a326b0f7efb2827606b44de8ebc39e5"
+  integrity sha512-wzR21JVSo9zVYPWxT04B+kmd0TPO6PkToOEvGuohlaeZNuiqkXx8xVpyN1HwSlbjntDmHlruanFV/BPo8OguIQ==
+
 oas-spec-ts@^0.3.83:
   version "0.3.83"
   resolved "https://registry.npmmirror.com/oas-spec-ts/-/oas-spec-ts-0.3.83.tgz"
   integrity sha512-P2Eftz3DcngFqDgAZhNTNqcJaCcIHjSsmnghXvyamJfDCgUUyzb6zdNP1kfDDzEWn2596Df4Mcwv3hYtIkPnNQ==
+
+oas-spec-ts@^0.6.3:
+  version "0.6.4"
+  resolved "https://registry.anpm.alibaba-inc.com/oas-spec-ts/-/oas-spec-ts-0.6.4.tgz#24ccc16a80511abb47b0b6f0e4a596d7882a31f2"
+  integrity sha512-MYBgT1EBMhRZjET+thtijhGHxexlK5+eugS0r37B4/FUEFYTbjKuZLLoPK7DkQAtuCm8/ZMUYbYswz15oN9XUA==
 
 object-inspect@^1.13.1:
   version "1.13.2"
@@ -3297,6 +3393,11 @@ picocolors@^1.1.0:
   resolved "https://registry.npmmirror.com/picocolors/-/picocolors-1.1.0.tgz#5358b76a78cde483ba5cef6a9dc9671440b27d59"
   integrity sha512-TQ92mBOW0l3LeMeyLV6mzy/kWr8lkd/hp3mTg7wYK7zJhuBStmGMBG0BdeDZS/dZx1IukaX6Bk11zcln25o1Aw==
 
+picocolors@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.anpm.alibaba-inc.com/picocolors/-/picocolors-1.1.1.tgz#3d321af3eab939b083c8f929a1d12cda81c26b6b"
+  integrity sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==
+
 picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.2, picomatch@^2.3.1:
   version "2.3.1"
   resolved "https://registry.npmmirror.com/picomatch/-/picomatch-2.3.1.tgz"
@@ -3335,6 +3436,24 @@ pontx-generate@^0.3.83:
     fs-extra "*"
     lodash "*"
     pontx-spec "^0.3.83"
+
+pontx-generate@^0.3.85:
+  version "0.3.113"
+  resolved "https://registry.anpm.alibaba-inc.com/pontx-generate/-/pontx-generate-0.3.113.tgz#8869b26be25daa88da2a09755da37800688fb7ec"
+  integrity sha512-T+JYlPlktwl2lUlQKy8vqP37hz9pDO8qHHfo+f/LHwLe75LhHfJgXOIWXHZG9dOYyUzzNgyo9q+qSZOqREMnzw==
+  dependencies:
+    fs-extra "*"
+    lodash "*"
+    pontx-spec "^0.3.113"
+
+pontx-generate@^0.6.8:
+  version "0.6.8"
+  resolved "https://registry.anpm.alibaba-inc.com/pontx-generate/-/pontx-generate-0.6.8.tgz#77217f64fc1a39e8c17bfabba3b5a5a6dd642137"
+  integrity sha512-KNvGIKL/VadoQAsi/UvG/5eKMtQCcIHVrMqIaJG7rB2iTRRf8AhXVKz6508jMw+cxUtjymAQZvh1ejbA2ebXnA==
+  dependencies:
+    fs-extra "*"
+    lodash "*"
+    pontx-spec "^0.6.3"
 
 pontx-manager@0.3.83-beta.0:
   version "0.3.83-beta.0"
@@ -3407,6 +3526,14 @@ pontx-sdk-plugin-core@^0.3.83:
     pontx-generate "^0.3.83"
     pontx-spec "^0.3.83"
 
+pontx-sdk-plugin-core@^0.3.85:
+  version "0.3.85"
+  resolved "https://registry.anpm.alibaba-inc.com/pontx-sdk-plugin-core/-/pontx-sdk-plugin-core-0.3.85.tgz#58972e59f2ce492ddd96a20ee8632bfce4dccad0"
+  integrity sha512-CF6jNHg4oFezYVygcLMN70F1oqtsfb3k+qDK5xqPbR1uryMd25aN60Z31IXN9x4c6TY/IGSHiiIWeya27+biCg==
+  dependencies:
+    pontx-generate "^0.3.85"
+    pontx-spec "^0.3.85"
+
 pontx-spec-diff@0.3.83:
   version "0.3.83"
   resolved "https://registry.npmmirror.com/pontx-spec-diff/-/pontx-spec-diff-0.3.83.tgz"
@@ -3421,9 +3548,23 @@ pontx-spec@0.3.83, pontx-spec@^0.3.83:
   dependencies:
     oas-spec-ts "^0.3.83"
 
-postcss-value-parser@^4.0.2:
+pontx-spec@^0.3.113, pontx-spec@^0.3.85:
+  version "0.3.113"
+  resolved "https://registry.anpm.alibaba-inc.com/pontx-spec/-/pontx-spec-0.3.113.tgz#f69c8bc6871e5e8dc5bf4bbe6194a3fa16c7c2ff"
+  integrity sha512-snkUoVbdG7jvLt57e8pVR4OxXVvqCoLP7L9wlU+SoTLUsPal4Uw9sb53cnwEgPOzY9UEBkxUri+yD+HgwdXQ0A==
+  dependencies:
+    oas-spec-ts "^0.3.113"
+
+pontx-spec@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.anpm.alibaba-inc.com/pontx-spec/-/pontx-spec-0.6.3.tgz#f96cb60b4cae0370126adfd8b6390554d7c2cb18"
+  integrity sha512-nmrVVHcoHCQjCwAzVZVa93NEgsIgw3GOzB7R9RP2qF86p6uSIPWv2bSqiN5SZgcYVQVr4PHXubUB3iisBFDkxA==
+  dependencies:
+    oas-spec-ts "^0.6.3"
+
+postcss-value-parser@^4.0.2, postcss-value-parser@^4.2.0:
   version "4.2.0"
-  resolved "https://registry.npmmirror.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz"
+  resolved "https://registry.anpm.alibaba-inc.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
 postcss@8.4.38:
@@ -3988,6 +4129,11 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.npmmirror.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
+tailwindcss@^4.1.18:
+  version "4.1.18"
+  resolved "https://registry.anpm.alibaba-inc.com/tailwindcss/-/tailwindcss-4.1.18.tgz#f488ba47853abdb5354daf9679d3e7791fc4f4e3"
+  integrity sha512-4+Z+0yiYyEtUVCScyfHCxOYP06L5Ne+JiHhY2IjR2KWMIWhJOYZKLSGZaP5HkZ8+bY0cxfzwDE5uOmzFXyIwxw==
+
 tar-fs@^2.0.0:
   version "2.1.1"
   resolved "https://registry.npmmirror.com/tar-fs/-/tar-fs-2.1.1.tgz"
@@ -4184,6 +4330,14 @@ update-browserslist-db@^1.0.13:
     escalade "^3.1.1"
     picocolors "^1.0.0"
 
+update-browserslist-db@^1.2.0:
+  version "1.2.3"
+  resolved "https://registry.anpm.alibaba-inc.com/update-browserslist-db/-/update-browserslist-db-1.2.3.tgz#64d76db58713136acbeb4c49114366cc6cc2e80d"
+  integrity sha512-Js0m9cx+qOgDxo0eMiFGEueWztz+d4+M3rGlmKPT+T4IS/jP4ylw3Nwpu6cpTTP8R1MAC1kF4VbdLt3ARf209w==
+  dependencies:
+    escalade "^3.2.0"
+    picocolors "^1.1.1"
+
 uri-js@^4.2.2:
   version "4.4.1"
   resolved "https://registry.npmmirror.com/uri-js/-/uri-js-4.4.1.tgz"
@@ -4266,6 +4420,11 @@ vsce@^2.15.0:
     xml2js "^0.4.23"
     yauzl "^2.3.1"
     yazl "^2.2.2"
+
+web-streams-polyfill@^3.0.3:
+  version "3.3.3"
+  resolved "https://registry.anpm.alibaba-inc.com/web-streams-polyfill/-/web-streams-polyfill-3.3.3.tgz#2073b91a2fdb1fbfbd401e7de0ac9f8214cecb4b"
+  integrity sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"

@@ -370,10 +370,8 @@ export const getFormatValues = (paramValues: any, apiParams, purpose?: string) =
         apiParams?.find(
           (item) =>
             item.name === key &&
-            item.style === "json" &&
-            item.schema?.type === "object" &&
-            !item.schema?.properties &&
-            !item.schema?.additionalProperties,
+            (item.schema?.style === "json" || item.schema?.ext?.style === "json") &&
+            item.schema?.type === "object" 
         )
       ) {
         try {
